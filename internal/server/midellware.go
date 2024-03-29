@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"gitea.com/lzhuk/forum/internal/helpers/cookies"
+	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
 func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
@@ -44,10 +45,9 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := userFromContext(r)
 		if user != nil {
-			http.Redirect(w, r, "/login", http.StatusSeeOther)
+			response.WriteJSON(w, 401, user)
 			return
 		}
-
 		next.ServeHTTP(w, r)
 	})
 }
