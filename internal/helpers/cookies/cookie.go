@@ -23,12 +23,10 @@ func CreateCookie(w http.ResponseWriter, session *model.Sessinon) http.Cookie {
 	cookie := http.Cookie{
 		Name:    cookieName,
 		Value:   session.UUID,
-		Path:    "/", // NEED TO CHANGE ???
+		Path:    "/",
 		Expires: session.ExpireAt,
 		MaxAge:  int(time.Until(session.ExpireAt).Seconds()),
 	}
-	// http.SetCookie(w, &cookie)
-
 	return cookie
 }
 
