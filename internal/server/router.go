@@ -14,15 +14,15 @@ func NewRouter(h *Handler) http.Handler {
 	//  USERS
 	mux.HandleFunc("/register", h.Register) // Страница регистрации (методы GET и POST)
 	mux.HandleFunc("/login", h.Login)       // Страница для входа (методы GET и POST)
-	
+
 	mux.HandleFunc("/userd3/likeposts", h.likePosts) // ??           // Cтраница понравившихся тем пользователем (метод GET)
 
-	mux.HandleFunc("/userd3/myposts", h.myPosts)    // Страница созданных пользователем тем (постов) (метод GET)
-	mux.HandleFunc("/userd3/posts", h.createPosts)  // Cтраница создания новой темы (поста) (методы GET и POST)
-	mux.HandleFunc("/userd3/post/", h.getPost)      // Получение страницы с конкретной темой по id (метод GET)
+	mux.HandleFunc("/userd3", h.Home)               // Главная страница пользователя (метод GET)
+	mux.HandleFunc("/userd3/posts", h.CreatePosts)  // Cтраница создания новой темы (поста) (методы GET и POST)
+	mux.HandleFunc("/userd3/myposts", h.UserPosts)  // Страница созданных пользователем тем (постов) (метод GET)
+	mux.HandleFunc("/userd3/post/", h.Post)         // Получение страницы с конкретной темой по id (метод GET)
 	mux.HandleFunc("/userd3/mypost/", h.updatePost) // Изменение и удаление поста (методы PUT и DELETE)
 	mux.HandleFunc("/userd3/post/vote", h.votePost) // Проставление лайка или дизлайка на пост (метод POST)
-	mux.HandleFunc("/userd3", h.Home)                      // Главная страница пользователя (метод GET)
 	//  MY ROUTES
 	mux.HandleFunc("/userd3/commentsCreate", h.CreateComment)
 	mux.HandleFunc("/userd3/commentsDelete", h.DeleteComment)

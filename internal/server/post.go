@@ -1,8 +1,6 @@
 package server
 
 import (
-	"context"
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -10,79 +8,47 @@ import (
 	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
-///// home page GET for getting all posts
-
-// Cтраница создания новой темы (поста) (методы GET и POST)
-
 func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
-	allPost, err := h.Services.PostsService.GetAllPostService()
+	posts, err := h.Services.PostsService.GetAllPostService()
 	if err != nil {
 		return
 	}
-
-	// for _, v := range allPost {
-	// 	fmt.Println(v)
-	// }
-	response.WriteJSON(w, 200, allPost)
+	response.WriteJSON(w, http.StatusOK, posts)
 }
 
-func (h *Handler) createPosts(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/userd3/posts" {
+func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context() // SEND TO DB A RE
+	if r.Method != http.MethodPost {
+		// ERROR STRUCT
 		return
 	}
 
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
+	uuid, _ := r.Cookie("CookieUUID")
+	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
 
-	switch r.Method {
-	case http.MethodGet:
-		allPost, err := h.Services.PostsService.GetAllPostService()
-		if err != nil {
-			return
-		}
-		for _, v := range allPost {
-			fmt.Println(v)
-		}
-
-		break
-	case http.MethodPost:
-		uuid, _ := r.Cookie("CookieUUID")
-		session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-
-		post, err := convert.NewConvertCreatePost(r, session)
-		if err != nil {
-			return
-		}
-		h.Services.PostsService.CreatePostService(ctx, *post)
-	default:
-		break
-	}
-}
-
-// Получение страницы с конкретной темой по id (метод GET)
-func (h *Handler) getPost(w http.ResponseWriter, r *http.Request) {
-	if !strings.HasPrefix(r.URL.Path, "/userd3/post/") {
+	post, err := convert.NewConvertCreatePost(r, session)
+	if err != nil {
 		return
 	}
+	h.Services.PostsService.CreatePostService(ctx, *post)
+}
+
+func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		return
 	}
-	numId, err := convert.ConvertDatePost(r.URL.Path)
+	id, err := convert.ConvertDatePost(r.URL.Path)
 	if err != nil {
 		return
 	}
-	postId, err := h.Services.PostsService.GetIdPostService(numId)
+	post, err := h.Services.PostsService.GetIdPostService(id)
 	if err != nil {
 		return
 	}
-	fmt.Println(postId)
+	response.WriteJSON(w, http.StatusOK, post)
 }
 
-// Получение страницы с темой (постами) созданных конкретным пользователем
-func (h *Handler) myPosts(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/userd3/myposts" {
-		return
-	}
+func (h *Handler) UserPosts(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		return
 	}
@@ -90,66 +56,45 @@ func (h *Handler) myPosts(w http.ResponseWriter, r *http.Request) {
 	uuid, _ := r.Cookie("CookieUUID")
 	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
 
-	userPosts, err := h.Services.PostsService.GetUserPostService(session.UserID)
+	postsU, err := h.Services.PostsService.GetUserPostService(session.UserID)
 	if err != nil {
 		return
 	}
 
-	for _, v := range userPosts {
-		fmt.Println(v)
-	}
+	response.WriteJSON(w, http.StatusOK, postsU)
 }
 
-// Получение страницы с постами понравившихся пользователю
-func (h *Handler) likePosts(w http.ResponseWriter, r *http.Request) {
-	// if r.Method != http.MethodGet {
-	// 	return
-	// }
-	// uuid, _ := r.Cookie("CookieUUID")
-	// session, _ := h.sessionService.GetSessionByUUIDService(uuid.Value)
-
-	// postsVote, err := h.sessionService.LikePostsService(session.UserID)
-	// if err != nil {
-	// 	return
-	// }
-	// for _, v := range postsVote {
-	// 	fmt.Println(v)
-	// }
-}
-
-// Изменение или удаления описания и текста раннее созданной темы
-func (h *Handler) updatePost(w http.ResponseWriter, r *http.Request) {
-	if !strings.HasPrefix(r.URL.Path, "/userd3/mypost/") {
+func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPut {
 		return
 	}
-	switch r.Method {
-	case http.MethodPut:
+	uuid, _ := r.Cookie("CookieUUID")
+	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
 
-		uuid, _ := r.Cookie("CookieUUID")
-		session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-
-		post, err := convert.NewConvertUpdatePost(r, session)
-		if err != nil {
-			return
-		}
-		err = h.Services.PostsService.UpdateUserPostService(*post)
-		if err != nil {
-			return
-		}
-	case http.MethodDelete:
-
-		uuid, _ := r.Cookie("CookieUUID")
-		session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-
-		deleteModel, err := convert.NewConvertDeletePost(r, session)
-		if err != nil {
-			return
-		}
-		err = h.Services.PostsService.DeleteUserPostService(deleteModel)
-		if err != nil {
-			return
-		}
+	post, err := convert.NewConvertUpdatePost(r, session)
+	if err != nil {
+		return
 	}
+	err = h.Services.PostsService.UpdateUserPostService(*post)
+	if err != nil {
+		return
+	}
+	response.WriteJSON(w, http.StatusOK, "VSE NORM BRAT")
+}
+
+func (h *Handler) updatePost(w http.ResponseWriter, r *http.Request) {
+	uuid, _ := r.Cookie("CookieUUID")
+	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
+
+	deleteModel, err := convert.NewConvertDeletePost(r, session)
+	if err != nil {
+		return
+	}
+	err = h.Services.PostsService.DeleteUserPostService(deleteModel)
+	if err != nil {
+		return
+	}
+	response.WriteJSON(w, http.StatusOK, "VSE NORM BRAT")
 }
 
 // Проставление лайка или дизлайка на тему (пост)
@@ -173,4 +118,21 @@ func (h *Handler) votePost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
+}
+
+// Получение страницы с постами понравившихся пользователю
+func (h *Handler) likePosts(w http.ResponseWriter, r *http.Request) {
+	// if r.Method != http.MethodGet {
+	// 	return
+	// }
+	// uuid, _ := r.Cookie("CookieUUID")
+	// session, _ := h.sessionService.GetSessionByUUIDService(uuid.Value)
+
+	// postsVote, err := h.sessionService.LikePostsService(session.UserID)
+	// if err != nil {
+	// 	return
+	// }
+	// for _, v := range postsVote {
+	// 	fmt.Println(v)
+	// }
 }
