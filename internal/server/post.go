@@ -7,17 +7,24 @@ import (
 	"strings"
 
 	"gitea.com/lzhuk/forum/internal/convert"
+	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
 ///// home page GET for getting all posts
-// allPost, err := h.postsService.GetAllPostService()
-// 		if err != nil {
-// 			return
-// 		}
-// 		for _, v := range allPost {
-// 			fmt.Println(v)
-// 		}
+
 // Cтраница создания новой темы (поста) (методы GET и POST)
+
+func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
+	allPost, err := h.Services.PostsService.GetAllPostService()
+	if err != nil {
+		return
+	}
+
+	// for _, v := range allPost {
+	// 	fmt.Println(v)
+	// }
+	response.WriteJSON(w, 200, allPost)
+}
 
 func (h *Handler) createPosts(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/userd3/posts" {
