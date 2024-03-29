@@ -22,7 +22,7 @@ func NewHandler(services service.Service) Handler {
 
 const key = KeyUser("UserData")
 
-func userFromContext(r *http.Request) *model.User {
+func contextUser(r *http.Request) *model.User {
 	user, exist := r.Context().Value(key).(*model.User)
 	if !exist {
 		return nil

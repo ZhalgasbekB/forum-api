@@ -14,7 +14,7 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
-	user := userFromContext(r)
+	user := contextUser(r)
 	createComment, err := convert.CreateCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
@@ -32,7 +32,7 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodDelete)
 		return
 	}
-	user := userFromContext(r)
+	user := contextUser(r)
 	deletedComment, err := convert.DeleteCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
@@ -49,7 +49,7 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodPut)
 		return
 	}
-	user := userFromContext(r)
+	user := contextUser(r)
 	updComment, err := convert.UpdateCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
