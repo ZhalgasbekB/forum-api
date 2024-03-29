@@ -7,6 +7,18 @@ import (
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
+func CreateCommentConvertAnotherVersion(r *http.Request, userID int) (*model.Comment, error) {
+	var createComment model.Comment
+	if err := json.NewDecoder(r.Body).Decode(&createComment); err != nil {
+		return nil, err
+	}
+	return &model.Comment{
+		User:        userID,
+		Post:        createComment.Post,
+		Description: createComment.Description,
+	}, nil
+}
+
 func CreateCommentConvert(r *http.Request, session *model.Sessinon) (*model.Comment, error) {
 	var createComment model.Comment
 	if err := json.NewDecoder(r.Body).Decode(&createComment); err != nil {

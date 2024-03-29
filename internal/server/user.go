@@ -6,7 +6,6 @@ import (
 
 	"gitea.com/lzhuk/forum/internal/convert"
 	"gitea.com/lzhuk/forum/internal/helpers/cookies"
-	"gitea.com/lzhuk/forum/pkg/validation"
 )
 
 func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
@@ -42,18 +41,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-
-	form := validation.New()
-	form.CheckField(form.EmailValid(user.Email), "email", "NOT VALID EMAIL")
-	form.CheckField(form.EmptyFieldValid(user.Email), "email", "EMPTY FIELD")
-	form.CheckField(form.EmptyFieldValid(user.Name), "name", "EMPTY FIELD")
-	form.CheckField(form.MinLengthValid(user.Password, 8), "password", fmt.Sprintf("MIN CHARACTERS SHOULD BE 8 BUT YOUR: %v", len(user.Password)))
-	form.CheckField(form.MaxLengthValid(user.Password, 16), "password", fmt.Sprintf("MAX CHARACTERS SHOULD BE 16 BUT YOUR: %v", len(user.Password)))
-	if !form.Valid() {
-		fmt.Println(form.Errors)
-		return
-	}
-
+	
 	if err := h.Services.UserService.CreateUserService(user); err != nil {
 		fmt.Println(err)
 		return
