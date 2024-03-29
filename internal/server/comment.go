@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"gitea.com/lzhuk/forum/internal/convert"
+	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
 func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
@@ -32,7 +33,7 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	log.Printf("Successfully Created")
+	response.WriteJSON(w, http.StatusOK, "Successfully Created")
 }
 
 func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
@@ -46,6 +47,7 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	session, err := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
+	log.Println(comm)
 	if err != nil {
 		log.Println(err)
 		return
@@ -55,7 +57,6 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	log.Printf("Successfully Deleted")
 }
 
 func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
@@ -82,7 +83,7 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	log.Printf("Successfully Updated")
+	response.WriteJSON(w, http.StatusOK, "Successfully Updated")
 }
 
 func (h *Handler) CommentByID(w http.ResponseWriter, r *http.Request) {
@@ -101,7 +102,7 @@ func (h *Handler) CommentByID(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	log.Println(comm)
+	response.WriteJSON(w, http.StatusOK, comm)
 }
 
 func (h *Handler) Comments(w http.ResponseWriter, r *http.Request) {
@@ -114,5 +115,6 @@ func (h *Handler) Comments(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	log.Println(comments)
+	response.WriteJSON(w, http.StatusOK, comments)
+
 }

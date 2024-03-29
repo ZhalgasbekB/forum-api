@@ -17,7 +17,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context() // SEND TO DB A RE
+	ctx := r.Context() // SEND TO DB LIKE REQUEST
 	if r.Method != http.MethodPost {
 		// ERROR STRUCT
 		return
@@ -82,7 +82,7 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 	response.WriteJSON(w, http.StatusOK, "VSE NORM BRAT")
 }
 
-func (h *Handler) updatePost(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	uuid, _ := r.Cookie("CookieUUID")
 	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
 
@@ -94,7 +94,7 @@ func (h *Handler) updatePost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, "VSE NORM BRAT")
+	response.WriteJSON(w, http.StatusOK, "VSE UDALIL BRAT CHETCO")
 }
 
 // Проставление лайка или дизлайка на тему (пост)
