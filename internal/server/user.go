@@ -27,8 +27,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(session)
-	response.WriteJSON(w, http.StatusOK, cookies.SetCookie(w, session))
+	response.WriteJSON(w, http.StatusOK, cookies.CreateCookie(w, session))
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
@@ -56,6 +55,18 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
+	uuid, err := convert.UUID(r)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	if err := h.Services.SessionService.DeleteSessionService(uuid.UUID); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println("User Successfully Logout")
 }
 
 func (h *Handler) DeleteUser(w http.ResponseWriter, r *http.Request) {

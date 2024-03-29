@@ -19,7 +19,7 @@ func Cookie(r *http.Request) (*http.Cookie, error) {
 	return cookie, nil
 }
 
-func SetCookie(w http.ResponseWriter, session *model.Sessinon) http.Cookie {
+func CreateCookie(w http.ResponseWriter, session *model.Sessinon) http.Cookie {
 	cookie := http.Cookie{
 		Name:    cookieName,
 		Value:   session.UUID,
