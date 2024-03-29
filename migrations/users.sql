@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS users(
+		id INTEGER NOT NULL PRIMARY KEY,
+		name VARCHAR(100),
+		email VARCHAR(100) UNIQUE, 
+		password VARCHAR(100), 
+		is_admin BOOLEAN,
+		created_at TIMESTAMP
+);

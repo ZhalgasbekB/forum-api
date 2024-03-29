@@ -1,0 +1,76 @@
+package server
+
+import (
+	"fmt"
+	"net/http"
+
+	"gitea.com/lzhuk/forum/internal/convert"
+	"gitea.com/lzhuk/forum/internal/helpers/cookies"
+	"gitea.com/lzhuk/forum/pkg/validation"
+)
+
+func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	userReq, err := convert.UserLoginRequestBody(r)
+	user, err := h.Services.UserService.UserByEmailService(userReq.Email, userReq.Password)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	session, err := h.Services.SessionService.CreateSessionService(user.ID)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(session)
+	cookies.SetCookie(w, session)
+}
+
+func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	user, err := convert.UserRegisterRequestBody(r)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	form := validation.New()
+	form.CheckField(form.EmailValid(user.Email), "email", "NOT VALID EMAIL")
+	form.CheckField(form.EmptyFieldValid(user.Email), "email", "EMPTY FIELD")
+	form.CheckField(form.EmptyFieldValid(user.Name), "name", "EMPTY FIELD")
+	form.CheckField(form.MinLengthValid(user.Password, 8), "password", fmt.Sprintf("MIN CHARACTERS SHOULD BE 8 BUT YOUR: %v", len(user.Password)))
+	form.CheckField(form.MaxLengthValid(user.Password, 16), "password", fmt.Sprintf("MAX CHARACTERS SHOULD BE 16 BUT YOUR: %v", len(user.Password)))
+	if !form.Valid() {
+		fmt.Println(form.Errors)
+		return
+	}
+
+	if err := h.Services.UserService.CreateUserService(user); err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println("User Successfully Created")
+}
+
+func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+}
+
+func (h *Handler) DeleteUser(w http.ResponseWriter, r *http.Request) {
+}
+
+func (h *Handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
+}
