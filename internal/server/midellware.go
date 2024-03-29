@@ -37,7 +37,6 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		}
 
 		ctx := context.WithValue(r.Context(), "key", user)
-		 //  r.Context _
 		next.ServeHTTP(w, r.WithContext(ctx))
 	
 	})

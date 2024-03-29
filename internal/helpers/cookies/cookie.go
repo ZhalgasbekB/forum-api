@@ -7,9 +7,12 @@ import (
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
-// Path:    "/", // NEED TO CHANGE ???
 
-const cookieName = "CookieUUID"
+const (
+	cookieName = "CookieUUID"
+)
+
+
 
 func Cookie(r *http.Request) (*http.Cookie, error) {
 	cookie, err := r.Cookie(cookieName)
