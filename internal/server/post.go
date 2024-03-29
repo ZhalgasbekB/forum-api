@@ -83,6 +83,9 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodDelete {
+		return
+	}
 	uuid, _ := r.Cookie("CookieUUID")
 	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
 

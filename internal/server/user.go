@@ -6,6 +6,7 @@ import (
 
 	"gitea.com/lzhuk/forum/internal/convert"
 	"gitea.com/lzhuk/forum/internal/helpers/cookies"
+	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
 func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +28,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println(session)
-	cookies.SetCookie(w, session)
+	response.WriteJSON(w, http.StatusOK, cookies.SetCookie(w, session))
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
@@ -41,7 +42,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	
+
 	if err := h.Services.UserService.CreateUserService(user); err != nil {
 		fmt.Println(err)
 		return
