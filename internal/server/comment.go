@@ -47,7 +47,6 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	session, err := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-	log.Println(comm)
 	if err != nil {
 		log.Println(err)
 		return
@@ -116,5 +115,4 @@ func (h *Handler) Comments(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	response.WriteJSON(w, http.StatusOK, comments)
-
 }
