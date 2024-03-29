@@ -9,18 +9,18 @@ import (
 )
 
 type ISessionRepository interface {
-	CreateSession(*model.Sessinon) error
+	CreateSession(*model.Session) error
 	DeleteSession(string) error
-	UserIDBySession(*model.Sessinon) (int, error)
-	SessionByID(int) (*model.Sessinon, error)
-	SessionByUUID(string) (*model.Sessinon, error)
+	UserIDBySession(*model.Session) (int, error)
+	SessionByID(int) (*model.Session, error)
+	SessionByUUID(string) (*model.Session, error)
 }
 
 type ISessionService interface {
-	CreateSessionService(id int) (*model.Sessinon, error)
+	CreateSessionService(id int) (*model.Session, error)
 	DeleteSessionService(uuid string) error
-	UserIDService(session *model.Sessinon) (int, error)
-	GetSessionByUUIDService(uuid string) (*model.Sessinon, error)
+	UserIDService(session *model.Session) (int, error)
+	GetSessionByUUIDService(uuid string) (*model.Session, error)
 }
 
 type SessinonService struct {
@@ -31,7 +31,7 @@ func NewSessionService(iSessionRepository ISessionRepository) *SessinonService {
 	return &SessinonService{iSessionRepository: iSessionRepository}
 }
 
-func (ss *SessinonService) CreateSessionService(id int) (*model.Sessinon, error) {
+func (ss *SessinonService) CreateSessionService(id int) (*model.Session, error) {
 	oldSession, _ := ss.iSessionRepository.SessionByID(id)
 	if oldSession != nil {
 		if err := ss.iSessionRepository.DeleteSession(oldSession.UUID); err != nil {
@@ -44,7 +44,7 @@ func (ss *SessinonService) CreateSessionService(id int) (*model.Sessinon, error)
 	if err != nil {
 		return nil, err
 	}
-	session := &model.Sessinon{
+	session := &model.Session{
 		UUID:     string(uuid.String()),
 		UserID:   id,
 		ExpireAt: time.Now().Add(time.Minute * 30),
@@ -62,7 +62,7 @@ func (ss *SessinonService) DeleteSessionService(uuid string) error {
 	return nil
 }
 
-func (ss *SessinonService) UserIDService(session *model.Sessinon) (int, error) {
+func (ss *SessinonService) UserIDService(session *model.Session) (int, error) {
 	user_id, err := ss.iSessionRepository.UserIDBySession(session)
 	if err != nil {
 		return -1, err
@@ -70,7 +70,7 @@ func (ss *SessinonService) UserIDService(session *model.Sessinon) (int, error) {
 	return user_id, nil
 }
 
-func (ss *SessinonService) GetSessionByUUIDService(uuid string) (*model.Sessinon, error) {
+func (ss *SessinonService) GetSessionByUUIDService(uuid string) (*model.Session, error) {
 	session, err := ss.iSessionRepository.SessionByUUID(uuid)
 	switch err {
 	case nil:

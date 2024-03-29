@@ -9,20 +9,20 @@ import (
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
-func NewConvertCreatePost(r *http.Request, session *model.Sessinon) (*model.CreatePost, error) {
+func ConvertCreatePost(r *http.Request, user_id int) (*model.CreatePost, error) {
 	createPost := &model.CreatePost{}
 	if err := json.NewDecoder(r.Body).Decode(createPost); err != nil {
 		return nil, err
 	}
 	return &model.CreatePost{
-		UserId:       session.UserID,
+		UserId:       user_id,
 		CategoryName: createPost.CategoryName,
 		Title:        createPost.Title,
 		Discription:  createPost.Discription,
 	}, nil
 }
 
-func NewConvertUpdatePost(r *http.Request, session *model.Sessinon) (*model.UpdatePost, error) {
+func ConvertUpdatePost(r *http.Request, user_id int) (*model.UpdatePost, error) {
 	numIdPost, err := ConvertDatePost(r.URL.Path)
 	if err != nil {
 		return nil, err
@@ -34,11 +34,11 @@ func NewConvertUpdatePost(r *http.Request, session *model.Sessinon) (*model.Upda
 	return &model.UpdatePost{
 		PostId:      numIdPost,
 		Discription: updatePost.Discription,
-		UserId:      session.UserID,
+		UserId:      user_id,
 	}, nil
 }
 
-func NewConvertDeletePost(r *http.Request, session *model.Sessinon) (*model.DeletePost, error) {
+func ConvertDeletePost(r *http.Request, user_id int) (*model.DeletePost, error) {
 	numIdPost, err := ConvertDatePost(r.URL.Path)
 	if err != nil {
 		return nil, err
@@ -48,11 +48,10 @@ func NewConvertDeletePost(r *http.Request, session *model.Sessinon) (*model.Dele
 		return nil, err
 	}
 	return &model.DeletePost{
-		UserId: session.UserID,
+		UserId: user_id,
 		PostId: numIdPost,
 	}, nil
 }
-
 
 func ConvertDatePost(path string) (int, error) {
 	switch {

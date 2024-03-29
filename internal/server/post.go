@@ -22,11 +22,8 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 		// ERROR STRUCT
 		return
 	}
-
-	uuid, _ := r.Cookie("CookieUUID")
-	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-
-	post, err := convert.NewConvertCreatePost(r, session)
+	user := contextUser(r)
+	post, err := convert.ConvertCreatePost(r, user.ID)
 	if err != nil {
 		return
 	}
@@ -52,15 +49,11 @@ func (h *Handler) UserPosts(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		return
 	}
-
-	uuid, _ := r.Cookie("CookieUUID")
-	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-
-	postsU, err := h.Services.PostsService.GetUserPostService(session.UserID)
+	user := contextUser(r)
+	postsU, err := h.Services.PostsService.GetUserPostService(user.ID)
 	if err != nil {
 		return
 	}
-
 	response.WriteJSON(w, http.StatusOK, postsU)
 }
 
@@ -68,10 +61,8 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPut {
 		return
 	}
-	uuid, _ := r.Cookie("CookieUUID")
-	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-
-	post, err := convert.NewConvertUpdatePost(r, session)
+	user := contextUser(r)
+	post, err := convert.ConvertUpdatePost(r, user.ID)
 	if err != nil {
 		return
 	}
@@ -86,10 +77,8 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodDelete {
 		return
 	}
-	uuid, _ := r.Cookie("CookieUUID")
-	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-
-	deleteModel, err := convert.NewConvertDeletePost(r, session)
+	user := contextUser(r)
+	deleteModel, err := convert.ConvertDeletePost(r, user.ID)
 	if err != nil {
 		return
 	}

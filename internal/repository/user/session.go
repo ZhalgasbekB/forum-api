@@ -23,7 +23,7 @@ const (
 	sessionQueryByUUID   = `SELECT * FROM sessions WHERE uuid = $1`
 )
 
-func (s *SessinonRepository) CreateSession(session *model.Sessinon) error {
+func (s *SessinonRepository) CreateSession(session *model.Session) error {
 	if _, err := s.db.Exec(createSessionQuery, session.UUID, session.UserID, session.ExpireAt); err != nil {
 		return err
 	}
@@ -37,16 +37,16 @@ func (s *SessinonRepository) DeleteSession(uuid string) error {
 	return nil
 }
 
-func (s *SessinonRepository) SessionByID(userID int) (*model.Sessinon, error) {
-	var session model.Sessinon
+func (s *SessinonRepository) SessionByID(userID int) (*model.Session, error) {
+	var session model.Session
 	if err := s.db.QueryRow(sessionQueryByID, userID).Scan(&session.UUID, &session.UserID, &session.ExpireAt); err != nil {
 		return nil, err
 	}
 	return &session, nil
 }
 
-func (s *SessinonRepository) SessionByUUID(uuid string) (*model.Sessinon, error) {
-	session := &model.Sessinon{}
+func (s *SessinonRepository) SessionByUUID(uuid string) (*model.Session, error) {
+	session := &model.Session{}
 	fmt.Println("check", uuid)
 	if err := s.db.QueryRow(sessionQueryByUUID, uuid).Scan(&session.UUID, &session.UserID, &session.ExpireAt); err != nil {
 		return nil, err
@@ -54,7 +54,7 @@ func (s *SessinonRepository) SessionByUUID(uuid string) (*model.Sessinon, error)
 	return session, nil
 }
 
-func (s *SessinonRepository) UserIDBySession(session *model.Sessinon) (int, error) {
+func (s *SessinonRepository) UserIDBySession(session *model.Session) (int, error) {
 	var userId int
 	if err := s.db.QueryRow(userIDQueryBySession, session.UUID).Scan(&userId); err != nil {
 		return -1, err
