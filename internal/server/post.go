@@ -122,17 +122,17 @@ func (h *Handler) votePost(w http.ResponseWriter, r *http.Request) {
 
 // Получение страницы с постами понравившихся пользователю
 func (h *Handler) likePosts(w http.ResponseWriter, r *http.Request) {
-	// if r.Method != http.MethodGet {
-	// 	return
-	// }
-	// uuid, _ := r.Cookie("CookieUUID")
-	// session, _ := h.sessionService.GetSessionByUUIDService(uuid.Value)
-
-	// postsVote, err := h.sessionService.LikePostsService(session.UserID)
-	// if err != nil {
-	// 	return
-	// }
-	// for _, v := range postsVote {
-	// 	fmt.Println(v)
-	// }
+	if r.Method != http.MethodGet {
+		return
+	}
+	uuid, _ := r.Cookie("CookieUUID")
+	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
+	postsVote, err := h.Services.SessionService.CreateSessionService(session.UserID) // NEED ???
+	// postsVote, err := h.Services.SessionService.LikePostsService(session.UserID) // NEED ???
+	if err != nil {
+		return
+	}
+	for _, v := range []string{"DD"} {
+		println(postsVote, v)
+	}
 }
