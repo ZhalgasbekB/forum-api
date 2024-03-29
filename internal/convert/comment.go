@@ -7,7 +7,7 @@ import (
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
-func CreateCommentConvertAnotherVersion(r *http.Request, userID int) (*model.Comment, error) {
+func CreateCommentConvert(r *http.Request, userID int) (*model.Comment, error) {
 	var createComment model.Comment
 	if err := json.NewDecoder(r.Body).Decode(&createComment); err != nil {
 		return nil, err
@@ -19,39 +19,27 @@ func CreateCommentConvertAnotherVersion(r *http.Request, userID int) (*model.Com
 	}, nil
 }
 
-func CreateCommentConvert(r *http.Request, session *model.Sessinon) (*model.Comment, error) {
-	var createComment model.Comment
-	if err := json.NewDecoder(r.Body).Decode(&createComment); err != nil {
-		return nil, err
-	}
-	return &model.Comment{
-		User:        session.UserID,
-		Post:        createComment.Post,
-		Description: createComment.Description,
-	}, nil
-}
-
-func UpdateCommentConvert(r *http.Request, sessions *model.Sessinon) (*model.Comment, error) {
+func UpdateCommentConvert(r *http.Request, user_id int) (*model.Comment, error) {
 	var updateComment model.CommentUpdateDTO
 	if err := json.NewDecoder(r.Body).Decode(&updateComment); err != nil {
 		return nil, err
 	}
 	return &model.Comment{
 		ID:          updateComment.ID,
-		User:        sessions.UserID,
+		User:        user_id,
 		Post:        updateComment.Post,
 		Description: updateComment.Description,
 	}, nil
 }
 
-func DeleteCommentConvert(r *http.Request, sessions *model.Sessinon) (*model.Comment, error) {
+func DeleteCommentConvert(r *http.Request, user_id int) (*model.Comment, error) {
 	var deleteComment model.CommentDeleteDTO
 	if err := json.NewDecoder(r.Body).Decode(&deleteComment); err != nil {
 		return nil, err
 	}
 	return &model.Comment{
 		ID:   deleteComment.ID,
-		User: sessions.UserID,
+		User: user_id,
 		Post: deleteComment.Post,
 	}, nil
 }

@@ -9,62 +9,13 @@ import (
 	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
-func (h *Handler) CreateCommentAnotherVersion(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.Header().Set("Allow", http.MethodGet)
-		return
-	}
-	user := userFromContext(r)
-	createComment, err := convert.CreateCommentConvertAnotherVersion(r, user.ID)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	if err := h.Services.CommentService.CreateCommentService(createComment); err != nil {
-		log.Println(err)
-		return
-	}
-	response.WriteJSON(w, http.StatusOK, "Successfully Created")
-}
-
-func (h *Handler) DeleteCommentAnotherVersion(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodDelete {
-		w.Header().Set("Allow", http.MethodDelete)
-		return
-	}
-	uuid, err := r.Cookie("CookieUUID")
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	session, err := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	deletedComment, err := convert.DeleteCommentConvert(r, session)
-	if err := h.Services.CommentService.DeleteCommentService(deletedComment); err != nil {
-		log.Println(err)
-		return
-	}
-}
-
 func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
-	uuid, err := r.Cookie("CookieUUID")
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	session, err := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	createComment, err := convert.CreateCommentConvert(r, session)
+	user := userFromContext(r)
+	createComment, err := convert.CreateCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
 		return
@@ -81,17 +32,12 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodDelete)
 		return
 	}
-	uuid, err := r.Cookie("CookieUUID")
+	user := userFromContext(r)
+	deletedComment, err := convert.DeleteCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	session, err := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	deletedComment, err := convert.DeleteCommentConvert(r, session)
 	if err := h.Services.CommentService.DeleteCommentService(deletedComment); err != nil {
 		log.Println(err)
 		return
@@ -103,17 +49,8 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodPut)
 		return
 	}
-	uuid, err := r.Cookie("CookieUUID")
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	session, err := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	updComment, err := convert.UpdateCommentConvert(r, session)
+	user := userFromContext(r)
+	updComment, err := convert.UpdateCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
 		return
