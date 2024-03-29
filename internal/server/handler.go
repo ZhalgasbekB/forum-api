@@ -1,14 +1,13 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/model"
 	"gitea.com/lzhuk/forum/internal/service"
 )
 
-type cookieKey string
+type KeyUser string
 type (
 	Handler struct {
 		Services service.Service
@@ -21,12 +20,12 @@ func NewHandler(services service.Service) Handler {
 	}
 }
 
-const key = cookieKey("UserData")
+const key = KeyUser("UserData")
 
-func CookieFromContext(r *http.Request) (*model.User, error) {
+func userFromContext(r *http.Request) *model.User {
 	user, exist := r.Context().Value(key).(*model.User)
 	if !exist {
-		return nil, fmt.Errorf("NOT EXIST USER")
+		return nil
 	}
-	return user, nil
+	return user
 }
