@@ -2,10 +2,11 @@ package app
 
 import (
 	"context"
-	"gitea.com/lzhuk/forum/internal/server"
-	"gitea.com/lzhuk/forum/pkg/config"
 	"log"
 	"net/http"
+
+	"gitea.com/lzhuk/forum/internal/server"
+	"gitea.com/lzhuk/forum/pkg/config"
 )
 
 type Server struct {
@@ -22,7 +23,7 @@ func NewServer(cfg config.Config, r server.Router) *Server {
 }
 
 func (s *Server) Start(ctx context.Context) error {
-	go func() { // parallel go func() int {return -1} ()
+	go func() {
 		if err := s.ServerHTTP.ListenAndServe(); err != nil {
 			log.Println(err)
 			return

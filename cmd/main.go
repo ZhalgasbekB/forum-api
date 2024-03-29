@@ -4,14 +4,15 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"gitea.com/lzhuk/forum/internal/app"
-	"gitea.com/lzhuk/forum/internal/service/comment"
-	"gitea.com/lzhuk/forum/internal/service/post"
-	"gitea.com/lzhuk/forum/internal/service/user"
 	"log"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"gitea.com/lzhuk/forum/internal/app"
+	"gitea.com/lzhuk/forum/internal/service/comment"
+	"gitea.com/lzhuk/forum/internal/service/post"
+	"gitea.com/lzhuk/forum/internal/service/user"
 
 	"gitea.com/lzhuk/forum/internal/repository"
 	"gitea.com/lzhuk/forum/internal/server"
@@ -21,15 +22,11 @@ import (
 )
 
 func main() {
-	// Загрузка конфигурации
 	cfg, err := config.Load()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Инициализация родительского контекста
-	_, cancel := context.WithCancel(context.Background())
-	defer cancel()
 
 	db, err := sql.Open("sqlite3", "forum.sqlite3")
 	if err != nil {
@@ -58,7 +55,7 @@ func main() {
 	router := server.NewRouter(&handler)
 	s := app.NewServer(cfg, router)
 
-	// ???
+	// It is work but it need for creating context
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
@@ -77,9 +74,4 @@ func main() {
 		log.Println(err)
 		return
 	}
-
-	//err = s.ListenAndServe()
-	//if err != nil {
-	//	log.Println("Сервер на порту %s не запущен. Ошибка: %s", cfg.Port, err)
-	//}
 }
