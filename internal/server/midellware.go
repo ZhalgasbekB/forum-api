@@ -9,35 +9,37 @@ import (
 	"gitea.com/lzhuk/forum/internal/helpers/cookies"
 )
 
-// Authentication USER with sessing ??
-// Context USE NEED WITH VALUE
-func (h *Handler) Authentication(next http.Handler) http.Handler {
+func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		cookie, err := cookies.Cookie(r)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
+		
 		uuid := cookie.Value
 		session, err := h.Services.SessionService.GetSessionByUUIDService(uuid)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
+		
 		if session.ExpireAt.Before(time.Now()) {
 			cookies.DeleteCookie(w)
 			next.ServeHTTP(w, r)
 			return
 		}
 		user, err := h.Services.UserService.UserByIDService(session.UserID)
+		
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 
-		fmt.Println(user)
 		ctx := context.WithValue(r.Context(), "key", user)
+		 //  r.Context _
 		next.ServeHTTP(w, r.WithContext(ctx))
+	
 	})
 }
 
