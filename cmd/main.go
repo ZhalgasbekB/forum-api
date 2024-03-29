@@ -4,6 +4,9 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	comment2 "gitea.com/lzhuk/forum/internal/repository/comment"
+	post2 "gitea.com/lzhuk/forum/internal/repository/post"
+	user2 "gitea.com/lzhuk/forum/internal/repository/user"
 	"log"
 	"os/signal"
 	"syscall"
@@ -14,7 +17,6 @@ import (
 	"gitea.com/lzhuk/forum/internal/service/post"
 	"gitea.com/lzhuk/forum/internal/service/user"
 
-	"gitea.com/lzhuk/forum/internal/repository"
 	"gitea.com/lzhuk/forum/internal/server"
 	"gitea.com/lzhuk/forum/internal/service"
 	"gitea.com/lzhuk/forum/pkg/config"
@@ -26,7 +28,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 
 	db, err := sql.Open("sqlite3", "forum.sqlite3")
 	if err != nil {
@@ -40,10 +41,10 @@ func main() {
 		}
 	}()
 
-	usersRepo := repository.NewUserRepo(db)
-	sessionRepo := repository.NewSessionRepository(db)
-	postsRepo := repository.NewPostsRepo(db)
-	commentsRepo := repository.NewCommentsRepo(db)
+	usersRepo := user2.NewUserRepo(db)
+	sessionRepo := user2.NewSessionRepository(db)
+	postsRepo := post2.NewPostsRepo(db)
+	commentsRepo := comment2.NewCommentsRepo(db)
 
 	usersService := user.NewUserService(usersRepo)
 	sessionsService := user.NewSessionService(sessionRepo)

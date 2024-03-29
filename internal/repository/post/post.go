@@ -1,4 +1,4 @@
-package repository
+package post
 
 import (
 	"context"
@@ -195,8 +195,8 @@ func (p *PostsRepository) UpdateUserPostRepo(post model.UpdatePost) error {
 // Метод для удаления поста пользователем
 func (p *PostsRepository) DeleteUserPostRepo(deleteModel *model.DeletePost) error {
 	_, err := p.db.Exec(
-		deleteUserPost, 
-		deleteModel.PostId, 
+		deleteUserPost,
+		deleteModel.PostId,
 		deleteModel.UserId)
 	if err != nil {
 		return err
@@ -239,8 +239,8 @@ func (p *PostsRepository) CheckTitlePost(title string) (string, error) {
 	return "no", nil
 }
 
-// Метод получения всех понравившихся тем (постов) пользователем 
-func (p *PostsRepository) LikePostsRepo(userId int)([]*model.Post, error) {
+// Метод получения всех понравившихся тем (постов) пользователем
+func (p *PostsRepository) LikePostsRepo(userId int) ([]*model.Post, error) {
 	rows, err := p.db.Query(getLikePosts, userId)
 	if err != nil {
 		return nil, err
@@ -290,13 +290,13 @@ func (p *PostsRepository) CheckVotePost(post model.Vote) (string, error) {
 }
 
 // Метод для удаления голоса с темы (поста)
-func (p *PostsRepository) DeleteVotePost(post model.Vote) (error) {
+func (p *PostsRepository) DeleteVotePost(post model.Vote) error {
 	_, err := p.db.Exec(
-		deleteVote, 
-		post.PostId, 
+		deleteVote,
+		post.PostId,
 		post.UserId)
 	if err != nil {
 		return err
 	}
 	return nil
-} 
+}
