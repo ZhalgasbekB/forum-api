@@ -19,7 +19,6 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) { // r * can be u
 
 func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("BBB")
-	// ctx := r.Context()
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodGet)
 		return

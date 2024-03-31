@@ -48,7 +48,6 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 
 func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		
 		user := contextUser(r)
 		if user == nil {
 			fmt.Println("EEEE")
