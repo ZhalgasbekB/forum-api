@@ -27,7 +27,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, cookies.CreateCookie(session))
+	response.WriteJSON(w, http.StatusOK, cookies.CreateCookie(w, session))
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
@@ -46,7 +46,6 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-
 	fmt.Println("User Successfully Created")
 }
 

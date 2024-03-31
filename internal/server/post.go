@@ -2,7 +2,6 @@ package server
 
 import (
 	"net/http"
-	"strings"
 
 	"gitea.com/lzhuk/forum/internal/convert"
 	"gitea.com/lzhuk/forum/internal/helpers/response"
@@ -18,11 +17,11 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) { // r * can be u
 }
 
 func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context() // SEND TO DB LIKE REQUEST
 	if r.Method != http.MethodPost {
-		// ERROR STRUCT
+		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
+	ctx := r.Context()
 	user := contextUser(r)
 	post, err := convert.ConvertCreatePost(r, user.ID)
 	if err != nil {
@@ -33,6 +32,7 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
 	id, err := convert.ConvertDatePost(r.URL.Path)
@@ -48,6 +48,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) UserPosts(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
 	user := contextUser(r)
@@ -60,6 +61,7 @@ func (h *Handler) UserPosts(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPut {
+		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
 	user := contextUser(r)
@@ -76,6 +78,7 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodDelete {
+		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
 	user := contextUser(r)
@@ -92,10 +95,8 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 
 // Проставление лайка или дизлайка на тему (пост)
 func (h *Handler) votePost(w http.ResponseWriter, r *http.Request) {
-	if !strings.HasPrefix(r.URL.Path, "/userd3/post/vote") {
-		return
-	}
 	if r.Method != http.MethodPost {
+		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
 
