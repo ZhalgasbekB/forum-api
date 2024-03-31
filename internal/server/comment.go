@@ -93,3 +93,7 @@ func (h *Handler) Comments(w http.ResponseWriter, r *http.Request) {
 	}
 	response.WriteJSON(w, http.StatusOK, comments)
 }
+
+func (h *Handler) PostComments(w http.ResponseWriter, r *http.Request) {
+
+}

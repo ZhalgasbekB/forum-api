@@ -11,15 +11,7 @@ const (
 	cookieName = "CookieUUID"
 )
 
-func Cookie(r *http.Request) (*http.Cookie, error) {
-	cookie, err := r.Cookie(cookieName)
-	if err != nil {
-		return nil, err
-	}
-	return cookie, nil
-}
-
-func CreateCookie(w http.ResponseWriter, session *model.Session) http.Cookie {
+func CreateCookie(session *model.Session) http.Cookie {
 	cookie := http.Cookie{
 		Name:    cookieName,
 		Value:   session.UUID,
@@ -30,12 +22,12 @@ func CreateCookie(w http.ResponseWriter, session *model.Session) http.Cookie {
 	return cookie
 }
 
-func DeleteCookie(w http.ResponseWriter) {
+func DeleteCookie() http.Cookie {
 	cookie := http.Cookie{
 		Name:   cookieName,
 		Value:  "",
 		Path:   "/",
 		MaxAge: -1,
 	}
-	http.SetCookie(w, &cookie)
+	return cookie
 }

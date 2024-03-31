@@ -2,7 +2,8 @@ package server
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+	"log"
 	"net/http"
 	"time"
 
@@ -12,27 +13,29 @@ import (
 
 func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		cookie, err := cookies.Cookie(r)
-		if err != nil {
-			fmt.Println(err)
+		var cookie http.Cookie
+		if err := json.NewDecoder(r.Body).Decode(cookie); err != nil {
+			log.Println(err)
+			next.ServeHTTP(w, r)
 			return
-		} // it wiil be change
+		}
 
 		uuid := cookie.Value
 		session, err := h.Services.SessionService.GetSessionByUUIDService(uuid)
 		if err != nil {
-			fmt.Println(err)
+			log.Println(err)
 			return
 		}
 
 		if session.ExpireAt.Before(time.Now()) {
-			cookies.DeleteCookie(w)
-			next.ServeHTTP(w, r)
+			response.WriteJSON(w, http.StatusSeeOther, cookies.DeleteCookie()) // ??? can be work
+			// next.ServeHTTP(w, r) // Come on the client like a expired Cookie
 			return
 		}
+
 		user, err := h.Services.UserService.UserByIDService(session.UserID)
 		if err != nil {
-			fmt.Println(err)
+			log.Println(err)
 			return
 		}
 

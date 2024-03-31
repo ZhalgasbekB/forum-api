@@ -27,7 +27,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, cookies.CreateCookie(w, session))
+	response.WriteJSON(w, http.StatusOK, cookies.CreateCookie(session))
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {

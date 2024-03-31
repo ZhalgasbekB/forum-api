@@ -8,11 +8,12 @@ import (
 	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
-func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Home(w http.ResponseWriter, r *http.Request) { // r * can be used for db
 	posts, err := h.Services.PostsService.GetAllPostService()
 	if err != nil {
 		return
 	}
+
 	response.WriteJSON(w, http.StatusOK, posts)
 }
 
