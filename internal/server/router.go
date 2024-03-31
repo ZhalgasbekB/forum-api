@@ -31,6 +31,5 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/userd3/comment", h.RequiredAuthentication(http.HandlerFunc(h.CommentByID)))
 	mux.HandleFunc("/userd3/comments", h.Comments)
 
-	h.IsAuthenticated(mux) // Check Authentication
-	return mux
+	return h.IsAuthenticated(mux) // Check Authentication
 }

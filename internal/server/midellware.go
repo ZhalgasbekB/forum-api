@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -12,6 +13,7 @@ import (
 
 func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("AAA")
 		cookie, err := cookies.Cookie(r)
 		if err != nil {
 			log.Println(err)
@@ -39,14 +41,17 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		}
 
 		ctx := context.WithValue(r.Context(), key, user)
+		fmt.Println(user)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
 
 func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		
 		user := contextUser(r)
-		if user != nil {
+		if user == nil {
+			fmt.Println("EEEE")
 			response.WriteJSON(w, 401, user)
 			return
 		}

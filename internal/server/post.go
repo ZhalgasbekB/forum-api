@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
@@ -17,17 +18,18 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) { // r * can be u
 }
 
 func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("BBB")
+	// ctx := r.Context()
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
-	ctx := r.Context()
 	user := contextUser(r)
 	post, err := convert.ConvertCreatePost(r, user.ID)
 	if err != nil {
 		return
 	}
-	h.Services.PostsService.CreatePostService(ctx, *post)
+	h.Services.PostsService.CreatePostService(r.Context(), *post)
 }
 
 func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {

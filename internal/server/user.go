@@ -14,6 +14,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
+	fmt.Println("BBB")
 
 	userReq, err := convert.UserLoginRequestBody(r)
 	user, err := h.Services.UserService.UserByEmailService(userReq.Email, userReq.Password)
