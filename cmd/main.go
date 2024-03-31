@@ -56,7 +56,7 @@ func main() {
 	router := server.NewRouter(&handler)
 	s := app.NewServer(cfg, router)
 
-	// It is work but it need for creating context
+	// It is work but it need for creating context 1 
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
