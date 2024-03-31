@@ -2,7 +2,6 @@ package post
 
 import (
 	"context"
-	"errors"
 	"time"
 
 	"gitea.com/lzhuk/forum/internal/model"
@@ -17,7 +16,7 @@ type PostsRepository interface {
 	UpdateUserPostRepo(post model.UpdatePost) error
 	DeleteUserPostRepo(deleteModel *model.DeletePost) error
 	VotePostsRepo(post model.Vote) error
-	CheckTitlePost(title string) (string, error)
+
 	CheckVotePost(post model.Vote) (string, error)
 	DeleteVotePost(post model.Vote) error
 }
@@ -44,18 +43,11 @@ func NewPostsService(repo PostsRepository) *PostsService {
 }
 
 func (p *PostsService) CreatePostService(ctx context.Context, post model.CreatePost) error {
-	// Бизнес-логика на проверку существубщей темы в БД
-	// при наличии темы (поста) пользователю возвращается
-	// сообщение что пост или тема раннее созданы
-	check, err := p.repo.CheckTitlePost(post.Title)
-	if check == "yes" {
-		return errors.New("Тема существует в БД")
-	}
 	post.CreateDate = time.Now()
-	err = p.repo.CreatePostRepo(ctx, post)
-	if err != nil {
+	if err := p.repo.CreatePostRepo(ctx, post); err != nil {
 		return err
 	}
+
 	return nil
 }
 

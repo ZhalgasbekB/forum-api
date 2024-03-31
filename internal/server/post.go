@@ -18,6 +18,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) { // r * can be u
 }
 
 func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
 	fmt.Println("BBB")
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodGet)
@@ -28,7 +29,7 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	h.Services.PostsService.CreatePostService(r.Context(), *post)
+	h.Services.PostsService.CreatePostService(ctx, *post)
 }
 
 func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
