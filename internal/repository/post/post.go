@@ -97,6 +97,7 @@ func (p *PostsRepository) DeleteUserPostRepo(deleteModel *model.DeletePost) erro
 	return nil
 }
 
+//////////////////
 func (p *PostsRepository) VotePostsRepo(post model.Vote) error {
 	_, err := p.db.Exec(addVote, post.PostId, post.UserId, post.Vote)
 	if err != nil {
@@ -141,10 +142,8 @@ func (p *PostsRepository) CheckVotePost(post model.Vote) (string, error) {
 	return "no", nil
 }
 
-// Метод для удаления голоса с темы (поста)
 func (p *PostsRepository) DeleteVotePost(post model.Vote) error {
-	_, err := p.db.Exec(deleteVote, post.PostId, post.UserId)
-	if err != nil {
+	if _, err := p.db.Exec(deleteVote, post.PostId, post.UserId); err != nil {
 		return err
 	}
 	return nil
