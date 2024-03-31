@@ -15,10 +15,11 @@ const (
 	getUserPost    = `SELECT * FROM posts WHERE user_id = $1`
 	updateUserPost = `UPDATE posts SET discription = $1, create_at = $2 WHERE id = $3 AND user_id = $4;`
 	deleteUserPost = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
-	addVote        = `INSERT INTO posts_votes( post_id, user_id, vote ) VALUES($1,$2,$3)`
-	getLikePosts   = `SELECT t1.post_id, t1.user_id, t1.category_name, t1.title, t1.discription, t1.create_at FROM posts t1 JOIN posts_votes t2 ON t1.id = t2.post_id WHERE t2.user_id = $1 AND t2.vote = 1`
-	checkVote      = `SELECT vote FROM posts_vote WHERE post_id = $1 AND user_id = $2`
-	deleteVote     = `DELETE  FROM posts_vote WHERE post_id = $1 AND user_id = $2`
+
+	addVote      = `INSERT INTO posts_votes( post_id, user_id, vote ) VALUES($1,$2,$3)`
+	getLikePosts = `SELECT t1.post_id, t1.user_id, t1.category_name, t1.title, t1.discription, t1.create_at FROM posts t1 JOIN posts_votes t2 ON t1.id = t2.post_id WHERE t2.user_id = $1 AND t2.vote = 1`
+	checkVote    = `SELECT vote FROM posts_vote WHERE post_id = $1 AND user_id = $2`
+	deleteVote   = `DELETE  FROM posts_vote WHERE post_id = $1 AND user_id = $2`
 )
 
 type PostsRepository struct {
