@@ -8,14 +8,14 @@ import (
 )
 
 type PostsRepository interface {
-	CreatePostRepo(ctx context.Context, post model.CreatePost) error
-	GetAllPostRepo() ([]*model.Post, error)
-	GetIdPostRepo(id int) (*model.Post, error)
-	GetUserPostRepo(userId int) ([]*model.Post, error)
-	LikePostsRepo(userId int) ([]*model.Post, error)
-	UpdateUserPostRepo(post model.UpdatePost) error
-	DeleteUserPostRepo(deleteModel *model.DeletePost) error
-	VotePostsRepo(post model.Vote) error
+	CreatePostRepository(ctx context.Context, post model.CreatePost) error
+	AllPostRepository() ([]*model.Post, error)
+	IdPostRepository(id int) (*model.Post, error)
+	UserPostRepository(userId int) ([]*model.Post, error)
+	LikePostsRepository(userId int) ([]*model.Post, error)
+	UpdateUserPostRepository(post model.UpdatePost) error
+	DeleteUserPostRepository(deleteModel *model.DeletePost) error
+	VotePostsRepository(post model.Vote) error
 
 	CheckVotePost(post model.Vote) (string, error)
 	DeleteVotePost(post model.Vote) error
@@ -44,7 +44,7 @@ func NewPostsService(repo PostsRepository) *PostsService {
 
 func (p *PostsService) CreatePostService(ctx context.Context, post model.CreatePost) error {
 	post.CreateDate = time.Now()
-	if err := p.repo.CreatePostRepo(ctx, post); err != nil {
+	if err := p.repo.CreatePostRepository(ctx, post); err != nil {
 		return err
 	}
 
@@ -52,7 +52,7 @@ func (p *PostsService) CreatePostService(ctx context.Context, post model.CreateP
 }
 
 func (p *PostsService) GetAllPostService() ([]*model.Post, error) {
-	allPosts, err := p.repo.GetAllPostRepo()
+	allPosts, err := p.repo.AllPostRepository()
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ func (p *PostsService) GetAllPostService() ([]*model.Post, error) {
 }
 
 func (p *PostsService) GetIdPostService(numId int) (*model.Post, error) {
-	postId, err := p.repo.GetIdPostRepo(numId)
+	postId, err := p.repo.IdPostRepository(numId)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +68,7 @@ func (p *PostsService) GetIdPostService(numId int) (*model.Post, error) {
 }
 
 func (p *PostsService) GetUserPostService(numId int) ([]*model.Post, error) {
-	userPosts, err := p.repo.GetUserPostRepo(numId)
+	userPosts, err := p.repo.UserPostRepository(numId)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func (p *PostsService) GetUserPostService(numId int) ([]*model.Post, error) {
 }
 
 func (p *PostsService) LikePostsService(userId int) ([]*model.Post, error) {
-	votePosts, err := p.repo.LikePostsRepo(userId)
+	votePosts, err := p.repo.LikePostsRepository(userId)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ func (p *PostsService) LikePostsService(userId int) ([]*model.Post, error) {
 
 func (p *PostsService) UpdateUserPostService(post model.UpdatePost) error {
 	post.CreateDate = time.Now()
-	err := p.repo.UpdateUserPostRepo(post)
+	err := p.repo.UpdateUserPostRepository(post)
 	if err != nil {
 		return err
 	}
@@ -94,7 +94,7 @@ func (p *PostsService) UpdateUserPostService(post model.UpdatePost) error {
 }
 
 func (p *PostsService) DeleteUserPostService(deleteModel *model.DeletePost) error {
-	err := p.repo.DeleteUserPostRepo(deleteModel)
+	err := p.repo.DeleteUserPostRepository(deleteModel)
 	if err != nil {
 		return err
 	}
@@ -113,7 +113,7 @@ func (p *PostsService) VotePostsService(post model.Vote) error {
 		return nil
 	}
 
-	err = p.repo.VotePostsRepo(post)
+	err = p.repo.VotePostsRepository(post)
 	if err != nil {
 		return err
 	}
