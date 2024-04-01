@@ -15,7 +15,7 @@ const (
 
 	getIdPost      = `SELECT * FROM posts WHERE id = $1`
 	getUserPost    = `SELECT * FROM posts WHERE user_id = $1`
-	updateUserPost = `UPDATE posts SET discription = $1, create_at = $2 WHERE id = $3 AND user_id = $4;`
+	updateUserPost = `UPDATE posts SET discription = $1, title = $2 WHERE id = $3 AND user_id = $4;`
 	deleteUserPost = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
 )
 
@@ -93,7 +93,7 @@ func (p PostsRepository) UserPostRepository(ctx context.Context, userId int) ([]
 func (p *PostsRepository) UpdateUserPostRepository(ctx context.Context, post model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
-	if _, err := p.db.ExecContext(ctx, updateUserPost, post.Discription, post.CreateDate, post.PostId, post.UserId); err != nil {
+	if _, err := p.db.ExecContext(ctx, updateUserPost, post.Discription, post.Title, post.PostId, post.UserId); err != nil {
 		return err
 	}
 	fmt.Println("User Successfully USERPOSTID")

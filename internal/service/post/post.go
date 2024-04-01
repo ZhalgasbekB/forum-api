@@ -68,7 +68,6 @@ func (p *PostsService) GetUserPostService(ctx context.Context, numId int) ([]*mo
 }
 
 func (p *PostsService) UpdateUserPostService(ctx context.Context, post model.Post) error {
-	post.CreateDate = time.Now()
 	if err := p.repo.UpdateUserPostRepository(ctx, post); err != nil {
 		return err
 	}
