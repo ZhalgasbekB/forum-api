@@ -6,7 +6,7 @@ import (
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
-func NewConvertVote(r *http.Request, session *model.Session) (*model.Vote, error) {
+func NewConvertVote(r *http.Request, session *model.Session) (*model.LikePost, error) {
 	// numIdPost, err := ConvertDatePost(r.URL.Path)
 	// if err != nil {
 	// 	return nil, err
