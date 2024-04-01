@@ -9,20 +9,20 @@ import (
 
 type PostsRepository interface {
 	CreatePostRepository(ctx context.Context, post model.CreatePost) error
-	AllPostRepository() ([]*model.Post, error)
-	IdPostRepository(id int) (*model.Post, error)
-	UserPostRepository(userId int) ([]*model.Post, error)
-	UpdateUserPostRepository(post model.UpdatePost) error
-	DeleteUserPostRepository(deleteModel *model.DeletePost) error
+	AllPostRepository(ctx context.Context) ([]*model.Post, error)
+	IdPostRepository(ctx context.Context, id int) (*model.Post, error)
+	UserPostRepository(ctx context.Context, userId int) ([]*model.Post, error)
+	UpdateUserPostRepository(ctx context.Context, post model.UpdatePost) error
+	DeleteUserPostRepository(ctx context.Context, deleteModel *model.DeletePost) error
 }
 
 type IPostsService interface {
 	CreatePostService(ctx context.Context, post model.CreatePost) error
-	GetAllPostService() ([]*model.Post, error)
-	GetIdPostService(numId int) (*model.Post, error)
-	GetUserPostService(numId int) ([]*model.Post, error)
-	UpdateUserPostService(post model.UpdatePost) error
-	DeleteUserPostService(deleteModel *model.DeletePost) error
+	GetAllPostService(ctx context.Context) ([]*model.Post, error)
+	GetIdPostService(ctx context.Context, numId int) (*model.Post, error)
+	GetUserPostService(ctx context.Context, numId int) ([]*model.Post, error)
+	UpdateUserPostService(ctx context.Context, post model.UpdatePost) error
+	DeleteUserPostService(ctx context.Context, deleteModel *model.DeletePost) error
 }
 
 type PostsService struct {
@@ -43,40 +43,40 @@ func (p *PostsService) CreatePostService(ctx context.Context, post model.CreateP
 	return nil
 }
 
-func (p *PostsService) GetAllPostService() ([]*model.Post, error) {
-	allPosts, err := p.repo.AllPostRepository()
+func (p *PostsService) GetAllPostService(ctx context.Context) ([]*model.Post, error) {
+	allPosts, err := p.repo.AllPostRepository(ctx)
 	if err != nil {
 		return nil, err
 	}
 	return allPosts, nil
 }
 
-func (p *PostsService) GetIdPostService(numId int) (*model.Post, error) {
-	postId, err := p.repo.IdPostRepository(numId)
+func (p *PostsService) GetIdPostService(ctx context.Context, numId int) (*model.Post, error) {
+	postId, err := p.repo.IdPostRepository(ctx, numId)
 	if err != nil {
 		return nil, err
 	}
 	return postId, nil
 }
 
-func (p *PostsService) GetUserPostService(numId int) ([]*model.Post, error) {
-	userPosts, err := p.repo.UserPostRepository(numId)
+func (p *PostsService) GetUserPostService(ctx context.Context, numId int) ([]*model.Post, error) {
+	userPosts, err := p.repo.UserPostRepository(ctx, numId)
 	if err != nil {
 		return nil, err
 	}
 	return userPosts, nil
 }
 
-func (p *PostsService) UpdateUserPostService(post model.UpdatePost) error {
+func (p *PostsService) UpdateUserPostService(ctx context.Context, post model.UpdatePost) error {
 	post.CreateDate = time.Now()
-	if err := p.repo.UpdateUserPostRepository(post); err != nil {
+	if err := p.repo.UpdateUserPostRepository(ctx, post); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (p *PostsService) DeleteUserPostService(deleteModel *model.DeletePost) error {
-	if err := p.repo.DeleteUserPostRepository(deleteModel); err != nil {
+func (p *PostsService) DeleteUserPostService(ctx context.Context, deleteModel *model.DeletePost) error {
+	if err := p.repo.DeleteUserPostRepository(ctx, deleteModel); err != nil {
 		return err
 	}
 	return nil

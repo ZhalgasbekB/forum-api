@@ -7,8 +7,8 @@ import (
 	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
-func (h *Handler) Home(w http.ResponseWriter, r *http.Request) { // r * can be used for db
-	posts, err := h.Services.PostsService.GetAllPostService()
+func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
+	posts, err := h.Services.PostsService.GetAllPostService(r.Context())
 	if err != nil {
 		return
 	}
@@ -17,7 +17,6 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) { // r * can be u
 }
 
 func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
-
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodGet)
 		return
@@ -39,7 +38,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	post, err := h.Services.PostsService.GetIdPostService(id)
+	post, err := h.Services.PostsService.GetIdPostService(r.Context(), id)
 	if err != nil {
 		return
 	}
@@ -52,7 +51,7 @@ func (h *Handler) UserPosts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	user := contextUser(r)
-	postsU, err := h.Services.PostsService.GetUserPostService(user.ID)
+	postsU, err := h.Services.PostsService.GetUserPostService(r.Context(), user.ID)
 	if err != nil {
 		return
 	}
@@ -69,7 +68,7 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	err = h.Services.PostsService.UpdateUserPostService(*post)
+	err = h.Services.PostsService.UpdateUserPostService(r.Context(), *post)
 	if err != nil {
 		return
 	}
@@ -86,7 +85,7 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	err = h.Services.PostsService.DeleteUserPostService(deleteModel)
+	err = h.Services.PostsService.DeleteUserPostService(r.Context(), deleteModel)
 	if err != nil {
 		return
 	}

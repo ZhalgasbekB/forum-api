@@ -38,10 +38,10 @@ func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.Cr
 	return nil
 }
 
-func (p PostsRepository) AllPostRepository() ([]*model.Post, error) {
+func (p PostsRepository) AllPostRepository(ctx context.Context) ([]*model.Post, error) {
 	p.m.Lock()
 	defer p.m.Unlock()
-	rows, err := p.db.Query(getAllPost)
+	rows, err := p.db.QueryContext(ctx, getAllPost)
 	if err != nil {
 		return nil, err
 	}
@@ -57,20 +57,20 @@ func (p PostsRepository) AllPostRepository() ([]*model.Post, error) {
 	return posts, nil
 }
 
-func (p PostsRepository) IdPostRepository(id int) (*model.Post, error) {
+func (p PostsRepository) IdPostRepository(ctx context.Context, id int) (*model.Post, error) {
 	p.m.Lock()
 	defer p.m.Unlock()
 	postId := &model.Post{}
-	if err := p.db.QueryRow(getIdPost, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Discription, &postId.CreateDate); err != nil {
+	if err := p.db.QueryRowContext(ctx, getIdPost, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Discription, &postId.CreateDate); err != nil {
 		return nil, err
 	}
 	return postId, nil
 }
 
-func (p PostsRepository) UserPostRepository(userId int) ([]*model.Post, error) {
+func (p PostsRepository) UserPostRepository(ctx context.Context, userId int) ([]*model.Post, error) {
 	p.m.Lock()
 	defer p.m.Unlock()
-	rows, err := p.db.Query(getUserPost, userId)
+	rows, err := p.db.QueryContext(ctx, getUserPost, userId)
 	if err != nil {
 		return nil, err
 	}
@@ -85,19 +85,19 @@ func (p PostsRepository) UserPostRepository(userId int) ([]*model.Post, error) {
 	return userPosts, nil
 }
 
-func (p *PostsRepository) UpdateUserPostRepository(post model.UpdatePost) error {
+func (p *PostsRepository) UpdateUserPostRepository(ctx context.Context, post model.UpdatePost) error {
 	p.m.Lock()
 	defer p.m.Unlock()
-	if _, err := p.db.Exec(updateUserPost, post.Discription, post.CreateDate, post.PostId, post.UserId); err != nil {
+	if _, err := p.db.ExecContext(ctx, updateUserPost, post.Discription, post.CreateDate, post.PostId, post.UserId); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (p *PostsRepository) DeleteUserPostRepository(deleteModel *model.DeletePost) error {
+func (p *PostsRepository) DeleteUserPostRepository(ctx context.Context, deleteModel *model.DeletePost) error {
 	p.m.Lock()
 	defer p.m.Unlock()
-	if _, err := p.db.Exec(deleteUserPost, deleteModel.PostId, deleteModel.UserId); err != nil {
+	if _, err := p.db.ExecContext(ctx, deleteUserPost, deleteModel.PostId, deleteModel.UserId); err != nil {
 		return err
 	}
 	return nil
