@@ -3,6 +3,8 @@ package post
 import (
 	"context"
 	"database/sql"
+	"sync"
+	"time"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -19,6 +21,7 @@ const (
 
 type PostsRepository struct {
 	db *sql.DB
+	m  sync.RWMutex
 }
 
 func NewPostsRepo(db *sql.DB) *PostsRepository {
@@ -28,10 +31,15 @@ func NewPostsRepo(db *sql.DB) *PostsRepository {
 }
 
 func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.CreatePost) error {
-	if _, err := p.db.Exec(createPostQuery, post.UserId, post.CategoryName, post.Title, post.Discription, post.CreateDate); err != nil {
-		return err
-	}
-	return nil
+	ctxTime, cancel := context.WithTimeout(ctx, time.Second*5)
+    defer cancel()
+    p.m.Lock()
+    defer p.m.Unlock()
+    
+    if _, err := p.db.ExecContext(ctxTime, createPostQuery, post.UserId, post.CategoryName, post.Title, post.Discription, post.CreateDate); err != nil {
+        return err
+    }
+    return nil
 }
 
 func (p PostsRepository) AllPostRepository() ([]*model.Post, error) {

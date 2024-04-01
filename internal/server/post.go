@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
@@ -18,8 +17,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) { // r * can be u
 }
 
 func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
-	ctx := r.Context()
-	fmt.Println("BBB")
+
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodGet)
 		return
@@ -29,7 +27,7 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	h.Services.PostsService.CreatePostService(ctx, *post)
+	h.Services.PostsService.CreatePostService(r.Context(), *post)
 }
 
 func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
@@ -94,7 +92,6 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	}
 	response.WriteJSON(w, http.StatusOK, "VSE UDALIL BRAT CHETCO")
 }
-
 
 // Получение страницы с постами понравившихся пользователю
 // func (h *Handler) likePosts(w http.ResponseWriter, r *http.Request) {

@@ -13,7 +13,7 @@ type PostsRepository interface {
 	IdPostRepository(id int) (*model.Post, error)
 	UserPostRepository(userId int) ([]*model.Post, error)
 	UpdateUserPostRepository(post model.UpdatePost) error
-	DeleteUserPostRepository(deleteModel *model.DeletePost) error	 
+	DeleteUserPostRepository(deleteModel *model.DeletePost) error
 }
 
 type IPostsService interface {
@@ -22,7 +22,7 @@ type IPostsService interface {
 	GetIdPostService(numId int) (*model.Post, error)
 	GetUserPostService(numId int) ([]*model.Post, error)
 	UpdateUserPostService(post model.UpdatePost) error
-	DeleteUserPostService(deleteModel *model.DeletePost) error	 
+	DeleteUserPostService(deleteModel *model.DeletePost) error
 }
 
 type PostsService struct {
@@ -40,7 +40,6 @@ func (p *PostsService) CreatePostService(ctx context.Context, post model.CreateP
 	if err := p.repo.CreatePostRepository(ctx, post); err != nil {
 		return err
 	}
-
 	return nil
 }
 
@@ -70,20 +69,15 @@ func (p *PostsService) GetUserPostService(numId int) ([]*model.Post, error) {
 
 func (p *PostsService) UpdateUserPostService(post model.UpdatePost) error {
 	post.CreateDate = time.Now()
-	err := p.repo.UpdateUserPostRepository(post)
-	if err != nil {
+	if err := p.repo.UpdateUserPostRepository(post); err != nil {
 		return err
 	}
-	
 	return nil
 }
 
 func (p *PostsService) DeleteUserPostService(deleteModel *model.DeletePost) error {
-	err := p.repo.DeleteUserPostRepository(deleteModel)
-	if err != nil {
+	if err := p.repo.DeleteUserPostRepository(deleteModel); err != nil {
 		return err
 	}
 	return nil
 }
-
- 
