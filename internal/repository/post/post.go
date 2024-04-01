@@ -101,7 +101,7 @@ func (p *PostsRepository) UpdateUserPostRepository(ctx context.Context, post mod
 	return nil
 }
 
-func (p *PostsRepository) DeleteUserPostRepository(ctx context.Context, deleteModel *model.DeletePost) error {
+func (p *PostsRepository) DeleteUserPostRepository(ctx context.Context, deleteModel *model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
 	if _, err := p.db.ExecContext(ctx, deleteUserPost, deleteModel.PostId, deleteModel.UserId); err != nil {

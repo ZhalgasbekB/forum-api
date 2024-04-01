@@ -22,8 +22,7 @@ func ConvertCreatePost(r *http.Request, user_id int) (*model.Post, error) {
 }
 
 func ConvertUpdatePost(r *http.Request, user_id int) (*model.Post, error) {
-	idS := r.URL.Query().Get("id")
-	numId, err := strconv.Atoi(idS)
+	postID, err := ConvertParamID(r)
 	if err != nil {
 		return nil, err
 	}
@@ -33,25 +32,29 @@ func ConvertUpdatePost(r *http.Request, user_id int) (*model.Post, error) {
 		return nil, err
 	}
 	return &model.Post{
-		PostId:      numId,
+		PostId:      postID,
 		UserId:      user_id,
 		Title:       updatePost.Title,
 		Discription: updatePost.Discription,
 	}, nil
 }
 
-func ConvertDeletePost(r *http.Request, user_id int) (*model.DeletePost, error) {
-	idS := r.URL.Query().Get("id")
-	numId, err := strconv.Atoi(idS)
+func ConvertDeletePost(r *http.Request, user_id int) (*model.Post, error) {
+	postID, err := ConvertParamID(r)
 	if err != nil {
 		return nil, err
 	}
-	deletePost := &model.DeletePost{}
-	if err := json.NewDecoder(r.Body).Decode(deletePost); err != nil {
-		return nil, err
-	}
-	return &model.DeletePost{
+	return &model.Post{
 		UserId: user_id,
-		PostId: numId,
+		PostId: postID,
 	}, nil
+}
+
+func ConvertParamID(r *http.Request) (int, error) {
+	idS := r.URL.Query().Get("id")
+	id, err := strconv.Atoi(idS)
+	if err != nil {
+		return -1, err
+	}
+	return id, err
 }

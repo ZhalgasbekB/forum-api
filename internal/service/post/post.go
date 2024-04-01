@@ -13,7 +13,7 @@ type PostsRepository interface {
 	IdPostRepository(ctx context.Context, id int) (*model.Post, error)
 	UserPostRepository(ctx context.Context, userId int) ([]*model.Post, error)
 	UpdateUserPostRepository(ctx context.Context, post model.Post) error
-	DeleteUserPostRepository(ctx context.Context, deleteModel *model.DeletePost) error
+	DeleteUserPostRepository(ctx context.Context, deleteModel *model.Post) error
 }
 
 type IPostsService interface {
@@ -22,7 +22,7 @@ type IPostsService interface {
 	GetIdPostService(ctx context.Context, numId int) (*model.Post, error)
 	GetUserPostService(ctx context.Context, numId int) ([]*model.Post, error)
 	UpdateUserPostService(ctx context.Context, post model.Post) error
-	DeleteUserPostService(ctx context.Context, deleteModel *model.DeletePost) error
+	DeleteUserPostService(ctx context.Context, deleteModel *model.Post) error
 }
 
 type PostsService struct {
@@ -75,7 +75,7 @@ func (p *PostsService) UpdateUserPostService(ctx context.Context, post model.Pos
 	return nil
 }
 
-func (p *PostsService) DeleteUserPostService(ctx context.Context, deleteModel *model.DeletePost) error {
+func (p *PostsService) DeleteUserPostService(ctx context.Context, deleteModel *model.Post) error {
 	if err := p.repo.DeleteUserPostRepository(ctx, deleteModel); err != nil {
 		return err
 	}
