@@ -99,7 +99,6 @@ func (p *PostsRepository) UpdateUserPostRepository(ctx context.Context, post mod
 		return err
 	}
 	fmt.Println("User Successfully USERPOSTID")
-
 	return nil
 }
 
