@@ -21,3 +21,8 @@ type UpdatePostDTO struct {
 	Title       string `json:"title"`
 	Discription string `json:"discription"`
 }
+
+type PostCommentsDTO struct {
+	Post    *Post      `json:"post"`
+	Comments []*Comment `json:"comments"`
+}

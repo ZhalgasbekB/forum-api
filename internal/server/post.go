@@ -75,6 +75,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}// GET COMMENTS POST
+	
 	response.WriteJSON(w, http.StatusOK, post)
 }
 

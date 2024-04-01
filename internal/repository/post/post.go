@@ -17,6 +17,8 @@ const (
 	getUserPost    = `SELECT * FROM posts WHERE user_id = $1`
 	updateUserPost = `UPDATE posts SET discription = $1, title = $2 WHERE id = $3 AND user_id = $4;`
 	deleteUserPost = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
+
+	postComments = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
 )
 
 type PostsRepository struct {
@@ -109,4 +111,27 @@ func (p *PostsRepository) DeleteUserPostRepository(ctx context.Context, deleteMo
 	}
 	fmt.Println("User Successfully DETELE")
 	return nil
+}
+
+// CHECK
+func (p *PostsRepository) CommentsPost(ctx context.Context, id int ) (*model.PostCommentsDTO, error) {
+	postComment := &model.PostCommentsDTO{}
+	
+	postId := &model.Post{}
+	if err := p.db.QueryRowContext(ctx, getIdPost, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Discription, &postId.CreateDate); err != nil {
+		return nil, err
+	}
+	
+	rows, err := p.db.QueryContext(ctx, postComments)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		var comment model.Comment
+		if err := rows.Scan(&comment.ID, &comment.Post, &comment.User, &comment.Description, &comment.CreatedDate, &comment.UpdatedDate); err != nil {
+			return nil, err
+		}
+		postComment.Comments = append(postComment.Comments, &comment)
+	}
+	return &model.PostCommentsDTO{}, nil
 }
