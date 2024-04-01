@@ -15,7 +15,7 @@ const (
 	getUserPost    = `SELECT * FROM posts WHERE user_id = $1`
 	updateUserPost = `UPDATE posts SET discription = $1, create_at = $2 WHERE id = $3 AND user_id = $4;`
 	deleteUserPost = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
- )
+)
 
 type PostsRepository struct {
 	db *sql.DB
@@ -76,18 +76,15 @@ func (p PostsRepository) UserPostRepository(userId int) ([]*model.Post, error) {
 }
 
 func (p *PostsRepository) UpdateUserPostRepository(post model.UpdatePost) error {
-	_, err := p.db.Exec(updateUserPost, post.Discription, post.CreateDate, post.PostId, post.UserId)
-	if err != nil {
+	if _, err := p.db.Exec(updateUserPost, post.Discription, post.CreateDate, post.PostId, post.UserId); err != nil {
 		return err
 	}
 	return nil
 }
 
 func (p *PostsRepository) DeleteUserPostRepository(deleteModel *model.DeletePost) error {
-	_, err := p.db.Exec(deleteUserPost, deleteModel.PostId, deleteModel.UserId)
-	if err != nil {
+	if _, err := p.db.Exec(deleteUserPost, deleteModel.PostId, deleteModel.UserId); err != nil {
 		return err
 	}
 	return nil
 }
-

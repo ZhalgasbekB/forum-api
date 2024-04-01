@@ -13,7 +13,6 @@ import (
 
 func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("AAA")
 		cookie, err := cookies.Cookie(r)
 		if err != nil {
 			log.Println(err)
@@ -50,8 +49,7 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := contextUser(r)
 		if user == nil {
-			fmt.Println("EEEE")
-			response.WriteJSON(w, http.StatusNonAuthoritativeInfo, user)
+			response.WriteJSON(w, http.StatusNonAuthoritativeInfo, "PLEASE AUTH")
 			return
 		}
 		next.ServeHTTP(w, r)

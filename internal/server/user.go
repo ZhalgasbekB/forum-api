@@ -14,7 +14,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	
+
 	userReq, err := convert.UserLoginRequestBody(r)
 	user, err := h.Services.UserService.UserByEmailService(userReq.Email, userReq.Password)
 	if err != nil {
@@ -29,6 +29,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	}
 	cookies.CreateCookie(w, session)
 	response.WriteJSON(w, http.StatusOK, "OK")
+	fmt.Println("User Successfully Logged")
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
