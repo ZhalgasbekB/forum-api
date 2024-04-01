@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -40,8 +39,11 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		}
 
 		ctx := context.WithValue(r.Context(), key, user)
-		fmt.Println(user)
-		next.ServeHTTP(w, r.WithContext(ctx))
+
+		ctxWithTimeout, cancel := context.WithTimeout(ctx, time.Second*5)
+		defer cancel()
+
+		next.ServeHTTP(w, r.WithContext(ctxWithTimeout))
 	})
 }
 
