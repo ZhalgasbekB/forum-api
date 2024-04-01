@@ -74,7 +74,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	post, err := h.Services.PostsService.GetIdPostService(r.Context(), id)
 	if err != nil {
 		return
-	}
+	}// GET COMMENTS POST
 	response.WriteJSON(w, http.StatusOK, post)
 }
 
