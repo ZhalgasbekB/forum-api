@@ -23,5 +23,5 @@ type CommentUpdateDTO struct {
 
 type CommentDeleteDTO struct {
 	ID   int `json:"id"`
-	Post int `json:"post_id"`
+	Post int `json:"post_id"` // ?? 
 }

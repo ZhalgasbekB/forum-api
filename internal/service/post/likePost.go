@@ -4,14 +4,14 @@ import "gitea.com/lzhuk/forum/internal/model"
 
 type ILikePostRepository interface {
 	LikePostsRepository(userId int) ([]*model.Post, error)
-	VotePostsRepository(post model.Vote) error
-	CheckVotePost(post model.Vote) (string, error)
-	DeleteVotePost(post model.Vote) error
+	VotePostsRepository(post model.LikePost) error
+	CheckVotePost(post model.LikePost) (string, error)
+	DeleteVotePost(post model.LikePost) error
 }
 
 type ILikePostService interface {
 	LikePostsService(userId int) ([]*model.Post, error)
-	VotePostsService(post model.Vote) error
+	VotePostsService(post model.LikePost) error
 }
 
 type LikePostService struct {
@@ -24,7 +24,7 @@ func NewLikePostsService(repo ILikePostRepository) *LikePostService {
 	}
 }
 
-func (p *LikePostService) VotePostsService(post model.Vote) error {
+func (p *LikePostService) VotePostsService(post model.LikePost) error {
 	check, err := p.repo.CheckVotePost(post)
 	if check == "yes" {
 		err = p.repo.DeleteVotePost(post)

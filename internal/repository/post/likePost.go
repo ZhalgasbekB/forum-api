@@ -23,7 +23,7 @@ func NewLikePostRepository(db *sql.DB) *LikePostRepository {
 	}
 }
 
-func (l *LikePostRepository) VotePostsRepository(post model.Vote) error {
+func (l *LikePostRepository) VotePostsRepository(post model.LikePost) error {
 	_, err := l.db.Exec(addVote, post.PostId, post.UserId, post.Vote)
 	if err != nil {
 		return err
@@ -48,7 +48,7 @@ func (l *LikePostRepository) LikePostsRepository(userId int) ([]*model.Post, err
 	return likePosts, nil
 }
 
-func (l *LikePostRepository) CheckVotePost(post model.Vote) (string, error) {
+func (l *LikePostRepository) CheckVotePost(post model.LikePost) (string, error) {
 	rows, err := l.db.Query(checkVote, post.PostId, post.UserId)
 	if err != nil {
 		return "", err
@@ -67,7 +67,7 @@ func (l *LikePostRepository) CheckVotePost(post model.Vote) (string, error) {
 	return "no", nil
 }
 
-func (l *LikePostRepository) DeleteVotePost(post model.Vote) error {
+func (l *LikePostRepository) DeleteVotePost(post model.LikePost) error {
 	if _, err := l.db.Exec(deleteVote, post.PostId, post.UserId); err != nil {
 		return err
 	}
