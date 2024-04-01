@@ -3,6 +3,7 @@ package post
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"sync"
 
 	"gitea.com/lzhuk/forum/internal/model"
@@ -29,12 +30,13 @@ func NewPostsRepo(db *sql.DB) *PostsRepository {
 	}
 }
 
-func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.CreatePost) error {
+func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
 	if _, err := p.db.ExecContext(ctx, createPostQuery, post.UserId, post.CategoryName, post.Title, post.Discription, post.CreateDate); err != nil {
 		return err
 	}
+	fmt.Println("User Successfully CREATE POST")
 	return nil
 }
 
@@ -54,6 +56,7 @@ func (p PostsRepository) AllPostRepository(ctx context.Context) ([]*model.Post, 
 		}
 		posts = append(posts, post)
 	}
+	fmt.Println("User Successfully  POSTS")
 	return posts, nil
 }
 
@@ -64,6 +67,7 @@ func (p PostsRepository) IdPostRepository(ctx context.Context, id int) (*model.P
 	if err := p.db.QueryRowContext(ctx, getIdPost, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Discription, &postId.CreateDate); err != nil {
 		return nil, err
 	}
+	fmt.Println("User Successfully  POST")
 	return postId, nil
 }
 
@@ -82,15 +86,18 @@ func (p PostsRepository) UserPostRepository(ctx context.Context, userId int) ([]
 		}
 		userPosts = append(userPosts, post)
 	}
+	fmt.Println("User Successfully USER")
 	return userPosts, nil
 }
 
-func (p *PostsRepository) UpdateUserPostRepository(ctx context.Context, post model.UpdatePost) error {
+func (p *PostsRepository) UpdateUserPostRepository(ctx context.Context, post model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
 	if _, err := p.db.ExecContext(ctx, updateUserPost, post.Discription, post.CreateDate, post.PostId, post.UserId); err != nil {
 		return err
 	}
+	fmt.Println("User Successfully USERPOSTID")
+
 	return nil
 }
 
@@ -100,5 +107,6 @@ func (p *PostsRepository) DeleteUserPostRepository(ctx context.Context, deleteMo
 	if _, err := p.db.ExecContext(ctx, deleteUserPost, deleteModel.PostId, deleteModel.UserId); err != nil {
 		return err
 	}
+	fmt.Println("User Successfully DETELE")
 	return nil
 }

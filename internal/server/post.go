@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
@@ -34,11 +35,11 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
-	id, err := convert.ConvertDatePost(r.URL.Path)
-	if err != nil {
-		return
-	}
-	post, err := h.Services.PostsService.GetIdPostService(r.Context(), id)
+	// id, err := convert.ConvertDatePost(r.URL.Path)
+	// if err != nil {
+	// 	return
+	// }
+	post, err := h.Services.PostsService.GetIdPostService(r.Context(), 1)
 	if err != nil {
 		return
 	}
@@ -63,6 +64,7 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
+	fmt.Println("DDDD")
 	user := contextUser(r)
 	post, err := convert.ConvertUpdatePost(r, user.ID)
 	if err != nil {

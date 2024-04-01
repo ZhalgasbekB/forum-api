@@ -8,20 +8,20 @@ import (
 )
 
 type PostsRepository interface {
-	CreatePostRepository(ctx context.Context, post model.CreatePost) error
+	CreatePostRepository(ctx context.Context, post model.Post) error
 	AllPostRepository(ctx context.Context) ([]*model.Post, error)
 	IdPostRepository(ctx context.Context, id int) (*model.Post, error)
 	UserPostRepository(ctx context.Context, userId int) ([]*model.Post, error)
-	UpdateUserPostRepository(ctx context.Context, post model.UpdatePost) error
+	UpdateUserPostRepository(ctx context.Context, post model.Post) error
 	DeleteUserPostRepository(ctx context.Context, deleteModel *model.DeletePost) error
 }
 
 type IPostsService interface {
-	CreatePostService(ctx context.Context, post model.CreatePost) error
+	CreatePostService(ctx context.Context, post model.Post) error
 	GetAllPostService(ctx context.Context) ([]*model.Post, error)
 	GetIdPostService(ctx context.Context, numId int) (*model.Post, error)
 	GetUserPostService(ctx context.Context, numId int) ([]*model.Post, error)
-	UpdateUserPostService(ctx context.Context, post model.UpdatePost) error
+	UpdateUserPostService(ctx context.Context, post model.Post) error
 	DeleteUserPostService(ctx context.Context, deleteModel *model.DeletePost) error
 }
 
@@ -35,7 +35,7 @@ func NewPostsService(repo PostsRepository) *PostsService {
 	}
 }
 
-func (p *PostsService) CreatePostService(ctx context.Context, post model.CreatePost) error {
+func (p *PostsService) CreatePostService(ctx context.Context, post model.Post) error {
 	post.CreateDate = time.Now()
 	if err := p.repo.CreatePostRepository(ctx, post); err != nil {
 		return err
@@ -67,7 +67,7 @@ func (p *PostsService) GetUserPostService(ctx context.Context, numId int) ([]*mo
 	return userPosts, nil
 }
 
-func (p *PostsService) UpdateUserPostService(ctx context.Context, post model.UpdatePost) error {
+func (p *PostsService) UpdateUserPostService(ctx context.Context, post model.Post) error {
 	post.CreateDate = time.Now()
 	if err := p.repo.UpdateUserPostRepository(ctx, post); err != nil {
 		return err
