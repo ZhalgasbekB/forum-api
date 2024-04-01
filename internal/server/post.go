@@ -71,11 +71,10 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	post, err := h.Services.PostsService.GetIdPostService(r.Context(), id)
+	post, err := h.Services.PostsService.CommentsPostService(r.Context(), id)
 	if err != nil {
 		return
-	}// GET COMMENTS POST
-	
+	}
 	response.WriteJSON(w, http.StatusOK, post)
 }
 
@@ -85,11 +84,11 @@ func (h *Handler) UserPosts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	user := contextUser(r)
-	postsU, err := h.Services.PostsService.GetUserPostService(r.Context(), user.ID)
+	postComments, err := h.Services.PostsService.GetUserPostService(r.Context(), user.ID)
 	if err != nil {
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, postsU)
+	response.WriteJSON(w, http.StatusOK, postComments)
 }
 
 // func (h *Handler) likePosts(w http.ResponseWriter, r *http.Request) {
