@@ -22,3 +22,4 @@ func CreateLikePostRepository() error { return nil }
 func UpdateLikePostRepository() error { return nil }
 func DeleteLikePostRepository() error { return nil }
 func GetLikePostRepository() error    { return nil }
+func NEEDSOMERepository() error       { return nil }
