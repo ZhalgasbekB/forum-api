@@ -12,13 +12,8 @@ type PostsRepository interface {
 	AllPostRepository() ([]*model.Post, error)
 	IdPostRepository(id int) (*model.Post, error)
 	UserPostRepository(userId int) ([]*model.Post, error)
-	LikePostsRepository(userId int) ([]*model.Post, error)
 	UpdateUserPostRepository(post model.UpdatePost) error
-	DeleteUserPostRepository(deleteModel *model.DeletePost) error
-	VotePostsRepository(post model.Vote) error
-
-	CheckVotePost(post model.Vote) (string, error)
-	DeleteVotePost(post model.Vote) error
+	DeleteUserPostRepository(deleteModel *model.DeletePost) error	 
 }
 
 type IPostsService interface {
@@ -26,10 +21,8 @@ type IPostsService interface {
 	GetAllPostService() ([]*model.Post, error)
 	GetIdPostService(numId int) (*model.Post, error)
 	GetUserPostService(numId int) ([]*model.Post, error)
-	LikePostsService(userId int) ([]*model.Post, error)
 	UpdateUserPostService(post model.UpdatePost) error
-	DeleteUserPostService(deleteModel *model.DeletePost) error
-	VotePostsService(post model.Vote) error
+	DeleteUserPostService(deleteModel *model.DeletePost) error	 
 }
 
 type PostsService struct {
@@ -75,21 +68,13 @@ func (p *PostsService) GetUserPostService(numId int) ([]*model.Post, error) {
 	return userPosts, nil
 }
 
-func (p *PostsService) LikePostsService(userId int) ([]*model.Post, error) {
-	votePosts, err := p.repo.LikePostsRepository(userId)
-	if err != nil {
-		return nil, err
-	}
-	return votePosts, nil
-}
-
 func (p *PostsService) UpdateUserPostService(post model.UpdatePost) error {
 	post.CreateDate = time.Now()
 	err := p.repo.UpdateUserPostRepository(post)
 	if err != nil {
 		return err
 	}
-
+	
 	return nil
 }
 
@@ -101,21 +86,4 @@ func (p *PostsService) DeleteUserPostService(deleteModel *model.DeletePost) erro
 	return nil
 }
 
-func (p *PostsService) VotePostsService(post model.Vote) error {
-	// Бизнес-логика на проверку голоса для темы в БД
-	// при наличии голоса пользователя голос убирается
-	check, err := p.repo.CheckVotePost(post)
-	if check == "yes" {
-		err = p.repo.DeleteVotePost(post)
-		if err != nil {
-			return err
-		}
-		return nil
-	}
-
-	err = p.repo.VotePostsRepository(post)
-	if err != nil {
-		return err
-	}
-	return nil
-}
+ 

@@ -51,7 +51,7 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 		user := contextUser(r)
 		if user == nil {
 			fmt.Println("EEEE")
-			response.WriteJSON(w, 401, user)
+			response.WriteJSON(w, http.StatusNonAuthoritativeInfo, user)
 			return
 		}
 		next.ServeHTTP(w, r)

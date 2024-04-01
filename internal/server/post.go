@@ -95,40 +95,40 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	response.WriteJSON(w, http.StatusOK, "VSE UDALIL BRAT CHETCO")
 }
 
-// Проставление лайка или дизлайка на тему (пост)
-func (h *Handler) votePost(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.Header().Set("Allow", http.MethodGet)
-		return
-	}
-
-	uuid, _ := r.Cookie("CookieUUID")
-	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-
-	postVote, err := convert.NewConvertVote(r, session)
-	if err != nil {
-		return
-	}
-
-	err = h.Services.PostsService.VotePostsService(*postVote)
-	if err != nil {
-		return
-	}
-}
 
 // Получение страницы с постами понравившихся пользователю
-func (h *Handler) likePosts(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		return
-	}
-	uuid, _ := r.Cookie("CookieUUID")
-	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-	postsVote, err := h.Services.SessionService.CreateSessionService(session.UserID) // NEED ???
-	// postsVote, err := h.Services.SessionService.LikePostsService(session.UserID) // NEED ???
-	if err != nil {
-		return
-	}
-	for _, v := range []string{"DD"} {
-		println(postsVote, v)
-	}
-}
+// func (h *Handler) likePosts(w http.ResponseWriter, r *http.Request) {
+// 	if r.Method != http.MethodGet {
+// 		return
+// 	}
+// 	uuid, _ := r.Cookie("CookieUUID")
+// 	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
+// 	postsVote, err := h.Services.SessionService.CreateSessionService(session.UserID) // NEED ???
+// 	// postsVote, err := h.Services.SessionService.LikePostsService(session.UserID) // NEED ???
+// 	if err != nil {
+// 		return
+// 	}
+// 	for _, v := range []string{"DD"} {
+// 		println(postsVote, v)
+// 	}
+// }
+// Проставление лайка или дизлайка на тему (пост)
+// func (h *Handler) votePost(w http.ResponseWriter, r *http.Request) {
+// 	if r.Method != http.MethodPost {
+// 		w.Header().Set("Allow", http.MethodGet)
+// 		return
+// 	}
+
+// 	uuid, _ := r.Cookie("CookieUUID")
+// 	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
+
+// 	postVote, err := convert.NewConvertVote(r, session)
+// 	if err != nil {
+// 		return
+// 	}
+
+// 	err = h.Services.PostsService.VotePostsService(*postVote)
+// 	if err != nil {
+// 		return
+// 	}
+// }

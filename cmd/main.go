@@ -4,13 +4,14 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	comment2 "gitea.com/lzhuk/forum/internal/repository/comment"
-	post2 "gitea.com/lzhuk/forum/internal/repository/post"
-	user2 "gitea.com/lzhuk/forum/internal/repository/user"
 	"log"
 	"os/signal"
 	"syscall"
 	"time"
+
+	comment2 "gitea.com/lzhuk/forum/internal/repository/comment"
+	post2 "gitea.com/lzhuk/forum/internal/repository/post"
+	user2 "gitea.com/lzhuk/forum/internal/repository/user"
 
 	"gitea.com/lzhuk/forum/internal/app"
 	"gitea.com/lzhuk/forum/internal/service/comment"
@@ -56,7 +57,7 @@ func main() {
 	router := server.NewRouter(&handler)
 	s := app.NewServer(cfg, router)
 
-	// It is work but it need for creating context 1 
+	// It is work but it need for creating context 1
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
