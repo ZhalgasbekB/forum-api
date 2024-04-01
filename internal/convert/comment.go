@@ -8,7 +8,7 @@ import (
 )
 
 func CreateCommentConvert(r *http.Request, userID int) (*model.Comment, error) {
-	var createComment model.Comment
+	var createComment model.CreateCommentDTO
 	if err := json.NewDecoder(r.Body).Decode(&createComment); err != nil {
 		return nil, err
 	}

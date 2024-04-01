@@ -11,10 +11,11 @@ type Comment struct {
 	UpdatedDate time.Time `json:"updated_at"`
 }
 
-type CommentDTO struct {
+type CreateCommentDTO struct {
 	Post        int    `json:"post_id"`
 	Description string `json:"description"`
 }
+
 type CommentUpdateDTO struct {
 	ID          int    `json:"id"`
 	Post        int    `json:"post_id"`
@@ -23,5 +24,5 @@ type CommentUpdateDTO struct {
 
 type CommentDeleteDTO struct {
 	ID   int `json:"id"`
-	Post int `json:"post_id"` // ?? 
+	Post int `json:"post_id"` // ??
 }
