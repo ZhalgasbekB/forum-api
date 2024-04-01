@@ -21,6 +21,9 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/userd3/post-update", h.RequiredAuthentication(http.HandlerFunc(h.UpdatePost))) // (PUT METHOD) update
 	mux.Handle("/userd3/post-delete", h.RequiredAuthentication(http.HandlerFunc(h.DeletePost))) // (DELETE METHOD) delete
 
+	// mux.HandleFunc("/userd3/post/vote", h.votePost)  // Проставление лайка или дизлайка на пост (метод POST)
+	// mux.HandleFunc("/userd3/likeposts", h.likePosts) // ??           // Cтраница понравившихся тем пользователем (метод GET)
+
 	mux.Handle("/userd3/comment", h.RequiredAuthentication(http.HandlerFunc(h.CommentByID)))          // (GET METHOD) comment by id
 	mux.HandleFunc("/userd3/comments", h.Comments)                                                    // (GET METHOD) comments
 	mux.Handle("/userd3/comment-create", h.RequiredAuthentication(http.HandlerFunc(h.CreateComment))) // (POST METHOD) create
@@ -29,6 +32,3 @@ func NewRouter(h *Handler) http.Handler {
 
 	return h.IsAuthenticated(mux) // Check Authentication
 }
-
-// mux.HandleFunc("/userd3/post/vote", h.votePost)  // Проставление лайка или дизлайка на пост (метод POST)
-// mux.HandleFunc("/userd3/likeposts", h.likePosts) // ??           // Cтраница понравившихся тем пользователем (метод GET)
