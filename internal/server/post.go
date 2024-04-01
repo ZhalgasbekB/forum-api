@@ -71,24 +71,24 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	post, err := h.Services.PostsService.CommentsPostService(r.Context(), id)
+	postComments, err := h.Services.PostsService.CommentsPostService(r.Context(), id)
 	if err != nil {
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, post)
+	response.WriteJSON(w, http.StatusOK, postComments)
 }
 
-func (h *Handler) UserPosts(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) PostsUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
 	user := contextUser(r)
-	postComments, err := h.Services.PostsService.GetUserPostService(r.Context(), user.ID)
+	postU, err := h.Services.PostsService.GetUserPostService(r.Context(), user.ID)
 	if err != nil {
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, postComments)
+	response.WriteJSON(w, http.StatusOK, postU)
 }
 
 // func (h *Handler) likePosts(w http.ResponseWriter, r *http.Request) {
