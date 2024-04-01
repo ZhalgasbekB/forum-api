@@ -15,9 +15,9 @@ func NewRouter(h *Handler) http.Handler {
 	mux.HandleFunc("/login", h.Login)       // Страница для входа (методы GET и POST)
 
 	mux.HandleFunc("/userd3", h.Home)                                                            // Главная страница пользователя (метод GET)
-	mux.Handle("/userd3/posts", h.RequiredAuthentication(http.HandlerFunc(h.CreatePosts)))       // Cтраница создания новой темы (поста) (методы GET и POST)
 	mux.Handle("/userd3/myposts", h.RequiredAuthentication(http.HandlerFunc(h.UserPosts)))       // Страница созданных пользователем тем (постов) (метод GET)
 	mux.Handle("/userd3/post", h.RequiredAuthentication(http.HandlerFunc(h.Post)))              // Получение страницы с конкретной темой по id (метод GET)
+	mux.Handle("/userd3/posts", h.RequiredAuthentication(http.HandlerFunc(h.CreatePosts)))       // Cтраница создания новой темы (поста) (методы GET)
 	mux.Handle("/userd3/postUpdate", h.RequiredAuthentication(http.HandlerFunc(h.UpdatePost))) // Изменение и удаление поста (метод PUT)
 	mux.Handle("/userd3/postDelete", h.RequiredAuthentication(http.HandlerFunc(h.DeletePost))) // Изменение и удаление поста (метод DELETE)
 	//  MY ROUTES
