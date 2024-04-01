@@ -1,6 +1,7 @@
 package comment
 
 import (
+	"context"
 	"database/sql"
 
 	"gitea.com/lzhuk/forum/internal/model"
@@ -23,38 +24,38 @@ func NewCommentsRepo(db *sql.DB) *CommentsRepository {
 	return &CommentsRepository{db: db}
 }
 
-func (repo *CommentsRepository) CreateComment(comm *model.Comment) error {
-	if _, err := repo.db.Exec(createCommQuery, comm.Post, comm.User, comm.Description, comm.CreatedDate, comm.UpdatedDate); err != nil {
+func (repo *CommentsRepository) CreateComment(ctx context.Context, comm *model.Comment) error {
+	if _, err := repo.db.ExecContext(ctx, createCommQuery, comm.Post, comm.User, comm.Description, comm.CreatedDate, comm.UpdatedDate); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (repo *CommentsRepository) UpdateComment(comm *model.Comment) error {
-	if _, err := repo.db.Exec(updateCommQuery, comm.Description, comm.UpdatedDate, comm.ID); err != nil {
+func (repo *CommentsRepository) UpdateComment(ctx context.Context, comm *model.Comment) error {
+	if _, err := repo.db.ExecContext(ctx, updateCommQuery, comm.Description, comm.UpdatedDate, comm.ID); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (repo *CommentsRepository) DeleteComment(comm *model.Comment) error {
-	if _, err := repo.db.Exec(deleteCommQuery, comm.ID, comm.User); err != nil {
+func (repo *CommentsRepository) DeleteComment(ctx context.Context, comm *model.Comment) error {
+	if _, err := repo.db.ExecContext(ctx, deleteCommQuery, comm.ID, comm.User); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (repo *CommentsRepository) CommentByID(id int) (*model.Comment, error) {
+func (repo *CommentsRepository) CommentByID(ctx context.Context, id int) (*model.Comment, error) {
 	var comm model.Comment
-	if err := repo.db.QueryRow(commentByIDQuery, id).Scan(&comm.ID, &comm.Post, &comm.User, &comm.Description, &comm.CreatedDate, &comm.UpdatedDate); err != nil {
+	if err := repo.db.QueryRowContext(ctx, commentByIDQuery, id).Scan(&comm.ID, &comm.Post, &comm.User, &comm.Description, &comm.CreatedDate, &comm.UpdatedDate); err != nil {
 		return nil, err
 	}
 	return &comm, nil
 }
 
-func (repo *CommentsRepository) Comments() ([]model.Comment, error) {
+func (repo *CommentsRepository) Comments(ctx context.Context) ([]model.Comment, error) {
 	var comments []model.Comment
-	rows, err := repo.db.Query(commentsQuery)
+	rows, err := repo.db.QueryContext(ctx, commentsQuery)
 	if err != nil {
 		return nil, err
 	}

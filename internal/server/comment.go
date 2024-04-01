@@ -20,7 +20,7 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	if err := h.Services.CommentService.CreateCommentService(createComment); err != nil {
+	if err := h.Services.CommentService.CreateCommentService(r.Context(), createComment); err != nil {
 		log.Println(err)
 		return
 	}
@@ -38,7 +38,7 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	if err := h.Services.CommentService.DeleteCommentService(deletedComment); err != nil {
+	if err := h.Services.CommentService.DeleteCommentService(r.Context(), deletedComment); err != nil {
 		log.Println(err)
 		return
 	}
@@ -55,7 +55,7 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	if err := h.Services.CommentService.UpdateCommentService(updComment); err != nil {
+	if err := h.Services.CommentService.UpdateCommentService(r.Context(), updComment); err != nil {
 		log.Println(err)
 		return
 	}
@@ -73,7 +73,7 @@ func (h *Handler) CommentByID(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	comm, err := h.Services.CommentService.CommentByIDService(id)
+	comm, err := h.Services.CommentService.CommentByIDService(r.Context(), id)
 	if err != nil {
 		log.Println(err)
 		return
@@ -86,7 +86,7 @@ func (h *Handler) Comments(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
-	comments, err := h.Services.CommentService.CommentsService()
+	comments, err := h.Services.CommentService.CommentsService(r.Context())
 	if err != nil {
 		log.Println(err)
 		return
@@ -94,6 +94,4 @@ func (h *Handler) Comments(w http.ResponseWriter, r *http.Request) {
 	response.WriteJSON(w, http.StatusOK, comments)
 }
 
-func (h *Handler) PostComments(w http.ResponseWriter, r *http.Request) {
-
-}
+ 

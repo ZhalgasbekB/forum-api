@@ -1,24 +1,26 @@
 package comment
 
 import (
+	"context"
 	"time"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
 type ICommentRepository interface {
-	CreateComment(*model.Comment) error
-	UpdateComment(*model.Comment) error
-	DeleteComment(*model.Comment) error
-	CommentByID(int) (*model.Comment, error)
-	Comments() ([]model.Comment, error)
+	CreateComment(context.Context, *model.Comment) error
+	UpdateComment(context.Context, *model.Comment) error
+	DeleteComment(context.Context, *model.Comment) error
+	CommentByID(context.Context, int) (*model.Comment, error)
+	Comments(context.Context) ([]model.Comment, error)
 }
+
 type ICommentService interface {
-	CreateCommentService(*model.Comment) error
-	UpdateCommentService(*model.Comment) error
-	DeleteCommentService(*model.Comment) error
-	CommentByIDService(id int) (*model.Comment, error)
-	CommentsService() ([]model.Comment, error)
+	CreateCommentService(context.Context, *model.Comment) error
+	UpdateCommentService(context.Context, *model.Comment) error
+	DeleteCommentService(context.Context, *model.Comment) error
+	CommentByIDService(context.Context, int) (*model.Comment, error)
+	CommentsService(context.Context) ([]model.Comment, error)
 }
 
 type CommentService struct {
@@ -29,40 +31,40 @@ func NewCommentsService(iCommentRepository ICommentRepository) *CommentService {
 	return &CommentService{iCommentRepository: iCommentRepository}
 }
 
-func (r *CommentService) CreateCommentService(comm *model.Comment) error {
+func (r *CommentService) CreateCommentService(ctx context.Context, comm *model.Comment) error {
 	comm.CreatedDate = time.Now()
 	comm.UpdatedDate = time.Now()
-	if err := r.iCommentRepository.CreateComment(comm); err != nil {
+	if err := r.iCommentRepository.CreateComment(ctx, comm); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (r *CommentService) UpdateCommentService(comm *model.Comment) error {
+func (r *CommentService) UpdateCommentService(ctx context.Context, comm *model.Comment) error {
 	comm.UpdatedDate = time.Now()
-	if err := r.iCommentRepository.UpdateComment(comm); err != nil {
+	if err := r.iCommentRepository.UpdateComment(ctx, comm); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (r *CommentService) DeleteCommentService(comm *model.Comment) error {
-	if err := r.iCommentRepository.DeleteComment(comm); err != nil {
+func (r *CommentService) DeleteCommentService(ctx context.Context, comm *model.Comment) error {
+	if err := r.iCommentRepository.DeleteComment(ctx, comm); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (r *CommentService) CommentByIDService(id int) (*model.Comment, error) {
-	comm, err := r.iCommentRepository.CommentByID(id)
+func (r *CommentService) CommentByIDService(ctx context.Context, id int) (*model.Comment, error) {
+	comm, err := r.iCommentRepository.CommentByID(ctx, id)
 	if err != nil {
 		return nil, err
 	}
 	return comm, nil
 }
 
-func (r *CommentService) CommentsService() ([]model.Comment, error) {
-	comments, err := r.iCommentRepository.Comments()
+func (r *CommentService) CommentsService(ctx context.Context) ([]model.Comment, error) {
+	comments, err := r.iCommentRepository.Comments(ctx)
 	if err != nil {
 		return nil, err
 	}
