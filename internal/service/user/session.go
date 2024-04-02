@@ -38,8 +38,6 @@ func (ss *SessinonService) CreateSessionService(id int) (*model.Session, error) 
 			return nil, err
 		}
 	}
-
-	// work
 	uuid, err := uuid.NewV4()
 	if err != nil {
 		return nil, err

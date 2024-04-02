@@ -21,11 +21,12 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/userd3/post-update", h.RequiredAuthentication(http.HandlerFunc(h.UpdatePost))) // (PUT METHOD) update
 	mux.Handle("/userd3/post-delete", h.RequiredAuthentication(http.HandlerFunc(h.DeletePost))) // (DELETE METHOD) delete
 
-	// mux.HandleFunc("/userd3/post/vote", h.votePost)  // Проставление лайка или дизлайка на пост (метод POST)
-	// mux.HandleFunc("/userd3/likeposts", h.likePosts) // ??           // Cтраница понравившихся тем пользователем (метод GET)
+	// mux.HandleFunc("/userd3/likeposts", h.LikePosts)											 // (GET METHOD)
+	// mux.Handle("userd3/post-like", h.RequiredAuthentication(http.HandleFunc(LikePost)))       // (POST METHOD)
+	// mux.Handle("userd3/comment-like", h.RequiredAuthentication(http.HandleFunc(LikeComment))) // (POST METHOD)
 
-	mux.Handle("/userd3/comment", h.RequiredAuthentication(http.HandlerFunc(h.CommentByID)))          // (GET METHOD) comment by id
 	mux.HandleFunc("/userd3/comments", h.Comments)                                                    // (GET METHOD) comments
+	mux.Handle("/userd3/comment", h.RequiredAuthentication(http.HandlerFunc(h.CommentByID)))          // (GET METHOD) comment by id
 	mux.Handle("/userd3/comment-create", h.RequiredAuthentication(http.HandlerFunc(h.CreateComment))) // (POST METHOD) create
 	mux.Handle("/userd3/comment-update", h.RequiredAuthentication(http.HandlerFunc(h.UpdateComment))) // (PUT METHOD) update
 	mux.Handle("/userd3/comment-delete", h.RequiredAuthentication(http.HandlerFunc(h.DeleteComment))) // (DELETE METHOD) delete

@@ -1,50 +1,52 @@
 package post
 
-import "gitea.com/lzhuk/forum/internal/model"
+import (
+	"fmt"
+	"math"
+
+	"gitea.com/lzhuk/forum/internal/model"
+)
 
 type ILikePostRepository interface {
-	LikePostsRepository(userId int) ([]*model.Post, error)
-	VotePostsRepository(post model.LikePost) error
-	CheckVotePost(post model.LikePost) (string, error)
-	DeleteVotePost(post model.LikePost) error
+	CreateLikePostRepository(*model.LikePost) error
+	UpdateLikePostRepository(*model.LikePost) error
+	GetLikePostRepository(int, int) (*model.LikePost, error)
+	GetLikesAndDislikesPostRepository(int) (int, int, error)
 }
 
 type ILikePostService interface {
-	LikePostsService(userId int) ([]*model.Post, error)
-	VotePostsService(post model.LikePost) error
+	LikePostService(like *model.LikePost) error
+	GetLikesAndDislikesPostService(like *model.LikePost) error
 }
 
 type LikePostService struct {
-	repo ILikePostRepository
+	likePostRepo ILikePostRepository
 }
 
-func NewLikePostsService(repo ILikePostRepository) *LikePostService {
+func NewLikePostService(likePostRepo ILikePostRepository) *LikePostService {
 	return &LikePostService{
-		repo: repo,
+		likePostRepo: likePostRepo,
 	}
 }
 
-func (p *LikePostService) VotePostsService(post model.LikePost) error {
-	check, err := p.repo.CheckVotePost(post)
-	if check == "yes" {
-		err = p.repo.DeleteVotePost(post)
-		if err != nil {
+func (l *LikePostService) LikePostService(like *model.LikePost) error {
+	oldLike, _ := l.likePostRepo.GetLikePostRepository(like.UserId, like.PostId)
+	if oldLike != nil {
+		if err := l.likePostRepo.UpdateLikePostRepository(like); err != nil {
 			return err
 		}
-		return nil
 	}
-
-	err = p.repo.VotePostsRepository(post)
-	if err != nil {
+	if err := l.likePostRepo.CreateLikePostRepository(like); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (p *LikePostService) LikePostsService(userId int) ([]*model.Post, error) {
-	votePosts, err := p.repo.LikePostsRepository(userId)
+func (l *LikePostService) GetLikesAndDislikesPostService(like *model.LikePost) error {
+	likes, dislikes, err := l.likePostRepo.GetLikesAndDislikesPostRepository(like.PostId)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return votePosts, nil
+	fmt.Println(likes, int(math.Abs(float64(dislikes))))
+	return nil
 }
