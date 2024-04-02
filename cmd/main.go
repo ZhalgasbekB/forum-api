@@ -47,14 +47,16 @@ func main() {
 	postsRepo := post2.NewPostsRepo(db)
 	likePostRepo := post2.NewLikePostRepository(db)
 	commentsRepo := comment2.NewCommentsRepo(db)
+	// likecommentsRepo := comment2.NewLikeCommentRepository(db)
 
 	usersService := user.NewUserService(usersRepo)
 	sessionsService := user.NewSessionService(sessionRepo)
 	postsService := post.NewPostsService(postsRepo)
 	likePostsService := post.NewLikePostService(likePostRepo)
 	commentsService := comment.NewCommentsService(commentsRepo)
+	// likecommentsService := comment.NewLikeCommentService(likecommentsRepo)
 
-	services := service.NewService(usersService, sessionsService, postsService, commentsService, likePostsService)
+	services := service.NewService(usersService, sessionsService, postsService, commentsService, likePostsService, nil)
 	handler := server.NewHandler(services)
 	router := server.NewRouter(&handler)
 	s := app.NewServer(cfg, router)

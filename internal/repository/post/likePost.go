@@ -9,7 +9,7 @@ import (
 
 const (
 	createLikePostQuery   = "INSERT INTO posts_likes(user_id, post_id, status) VALUES($1, $2, $3)"
-	deleteLikeQuery       = "DELETE FROM posts_likes WHERE user_id = $1 AND post_id = $2"
+	deleteLikePostQuery   = "DELETE FROM posts_likes WHERE user_id = $1 AND post_id = $2"
 	existLikePostQuery    = "SELECT * FROM posts_likes WHERE user_id = $1 AND post_id = $2"
 	likesAndDislikesQuery = "SELECT SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes WHERE post_id = $1 GROUP BY post_id"
 )
@@ -33,7 +33,7 @@ func (l *LikePostRepository) CreateLikePostRepository(like *model.LikePost) erro
 }
 
 func (l *LikePostRepository) DeleteLikeByPostIdRepository(user_id, post_id int) error {
-	if _, err := l.db.Exec(deleteLikeQuery, user_id, post_id); err != nil {
+	if _, err := l.db.Exec(deleteLikePostQuery, user_id, post_id); err != nil {
 		return err
 	}
 	return nil

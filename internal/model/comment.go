@@ -9,6 +9,9 @@ type Comment struct {
 	Description string    `json:"description"`
 	CreatedDate time.Time `json:"created_at"`
 	UpdatedDate time.Time `json:"updated_at"`
+
+	Like    int `json:"likes"`
+	Dislike int `json:"dislikes"`
 }
 
 type CreateCommentDTO struct {
@@ -24,5 +27,5 @@ type CommentUpdateDTO struct {
 
 type CommentDeleteDTO struct {
 	ID   int `json:"id"`
-	Post int `json:"post_id"` // ??
+	Post int `json:"post_id"`
 }

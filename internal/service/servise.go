@@ -12,8 +12,9 @@ type Service struct {
 	PostsService   post.IPostsService
 	CommentService comment.ICommentService
 	LikePosts      post.ILikePostService
+	LikeComments   comment.ILikeCommentService
 }
 
-func NewService(userService user.IUserService, sessionService user.ISessionService, postsService post.IPostsService, commentService comment.ICommentService, LikePosts post.ILikePostService) Service {
-	return Service{UserService: userService, SessionService: sessionService, PostsService: postsService, CommentService: commentService, LikePosts: LikePosts}
+func NewService(userService user.IUserService, sessionService user.ISessionService, postsService post.IPostsService, commentService comment.ICommentService, LikePosts post.ILikePostService, LikeComments comment.ILikeCommentService) Service {
+	return Service{UserService: userService, SessionService: sessionService, PostsService: postsService, CommentService: commentService, LikePosts: LikePosts, LikeComments: LikeComments}
 }
