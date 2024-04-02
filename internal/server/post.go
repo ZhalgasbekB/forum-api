@@ -72,11 +72,18 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
+
 	postComments, err := h.Services.PostsService.CommentsPostService(r.Context(), id)
 	if err != nil {
 		return
 	}
-	h.Services.LikePosts.GetLikesAndDislikesPostService(postComments.Post.PostId)
+
+	likes, dislikes, err := h.Services.LikePosts.GetLikesAndDislikesPostService(postComments.Post.PostId)
+	if err != nil {
+		return
+	}
+	postComments.Post.Like = likes
+	postComments.Post.Dislike = dislikes
 	response.WriteJSON(w, http.StatusOK, postComments)
 }
 

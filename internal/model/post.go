@@ -9,10 +9,13 @@ type Post struct {
 	Title        string    `json:"title"`
 	Discription  string    `json:"discription"`
 	CreateDate   time.Time `json:"create_at"`
+
+	Like    int `json:"likes"`
+	Dislike int `json:"dislikes"`
 }
 
 type CreatePostDTO struct {
-	CategoryName string //`json:"category_name"`
+	CategoryName string `json:"category_name"`
 	Title        string `json:"title"`
 	Discription  string `json:"discription"`
 }
@@ -23,6 +26,6 @@ type UpdatePostDTO struct {
 }
 
 type PostCommentsDTO struct {
-	Post    *Post      `json:"post"`
+	Post     *Post      `json:"post"`
 	Comments []*Comment `json:"comments"`
 }
