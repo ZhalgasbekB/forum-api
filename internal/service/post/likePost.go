@@ -9,14 +9,14 @@ import (
 
 type ILikePostRepository interface {
 	CreateLikePostRepository(*model.LikePost) error
-	UpdateLikePostRepository(*model.LikePost) error
 	GetLikePostRepository(int, int) (*model.LikePost, error)
 	GetLikesAndDislikesPostRepository(int) (int, int, error)
+	DeleteLikeByPostIdRepository(int, int) error
 }
 
 type ILikePostService interface {
-	LikePostService(like *model.LikePost) error
-	GetLikesAndDislikesPostService(like *model.LikePost) error
+	LikePostService(*model.LikePost) error
+	GetLikesAndDislikesPostService(int) error
 }
 
 type LikePostService struct {
@@ -32,21 +32,20 @@ func NewLikePostService(likePostRepo ILikePostRepository) *LikePostService {
 func (l *LikePostService) LikePostService(like *model.LikePost) error {
 	oldLike, _ := l.likePostRepo.GetLikePostRepository(like.UserId, like.PostId)
 	if oldLike != nil {
-		if err := l.likePostRepo.UpdateLikePostRepository(like); err != nil {
-			return err
+		l.likePostRepo.DeleteLikeByPostIdRepository(like.UserId, like.PostId)
+		if oldLike.LikeStatus == like.LikeStatus {
+			return nil
 		}
 	}
-	if err := l.likePostRepo.CreateLikePostRepository(like); err != nil {
-		return err
-	}
-	return nil
+	return l.likePostRepo.CreateLikePostRepository(like)
 }
 
-func (l *LikePostService) GetLikesAndDislikesPostService(like *model.LikePost) error {
-	likes, dislikes, err := l.likePostRepo.GetLikesAndDislikesPostRepository(like.PostId)
+func (l *LikePostService) GetLikesAndDislikesPostService(post_id int) error {
+	likes, dislikes, err := l.likePostRepo.GetLikesAndDislikesPostRepository(post_id)
 	if err != nil {
 		return err
 	}
+	fmt.Println("DDDDD")
 	fmt.Println(likes, int(math.Abs(float64(dislikes))))
 	return nil
 }

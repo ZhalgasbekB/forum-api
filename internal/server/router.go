@@ -22,7 +22,7 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/userd3/post-delete", h.RequiredAuthentication(http.HandlerFunc(h.DeletePost))) // (DELETE METHOD) delete
 
 	// mux.HandleFunc("/userd3/likeposts", h.LikePosts)											 // (GET METHOD)
-	// mux.Handle("userd3/post-like", h.RequiredAuthentication(http.HandleFunc(LikePost)))       // (POST METHOD)
+	mux.Handle("/userd3/post-like", h.RequiredAuthentication(http.HandlerFunc(h.LikePosts))) // (POST METHOD)
 	// mux.Handle("userd3/comment-like", h.RequiredAuthentication(http.HandleFunc(LikeComment))) // (POST METHOD)
 
 	mux.HandleFunc("/userd3/comments", h.Comments)                                                    // (GET METHOD) comments

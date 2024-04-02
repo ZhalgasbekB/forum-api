@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
@@ -75,6 +76,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
+	h.Services.LikePosts.GetLikesAndDislikesPostService(postComments.Post.PostId)
 	response.WriteJSON(w, http.StatusOK, postComments)
 }
 
@@ -91,38 +93,19 @@ func (h *Handler) PostsUser(w http.ResponseWriter, r *http.Request) {
 	response.WriteJSON(w, http.StatusOK, postU)
 }
 
-// func (h *Handler) likePosts(w http.ResponseWriter, r *http.Request) {
-// 	if r.Method != http.MethodGet {
-// 		return
-// 	}
-// 	uuid, _ := r.Cookie("CookieUUID")
-// 	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-// 	postsVote, err := h.Services.SessionService.CreateSessionService(session.UserID) // NEED ???
-// 	// postsVote, err := h.Services.SessionService.LikePostsService(session.UserID) // NEED ???
-// 	if err != nil {
-// 		return
-// 	}
-// 	for _, v := range []string{"DD"} {
-// 		println(postsVote, v)
-// 	}
-// }
-// Проставление лайка или дизлайка на тему (пост)
-// func (h *Handler) votePost(w http.ResponseWriter, r *http.Request) {
-// 	if r.Method != http.MethodPost {
-// 		w.Header().Set("Allow", http.MethodGet)
-// 		return
-// 	}
+func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.Header().Set("Allow", http.MethodPost)
+		return
+	}
+	user := contextUser(r)
 
-// 	uuid, _ := r.Cookie("CookieUUID")
-// 	session, _ := h.Services.SessionService.GetSessionByUUIDService(uuid.Value)
-
-// 	postVote, err := convert.NewConvertVote(r, session)
-// 	if err != nil {
-// 		return
-// 	}
-
-// 	err = h.Services.PostsService.VotePostsService(*postVote)
-// 	if err != nil {
-// 		return
-// 	}
-// }
+	like, err := convert.LikeConvertor(r, user.ID)
+	if err != nil {
+		return
+	}
+	fmt.Println(like.LikeStatus)
+	if err := h.Services.LikePosts.LikePostService(like); err != nil {
+		return
+	}
+}
