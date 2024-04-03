@@ -9,12 +9,12 @@ import (
 
 type PostsRepository interface {
 	CreatePostRepository(ctx context.Context, post model.Post) error
-	AllPostRepository(ctx context.Context) ([]*model.Post, error)
-	IdPostRepository(ctx context.Context, id int) (*model.Post, error)
-	UserPostRepository(ctx context.Context, userId int) ([]*model.Post, error)
-	UpdateUserPostRepository(ctx context.Context, post model.Post) error
-	DeleteUserPostRepository(ctx context.Context, deleteModel *model.Post) error
-	CommentsPostRepository(context.Context, int) (*model.PostCommentsDTO, error)
+	PostsRepository(ctx context.Context) ([]*model.Post, error)
+	PostByIdRepository(ctx context.Context, id int) (*model.Post, error)
+	PostByUserIdRepository(ctx context.Context, userId int) ([]*model.Post, error)
+	UpdatePostByUserIdRepository(ctx context.Context, post model.Post) error
+	DeletePostByUserIdRepository(ctx context.Context, deleteModel *model.Post) error
+	PostCommentsRepository(context.Context, int) (*model.PostCommentsDTO, error)
 }
 
 type IPostsService interface {
@@ -46,47 +46,25 @@ func (p *PostsService) CreatePostService(ctx context.Context, post model.Post) e
 }
 
 func (p *PostsService) GetAllPostService(ctx context.Context) ([]*model.Post, error) {
-	allPosts, err := p.repo.AllPostRepository(ctx)
-	if err != nil {
-		return nil, err
-	}
-	return allPosts, nil
+	return p.repo.PostsRepository(ctx)
 }
 
 func (p *PostsService) GetIdPostService(ctx context.Context, numId int) (*model.Post, error) {
-	postId, err := p.repo.IdPostRepository(ctx, numId)
-	if err != nil {
-		return nil, err
-	}
-	return postId, nil
+	return p.repo.PostByIdRepository(ctx, numId)
 }
 
 func (p *PostsService) GetUserPostService(ctx context.Context, numId int) ([]*model.Post, error) {
-	userPosts, err := p.repo.UserPostRepository(ctx, numId)
-	if err != nil {
-		return nil, err
-	}
-	return userPosts, nil
+	return p.repo.PostByUserIdRepository(ctx, numId)
 }
 
-func (p *PostsService) UpdateUserPostService(ctx context.Context, post model.Post) error {
-	if err := p.repo.UpdateUserPostRepository(ctx, post); err != nil {
-		return err
-	}
-	return nil
+func (p *PostsService) UpdateUserPostService(ctx context.Context, post model.Post) error { 
+	return p.repo.UpdatePostByUserIdRepository(ctx, post)
 }
 
 func (p *PostsService) DeleteUserPostService(ctx context.Context, deleteModel *model.Post) error {
-	if err := p.repo.DeleteUserPostRepository(ctx, deleteModel); err != nil {
-		return err
-	}
-	return nil
+	return p.repo.DeletePostByUserIdRepository(ctx, deleteModel)
 }
 
 func (p *PostsService) CommentsPostService(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
-	postComments, err := p.repo.CommentsPostRepository(ctx, id)
-	if err != nil {
-		return nil, err
-	}
-	return postComments, nil
+	return p.repo.PostCommentsRepository(ctx, id)
 }

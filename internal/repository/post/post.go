@@ -10,13 +10,13 @@ import (
 )
 
 const (
-	createPostQuery = `INSERT INTO posts(user_id, category_name, title, description, create_at) VALUES($1,$2,$3,$4,$5)`
-	postsQuery      = `SELECT * FROM posts`
+	createPostQuery       = `INSERT INTO posts(user_id, category_name, title, description, create_at) VALUES($1,$2,$3,$4,$5)`
+	postsQuery            = `SELECT * FROM posts`
 	postByIdQuery         = `SELECT * FROM posts WHERE id = $1`
 	postsByUserIdQuery    = `SELECT * FROM posts WHERE user_id = $1`
 	updatePostUserIdQuery = `UPDATE posts SET description = $1, title = $2 WHERE id = $3 AND user_id = $4;`
 	deletePostUserIdQuery = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
-	postCommentsQuery = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
+	postCommentsQuery     = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
 )
 
 type PostsRepository struct {
@@ -42,7 +42,7 @@ func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.Po
 	return nil
 }
 
-func (p PostsRepository) AllPostRepository(ctx context.Context) ([]*model.Post, error) {
+func (p PostsRepository) PostsRepository(ctx context.Context) ([]*model.Post, error) {
 	p.m.Lock()
 	defer p.m.Unlock()
 	rows, err := p.db.QueryContext(ctx, postsQuery)
@@ -62,7 +62,7 @@ func (p PostsRepository) AllPostRepository(ctx context.Context) ([]*model.Post, 
 	return posts, nil
 }
 
-func (p PostsRepository) IdPostRepository(ctx context.Context, id int) (*model.Post, error) {
+func (p PostsRepository) PostByIdRepository(ctx context.Context, id int) (*model.Post, error) {
 	p.m.Lock()
 	defer p.m.Unlock()
 	postId := &model.Post{}
@@ -73,7 +73,7 @@ func (p PostsRepository) IdPostRepository(ctx context.Context, id int) (*model.P
 	return postId, nil
 }
 
-func (p PostsRepository) UserPostRepository(ctx context.Context, userId int) ([]*model.Post, error) {
+func (p PostsRepository) PostByUserIdRepository(ctx context.Context, userId int) ([]*model.Post, error) {
 	p.m.Lock()
 	defer p.m.Unlock()
 	rows, err := p.db.QueryContext(ctx, postsByUserIdQuery, userId)
@@ -92,7 +92,7 @@ func (p PostsRepository) UserPostRepository(ctx context.Context, userId int) ([]
 	return userPosts, nil
 }
 
-func (p *PostsRepository) UpdateUserPostRepository(ctx context.Context, post model.Post) error {
+func (p *PostsRepository) UpdatePostByUserIdRepository(ctx context.Context, post model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
 	if _, err := p.db.ExecContext(ctx, updatePostUserIdQuery, post.Description, post.Title, post.PostId, post.UserId); err != nil {
@@ -102,7 +102,7 @@ func (p *PostsRepository) UpdateUserPostRepository(ctx context.Context, post mod
 	return nil
 }
 
-func (p *PostsRepository) DeleteUserPostRepository(ctx context.Context, deleteModel *model.Post) error {
+func (p *PostsRepository) DeletePostByUserIdRepository(ctx context.Context, deleteModel *model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
 	if _, err := p.db.ExecContext(ctx, deleteLikePostQuery, deleteModel.PostId, deleteModel.UserId); err != nil {
@@ -112,7 +112,7 @@ func (p *PostsRepository) DeleteUserPostRepository(ctx context.Context, deleteMo
 	return nil
 }
 
-func (p *PostsRepository) CommentsPostRepository(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
+func (p *PostsRepository) PostCommentsRepository(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
 	postComments := &model.PostCommentsDTO{}
 
 	postId := &model.Post{}
