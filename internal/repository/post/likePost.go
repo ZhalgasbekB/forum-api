@@ -8,12 +8,12 @@ import (
 )
 
 const (
-	createLikePostQuery   = "INSERT INTO posts_likes(user_id, post_id, status) VALUES($1, $2, $3)"
-	deleteLikePostQuery   = "DELETE FROM posts_likes WHERE user_id = $1 AND post_id = $2"
-	likePostQuery         = "SELECT * FROM posts_likes WHERE user_id = $1 AND post_id = $2"
-	likesAndDislikesQuery = "SELECT SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes WHERE post_id = $1 GROUP BY post_id"
-	likedPostsQuery       = "SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at FROM posts_likes p JOIN posts ps ON ps.id = p.post_id WHERE user_id = $1"
-	likedPostAndHisLikes  = "SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, SUM(CASE WHEN p.status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN p.status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes p JOIN posts ps ON ps.id = p.post_id WHERE ps.user_id = $1 GROUP BY ps.id"
+	createLikePostQuery      = "INSERT INTO posts_likes(user_id, post_id, status) VALUES($1, $2, $3)"
+	deleteLikePostQuery      = "DELETE FROM posts_likes WHERE user_id = $1 AND post_id = $2"
+	likePostQuery            = "SELECT * FROM posts_likes WHERE user_id = $1 AND post_id = $2"
+	likesAndDislikesQuery    = "SELECT SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes WHERE post_id = $1 GROUP BY post_id"
+	likesAndDislikesAllQuery = "SELECT SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes GROUP BY post_id"
+	likedPostAndHisLikes     = "SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, SUM(CASE WHEN p.status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN p.status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes p JOIN posts ps ON ps.id = p.post_id WHERE ps.user_id = $1 GROUP BY ps.id"
 )
 
 type LikePostRepository struct {
@@ -65,7 +65,7 @@ func (l *LikePostRepository) GetUserLikedPostRepository(user_id int) ([]model.Po
 		return nil, err
 	}
 	defer rows.Close()
-	fmt.Println(user_id) 
+	fmt.Println(user_id)
 
 	for rows.Next() {
 		post := model.Post{}
