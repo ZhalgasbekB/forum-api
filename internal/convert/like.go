@@ -18,3 +18,15 @@ func LikeConvertor(r *http.Request, userID int) (*model.LikePost, error) {
 		LikeStatus: createLike.LikeStatus,
 	}, nil
 }
+
+func LikeCommentConvertor(r *http.Request, userID int) (*model.LikeComment, error) {
+	createLike := &model.LikeCommentDTO{}
+	if err := json.NewDecoder(r.Body).Decode(createLike); err != nil {
+		return nil, err
+	}
+	return &model.LikeComment{
+		UserId:     userID,
+		CommentId:     createLike.CommentId,
+		LikeStatus: createLike.LikeStatus,
+	}, nil
+}

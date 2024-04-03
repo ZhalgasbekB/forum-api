@@ -27,7 +27,7 @@ func NewLikeCommentService(LikeCommentRepository ILikeCommentRepository) *LikeCo
 	}
 }
 
-func (l *LikeCommentService) LikePostService(like *model.LikeComment) error {
+func (l *LikeCommentService) LikeCommentService(like *model.LikeComment) error {
 	oldLike, _ := l.LikeCommentRepository.GetLikeCommentRepository(like.UserId, like.CommentId)
 	if oldLike != nil {
 		l.LikeCommentRepository.DeleteLikeByCommentIdRepository(like.UserId, like.CommentId)
@@ -38,6 +38,6 @@ func (l *LikeCommentService) LikePostService(like *model.LikeComment) error {
 	return l.LikeCommentRepository.CreateLikeCommentRepository(like)
 }
 
-func (l *LikeCommentService) GetLikesAndDislikesPostService() (map[int][]int, error) {
+func (l *LikeCommentService) GetLikesAndDislikesCommentService() (map[int][]int, error) {
 	return l.LikeCommentRepository.GetLikesAndDislikesCommentAllRepository()
 }

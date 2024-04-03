@@ -2,7 +2,6 @@ package comment
 
 import (
 	"database/sql"
-	"math"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -47,15 +46,9 @@ func (l *LikeCommentRepostory) GetLikeCommentRepository(userId, postId int) (*mo
 	return likedPost, nil
 }
 
- 
-
-func (l *LikeCommentRepostory) GetUserLikedCommentRepository(like *model.LikeComment) error {
-	return nil
-}
-
 func (l *LikeCommentRepostory) GetLikesAndDislikesCommentAllRepository() (map[int][]int, error) {
 	commentsLikes := map[int][]int{}
-	rows, err := l.db.Query(likesAndDislikesQuery)
+	rows, err := l.db.Query(likeANDDislikesAllQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +59,11 @@ func (l *LikeCommentRepostory) GetLikesAndDislikesCommentAllRepository() (map[in
 		if err := rows.Scan(&comment_id, &likes, &dislikes); err != nil {
 			return nil, nil
 		}
-		commentsLikes[comment_id] = append(commentsLikes[comment_id], likes, int(math.Abs(float64(dislikes))))
+		commentsLikes[comment_id] = append(commentsLikes[comment_id], likes, dislikes)
 	}
 	return commentsLikes, nil
+}
+
+func (l *LikeCommentRepostory) GetUserLikedCommentRepository(like *model.LikeComment) error {
+	return nil
 }

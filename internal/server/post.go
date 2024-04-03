@@ -84,6 +84,18 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	}
 	postComments.Post.Like = likes
 	postComments.Post.Dislike = dislikes
+
+	res, err := h.Services.LikeComments.GetLikesAndDislikesCommentService()
+	if err != nil {
+		return
+	}
+
+	for i, v := range postComments.Comments {
+		if res[v.ID] != nil {
+			postComments.Comments[i].Like = res[v.ID][0]
+			postComments.Comments[i].Dislike = res[v.ID][1]
+		}
+	}
 	response.WriteJSON(w, http.StatusOK, postComments)
 }
 

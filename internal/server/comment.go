@@ -94,4 +94,18 @@ func (h *Handler) Comments(w http.ResponseWriter, r *http.Request) {
 	response.WriteJSON(w, http.StatusOK, comments)
 }
 
- 
+func (h *Handler) LikeComments(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.Header().Set("Allow", http.MethodPost)
+		return
+	}
+	user := contextUser(r)
+	like, err := convert.LikeCommentConvertor(r, user.ID)
+	if err != nil {
+		return
+	}
+
+	if err := h.Services.LikeComments.LikeCommentService(like); err != nil {
+		return
+	}
+}
