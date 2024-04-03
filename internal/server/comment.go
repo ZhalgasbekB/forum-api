@@ -81,19 +81,6 @@ func (h *Handler) CommentByID(w http.ResponseWriter, r *http.Request) {
 	response.WriteJSON(w, http.StatusOK, comm)
 }
 
-func (h *Handler) Comments(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		w.Header().Set("Allow", http.MethodGet)
-		return
-	}
-	comments, err := h.Services.CommentService.CommentsService(r.Context())
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	response.WriteJSON(w, http.StatusOK, comments)
-}
-
 func (h *Handler) LikeComments(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodPost)

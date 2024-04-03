@@ -1,8 +1,6 @@
 package post
 
 import (
-	"math"
-
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
@@ -11,11 +9,13 @@ type ILikePostRepository interface {
 	GetLikePostRepository(int, int) (*model.LikePost, error)
 	GetLikesAndDislikesPostRepository(int) (int, int, error)
 	DeleteLikeByPostIdRepository(int, int) error
+	GetUserLikedPostRepository(int) ([]model.Post, error)
 }
 
 type ILikePostService interface {
 	LikePostService(*model.LikePost) error
 	GetLikesAndDislikesPostService(int) (int, int, error)
+	GetUserLikedPostService(int) ([]model.Post, error)
 }
 
 type LikePostService struct {
@@ -44,5 +44,9 @@ func (l *LikePostService) GetLikesAndDislikesPostService(post_id int) (int, int,
 	if err != nil {
 		return -1, -1, err
 	}
-	return likes, int(math.Abs(float64(dislikes))), nil
+	return likes, dislikes, nil
+}
+
+func (l *LikePostService) GetUserLikedPostService(user_id int) ([]model.Post, error) {
+	return l.likePostRepo.GetUserLikedPostRepository(user_id)
 }

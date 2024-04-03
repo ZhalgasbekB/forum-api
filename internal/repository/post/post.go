@@ -105,7 +105,7 @@ func (p *PostsRepository) UpdatePostByUserIdRepository(ctx context.Context, post
 func (p *PostsRepository) DeletePostByUserIdRepository(ctx context.Context, deleteModel *model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
-	if _, err := p.db.ExecContext(ctx, deleteLikePostQuery, deleteModel.PostId, deleteModel.UserId); err != nil {
+	if _, err := p.db.ExecContext(ctx, deletePostUserIdQuery, deleteModel.UserId, deleteModel.PostId); err != nil {
 		return err
 	}
 	fmt.Println("User Successfully Delete Post")

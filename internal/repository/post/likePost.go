@@ -2,6 +2,7 @@ package post
 
 import (
 	"database/sql"
+	"fmt"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -12,8 +13,7 @@ const (
 	likePostQuery         = "SELECT * FROM posts_likes WHERE user_id = $1 AND post_id = $2"
 	likesAndDislikesQuery = "SELECT SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes WHERE post_id = $1 GROUP BY post_id"
 	likedPostsQuery       = "SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at FROM posts_likes p JOIN posts ps ON ps.id = p.post_id WHERE user_id = $1"
-
-// ??	gen                   = "SELECT *, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM (SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at FROM posts_likes p JOIN posts ps ON ps.id = p.post_id WHERE user_id = $1) GROUP BY id"
+	likedPostAndHisLikes  = "SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, SUM(CASE WHEN p.status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN p.status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes p JOIN posts ps ON ps.id = p.post_id WHERE ps.user_id = $1 GROUP BY ps.id"
 )
 
 type LikePostRepository struct {
@@ -56,20 +56,23 @@ func (l *LikePostRepository) GetLikesAndDislikesPostRepository(postId int) (int,
 	return likes, dislikes, nil
 }
 
-func (l *LikePostRepository) GetUserLikedPostRepository(like *model.LikePost) error {
+func (l *LikePostRepository) GetUserLikedPostRepository(user_id int) ([]model.Post, error) {
 	likedPosts := []model.Post{}
-	rows, err := l.db.Query(likedPostsQuery, like.UserId)
+
+	rows, err := l.db.Query(likedPostAndHisLikes, user_id)
 	if err != nil {
-		return err
+		fmt.Println(err)
+		return nil, err
 	}
 	defer rows.Close()
+	fmt.Println(user_id) 
 
 	for rows.Next() {
 		post := model.Post{}
-		if err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate); err != nil {
-			return err
+		if err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate, &post.Like, &post.Dislike); err != nil {
+			return nil, err
 		}
 		likedPosts = append(likedPosts, post)
 	}
-	return nil
+	return likedPosts, nil
 }

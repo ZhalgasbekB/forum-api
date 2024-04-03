@@ -26,7 +26,7 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	 
+
 	h.Services.PostsService.CreatePostService(r.Context(), *post)
 }
 
@@ -124,8 +124,23 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	fmt.Println(like.LikeStatus)
 	if err := h.Services.LikePosts.LikePostService(like); err != nil {
 		return
 	}
+}
+
+func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", http.MethodGet)
+		return
+	}
+	user := contextUser(r)
+
+	likedPosts, err := h.Services.LikePosts.GetUserLikedPostService(user.ID)
+	if err != nil {
+		fmt.Println("AAA")
+		return
+	}
+
+	response.WriteJSON(w, http.StatusOK, likedPosts)
 }
