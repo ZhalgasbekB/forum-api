@@ -39,10 +39,7 @@ func NewPostsService(repo PostsRepository) *PostsService {
 
 func (p *PostsService) CreatePostService(ctx context.Context, post model.Post) error {
 	post.CreateDate = time.Now()
-	if err := p.repo.CreatePostRepository(ctx, post); err != nil {
-		return err
-	}
-	return nil
+	return p.repo.CreatePostRepository(ctx, post)
 }
 
 func (p *PostsService) GetAllPostService(ctx context.Context) ([]*model.Post, error) {
@@ -57,7 +54,7 @@ func (p *PostsService) GetUserPostService(ctx context.Context, numId int) ([]*mo
 	return p.repo.PostByUserIdRepository(ctx, numId)
 }
 
-func (p *PostsService) UpdateUserPostService(ctx context.Context, post model.Post) error { 
+func (p *PostsService) UpdateUserPostService(ctx context.Context, post model.Post) error {
 	return p.repo.UpdatePostByUserIdRepository(ctx, post)
 }
 
