@@ -51,21 +51,4 @@ func (repo *CommentsRepository) CommentByID(ctx context.Context, id int) (*model
 		return nil, err
 	}
 	return &comm, nil
-}
-
-func (repo *CommentsRepository) Comments(ctx context.Context) ([]model.Comment, error) {
-	var comments []model.Comment
-	rows, err := repo.db.QueryContext(ctx, commentsQuery)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var comm model.Comment
-		if err := rows.Scan(&comm.ID, &comm.Post, &comm.User, &comm.Description, &comm.CreatedDate, &comm.UpdatedDate); err != nil {
-			return nil, err
-		}
-		comments = append(comments, comm)
-	}
-	return comments, nil
-}
+} 
