@@ -17,7 +17,7 @@ func ConvertCreatePost(r *http.Request, user_id int) (*model.Post, error) {
 		UserId:       user_id,
 		CategoryName: createPost.CategoryName,
 		Title:        createPost.Title,
-		Discription:  createPost.Discription,
+		Description:  createPost.Description,
 	}, nil
 }
 
@@ -35,7 +35,7 @@ func ConvertUpdatePost(r *http.Request, user_id int) (*model.Post, error) {
 		PostId:      postID,
 		UserId:      user_id,
 		Title:       updatePost.Title,
-		Discription: updatePost.Discription,
+		Description: updatePost.Description,
 	}, nil
 }
 

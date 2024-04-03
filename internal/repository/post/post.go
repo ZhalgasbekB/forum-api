@@ -10,12 +10,12 @@ import (
 )
 
 const (
-	createPostQuery = `INSERT INTO posts(user_id, category_name, title, discription, create_at) VALUES($1,$2,$3,$4,$5)`
+	createPostQuery = `INSERT INTO posts(user_id, category_name, title, description, create_at) VALUES($1,$2,$3,$4,$5)`
 	getAllPost      = `SELECT * FROM posts`
 
 	getIdPost      = `SELECT * FROM posts WHERE id = $1`
 	getUserPost    = `SELECT * FROM posts WHERE user_id = $1`
-	updateUserPost = `UPDATE posts SET discription = $1, title = $2 WHERE id = $3 AND user_id = $4;`
+	updateUserPost = `UPDATE posts SET description = $1, title = $2 WHERE id = $3 AND user_id = $4;`
 	deleteUserPost = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
 
 	postCommentsQuery = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
@@ -35,7 +35,9 @@ func NewPostsRepo(db *sql.DB) *PostsRepository {
 func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
-	if _, err := p.db.ExecContext(ctx, createPostQuery, post.UserId, post.CategoryName, post.Title, post.Discription, post.CreateDate); err != nil {
+
+	if _, err := p.db.ExecContext(ctx, createPostQuery, post.UserId, post.CategoryName, post.Title, post.Description, post.CreateDate); err != nil {
+		fmt.Println(err)
 		return err
 	}
 	fmt.Println("User Successfully CREATE POST")
@@ -52,7 +54,7 @@ func (p PostsRepository) AllPostRepository(ctx context.Context) ([]*model.Post, 
 	posts := make([]*model.Post, 0)
 	for rows.Next() {
 		post := new(model.Post)
-		err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Discription, &post.CreateDate)
+		err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate)
 		if err != nil {
 			return nil, err
 		}
@@ -66,7 +68,7 @@ func (p PostsRepository) IdPostRepository(ctx context.Context, id int) (*model.P
 	p.m.Lock()
 	defer p.m.Unlock()
 	postId := &model.Post{}
-	if err := p.db.QueryRowContext(ctx, getIdPost, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Discription, &postId.CreateDate); err != nil {
+	if err := p.db.QueryRowContext(ctx, getIdPost, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate); err != nil {
 		return nil, err
 	}
 	fmt.Println("User Successfully  POST")
@@ -83,7 +85,7 @@ func (p PostsRepository) UserPostRepository(ctx context.Context, userId int) ([]
 	userPosts := make([]*model.Post, 0)
 	for rows.Next() {
 		post := new(model.Post)
-		if err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Discription, &post.CreateDate); err != nil {
+		if err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate); err != nil {
 			return nil, err
 		}
 		userPosts = append(userPosts, post)
@@ -95,7 +97,7 @@ func (p PostsRepository) UserPostRepository(ctx context.Context, userId int) ([]
 func (p *PostsRepository) UpdateUserPostRepository(ctx context.Context, post model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
-	if _, err := p.db.ExecContext(ctx, updateUserPost, post.Discription, post.Title, post.PostId, post.UserId); err != nil {
+	if _, err := p.db.ExecContext(ctx, updateUserPost, post.Description, post.Title, post.PostId, post.UserId); err != nil {
 		return err
 	}
 	fmt.Println("User Successfully USERPOSTID")
@@ -116,7 +118,7 @@ func (p *PostsRepository) CommentsPostRepository(ctx context.Context, id int) (*
 	postComments := &model.PostCommentsDTO{}
 
 	postId := &model.Post{}
-	if err := p.db.QueryRowContext(ctx, getIdPost, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Discription, &postId.CreateDate); err != nil {
+	if err := p.db.QueryRowContext(ctx, getIdPost, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate); err != nil {
 		return nil, err
 	}
 	postComments.Post = postId

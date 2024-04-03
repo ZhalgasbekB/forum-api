@@ -26,6 +26,7 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
+	 
 	h.Services.PostsService.CreatePostService(r.Context(), *post)
 }
 
