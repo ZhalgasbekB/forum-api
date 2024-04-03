@@ -10,8 +10,9 @@ type Post struct {
 	Description  string    `json:"description"`
 	CreateDate   time.Time `json:"create_at"`
 
-	Like    int `json:"likes"`
-	Dislike int `json:"dislikes"`
+	Author  string `json:"name"`
+	Like    int    `json:"likes"`
+	Dislike int    `json:"dislikes"`
 }
 
 type CreatePostDTO struct {

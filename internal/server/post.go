@@ -9,9 +9,26 @@ import (
 )
 
 func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", http.MethodGet)
+		return
+	}
+
 	posts, err := h.Services.PostsService.GetAllPostService(r.Context())
 	if err != nil {
 		return
+	}
+
+	res, err := h.Services.LikePosts.GetLikeAndDislikeAllPostService()
+	if err != nil {
+		return
+	}
+
+	for i, v := range posts {
+		if res[v.PostId] != nil {
+			posts[i].Like = res[v.PostId][0]
+			posts[i].Dislike = res[v.PostId][1]
+		}
 	}
 	response.WriteJSON(w, http.StatusOK, posts)
 }

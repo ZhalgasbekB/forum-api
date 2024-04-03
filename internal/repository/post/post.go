@@ -11,7 +11,7 @@ import (
 
 const (
 	createPostQuery       = `INSERT INTO posts(user_id, category_name, title, description, create_at) VALUES($1,$2,$3,$4,$5)`
-	postsQuery            = `SELECT * FROM posts`
+	postsQuery            = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id   `
 	postByIdQuery         = `SELECT * FROM posts WHERE id = $1`
 	postsByUserIdQuery    = `SELECT * FROM posts WHERE user_id = $1`
 	updatePostUserIdQuery = `UPDATE posts SET description = $1, title = $2 WHERE id = $3 AND user_id = $4;`
@@ -52,7 +52,7 @@ func (p PostsRepository) PostsRepository(ctx context.Context) ([]*model.Post, er
 	posts := make([]*model.Post, 0)
 	for rows.Next() {
 		post := new(model.Post)
-		err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate)
+		err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate, &post.Author)
 		if err != nil {
 			return nil, err
 		}
