@@ -12,7 +12,6 @@ type ICommentRepository interface {
 	UpdateComment(context.Context, *model.Comment) error
 	DeleteComment(context.Context, *model.Comment) error
 	CommentByID(context.Context, int) (*model.Comment, error)
-	 
 }
 
 type ICommentService interface {
@@ -20,7 +19,6 @@ type ICommentService interface {
 	UpdateCommentService(context.Context, *model.Comment) error
 	DeleteCommentService(context.Context, *model.Comment) error
 	CommentByIDService(context.Context, int) (*model.Comment, error)
-	 
 }
 
 type CommentService struct {
@@ -34,33 +32,18 @@ func NewCommentsService(iCommentRepository ICommentRepository) *CommentService {
 func (r *CommentService) CreateCommentService(ctx context.Context, comm *model.Comment) error {
 	comm.CreatedDate = time.Now()
 	comm.UpdatedDate = time.Now()
-	if err := r.iCommentRepository.CreateComment(ctx, comm); err != nil {
-		return err
-	}
-	return nil
+	return r.iCommentRepository.CreateComment(ctx, comm)
 }
 
 func (r *CommentService) UpdateCommentService(ctx context.Context, comm *model.Comment) error {
 	comm.UpdatedDate = time.Now()
-	if err := r.iCommentRepository.UpdateComment(ctx, comm); err != nil {
-		return err
-	}
-	return nil
+	return r.iCommentRepository.UpdateComment(ctx, comm)
 }
 
 func (r *CommentService) DeleteCommentService(ctx context.Context, comm *model.Comment) error {
-	if err := r.iCommentRepository.DeleteComment(ctx, comm); err != nil {
-		return err
-	}
-	return nil
+	return r.iCommentRepository.DeleteComment(ctx, comm)
 }
 
 func (r *CommentService) CommentByIDService(ctx context.Context, id int) (*model.Comment, error) {
-	comm, err := r.iCommentRepository.CommentByID(ctx, id)
-	if err != nil {
-		return nil, err
-	}
-	return comm, nil
+	return r.iCommentRepository.CommentByID(ctx, id)
 }
-
- 
