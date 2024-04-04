@@ -8,12 +8,14 @@ type ILikeCommentRepository interface {
 	CreateLikeCommentRepository(*model.LikeComment) error
 	DeleteLikeByCommentIdRepository(int, int) error
 	LikeCommentRepository(int, int) (*model.LikeComment, error)
-	LikesAndDislikesCommentAllRepository() (map[int][]int, error)
+	PostCommentsRepository(post_id int) ([]model.Comment, error)
+	LikesAndDislikesCommentAllRepository() (map[int][]int, map[int]string, error)
 }
 
 type ILikeCommentService interface {
 	LikeCommentService(*model.LikeComment) error
-	LikesAndDislikesCommentService() (map[int][]int, error)
+	LikesAndDislikesCommentService() (map[int][]int, map[int]string, error)
+	PostCommentsService(post_id int) ([]model.Comment, error)
 }
 
 type LikeCommentService struct {
@@ -37,6 +39,10 @@ func (l *LikeCommentService) LikeCommentService(like *model.LikeComment) error {
 	return l.LikeCommentRepository.CreateLikeCommentRepository(like)
 }
 
-func (l *LikeCommentService) LikesAndDislikesCommentService() (map[int][]int, error) {
+func (l *LikeCommentService) LikesAndDislikesCommentService() (map[int][]int, map[int]string, error) {
 	return l.LikeCommentRepository.LikesAndDislikesCommentAllRepository()
+}
+
+func (l *LikeCommentService) PostCommentsService(post_id int) ([]model.Comment, error) {
+	return l.LikeCommentRepository.PostCommentsRepository(post_id)
 }

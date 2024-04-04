@@ -2,6 +2,7 @@ package server
 
 import (
 	"database/sql"
+	"fmt"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
@@ -98,7 +99,6 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-
 	likes, dislikes, err := h.Services.LikePosts.GetLikesAndDislikesPostService(postComments.Post.PostId)
 	if err == sql.ErrNoRows {
 		likes, dislikes = 0, 0
@@ -106,15 +106,17 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	postComments.Post.Like = likes
 	postComments.Post.Dislike = dislikes
 
-	res, err := h.Services.LikeComments.LikesAndDislikesCommentService()
+	comments, names, err := h.Services.LikeComments.LikesAndDislikesCommentService()
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 
 	for i, v := range postComments.Comments {
-		if res[v.ID] != nil {
-			postComments.Comments[i].Like = res[v.ID][0]
-			postComments.Comments[i].Dislike = res[v.ID][1]
+		if comments[v.ID] != nil {
+			postComments.Comments[i].Name = names[v.ID]
+			postComments.Comments[i].Like = comments[v.ID][0]
+			postComments.Comments[i].Dislike = comments[v.ID][1]
 		}
 	}
 	response.WriteJSON(w, http.StatusOK, postComments)

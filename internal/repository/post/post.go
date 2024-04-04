@@ -11,12 +11,13 @@ import (
 
 const (
 	createPostQuery       = `INSERT INTO posts(user_id, category_name, title, description, create_at) VALUES($1,$2,$3,$4,$5)`
-	postsQuery            = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id`
-	postByIdQuery         = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1`      // CHECK
-	postsByUserIdQuery    = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.user_id = $1` // CHECK2
 	updatePostUserIdQuery = `UPDATE posts SET description = $1, title = $2 WHERE id = $3 AND user_id = $4;`
 	deletePostUserIdQuery = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
-	postCommentsQuery     = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
+
+	postsQuery         = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id`
+	postByIdQuery      = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1`      // CHECK
+	postsByUserIdQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.user_id = $1` // CHECK2
+	postCommentsQuery  = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
 )
 
 type PostsRepository struct {
@@ -118,12 +119,9 @@ func (p *PostsRepository) PostCommentsRepository(ctx context.Context, id int) (*
 
 	postId := &model.Post{}
 	if err := p.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
-		fmt.Println(err)
 		return nil, err
 	}
-
 	postComments.Post = postId
-
 	rows, err := p.db.QueryContext(ctx, postCommentsQuery, id)
 	if err != nil {
 		fmt.Println(err)
@@ -135,7 +133,7 @@ func (p *PostsRepository) PostCommentsRepository(ctx context.Context, id int) (*
 		if err := rows.Scan(&comment.ID, &comment.Post, &comment.User, &comment.Description, &comment.CreatedDate, &comment.UpdatedDate); err != nil {
 			return nil, err
 		}
-		postComments.Comments = append(postComments.Comments, &comment)
+		postComments.Comments = append(postComments.Comments, comment)
 	}
 	fmt.Println("User Successfully Post Comments")
 	return postComments, nil
