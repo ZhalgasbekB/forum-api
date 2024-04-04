@@ -2,7 +2,6 @@ package comment
 
 import (
 	"database/sql"
-	"fmt"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -69,21 +68,4 @@ func (l *LikeCommentRepostory) LikesAndDislikesCommentAllRepository() (map[int][
 	return commentsLikes, commentsNames, nil
 }
 
-func (l *LikeCommentRepostory) PostCommentsRepository(post_id int) ([]model.Comment, error) {
-	likeComments := []model.Comment{}
-	rows, err := l.db.Query("", post_id)
-	if err != nil {
-		return nil, err
-	}
-	fmt.Println("s")
-	defer rows.Close()
-	for rows.Next() {
-		comment := model.Comment{}
-		if err := rows.Scan(&comment.ID, &comment.User, &comment.Post, &comment.Description, &comment.CreatedDate, &comment.UpdatedDate, &comment.Name, &comment.Like, &comment.Dislike); err != nil {
-			return nil, err
-		}
-
-		likeComments = append(likeComments, comment)
-	}
-	return likeComments, nil
-}
+ 
