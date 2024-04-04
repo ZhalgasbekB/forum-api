@@ -2,7 +2,6 @@ package server
 
 import (
 	"database/sql"
-	"fmt"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
@@ -156,7 +155,6 @@ func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 
 	likedPosts, err := h.Services.LikePosts.GetUserLikedPostService(user.ID)
 	if err != nil {
-		fmt.Println("AAA")
 		return
 	}
 

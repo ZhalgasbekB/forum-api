@@ -12,8 +12,8 @@ import (
 const (
 	createPostQuery       = `INSERT INTO posts(user_id, category_name, title, description, create_at) VALUES($1,$2,$3,$4,$5)`
 	postsQuery            = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id`
-	postByIdQuery         = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1` // CHECK
-	postsByUserIdQuery    = `SELECT * FROM posts WHERE user_id = $1`
+	postByIdQuery         = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1`      // CHECK
+	postsByUserIdQuery    = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.user_id = $1` // CHECK2
 	updatePostUserIdQuery = `UPDATE posts SET description = $1, title = $2 WHERE id = $3 AND user_id = $4;`
 	deletePostUserIdQuery = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
 	postCommentsQuery     = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
@@ -64,7 +64,7 @@ func (p PostsRepository) PostsRepository(ctx context.Context) ([]*model.Post, er
 
 func (p PostsRepository) PostByIdRepository(ctx context.Context, id int) (*model.Post, error) {
 	p.m.Lock()
-	defer p.m.Unlock() 
+	defer p.m.Unlock()
 	postId := &model.Post{}
 	if err := p.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
 		return nil, err
@@ -76,6 +76,7 @@ func (p PostsRepository) PostByIdRepository(ctx context.Context, id int) (*model
 func (p PostsRepository) PostByUserIdRepository(ctx context.Context, userId int) ([]*model.Post, error) {
 	p.m.Lock()
 	defer p.m.Unlock()
+
 	rows, err := p.db.QueryContext(ctx, postsByUserIdQuery, userId)
 	if err != nil {
 		return nil, err
@@ -83,7 +84,7 @@ func (p PostsRepository) PostByUserIdRepository(ctx context.Context, userId int)
 	userPosts := make([]*model.Post, 0)
 	for rows.Next() {
 		post := new(model.Post)
-		if err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate); err != nil {
+		if err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate, &post.Author); err != nil {
 			return nil, err
 		}
 		userPosts = append(userPosts, post)
