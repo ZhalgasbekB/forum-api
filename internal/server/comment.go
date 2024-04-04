@@ -3,7 +3,6 @@ package server
 import (
 	"log"
 	"net/http"
-	"strconv"
 
 	"gitea.com/lzhuk/forum/internal/convert"
 	"gitea.com/lzhuk/forum/internal/helpers/response"
@@ -60,25 +59,6 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	response.WriteJSON(w, http.StatusOK, "Successfully Updated")
-}
-
-func (h *Handler) CommentByID(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		w.Header().Set("Allow", http.MethodGet)
-		return
-	}
-	idS := r.URL.Query().Get("id")
-	id, err := strconv.Atoi(idS)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	comm, err := h.Services.CommentService.CommentByIDService(r.Context(), id)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	response.WriteJSON(w, http.StatusOK, comm)
 }
 
 func (h *Handler) LikeComments(w http.ResponseWriter, r *http.Request) {

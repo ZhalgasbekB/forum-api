@@ -9,11 +9,9 @@ import (
 )
 
 const (
-	updateCommQuery  = `UPDATE comments SET description = $1, updated_at = $2 WHERE id = $3`
-	deleteCommQuery  = `DELETE FROM comments WHERE id = $1 AND user_id = $2`
-	commentByIDQuery = `SELECT * FROM comments WHERE id = $1`
-	commentsQuery    = `SELECT * FROM comments`
-	createCommQuery  = `INSERT INTO comments (post_id, user_id, description, created_at, updated_at) VALUES ($1,$2,$3,$4,$5)`
+	createCommQuery = `INSERT INTO comments (post_id, user_id, description, created_at, updated_at) VALUES ($1,$2,$3,$4,$5)`
+	updateCommQuery = `UPDATE comments SET description = $1, updated_at = $2 WHERE id = $3`
+	deleteCommQuery = `DELETE FROM comments WHERE id = $1 AND user_id = $2`
 )
 
 type CommentsRepository struct {
@@ -44,11 +42,3 @@ func (repo *CommentsRepository) DeleteComment(ctx context.Context, comm *model.C
 	}
 	return nil
 }
-
-func (repo *CommentsRepository) CommentByID(ctx context.Context, id int) (*model.Comment, error) {
-	var comm model.Comment
-	if err := repo.db.QueryRowContext(ctx, commentByIDQuery, id).Scan(&comm.ID, &comm.Post, &comm.User, &comm.Description, &comm.CreatedDate, &comm.UpdatedDate); err != nil {
-		return nil, err
-	}
-	return &comm, nil
-} 

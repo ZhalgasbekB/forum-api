@@ -10,8 +10,9 @@ type Comment struct {
 	CreatedDate time.Time `json:"created_at"`
 	UpdatedDate time.Time `json:"updated_at"`
 
-	Like    int `json:"likes"`
-	Dislike int `json:"dislikes"`
+	Name    string `json:"name"`
+	Like    int    `json:"likes"`
+	Dislike int    `json:"dislikes"`
 }
 
 type CreateCommentDTO struct {

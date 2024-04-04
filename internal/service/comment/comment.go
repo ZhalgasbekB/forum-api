@@ -11,14 +11,12 @@ type ICommentRepository interface {
 	CreateComment(context.Context, *model.Comment) error
 	UpdateComment(context.Context, *model.Comment) error
 	DeleteComment(context.Context, *model.Comment) error
-	CommentByID(context.Context, int) (*model.Comment, error)
 }
 
 type ICommentService interface {
 	CreateCommentService(context.Context, *model.Comment) error
 	UpdateCommentService(context.Context, *model.Comment) error
 	DeleteCommentService(context.Context, *model.Comment) error
-	CommentByIDService(context.Context, int) (*model.Comment, error)
 }
 
 type CommentService struct {
@@ -44,6 +42,4 @@ func (r *CommentService) DeleteCommentService(ctx context.Context, comm *model.C
 	return r.iCommentRepository.DeleteComment(ctx, comm)
 }
 
-func (r *CommentService) CommentByIDService(ctx context.Context, id int) (*model.Comment, error) {
-	return r.iCommentRepository.CommentByID(ctx, id)
-}
+ 
