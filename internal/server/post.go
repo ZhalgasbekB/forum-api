@@ -1,6 +1,7 @@
 package server
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 
@@ -97,8 +98,8 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	}
 
 	likes, dislikes, err := h.Services.LikePosts.GetLikesAndDislikesPostService(postComments.Post.PostId)
-	if err != nil {
-		return
+	if err == sql.ErrNoRows {
+		likes, dislikes = 0, 0
 	}
 	postComments.Post.Like = likes
 	postComments.Post.Dislike = dislikes

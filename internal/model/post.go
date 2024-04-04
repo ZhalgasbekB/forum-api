@@ -16,7 +16,7 @@ type Post struct {
 }
 
 type CreatePostDTO struct {
-	CategoryName string `json:"category_name"`
+	CategoryName string  // `json:"category_name"`
 	Title        string `json:"title"`
 	Description  string `json:"description"`
 }
