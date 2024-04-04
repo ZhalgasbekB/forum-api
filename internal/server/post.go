@@ -38,13 +38,16 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
+
 	user := contextUser(r)
 	post, err := convert.ConvertCreatePost(r, user.ID)
 	if err != nil {
 		return
 	}
-
-	h.Services.PostsService.CreatePostService(r.Context(), *post)
+	if err := h.Services.PostsService.CreatePostService(r.Context(), *post); err != nil {
+		return
+	}
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
@@ -61,7 +64,7 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, "VSE NORM BRAT")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
@@ -78,7 +81,7 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, "VSE UDALIL BRAT CHETCO")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
@@ -144,6 +147,7 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 	if err := h.Services.LikePosts.LikePostService(like); err != nil {
 		return
 	}
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
@@ -152,7 +156,6 @@ func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	user := contextUser(r)
-
 	likedPosts, err := h.Services.LikePosts.GetUserLikedPostService(user.ID)
 	if err != nil {
 		return

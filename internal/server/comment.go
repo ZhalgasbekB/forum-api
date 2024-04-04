@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
-	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
 func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
@@ -23,7 +22,7 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, "Successfully Created")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
@@ -41,6 +40,7 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
@@ -58,7 +58,7 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, "Successfully Updated")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) LikeComments(w http.ResponseWriter, r *http.Request) {
@@ -75,4 +75,5 @@ func (h *Handler) LikeComments(w http.ResponseWriter, r *http.Request) {
 	if err := h.Services.LikeComments.LikeCommentService(like); err != nil {
 		return
 	}
+	w.WriteHeader(http.StatusOK)
 }

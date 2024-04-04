@@ -6,7 +6,6 @@ import (
 
 	"gitea.com/lzhuk/forum/internal/convert"
 	"gitea.com/lzhuk/forum/internal/helpers/cookies"
-	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
 func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
@@ -28,8 +27,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	cookies.CreateCookie(w, session)
-	response.WriteJSON(w, http.StatusOK, "OK")
-	fmt.Println("User Successfully Logged")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
@@ -48,7 +46,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println("User Successfully Created")
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
@@ -66,12 +64,5 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-
-	fmt.Println("User Successfully Logout")
-}
-
-func (h *Handler) DeleteUser(w http.ResponseWriter, r *http.Request) {
-}
-
-func (h *Handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
 }
