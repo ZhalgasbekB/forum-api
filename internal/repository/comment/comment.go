@@ -3,6 +3,7 @@ package comment
 import (
 	"context"
 	"database/sql"
+	"fmt"
 
 	"gitea.com/lzhuk/forum/internal/model"
 	_ "github.com/mattn/go-sqlite3"
@@ -41,4 +42,26 @@ func (repo *CommentsRepository) DeleteComment(ctx context.Context, comm *model.C
 		return err
 	}
 	return nil
+}
+
+func (repo *CommentsRepository) CommentsName(ctx context.Context) (map[int]string, error) {
+	var commentsName map[int]string
+	rows, err := repo.db.Query("SELECT c.id, us.name FROM comments c JOIN users us ON c.user_id  = us.id")
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+	rows.Close()
+	for rows.Next() {
+		var (
+			id   int
+			name int
+		)
+
+		if err := rows.Scan(&id, &name); err != nil {
+			return nil, err
+		}
+		commentsName[id] = ""
+	}
+	return commentsName, nil
 }

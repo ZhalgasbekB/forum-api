@@ -14,7 +14,7 @@ const (
 	createLikeCommentQuery = `INSERT INTO comments_likes(user_id, comment_id, status) VALUES($1, $2, $3)`
 	deleteLikeCommentQuery = `DELETE FROM comments_likes WHERE user_id = $1 AND comment_id = $2`
 	checkCommentQuery      = `SELECT * FROM comments_likes WHERE user_id = $1 AND comment_id = $2`
-	likeAllQuery           = `SELECT comment_id, us.name, COUNT(CASE WHEN status = true THEN 1 END) AS likes, COUNT(CASE WHEN status = false THEN 1 END) AS dislikes FROM comments_likes c JOIN users us ON us.id = c.user_id GROUP BY c.comment_id;`
+	likeAllQuery           = `SELECT comment_id, us.name, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes c JOIN users us ON us.id = c.user_id GROUP BY c.comment_id, us.name`
 )
 
 func NewLikeCommentRepository(db *sql.DB) *LikeCommentRepostory {
@@ -67,5 +67,3 @@ func (l *LikeCommentRepostory) LikesAndDislikesCommentAllRepository() (map[int][
 	}
 	return commentsLikes, commentsNames, nil
 }
-
- 
