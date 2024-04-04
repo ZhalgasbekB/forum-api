@@ -14,7 +14,6 @@ type ILikeCommentRepository interface {
 type ILikeCommentService interface {
 	LikeCommentService(*model.LikeComment) error
 	LikesAndDislikesCommentService() (map[int][]int, map[int]string, error)
-	PostCommentsService(post_id int) ([]model.Comment, error)
 }
 
 type LikeCommentService struct {
