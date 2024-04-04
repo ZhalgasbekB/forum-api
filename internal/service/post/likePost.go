@@ -6,11 +6,12 @@ import (
 
 type ILikePostRepository interface {
 	CreateLikePostRepository(*model.LikePost) error
+	DeleteLikeByPostIdRepository(int, int) error
+	
 	GetLikePostRepository(int, int) (*model.LikePost, error)
 	GetLikesAndDislikesPostRepository(int) (int, int, error)
-	DeleteLikeByPostIdRepository(int, int) error
-	GetUserLikedPostRepository(int) ([]model.Post, error)
 	GetLikeAndDislikeAllPostRepository() (map[int][]int, error)
+	GetUserLikedPostRepository(int) ([]model.Post, error)
 }
 
 type ILikePostService interface {
