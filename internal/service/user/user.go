@@ -43,6 +43,17 @@ func (us *UserService) CreateUserService(user *model.User) error {
 	return us.iUserRepository.CreateUser(user)
 }
 
+func (us *UserService) UserByEmailService(email, password string) (*model.User, error) {
+	user, err := us.iUserRepository.UserByEmail(email)
+	if err != nil {
+		return nil, err
+	}
+	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)) != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
 func (us *UserService) UpdateUserService(user *model.User, id int) error {
 	return us.iUserRepository.UpdateUser(user, id)
 }
@@ -57,15 +68,4 @@ func (us *UserService) UserByIDService(id int) (*model.User, error) {
 
 func (us *UserService) UsersService() ([]model.User, error) {
 	return us.iUserRepository.Users()
-}
-
-func (us *UserService) UserByEmailService(email, password string) (*model.User, error) {
-	user, err := us.iUserRepository.UserByEmail(email)
-	if err != nil {
-		return nil, err
-	}
-	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)) != nil {
-		return nil, err
-	}
-	return user, nil
 }
