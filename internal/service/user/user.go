@@ -55,6 +55,10 @@ func (us *UserService) UserByIDService(id int) (*model.User, error) {
 	return us.iUserRepository.UserByID(id)
 }
 
+func (us *UserService) UsersService() ([]model.User, error) {
+	return us.iUserRepository.Users()
+}
+
 func (us *UserService) UserByEmailService(email, password string) (*model.User, error) {
 	user, err := us.iUserRepository.UserByEmail(email)
 	if err != nil {
@@ -64,8 +68,4 @@ func (us *UserService) UserByEmailService(email, password string) (*model.User, 
 		return nil, err
 	}
 	return user, nil
-}
-
-func (us *UserService) UsersService() ([]model.User, error) {
-	return us.iUserRepository.Users()
 }
