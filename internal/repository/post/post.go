@@ -17,7 +17,7 @@ const (
 	postsQuery         = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id`
 	postByIdQuery      = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1`      // CHECK
 	postsByUserIdQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.user_id = $1` // CHECK2
-	postCommentsQuery  = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
+	postCommentsQuery  = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`                    // CHECK3
 )
 
 type PostsRepository struct {

@@ -8,8 +8,9 @@ import (
 )
 
 const (
-	createLikePostQuery      = "INSERT INTO posts_likes(user_id, post_id, status) VALUES($1, $2, $3)"
-	deleteLikePostQuery      = "DELETE FROM posts_likes WHERE user_id = $1 AND post_id = $2"
+	createLikePostQuery = "INSERT INTO posts_likes(user_id, post_id, status) VALUES($1, $2, $3)"
+	deleteLikePostQuery = "DELETE FROM posts_likes WHERE user_id = $1 AND post_id = $2"
+
 	likePostQuery            = "SELECT * FROM posts_likes WHERE user_id = $1 AND post_id = $2"
 	likesAndDislikesQuery    = "SELECT SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes WHERE post_id = $1 GROUP BY post_id"
 	likesAndDislikesAllQuery = "SELECT post_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes GROUP BY post_id"
