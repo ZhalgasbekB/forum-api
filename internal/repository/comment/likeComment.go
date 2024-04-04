@@ -15,7 +15,7 @@ const (
 	deleteLikeCommentQuery  = `DELETE FROM comments_likes WHERE user_id = $1 AND comment_id = $2`
 	existLikeCommentQuery   = `SELECT * FROM comments_likes WHERE user_id = $1 AND comment_id = $2`
 	likesAndDislikesQuery   = `SELECT SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes WHERE comment_id = $1 GROUP BY comment_id`
-	likeANDDislikesAllQuery = `SELECT comment_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes GROUP BY comment_id`
+	likeAndDislikesAllQuery = `SELECT comment_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes GROUP BY comment_id`
 )
 
 func NewLikeCommentRepository(db *sql.DB) *LikeCommentRepostory {
@@ -38,7 +38,7 @@ func (l *LikeCommentRepostory) DeleteLikeByCommentIdRepository(user_id, post_id 
 	return nil
 }
 
-func (l *LikeCommentRepostory) GetLikeCommentRepository(userId, postId int) (*model.LikeComment, error) {
+func (l *LikeCommentRepostory) LikeCommentRepository(userId, postId int) (*model.LikeComment, error) {
 	likedPost := &model.LikeComment{}
 	if err := l.db.QueryRow(existLikeCommentQuery, userId, postId).Scan(&likedPost.UserId, &likedPost.CommentId, &likedPost.LikeStatus); err != nil {
 		return nil, err
@@ -46,9 +46,9 @@ func (l *LikeCommentRepostory) GetLikeCommentRepository(userId, postId int) (*mo
 	return likedPost, nil
 }
 
-func (l *LikeCommentRepostory) GetLikesAndDislikesCommentAllRepository() (map[int][]int, error) {
+func (l *LikeCommentRepostory) LikesAndDislikesCommentAllRepository() (map[int][]int, error) {
 	commentsLikes := map[int][]int{}
-	rows, err := l.db.Query(likeANDDislikesAllQuery)
+	rows, err := l.db.Query(likeAndDislikesAllQuery)
 	if err != nil {
 		return nil, err
 	}
@@ -62,8 +62,4 @@ func (l *LikeCommentRepostory) GetLikesAndDislikesCommentAllRepository() (map[in
 		commentsLikes[comment_id] = append(commentsLikes[comment_id], likes, dislikes)
 	}
 	return commentsLikes, nil
-}
-
-func (l *LikeCommentRepostory) GetUserLikedCommentRepository(like *model.LikeComment) error {
-	return nil
 }

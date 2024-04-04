@@ -1,7 +1,6 @@
 package user
 
 import (
-	"fmt"
 	"time"
 
 	"gitea.com/lzhuk/forum/internal/model"
@@ -34,7 +33,6 @@ func NewUserService(userRepository IUserRepository) *UserService {
 	return &UserService{iUserRepository: userRepository}
 }
 
-// Binary Crypted
 func (us *UserService) CreateUserService(user *model.User) error {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
@@ -42,36 +40,21 @@ func (us *UserService) CreateUserService(user *model.User) error {
 	}
 	user.Password = string(hashedPassword)
 	user.CreatedAt = time.Now()
-	fmt.Println(hashedPassword)
-	if err := us.iUserRepository.CreateUser(user); err != nil {
-		return err
-	}
-	return nil
+	return us.iUserRepository.CreateUser(user)
 }
 
 func (us *UserService) UpdateUserService(user *model.User, id int) error {
-	if err := us.iUserRepository.UpdateUser(user, id); err != nil {
-		return err
-	}
-	return nil
+	return us.iUserRepository.UpdateUser(user, id)
 }
 
 func (us *UserService) DeleteUserByIDService(id int) error {
-	if err := us.iUserRepository.DeleteUserByID(id); err != nil {
-		return err
-	}
-	return nil
+	return us.iUserRepository.DeleteUserByID(id)
 }
 
 func (us *UserService) UserByIDService(id int) (*model.User, error) {
-	user, err := us.iUserRepository.UserByID(id)
-	if err != nil {
-		return nil, err
-	}
-	return user, nil
+	return us.iUserRepository.UserByID(id)
 }
 
-// Binary Crypted
 func (us *UserService) UserByEmailService(email, password string) (*model.User, error) {
 	user, err := us.iUserRepository.UserByEmail(email)
 	if err != nil {
@@ -84,9 +67,5 @@ func (us *UserService) UserByEmailService(email, password string) (*model.User, 
 }
 
 func (us *UserService) UsersService() ([]model.User, error) {
-	users, err := us.iUserRepository.Users()
-	if err != nil {
-		return nil, err
-	}
-	return users, nil
+	return us.iUserRepository.Users()
 }

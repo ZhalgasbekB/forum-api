@@ -53,21 +53,6 @@ func (ss *SessinonService) CreateSessionService(id int) (*model.Session, error) 
 	return session, nil
 }
 
-func (ss *SessinonService) DeleteSessionService(uuid string) error {
-	if err := ss.iSessionRepository.DeleteSession(uuid); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (ss *SessinonService) UserIDService(session *model.Session) (int, error) {
-	user_id, err := ss.iSessionRepository.UserIDBySession(session)
-	if err != nil {
-		return -1, err
-	}
-	return user_id, nil
-}
-
 func (ss *SessinonService) GetSessionByUUIDService(uuid string) (*model.Session, error) {
 	session, err := ss.iSessionRepository.SessionByUUID(uuid)
 	switch err {
@@ -79,4 +64,12 @@ func (ss *SessinonService) GetSessionByUUIDService(uuid string) (*model.Session,
 	default:
 		return nil, err
 	}
+}
+
+func (ss *SessinonService) DeleteSessionService(uuid string) error {
+	return ss.iSessionRepository.DeleteSession(uuid)
+}
+
+func (ss *SessinonService) UserIDService(session *model.Session) (int, error) {
+	return ss.iSessionRepository.UserIDBySession(session)
 }

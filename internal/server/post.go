@@ -103,7 +103,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	postComments.Post.Like = likes
 	postComments.Post.Dislike = dislikes
 
-	res, err := h.Services.LikeComments.GetLikesAndDislikesCommentService()
+	res, err := h.Services.LikeComments.LikesAndDislikesCommentService()
 	if err != nil {
 		return
 	}

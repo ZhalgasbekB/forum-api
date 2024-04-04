@@ -2,7 +2,6 @@ package user
 
 import (
 	"database/sql"
-	"fmt"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -47,7 +46,6 @@ func (s *SessinonRepository) SessionByID(userID int) (*model.Session, error) {
 
 func (s *SessinonRepository) SessionByUUID(uuid string) (*model.Session, error) {
 	session := &model.Session{}
-	fmt.Println("check", uuid)
 	if err := s.db.QueryRow(sessionQueryByUUID, uuid).Scan(&session.UUID, &session.UserID, &session.ExpireAt); err != nil {
 		return nil, err
 	}
