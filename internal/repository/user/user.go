@@ -16,9 +16,7 @@ func NewUserRepo(db *sql.DB) *UserRepository {
 }
 
 const (
-	createUserQuery   = `INSERT INTO users (name, email, password, is_admin, created_at) VALUES ($1,$2,$3,$4,$5)`
-	updateUserQuery   = `UPDATE users SET name = $1, email = $2, password = $3, is_admin = $4, created_at = $5 WHERE id = $6`
-	deleteUserQuery   = `DELETE FROM users WHERE id = $1`
+	createUserQuery   = `INSERT INTO users (name, email, password, is_admin, created_at) VALUES ($1,$2,$3,$4,$5)` 
 	userByIDQuery     = `SELECT * FROM users WHERE id = $1`
 	usersByEmailQuery = `SELECT * FROM users WHERE email = $1`
 	usersQuery        = `SELECT * FROM users`
@@ -32,20 +30,7 @@ func (u *UserRepository) CreateUser(user *model.User) error {
 	return nil
 }
 
-func (u *UserRepository) UpdateUser(user *model.User, id int) error {
-	if _, err := u.db.Exec(updateUserQuery, user.Name, user.Email, user.Password, user.IsAdmin, user.CreatedAt, id); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (u *UserRepository) DeleteUserByID(id int) error {
-	if _, err := u.db.Exec(deleteUserQuery, id); err != nil {
-		return err
-	}
-	return nil
-}
-
+ 
 func (u *UserRepository) UserByID(id int) (*model.User, error) {
 	var user model.User
 	if err := u.db.QueryRow(userByIDQuery, id).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.IsAdmin, &user.CreatedAt); err != nil {

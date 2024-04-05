@@ -9,19 +9,15 @@ import (
 
 type IUserRepository interface {
 	CreateUser(*model.User) error
-	UpdateUser(*model.User, int) error
-	DeleteUserByID(int) error
-	UserByID(int) (*model.User, error)
 	UserByEmail(string) (*model.User, error)
+	UserByID(int) (*model.User, error)
 	Users() ([]model.User, error)
 }
 
 type IUserService interface {
 	CreateUserService(*model.User) error
-	UpdateUserService(*model.User, int) error
-	DeleteUserByIDService(int) error
-	UserByIDService(int) (*model.User, error)
 	UserByEmailService(string, string) (*model.User, error)
+	UserByIDService(int) (*model.User, error)
 	UsersService() ([]model.User, error)
 }
 
@@ -52,14 +48,6 @@ func (us *UserService) UserByEmailService(email, password string) (*model.User, 
 		return nil, err
 	}
 	return user, nil
-}
-
-func (us *UserService) UpdateUserService(user *model.User, id int) error {
-	return us.iUserRepository.UpdateUser(user, id)
-}
-
-func (us *UserService) DeleteUserByIDService(id int) error {
-	return us.iUserRepository.DeleteUserByID(id)
 }
 
 func (us *UserService) UserByIDService(id int) (*model.User, error) {

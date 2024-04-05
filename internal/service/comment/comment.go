@@ -11,19 +11,19 @@ type ICommentRepository interface {
 	CreateComment(context.Context, *model.Comment) error
 	UpdateComment(context.Context, *model.Comment) error
 	DeleteComment(context.Context, *model.Comment) error
-	CommentsName(ctx context.Context) (map[int]string, error)                    // 0
-	CommentsByPostId(int) ([]model.Comment, error)                               // 1
-	LikesCommentsByPostRepository(int) (map[int][]int, error)                    // 2
-	PostCommentsRepository(context.Context, int) (*model.PostCommentsDTO, error) // 4
+
+	CommentsName(ctx context.Context) (map[int]string, error)
+	CommentsByPostId(int) ([]model.Comment, error)
+	LikesCommentsByPostRepository(int) (map[int][]int, error)
+	PostCommentsRepository(context.Context, int) (*model.PostCommentsDTO, error)
 }
 
 type ICommentService interface {
 	CreateCommentService(context.Context, *model.Comment) error
 	UpdateCommentService(context.Context, *model.Comment) error
 	DeleteCommentService(context.Context, *model.Comment) error
-	CommentsNameService(ctx context.Context) (map[int]string, error)
 
-	CommentsLikesNames(context.Context, int) (*model.PostCommentsDTO, error) // 3
+	CommentsLikesNames(context.Context, int) (*model.PostCommentsDTO, error)
 }
 
 type CommentService struct {
@@ -47,10 +47,6 @@ func (r *CommentService) UpdateCommentService(ctx context.Context, comm *model.C
 
 func (r *CommentService) DeleteCommentService(ctx context.Context, comm *model.Comment) error {
 	return r.iCommentRepository.DeleteComment(ctx, comm)
-}
-
-func (r *CommentService) CommentsNameService(ctx context.Context) (map[int]string, error) {
-	return r.iCommentRepository.CommentsName(ctx)
 }
 
 func (r *CommentService) CommentsLikesNames(ctx context.Context, post_id int) (*model.PostCommentsDTO, error) {

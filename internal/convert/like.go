@@ -7,7 +7,7 @@ import (
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
-func LikeConvertor(r *http.Request, userID int) (*model.LikePost, error) {
+func LikePostConvertor(r *http.Request, userID int) (*model.LikePost, error) {
 	createLike := &model.LikePostDTO{}
 	if err := json.NewDecoder(r.Body).Decode(createLike); err != nil {
 		return nil, err

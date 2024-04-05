@@ -126,7 +126,7 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 	}
 	user := contextUser(r)
 
-	like, err := convert.LikeConvertor(r, user.ID)
+	like, err := convert.LikePostConvertor(r, user.ID)
 	if err != nil {
 		return
 	}
