@@ -56,12 +56,10 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 	}
 	uuid, err := convert.UUID(r)
 	if err != nil {
-		fmt.Println(err)
 		return
 	}
 
 	if err := h.Services.SessionService.DeleteSessionService(uuid.UUID); err != nil {
-		fmt.Println(err)
 		return
 	}
 	w.WriteHeader(http.StatusOK)

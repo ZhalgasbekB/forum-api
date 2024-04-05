@@ -77,10 +77,11 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	err = h.Services.PostsService.DeleteUserPostService(r.Context(), deleteModel)
-	if err != nil {
+
+	if err := h.Services.PostsService.DeleteUserPostService(r.Context(), deleteModel); err != nil {
 		return
 	}
+
 	w.WriteHeader(http.StatusOK)
 }
 
@@ -105,7 +106,6 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	response.WriteJSON(w, http.StatusOK, arr)
 }
 
- 
 func (h *Handler) PostsUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.Header().Set("Allow", http.MethodGet)

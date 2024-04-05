@@ -11,8 +11,9 @@ type Router interface {
 func NewRouter(h *Handler) http.Handler {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/register", h.Register) // (POST METHOD)
-	mux.HandleFunc("/login", h.Login)       // (POST METHOD)
+	mux.HandleFunc("/register", h.Register)                                     // (POST METHOD)
+	mux.HandleFunc("/login", h.Login)                                           // (POST METHOD)
+	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout))) // (POST METHOD)
 
 	mux.HandleFunc("/userd3", h.Home)                                                            // (GET METHOD) get all posts
 	mux.Handle("/userd3/myposts", h.RequiredAuthentication(http.HandlerFunc(h.PostsUser)))       // (GET METHOD) user posts
