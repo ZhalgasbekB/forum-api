@@ -2,6 +2,7 @@ package comment
 
 import (
 	"database/sql"
+	"fmt"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -25,6 +26,7 @@ func NewLikeCommentRepository(db *sql.DB) *LikeCommentRepostory {
 }
 
 func (l *LikeCommentRepostory) CreateLikeCommentRepository(like *model.LikeComment) error {
+	fmt.Println(like.CommentId)
 	if _, err := l.db.Exec(createLikeCommentQuery, like.UserId, like.CommentId, like.LikeStatus); err != nil {
 		return err
 	}
