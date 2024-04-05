@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/helpers/cookies"
 	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
@@ -51,7 +52,7 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := contextUser(r)
 		if user == nil {
-			response.WriteJSON(w, http.StatusSeeOther, "PLEASE AUTH")
+			response.WriteJSON(w, http.StatusSeeOther, errors.NewError(http.StatusSeeOther, "No Athenticated User: Please Aithenticate"))
 			return
 		}
 		next.ServeHTTP(w, r)
