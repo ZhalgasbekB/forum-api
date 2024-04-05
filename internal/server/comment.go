@@ -12,12 +12,14 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
+
 	user := contextUser(r)
 	createComment, err := convert.CreateCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
 		return
 	}
+
 	if err := h.Services.CommentService.CreateCommentService(r.Context(), createComment); err != nil {
 		log.Println(err)
 		return
@@ -30,6 +32,7 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodDelete)
 		return
 	}
+
 	user := contextUser(r)
 	deletedComment, err := convert.DeleteCommentConvert(r, user.ID)
 	if err != nil {
@@ -48,12 +51,14 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodPut)
 		return
 	}
+
 	user := contextUser(r)
 	updComment, err := convert.UpdateCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
 		return
 	}
+
 	if err := h.Services.CommentService.UpdateCommentService(r.Context(), updComment); err != nil {
 		log.Println(err)
 		return
@@ -66,6 +71,7 @@ func (h *Handler) LikeComments(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodPost)
 		return
 	}
+
 	user := contextUser(r)
 	like, err := convert.LikeCommentConvertor(r, user.ID)
 	if err != nil {
