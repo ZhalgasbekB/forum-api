@@ -105,11 +105,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	response.WriteJSON(w, http.StatusOK, arr)
 }
 
-// postComments, err := h.Services.PostsService.CommentsPostService(r.Context(), id)
-// if err != nil {
-// 	return
-// }
-
+ 
 func (h *Handler) PostsUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.Header().Set("Allow", http.MethodGet)
