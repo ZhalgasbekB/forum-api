@@ -2,8 +2,8 @@ package post
 
 import (
 	"database/sql"
-	"fmt"
 
+	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
@@ -52,6 +52,9 @@ func (l *LikePostRepository) GetLikePostRepository(userId, postId int) (*model.L
 func (l *LikePostRepository) GetLikesAndDislikesPostRepository(postId int) (int, int, error) {
 	var likes, dislikes int
 	if err := l.db.QueryRow(likesAndDislikesQuery, postId).Scan(&likes, &dislikes); err != nil {
+		if err == errors.ErrSQLNoRows {
+			return 0, 0, nil
+		}
 		return -1, -1, err
 	}
 	return likes, dislikes, nil
@@ -59,10 +62,8 @@ func (l *LikePostRepository) GetLikesAndDislikesPostRepository(postId int) (int,
 
 func (l *LikePostRepository) GetUserLikedPostRepository(user_id int) ([]model.Post, error) {
 	likedPosts := []model.Post{}
-
 	rows, err := l.db.Query(likedPostAndHisLikes, user_id)
 	if err != nil {
-		fmt.Println(err)
 		return nil, err
 	}
 	defer rows.Close()
