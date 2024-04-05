@@ -88,14 +88,3 @@ func (r *CommentService) CommentsLikesNames(ctx context.Context, post_id int) (*
 	postUname.Comments = commentsPost
 	return postUname, nil
 }
-
-// names, ok := commentName[k]
-// likes, ok1 := comm[k]
-// if ok {
-// 	v.Name = names
-// }
-// if ok1 {
-// 	v.Like = likes[0]
-// 	v.Dislike = likes[1]
-// }
-// arr = append(arr, v)
