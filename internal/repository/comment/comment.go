@@ -14,7 +14,9 @@ const (
 	deleteCommQuery   = `DELETE FROM comments WHERE id = $1 AND user_id = $2`
 	commentsNameQuery = `SELECT c.id, us.name FROM comments c JOIN users us ON c.user_id  = us.id`
 
-	postCommentsQuery = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1` // CHECK
+	postCommentsQuery = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`               // CHECK
+	postByIdQuery     = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1` // CHECK
+
 )
 
 type CommentsRepository struct {
@@ -66,8 +68,8 @@ func (repo *CommentsRepository) CommentsName(ctx context.Context) (map[int]strin
 	return commentsName, nil
 }
 
-func (repo *CommentsRepository) CommentsByPostId(post_id int) (map[int]model.Comment, error) {
-	commentsPost := make(map[int]model.Comment)
+func (repo *CommentsRepository) CommentsByPostId(post_id int) ([]model.Comment, error) {
+	commentsPost := []model.Comment{}
 	rows, err := repo.db.Query(postCommentsQuery, post_id)
 	if err != nil {
 		return nil, err
@@ -78,7 +80,7 @@ func (repo *CommentsRepository) CommentsByPostId(post_id int) (map[int]model.Com
 		if err := rows.Scan(&comment.ID, &comment.Post, &comment.User, &comment.Description, &comment.CreatedDate, &comment.UpdatedDate); err != nil {
 			return nil, err
 		}
-		commentsPost[comment.ID] = comment
+		commentsPost = append(commentsPost, comment)
 	}
 	return commentsPost, nil
 }
@@ -100,4 +102,16 @@ func (repo *CommentsRepository) LikesCommentsByPostRepository(id int) (map[int][
 		commentsLikes[comment_id] = append(commentsLikes[comment_id], likes, dislikes)
 	}
 	return commentsLikes, nil
+}
+
+func (repo *CommentsRepository) PostCommentsRepository(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
+	postComments := &model.PostCommentsDTO{}
+
+	postId := &model.Post{}
+	if err := repo.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
+		return nil, err
+	}
+	postComments.Post = postId
+
+	return postComments, nil
 }

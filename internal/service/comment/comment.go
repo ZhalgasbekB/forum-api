@@ -11,9 +11,10 @@ type ICommentRepository interface {
 	CreateComment(context.Context, *model.Comment) error
 	UpdateComment(context.Context, *model.Comment) error
 	DeleteComment(context.Context, *model.Comment) error
-	CommentsName(ctx context.Context) (map[int]string, error) // 0
-	CommentsByPostId(int) (map[int]model.Comment, error)      // 1
-	LikesCommentsByPostRepository(int) (map[int][]int, error) // 2
+	CommentsName(ctx context.Context) (map[int]string, error)                    // 0
+	CommentsByPostId(int) ([]model.Comment, error)                               // 1
+	LikesCommentsByPostRepository(int) (map[int][]int, error)                    // 2
+	PostCommentsRepository(context.Context, int) (*model.PostCommentsDTO, error) // 4
 }
 
 type ICommentService interface {
@@ -22,7 +23,7 @@ type ICommentService interface {
 	DeleteCommentService(context.Context, *model.Comment) error
 	CommentsNameService(ctx context.Context) (map[int]string, error)
 
-	CommentsLikesNames(context.Context, int) ([]model.Comment, error) // 3
+	CommentsLikesNames(context.Context, int) (*model.PostCommentsDTO, error) // 3
 }
 
 type CommentService struct {
@@ -52,29 +53,49 @@ func (r *CommentService) CommentsNameService(ctx context.Context) (map[int]strin
 	return r.iCommentRepository.CommentsName(ctx)
 }
 
-func (r *CommentService) CommentsLikesNames(ctx context.Context, post_id int) ([]model.Comment, error) {
-	arr := []model.Comment{}
+func (r *CommentService) CommentsLikesNames(ctx context.Context, post_id int) (*model.PostCommentsDTO, error) {
+	postUname, err := r.iCommentRepository.PostCommentsRepository(ctx, post_id)
+
 	commentsPost, err := r.iCommentRepository.CommentsByPostId(post_id)
 	if err != nil {
 		return nil, err
 	}
+
 	commentName, err := r.iCommentRepository.CommentsName(ctx)
 	if err != nil {
 		return nil, err
 	}
-	comm, _ := r.iCommentRepository.LikesCommentsByPostRepository(post_id)
 
-	for k, v := range commentsPost {
-		names, ok := commentName[k]
-		likes, ok1 := comm[k]
-		if ok {
-			v.Name = names
-		}
-		if ok1 {
-			v.Like = likes[0]
-			v.Dislike = likes[1]
-		}
-		arr = append(arr, v)
+	comm, err := r.iCommentRepository.LikesCommentsByPostRepository(post_id)
+	if err != nil {
+		return nil, err
 	}
-	return arr, nil
+
+	for i, v := range commentsPost {
+		for k1, v1 := range commentName {
+			if v.ID == k1 {
+				commentsPost[i].Name = v1
+			}
+		}
+		for k2, v2 := range comm {
+			if v.ID == k2 {
+				commentsPost[i].Like = v2[0]
+				commentsPost[i].Dislike = v2[1]
+			}
+		}
+
+	}
+	postUname.Comments = commentsPost
+	return postUname, nil
 }
+
+// names, ok := commentName[k]
+// likes, ok1 := comm[k]
+// if ok {
+// 	v.Name = names
+// }
+// if ok1 {
+// 	v.Like = likes[0]
+// 	v.Dislike = likes[1]
+// }
+// arr = append(arr, v)

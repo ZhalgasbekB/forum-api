@@ -1,6 +1,7 @@
 package server
 
 import (
+	"database/sql"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
@@ -92,37 +93,21 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-
-	postComments, err := h.Services.PostsService.CommentsPostService(r.Context(), id)
-	if err != nil {
-		return
+	likes, dislike, err := h.Services.LikePosts.GetLikesAndDislikesPostService(id)
+	if err == sql.ErrNoRows {
+		likes = 0
+		dislike = 0
 	}
-	arr, err := h.Services.CommentService.CommentsLikesNames(r.Context(), postComments.Post.PostId)
-	postComments.Comments = arr
-	response.WriteJSON(w, http.StatusOK, postComments)
+	arr, err := h.Services.CommentService.CommentsLikesNames(r.Context(), id)
+	arr.Post.Like = likes
+	arr.Post.Dislike = dislike
+
+	response.WriteJSON(w, http.StatusOK, arr)
 }
 
-// likes, dislikes, err := h.Services.LikePosts.GetLikesAndDislikesPostService(postComments.Post.PostId)
-// if err == sql.ErrNoRows {
-// 	likes, dislikes = 0, 0
-// }
-// postComments.Post.Like = likes
-// postComments.Post.Dislike = dislikes
-
-// commensName, err := h.Services.CommentService.CommentsNameService(r.Context())
-// comments, err := h.Services.LikeComments.LikesAndDislikesCommentService()
+// postComments, err := h.Services.PostsService.CommentsPostService(r.Context(), id)
 // if err != nil {
 // 	return
-// }
-
-// for i, v := range postComments.Comments {
-// 	if commensName[v.ID] != "" {
-// 		postComments.Comments[i].Name = commensName[v.ID]
-// 	}
-// 	if comments[v.ID] != nil {
-// 		postComments.Comments[i].Like = comments[v.ID][0]
-// 		postComments.Comments[i].Dislike = comments[v.ID][1]
-// 	}
 // }
 
 func (h *Handler) PostsUser(w http.ResponseWriter, r *http.Request) {
