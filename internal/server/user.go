@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
+	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/helpers/cookies"
 )
 
@@ -16,10 +17,15 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 
 	userReq, err := convert.UserLoginRequestBody(r)
 	user, err := h.Services.UserService.UserByEmailService(userReq.Email, userReq.Password)
+	// ???
 	if err != nil {
-		fmt.Println(err)
+		if err == errors.ErrSQLNoRows {
+			errors.NewError(http.StatusInternalServerError, err.Error())
+			return
+		}
 		return
 	}
+	// ???
 
 	session, err := h.Services.SessionService.CreateSessionService(user.ID)
 	if err != nil {

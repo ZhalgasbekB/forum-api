@@ -2,8 +2,8 @@ package user
 
 import (
 	"database/sql"
-	"fmt"
 
+	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
@@ -16,7 +16,7 @@ func NewUserRepo(db *sql.DB) *UserRepository {
 }
 
 const (
-	createUserQuery   = `INSERT INTO users (name, email, password, is_admin, created_at) VALUES ($1,$2,$3,$4,$5)` 
+	createUserQuery   = `INSERT INTO users (name, email, password, is_admin, created_at) VALUES ($1,$2,$3,$4,$5)`
 	userByIDQuery     = `SELECT * FROM users WHERE id = $1`
 	usersByEmailQuery = `SELECT * FROM users WHERE email = $1`
 	usersQuery        = `SELECT * FROM users`
@@ -24,13 +24,14 @@ const (
 
 func (u *UserRepository) CreateUser(user *model.User) error {
 	if _, err := u.db.Exec(createUserQuery, user.Name, user.Email, user.Password, user.IsAdmin, user.CreatedAt); err != nil {
-		fmt.Println(err)
+		if err.Error() == "UNIQUE constraint failed: users.email" {
+			return errors.ErrHaveDuplicateEmail
+		}
 		return err
 	}
 	return nil
 }
 
- 
 func (u *UserRepository) UserByID(id int) (*model.User, error) {
 	var user model.User
 	if err := u.db.QueryRow(userByIDQuery, id).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.IsAdmin, &user.CreatedAt); err != nil {

@@ -3,6 +3,7 @@ package user
 import (
 	"time"
 
+	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/model"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -45,7 +46,7 @@ func (us *UserService) UserByEmailService(email, password string) (*model.User, 
 		return nil, err
 	}
 	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)) != nil {
-		return nil, err
+		return nil, errors.ErrInvalidCredentials
 	}
 	return user, nil
 }

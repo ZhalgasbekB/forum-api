@@ -11,9 +11,10 @@ type ErrorCustom struct {
 }
 
 var (
-	errSQLNoRows          = sql.ErrNoRows
-	errHaveDuplicateEmail = errors.New("Email already exist")
-	errSessionExpired     = errors.New("Time session expired")
+	ErrSQLNoRows          = sql.ErrNoRows
+	ErrHaveDuplicateEmail = errors.New("Email already exist")
+	ErrSessionExpired     = errors.New("Time session expired")
+	ErrInvalidCredentials = errors.New("Invalid Credentials")
 )
 
 func NewError(status int, message string) *ErrorCustom {
@@ -22,4 +23,3 @@ func NewError(status int, message string) *ErrorCustom {
 		Message: message,
 	}
 }
-////////////////////
