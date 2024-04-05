@@ -83,10 +83,10 @@ func (repo *CommentsRepository) CommentsByPostId(post_id int) (map[int]model.Com
 	return commentsPost, nil
 }
 
-func (l *LikeCommentRepostory) LikesCommentsByPostRepository() (map[int][]int, error) {
+func (repo *CommentsRepository) LikesCommentsByPostRepository(id int) (map[int][]int, error) {
 	commentsLikes := map[int][]int{}
 
-	rows, err := l.db.Query("SELECT comment_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes c JOIN comments co ON c.comment_id = co.comment_id JOIN posts p ON p.id = co.post_id  WHERE p.id = $1 GROUP BY comment_id")
+	rows, err := repo.db.Query("SELECT comment_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes c JOIN comments co ON c.comment_id = co.id JOIN posts p ON p.id = co.post_id  WHERE p.id = $1 GROUP BY comment_id", id)
 	if err != nil {
 		return nil, err
 	}
@@ -101,4 +101,3 @@ func (l *LikeCommentRepostory) LikesCommentsByPostRepository() (map[int][]int, e
 	}
 	return commentsLikes, nil
 }
- 

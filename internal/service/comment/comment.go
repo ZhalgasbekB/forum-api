@@ -13,7 +13,7 @@ type ICommentRepository interface {
 	DeleteComment(context.Context, *model.Comment) error
 	CommentsName(ctx context.Context) (map[int]string, error) // 0
 	CommentsByPostId(int) (map[int]model.Comment, error)      // 1
-	LikesCommentsByPostRepository() (map[int][]int, error)    // 2
+	LikesCommentsByPostRepository(int) (map[int][]int, error) // 2
 }
 
 type ICommentService interface {
@@ -62,7 +62,7 @@ func (r *CommentService) CommentsLikesNames(ctx context.Context, post_id int) ([
 	if err != nil {
 		return nil, err
 	}
-	comm, _ := r.iCommentRepository.LikesCommentsByPostRepository()
+	comm, _ := r.iCommentRepository.LikesCommentsByPostRepository(post_id)
 
 	for k, v := range commentsPost {
 		names, ok := commentName[k]
