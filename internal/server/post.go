@@ -19,7 +19,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := h.Services.LikePosts.GetLikeAndDislikeAllPostService()
+	res, err := h.Services.LikePosts.GetLikeAndDislikeAllPostService()   
 	if err != nil {
 		return
 	}
@@ -33,7 +33,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	response.WriteJSON(w, http.StatusOK, posts)
 }
 
-func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {  
 	if r.Method != http.MethodPost {
 		w.Header().Set("Allow", http.MethodGet)
 		return
@@ -47,10 +47,10 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 	if err := h.Services.PostsService.CreatePostService(r.Context(), *post); err != nil {
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusCreated)
 }
 
-func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) { 
 	if r.Method != http.MethodPut {
 		w.Header().Set("Allow", http.MethodGet)
 		return
@@ -64,10 +64,10 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusAccepted)
 }
 
-func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {  
 	if r.Method != http.MethodDelete {
 		w.Header().Set("Allow", http.MethodGet)
 		return
@@ -82,7 +82,7 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusAccepted)
 }
 
 func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {

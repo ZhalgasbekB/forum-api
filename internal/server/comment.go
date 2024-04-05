@@ -24,7 +24,7 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusCreated)
 }
 
 func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
@@ -43,7 +43,7 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusAccepted)
 }
 
 func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
@@ -63,7 +63,7 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusAccepted)
 }
 
 func (h *Handler) LikeComments(w http.ResponseWriter, r *http.Request) {

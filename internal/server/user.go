@@ -46,7 +46,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	w.WriteHeader(http.StatusCreated)
 }
 
 func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
