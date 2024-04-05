@@ -62,6 +62,7 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 	}
 	uuid, err := convert.UUID(r)
 	if err != nil {
+		fmt.Println(err) /// ????
 		return
 	}
 
