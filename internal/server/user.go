@@ -60,14 +60,15 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	uuid, err := convert.UUID(r)
+	cookie, err := cookies.Cookie(r)
 	if err != nil {
-		fmt.Println(err) /// ????
+		fmt.Println(err)
 		return
 	}
 
-	if err := h.Services.SessionService.DeleteSessionService(uuid.UUID); err != nil {
+	if err := h.Services.SessionService.DeleteSessionService(cookie.Value); err != nil {
 		return
 	}
-	w.WriteHeader(http.StatusOK)
+	cookies.DeleteCookie(w)
+	w.WriteHeader(http.StatusSeeOther)
 }

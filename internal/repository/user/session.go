@@ -2,7 +2,6 @@ package user
 
 import (
 	"database/sql"
-
 	"gitea.com/lzhuk/forum/internal/model"
 )
 

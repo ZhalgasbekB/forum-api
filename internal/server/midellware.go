@@ -23,6 +23,8 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		session, err := h.Services.SessionService.GetSessionByUUIDService(uuid)
 		if err != nil {
 			log.Println(err)
+			cookies.DeleteCookie(w)
+			next.ServeHTTP(w, r)
 			return
 		}
 
@@ -52,7 +54,7 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := contextUser(r)
 		if user == nil {
-			response.WriteJSON(w, http.StatusSeeOther, errors.NewError(http.StatusSeeOther, "No Athenticated User: Please Aithenticate"))
+			response.WriteJSON(w, http.StatusSeeOther, errors.NewError(http.StatusSeeOther, "No Authenticated User: Please Authenticate"))
 			return
 		}
 		next.ServeHTTP(w, r)
