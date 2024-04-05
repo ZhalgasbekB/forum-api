@@ -3,9 +3,9 @@ package post
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"sync"
 
+	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
@@ -34,12 +34,12 @@ func NewPostsRepo(db *sql.DB) *PostsRepository {
 func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.Post) error {
 	p.m.Lock()
 	defer p.m.Unlock()
-
 	if _, err := p.db.ExecContext(ctx, createPostQuery, post.UserId, post.CategoryName, post.Title, post.Description, post.CreateDate); err != nil {
-		fmt.Println(err)
+		if err == sql.ErrNoRows {
+			return errors.ErrNotFoundDate
+		}
 		return err
 	}
-	fmt.Println("User Successfully CREATE POST")
 	return nil
 }
 
@@ -48,6 +48,9 @@ func (p PostsRepository) PostsRepository(ctx context.Context) ([]*model.Post, er
 	defer p.m.Unlock()
 	rows, err := p.db.QueryContext(ctx, postsQuery)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.ErrNotFoundDate
+		}
 		return nil, err
 	}
 	posts := make([]*model.Post, 0)
@@ -59,7 +62,6 @@ func (p PostsRepository) PostsRepository(ctx context.Context) ([]*model.Post, er
 		}
 		posts = append(posts, post)
 	}
-	fmt.Println("User Successfully Returned Posts")
 	return posts, nil
 }
 
@@ -70,7 +72,6 @@ func (p PostsRepository) PostByIdRepository(ctx context.Context, id int) (*model
 	if err := p.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
 		return nil, err
 	}
-	fmt.Println("User Successfully Return Post")
 	return postId, nil
 }
 
@@ -80,6 +81,9 @@ func (p PostsRepository) PostByUserIdRepository(ctx context.Context, userId int)
 
 	rows, err := p.db.QueryContext(ctx, postsByUserIdQuery, userId)
 	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.ErrNotFoundDate
+		}
 		return nil, err
 	}
 	userPosts := make([]*model.Post, 0)
@@ -90,7 +94,6 @@ func (p PostsRepository) PostByUserIdRepository(ctx context.Context, userId int)
 		}
 		userPosts = append(userPosts, post)
 	}
-	fmt.Println("User Successfully User Posts Return")
 	return userPosts, nil
 }
 
@@ -100,7 +103,6 @@ func (p *PostsRepository) UpdatePostByUserIdRepository(ctx context.Context, post
 	if _, err := p.db.ExecContext(ctx, updatePostUserIdQuery, post.Description, post.Title, post.PostId, post.UserId); err != nil {
 		return err
 	}
-	fmt.Println("User Successfully User Post Return")
 	return nil
 }
 
@@ -110,18 +112,18 @@ func (p *PostsRepository) DeletePostByUserIdRepository(ctx context.Context, dele
 	if _, err := p.db.ExecContext(ctx, deletePostUserIdQuery, deleteModel.PostId, deleteModel.UserId); err != nil {
 		return err
 	}
-	fmt.Println("User Successfully Delete Post")
 	return nil
 }
 
 func (p *PostsRepository) PostCommentsRepository(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
 	postComments := &model.PostCommentsDTO{}
-
 	postId := &model.Post{}
 	if err := p.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.ErrNotFoundDate
+		}
 		return nil, err
 	}
 	postComments.Post = postId
-	fmt.Println("User Successfully Post Comments")
 	return postComments, nil
 }
