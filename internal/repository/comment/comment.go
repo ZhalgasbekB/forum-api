@@ -17,6 +17,7 @@ const (
 	postCommentsQuery = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`               // CHECK
 	postByIdQuery     = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1` // CHECK
 
+	likesCommentsByPost = `SELECT comment_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes c JOIN comments co ON c.comment_id = co.id JOIN posts p ON p.id = co.post_id  WHERE p.id = $1 GROUP BY comment_id`
 )
 
 type CommentsRepository struct {
@@ -74,7 +75,7 @@ func (repo *CommentsRepository) CommentsByPostId(post_id int) ([]model.Comment, 
 	if err != nil {
 		return nil, err
 	}
-
+	defer rows.Close()
 	for rows.Next() {
 		var comment model.Comment
 		if err := rows.Scan(&comment.ID, &comment.Post, &comment.User, &comment.Description, &comment.CreatedDate, &comment.UpdatedDate); err != nil {
@@ -87,13 +88,11 @@ func (repo *CommentsRepository) CommentsByPostId(post_id int) ([]model.Comment, 
 
 func (repo *CommentsRepository) LikesCommentsByPostRepository(id int) (map[int][]int, error) {
 	commentsLikes := map[int][]int{}
-
-	rows, err := repo.db.Query("SELECT comment_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes c JOIN comments co ON c.comment_id = co.id JOIN posts p ON p.id = co.post_id  WHERE p.id = $1 GROUP BY comment_id", id)
+	rows, err := repo.db.Query(likesCommentsByPost, id)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-
 	for rows.Next() {
 		var comment_id, likes, dislikes int
 		if err := rows.Scan(&comment_id, &likes, &dislikes); err != nil {
@@ -105,13 +104,9 @@ func (repo *CommentsRepository) LikesCommentsByPostRepository(id int) (map[int][
 }
 
 func (repo *CommentsRepository) PostCommentsRepository(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
-	postComments := &model.PostCommentsDTO{}
-
 	postId := &model.Post{}
 	if err := repo.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
 		return nil, err
 	}
-	postComments.Post = postId
-
-	return postComments, nil
+	return &model.PostCommentsDTO{Post: postId}, nil
 }

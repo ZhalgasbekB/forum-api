@@ -125,17 +125,3 @@ func (p *PostsRepository) PostCommentsRepository(ctx context.Context, id int) (*
 	fmt.Println("User Successfully Post Comments")
 	return postComments, nil
 }
-
-// rows, err := p.db.QueryContext(ctx, postCommentsQuery, id)
-// if err != nil {
-// 	fmt.Println(err)
-// 	return nil, err
-// }
-
-// for rows.Next() {
-// 	var comment model.Comment
-// 	if err := rows.Scan(&comment.ID, &comment.Post, &comment.User, &comment.Description, &comment.CreatedDate, &comment.UpdatedDate); err != nil {
-// 		return nil, err
-// 	}
-// 	postComments.Comments = append(postComments.Comments, comment)
-// }
