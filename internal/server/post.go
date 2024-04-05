@@ -2,7 +2,6 @@ package server
 
 import (
 	"database/sql"
-	"fmt"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
@@ -107,9 +106,8 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	postComments.Post.Dislike = dislikes
 
 	commensName, err := h.Services.CommentService.CommentsNameService(r.Context())
-	comments, _, err := h.Services.LikeComments.LikesAndDislikesCommentService()
+	comments, err := h.Services.LikeComments.LikesAndDislikesCommentService()
 	if err != nil {
-		fmt.Println(err)
 		return
 	}
 
@@ -165,6 +163,5 @@ func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-
 	response.WriteJSON(w, http.StatusOK, likedPosts)
 }
