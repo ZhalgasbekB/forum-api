@@ -15,6 +15,7 @@ type IPostsRepository interface {
 	UpdatePostByUserIdRepository(ctx context.Context, post model.Post) error
 	DeletePostByUserIdRepository(ctx context.Context, deleteModel *model.Post) error
 	PostCommentsRepository(context.Context, int) (*model.PostCommentsDTO, error)
+	PostsCategory(category string) ([]*model.Post, error) // 1
 }
 
 type IPostsService interface {
@@ -25,6 +26,7 @@ type IPostsService interface {
 	UpdateUserPostService(ctx context.Context, post model.Post) error
 	DeleteUserPostService(ctx context.Context, deleteModel *model.Post) error
 	CommentsPostService(context.Context, int) (*model.PostCommentsDTO, error)
+	PostsCategoryService(category string) ([]*model.Post, error) // 2
 }
 
 type PostsService struct {
@@ -64,4 +66,8 @@ func (p *PostsService) DeleteUserPostService(ctx context.Context, deleteModel *m
 
 func (p *PostsService) CommentsPostService(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
 	return p.postsRepository.PostCommentsRepository(ctx, id)
+}
+
+func (p *PostsService) PostsCategoryService(category string) ([]*model.Post, error) {
+	return p.postsRepository.PostsCategory(category)
 }

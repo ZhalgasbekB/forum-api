@@ -188,3 +188,18 @@ func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 	}
 	response.WriteJSON(w, http.StatusOK, likedPosts)
 }
+
+func (h *Handler) PostCategory(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", http.MethodGet)
+		return
+	}
+	category := r.URL.Query().Get("name")
+	postsCategory, err := h.Services.PostsService.PostsCategoryService(category)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	response.WriteJSON(w, http.StatusOK, postsCategory)
+}

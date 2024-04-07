@@ -14,9 +14,11 @@ const (
 	updatePostUserIdQuery = `UPDATE posts SET description = $1, title = $2 WHERE id = $3 AND user_id = $4;`
 	deletePostUserIdQuery = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
 
-	postsQuery         = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id`
+	postsQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id`
+
 	postByIdQuery      = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1`
-	postsByUserIdQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name, SUM(CASE WHEN pl.status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN pl.status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts ps JOIN users u ON ps.user_id = u.id LEFT JOIN posts_likes pl ON ps.id = pl.post_id WHERE ps.user_id = $1 GROUP BY ps.id, u.id ORDER BY ps.create_at DESC;`
+	postsByUserIdQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name, SUM(CASE WHEN pl.status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN pl.status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts ps JOIN users u ON ps.user_id = u.id LEFT JOIN posts_likes pl ON ps.id = pl.post_id WHERE ps.user_id = $1 GROUP BY ps.id, u.id ORDER BY ps.create_at DESC`
+	postsCategoryQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name, SUM(CASE WHEN pl.status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN pl.status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts ps JOIN users u ON ps.user_id = u.id LEFT JOIN posts_likes pl ON ps.id = pl.post_id WHERE ps.category_name = $1 GROUP BY ps.id, u.id ORDER BY ps.create_at DESC` // CHECK
 	postCommentsQuery  = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
 )
 
@@ -128,4 +130,26 @@ func (p *PostsRepository) PostCommentsRepository(ctx context.Context, id int) (*
 	}
 	postComments.Post = postId
 	return postComments, nil
+}
+
+func (p *PostsRepository) PostsCategory(category string) ([]*model.Post, error) {
+	p.m.Lock()
+	defer p.m.Unlock()
+	rows, err := p.db.Query(postsCategoryQuery, category)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.ErrNotFoundData
+		}
+		return nil, err
+	}
+	posts := make([]*model.Post, 0)
+	for rows.Next() {
+		post := &model.Post{}
+		err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate, &post.Author, &post.Like, &post.Dislike)
+		if err != nil {
+			return nil, err
+		}
+		posts = append(posts, post)
+	}
+	return posts, nil
 }
