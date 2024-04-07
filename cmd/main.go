@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 	"os/signal"
 	"syscall"
 	"time"
@@ -25,6 +26,15 @@ import (
 )
 
 func main() {
+	logFile, err := os.Create("./internal/logs/result.log")
+	if err != nil {
+		log.Println("Doesn't open file: ", err, ".")
+	}
+	defer logFile.Close()
+	log.SetOutput(logFile)
+	log.SetPrefix("Log: ")
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+
 	cfg, err := config.Load()
 	if err != nil {
 		log.Fatal(err)
@@ -60,7 +70,7 @@ func main() {
 	handler := server.NewHandler(services)
 	router := server.NewRouter(&handler)
 	s := app.NewServer(cfg, router)
- 
+
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 

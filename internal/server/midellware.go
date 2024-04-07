@@ -53,6 +53,7 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := contextUser(r)
 		if user == nil {
+			log.Println("No Authenticated User: Please Authenticate")
 			errors.ErrorSendler(w, http.StatusSeeOther, "No Authenticated User: Please Authenticate")
 			return
 		}
