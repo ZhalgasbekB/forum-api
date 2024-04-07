@@ -15,9 +15,9 @@ const (
 	deletePostUserIdQuery = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
 
 	postsQuery         = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id`
-	postByIdQuery      = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1`      // CHECK
-	postsByUserIdQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.user_id = $1` // CHECK2
-	postCommentsQuery  = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`                    // CHECK3
+	postByIdQuery      = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1`
+	postsByUserIdQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.user_id = $1`
+	postCommentsQuery  = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
 )
 
 type PostsRepository struct {
@@ -116,6 +116,8 @@ func (p *PostsRepository) DeletePostByUserIdRepository(ctx context.Context, dele
 }
 
 func (p *PostsRepository) PostCommentsRepository(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
+	p.m.Lock()
+	defer p.m.Unlock()
 	postComments := &model.PostCommentsDTO{}
 	postId := &model.Post{}
 	if err := p.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
