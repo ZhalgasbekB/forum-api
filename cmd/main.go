@@ -2,8 +2,7 @@ package main
 
 import (
 	"context"
-	"database/sql"
-	"fmt"
+	"gitea.com/lzhuk/forum/pkg/db/driver"
 	"log"
 	"os"
 	"os/signal"
@@ -38,11 +37,13 @@ func main() {
 	cfg, err := config.Load()
 	if err != nil {
 		log.Fatal(err)
+		return
 	}
 
-	db, err := sql.Open("sqlite3", "forum.sqlite3")
+	db, err := driver.NewDB(cfg)
 	if err != nil {
-		fmt.Println(err)
+		log.Println("Ошибка инциализации базы данных %w", err)
+		return
 	}
 
 	defer func() {
