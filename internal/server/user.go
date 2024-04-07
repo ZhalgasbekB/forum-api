@@ -37,7 +37,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	cookies.CreateCookie(w, session)
-	json.WriteJSON(w, http.StatusOK, model.UserReposnseDTO{Name: user.Name, Email: user.Email})
+	json.WriteJSON(w, http.StatusOK, model.UserResponseDTO{Name: user.Name, Email: user.Email})
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {

@@ -22,7 +22,7 @@ type UserLoginDTO struct {
 	Password string `json:"password"`
 }
 
-type UserReposnseDTO struct {
+type UserResponseDTO struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
