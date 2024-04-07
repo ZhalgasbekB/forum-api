@@ -1,7 +1,6 @@
 package user
 
 import (
-	"fmt"
 	"time"
 
 	"gitea.com/lzhuk/forum/internal/model"
@@ -53,23 +52,14 @@ func (ss *SessinonService) CreateSessionService(id int) (*model.Session, error) 
 	return session, nil
 }
 
-func (ss *SessinonService) GetSessionByUUIDService(uuid string) (*model.Session, error) {
-	session, err := ss.iSessionRepository.SessionByUUID(uuid)
-	switch err {
-	case nil:
-		if session.ExpireAt.Before(time.Now()) {
-			return nil, fmt.Errorf("Time Session Expired")
-		}
-		return session, nil
-	default:
-		return nil, err
-	}
-}
-
 func (ss *SessinonService) DeleteSessionService(uuid string) error {
 	return ss.iSessionRepository.DeleteSession(uuid)
 }
 
 func (ss *SessinonService) UserIDService(session *model.Session) (int, error) {
 	return ss.iSessionRepository.UserIDBySession(session)
+}
+
+func (ss *SessinonService) GetSessionByUUIDService(uuid string) (*model.Session, error) {
+	return ss.iSessionRepository.SessionByUUID(uuid)
 }

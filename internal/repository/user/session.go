@@ -2,6 +2,8 @@ package user
 
 import (
 	"database/sql"
+
+	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
@@ -43,18 +45,24 @@ func (s *SessinonRepository) SessionByID(userID int) (*model.Session, error) {
 	return &session, nil
 }
 
-func (s *SessinonRepository) SessionByUUID(uuid string) (*model.Session, error) {
-	session := &model.Session{}
-	if err := s.db.QueryRow(sessionQueryByUUID, uuid).Scan(&session.UUID, &session.UserID, &session.ExpireAt); err != nil {
-		return nil, err
-	}
-	return session, nil
-}
-
 func (s *SessinonRepository) UserIDBySession(session *model.Session) (int, error) {
 	var userId int
 	if err := s.db.QueryRow(userIDQueryBySession, session.UUID).Scan(&userId); err != nil {
+		if err == sql.ErrNoRows {
+			return -1, errors.ErrNotFoundData
+		}
 		return -1, err
 	}
 	return userId, nil
+}
+
+func (s *SessinonRepository) SessionByUUID(uuid string) (*model.Session, error) {
+	session := &model.Session{}
+	if err := s.db.QueryRow(sessionQueryByUUID, uuid).Scan(&session.UUID, &session.UserID, &session.ExpireAt); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, errors.ErrNotFoundData
+		}
+		return nil, err
+	}
+	return session, nil
 }

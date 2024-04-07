@@ -17,15 +17,13 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 
 	userReq, err := convert.UserLoginRequestBody(r)
 	user, err := h.Services.UserService.UserByEmailService(userReq.Email, userReq.Password)
-	// ???
 	if err != nil {
 		if err == errors.ErrSQLNoRows {
-			errors.NewError(http.StatusInternalServerError, err.Error())
+			errors.NewError(http.StatusInternalServerError, errors.ErrNotFoundData.Error())
 			return
 		}
 		return
 	}
-	// ???
 
 	session, err := h.Services.SessionService.CreateSessionService(user.ID)
 	if err != nil {

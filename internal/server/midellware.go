@@ -29,7 +29,7 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		}
 
 		if session.ExpireAt.Before(time.Now()) {
-			log.Println("Expired Session:")
+			log.Println("Expired Session: Time Expired")
 			cookies.DeleteCookie(w)
 			next.ServeHTTP(w, r)
 			return
@@ -38,11 +38,11 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		user, err := h.Services.UserService.UserByIDService(session.UserID)
 		if err != nil {
 			log.Println(err)
+			response.WriteJSON(w, http.StatusSeeOther, errors.NewError(http.StatusInternalServerError, err.Error()))
 			return
 		}
 
 		ctx := context.WithValue(r.Context(), key, user)
-
 		ctxWithTimeout, cancel := context.WithTimeout(ctx, time.Second*5)
 		defer cancel()
 

@@ -16,11 +16,13 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 
 	posts, err := h.Services.PostsService.GetAllPostService(r.Context())
 	if err != nil {
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 		return
 	}
 
 	res, err := h.Services.LikePosts.GetLikeAndDislikeAllPostService()
 	if err != nil {
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 		return
 	}
 
@@ -42,9 +44,11 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 	user := contextUser(r)
 	post, err := convert.ConvertCreatePost(r, user.ID)
 	if err != nil {
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 		return
 	}
 	if err := h.Services.PostsService.CreatePostService(r.Context(), *post); err != nil {
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
@@ -55,15 +59,18 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
+
 	user := contextUser(r)
 	post, err := convert.ConvertUpdatePost(r, user.ID)
 	if err != nil {
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 		return
 	}
-	err = h.Services.PostsService.UpdateUserPostService(r.Context(), *post)
-	if err != nil {
-		return
+
+	if err := h.Services.PostsService.UpdateUserPostService(r.Context(), *post); err != nil {
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 	}
+
 	w.WriteHeader(http.StatusAccepted)
 }
 
@@ -72,13 +79,16 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
+	
 	user := contextUser(r)
 	deleteModel, err := convert.ConvertDeletePost(r, user.ID)
 	if err != nil {
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 		return
 	}
 
 	if err := h.Services.PostsService.DeleteUserPostService(r.Context(), deleteModel); err != nil {
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 		return
 	}
 
@@ -92,7 +102,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	}
 	id, err := convert.ConvertParamID(r)
 	if err != nil {
-		response.WriteJSON(w, http.StatusOK, nil)
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 		return
 	}
 

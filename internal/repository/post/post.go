@@ -55,7 +55,7 @@ func (p PostsRepository) PostsRepository(ctx context.Context) ([]*model.Post, er
 	}
 	posts := make([]*model.Post, 0)
 	for rows.Next() {
-		post := new(model.Post)
+		post := &model.Post{}
 		err := rows.Scan(&post.PostId, &post.UserId, &post.CategoryName, &post.Title, &post.Description, &post.CreateDate, &post.Author)
 		if err != nil {
 			return nil, err

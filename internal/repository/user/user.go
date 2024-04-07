@@ -33,19 +33,22 @@ func (u *UserRepository) CreateUser(user *model.User) error {
 }
 
 func (u *UserRepository) UserByID(id int) (*model.User, error) {
-	var user model.User
+	user := &model.User{}
 	if err := u.db.QueryRow(userByIDQuery, id).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.IsAdmin, &user.CreatedAt); err != nil {
+		if err == errors.ErrSQLNoRows {
+			return nil, errors.ErrNotFoundData
+		}
 		return nil, err
 	}
-	return &user, nil
+	return user, nil
 }
 
 func (u *UserRepository) UserByEmail(email string) (*model.User, error) {
-	var user model.User
+	user := &model.User{}
 	if err := u.db.QueryRow(usersByEmailQuery, email).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.IsAdmin, &user.CreatedAt); err != nil {
 		return nil, err
 	}
-	return &user, nil
+	return user, nil
 }
 
 func (u *UserRepository) Users() ([]model.User, error) {
