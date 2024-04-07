@@ -14,8 +14,7 @@ var (
 	ErrSQLNoRows    = sql.ErrNoRows
 	ErrNotFoundData = errors.New("Not Found Any Data")
 
-	ErrHaveDuplicateEmail = errors.New("Email already exist")
-	ErrSessionExpired     = errors.New("Time session expired")
+	ErrHaveDuplicateEmail = errors.New("Email already exist") 
 	ErrInvalidCredentials = errors.New("Invalid Credentials")
 )
 
