@@ -8,7 +8,6 @@ import (
 
 	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/helpers/cookies"
-	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
 func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
@@ -29,7 +28,7 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		}
 
 		if session.ExpireAt.Before(time.Now()) {
-			log.Println("Expired Session: Time Expired")
+			log.Println("Time Expired")
 			cookies.DeleteCookie(w)
 			next.ServeHTTP(w, r)
 			return
@@ -38,7 +37,7 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		user, err := h.Services.UserService.UserByIDService(session.UserID)
 		if err != nil {
 			log.Println(err)
-			response.WriteJSON(w, http.StatusSeeOther, errors.NewError(http.StatusInternalServerError, err.Error()))
+			errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
 			return
 		}
 
@@ -54,7 +53,7 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := contextUser(r)
 		if user == nil {
-			response.WriteJSON(w, http.StatusSeeOther, errors.NewError(http.StatusSeeOther, "No Authenticated User: Please Authenticate"))
+			errors.ErrorSendler(w, http.StatusSeeOther, "No Authenticated User: Please Authenticate")
 			return
 		}
 		next.ServeHTTP(w, r)

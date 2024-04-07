@@ -3,6 +3,9 @@ package errors
 import (
 	"database/sql"
 	"errors"
+	"net/http"
+
+	"gitea.com/lzhuk/forum/internal/helpers/response"
 )
 
 type ErrorCustom struct {
@@ -14,13 +17,14 @@ var (
 	ErrSQLNoRows    = sql.ErrNoRows
 	ErrNotFoundData = errors.New("Not Found Any Data")
 
-	ErrHaveDuplicateEmail = errors.New("Email already exist") 
+	ErrHaveDuplicateEmail = errors.New("Email already exist")
 	ErrInvalidCredentials = errors.New("Invalid Credentials")
 )
 
-func NewError(status int, message string) *ErrorCustom {
-	return &ErrorCustom{
+func ErrorSendler(w http.ResponseWriter, status int, message string) {
+	custom := &ErrorCustom{
 		Status:  status,
 		Message: message,
 	}
+	response.WriteJSON(w, custom.Status, custom)
 }
