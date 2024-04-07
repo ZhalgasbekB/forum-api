@@ -36,6 +36,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 			posts[i].Dislike = res[v.PostId][1]
 		}
 	}
+
 	json.WriteJSON(w, http.StatusOK, posts)
 }
 
@@ -57,6 +58,7 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	w.WriteHeader(http.StatusCreated)
 }
 
@@ -111,6 +113,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
+
 	id, err := convert.ConvertParamID(r)
 	if err != nil {
 		log.Println(err)
@@ -124,6 +127,7 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	comments, err := h.Services.CommentService.CommentsLikesNames(r.Context(), id)
 	if err != nil {
 		log.Println(err)
@@ -139,6 +143,7 @@ func (h *Handler) PostsUser(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
+
 	user := contextUser(r)
 	postU, err := h.Services.PostsService.GetUserPostService(r.Context(), user.ID)
 	if err != nil {
@@ -146,6 +151,7 @@ func (h *Handler) PostsUser(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	json.WriteJSON(w, http.StatusOK, postU)
 }
 
@@ -154,19 +160,21 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodPost)
 		return
 	}
-	user := contextUser(r)
 
+	user := contextUser(r)
 	like, err := convert.LikePostConvertor(r, user.ID)
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	if err := h.Services.LikePosts.LikePostService(like); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	w.WriteHeader(http.StatusOK)
 }
 
@@ -175,6 +183,7 @@ func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
+
 	user := contextUser(r)
 	likedPosts, err := h.Services.LikePosts.GetUserLikedPostService(user.ID)
 	if err != nil {
@@ -182,6 +191,7 @@ func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	json.WriteJSON(w, http.StatusOK, likedPosts)
 }
 
@@ -190,12 +200,13 @@ func (h *Handler) PostCategory(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Allow", http.MethodGet)
 		return
 	}
-	category := r.URL.Query().Get("name")
-	postsCategory, err := h.Services.PostsService.PostsCategoryService(r.Context(), category)
+
+	postsCategory, err := h.Services.PostsService.PostsCategoryService(r.Context(), r.URL.Query().Get("name"))
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	json.WriteJSON(w, http.StatusOK, postsCategory)
 }

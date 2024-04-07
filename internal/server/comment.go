@@ -27,6 +27,7 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
+
 	w.WriteHeader(http.StatusCreated)
 }
 
@@ -43,11 +44,13 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
+
 	if err := h.Services.CommentService.DeleteCommentService(r.Context(), deletedComment); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
+
 	w.WriteHeader(http.StatusAccepted)
 }
 
@@ -70,6 +73,7 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
+
 	w.WriteHeader(http.StatusAccepted)
 }
 
@@ -92,5 +96,6 @@ func (h *Handler) LikeComments(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
+
 	w.WriteHeader(http.StatusOK)
 }

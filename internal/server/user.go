@@ -23,6 +23,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
+
 	user, err := h.Services.UserService.UserByEmailService(userReq.Email, userReq.Password)
 	if err != nil {
 		log.Println(err)
@@ -36,6 +37,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
+
 	cookies.CreateCookie(w, session)
 	json.WriteJSON(w, http.StatusOK, model.UserResponseDTO{Name: user.Name, Email: user.Email})
 }
@@ -58,6 +60,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
+
 	w.WriteHeader(http.StatusCreated)
 }
 
@@ -79,6 +82,7 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
+
 	cookies.DeleteCookie(w)
 	w.WriteHeader(http.StatusSeeOther)
 }
