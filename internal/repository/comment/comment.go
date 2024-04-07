@@ -9,10 +9,10 @@ import (
 )
 
 const (
-	createCommQuery   = `INSERT INTO comments (post_id, user_id, description, created_at, updated_at) VALUES ($1,$2,$3,$4,$5)`
-	updateCommQuery   = `UPDATE comments SET description = $1, updated_at = $2 WHERE id = $3`
-	deleteCommQuery   = `DELETE FROM comments WHERE id = $1 AND user_id = $2`
-	
+	createCommQuery = `INSERT INTO comments (post_id, user_id, description, created_at, updated_at) VALUES ($1,$2,$3,$4,$5)`
+	updateCommQuery = `UPDATE comments SET description = $1, updated_at = $2 WHERE id = $3`
+	deleteCommQuery = `DELETE FROM comments WHERE id = $1 AND user_id = $2`
+
 	commentsNameQuery = `SELECT c.id, us.name FROM comments c JOIN users us ON c.user_id  = us.id`
 	commentsPostQuery = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`               // CHECK
 	postByIdQuery     = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1` // CHECK

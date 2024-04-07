@@ -95,12 +95,20 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 		response.WriteJSON(w, http.StatusOK, nil)
 		return
 	}
+
+	postComments, err := h.Services.CommentService.CommentsLikesNames(r.Context(), id)
+	if err != nil {
+		if err == errors.ErrSQLNoRows {
+			response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, errors.ErrNotFoundData.Error()))
+		}
+		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
+	}
+
 	likes, dislike, err := h.Services.LikePosts.GetLikesAndDislikesPostService(id)
 	if err != nil {
 		response.WriteJSON(w, http.StatusInternalServerError, errors.NewError(500, err.Error()))
 		return
 	}
-	postComments, err := h.Services.CommentService.CommentsLikesNames(r.Context(), id)
 	postComments.Post.Like = likes
 	postComments.Post.Dislike = dislike
 	response.WriteJSON(w, http.StatusOK, postComments)

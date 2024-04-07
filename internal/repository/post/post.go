@@ -36,7 +36,7 @@ func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.Po
 	defer p.m.Unlock()
 	if _, err := p.db.ExecContext(ctx, createPostQuery, post.UserId, post.CategoryName, post.Title, post.Description, post.CreateDate); err != nil {
 		if err == sql.ErrNoRows {
-			return errors.ErrNotFoundDate
+			return errors.ErrNotFoundData
 		}
 		return err
 	}
@@ -49,7 +49,7 @@ func (p PostsRepository) PostsRepository(ctx context.Context) ([]*model.Post, er
 	rows, err := p.db.QueryContext(ctx, postsQuery)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.ErrNotFoundDate
+			return nil, errors.ErrNotFoundData
 		}
 		return nil, err
 	}
@@ -82,7 +82,7 @@ func (p PostsRepository) PostByUserIdRepository(ctx context.Context, userId int)
 	rows, err := p.db.QueryContext(ctx, postsByUserIdQuery, userId)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.ErrNotFoundDate
+			return nil, errors.ErrNotFoundData
 		}
 		return nil, err
 	}
@@ -120,7 +120,7 @@ func (p *PostsRepository) PostCommentsRepository(ctx context.Context, id int) (*
 	postId := &model.Post{}
 	if err := p.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
 		if err == sql.ErrNoRows {
-			return nil, errors.ErrNotFoundDate
+			return nil, errors.ErrNotFoundData
 		}
 		return nil, err
 	}

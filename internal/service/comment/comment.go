@@ -51,6 +51,9 @@ func (r *CommentService) DeleteCommentService(ctx context.Context, comm *model.C
 
 func (r *CommentService) CommentsLikesNames(ctx context.Context, post_id int) (*model.PostCommentsDTO, error) {
 	postUname, err := r.iCommentRepository.PostCommentsRepository(ctx, post_id)
+	if err != nil {
+		return nil, err
+	}
 
 	commentsPost, err := r.iCommentRepository.CommentsByPostId(post_id)
 	if err != nil {

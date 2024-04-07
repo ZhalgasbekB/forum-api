@@ -11,8 +11,9 @@ type ErrorCustom struct {
 }
 
 var (
-	ErrSQLNoRows          = sql.ErrNoRows
-	ErrNotFoundDate       = errors.New("Not Found Any Date")
+	ErrSQLNoRows    = sql.ErrNoRows
+	ErrNotFoundData = errors.New("Not Found Any Data")
+
 	ErrHaveDuplicateEmail = errors.New("Email already exist")
 	ErrSessionExpired     = errors.New("Time session expired")
 	ErrInvalidCredentials = errors.New("Invalid Credentials")
