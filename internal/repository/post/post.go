@@ -14,12 +14,11 @@ const (
 	updatePostUserIdQuery = `UPDATE posts SET description = $1, title = $2 WHERE id = $3 AND user_id = $4;`
 	deletePostUserIdQuery = `DELETE FROM posts WHERE id = $1 AND user_id = $2`
 
-	postsQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id`
+	postsQuery             = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id`
+	postByIdWithLikesQuery = `SELECT  ps.id,  ps.user_id,  ps.category_name,  ps.title,  ps.description,  ps.create_at,  u.name, COALESCE(SUM(CASE WHEN pl.status = true THEN 1 ELSE 0 END), 0) AS likes, COALESCE(SUM(CASE WHEN pl.status = false THEN 1 ELSE 0 END), 0) AS dislikes FROM  posts ps JOIN  users u ON ps.user_id = u.id LEFT JOIN  posts_likes pl ON ps.id = pl.post_id WHERE  ps.id = $1 GROUP BY  ps.id, u.id;`
 
-	postByIdQuery      = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name FROM posts ps JOIN users u ON ps.user_id = u.id WHERE ps.id = $1`
 	postsByUserIdQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name, SUM(CASE WHEN pl.status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN pl.status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts ps JOIN users u ON ps.user_id = u.id LEFT JOIN posts_likes pl ON ps.id = pl.post_id WHERE ps.user_id = $1 GROUP BY ps.id, u.id ORDER BY ps.create_at DESC`
 	postsCategoryQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name, SUM(CASE WHEN pl.status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN pl.status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts ps JOIN users u ON ps.user_id = u.id LEFT JOIN posts_likes pl ON ps.id = pl.post_id WHERE ps.category_name = $1 GROUP BY ps.id, u.id ORDER BY ps.create_at DESC` // CHECK
-	postCommentsQuery  = `SELECT c.id, c.post_id, c.user_id, c.description, c.created_at, c.updated_at FROM posts p JOIN comments c ON c.post_id = p.id WHERE p.id = $1`
 )
 
 type PostsRepository struct {
@@ -71,7 +70,7 @@ func (p PostsRepository) PostByIdRepository(ctx context.Context, id int) (*model
 	p.m.Lock()
 	defer p.m.Unlock()
 	postId := &model.Post{}
-	if err := p.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
+	if err := p.db.QueryRowContext(ctx, postByIdWithLikesQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author, &postId.Like, &postId.Dislike); err != nil {
 		return nil, err
 	}
 	return postId, nil
@@ -117,25 +116,10 @@ func (p *PostsRepository) DeletePostByUserIdRepository(ctx context.Context, dele
 	return nil
 }
 
-func (p *PostsRepository) PostCommentsRepository(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
+func (p *PostsRepository) PostsCategoryRepository(ctx context.Context, category string) ([]*model.Post, error) {
 	p.m.Lock()
 	defer p.m.Unlock()
-	postComments := &model.PostCommentsDTO{}
-	postId := &model.Post{}
-	if err := p.db.QueryRowContext(ctx, postByIdQuery, id).Scan(&postId.PostId, &postId.UserId, &postId.CategoryName, &postId.Title, &postId.Description, &postId.CreateDate, &postId.Author); err != nil {
-		if err == sql.ErrNoRows {
-			return nil, errors.ErrNotFoundData
-		}
-		return nil, err
-	}
-	postComments.Post = postId
-	return postComments, nil
-}
-
-func (p *PostsRepository) PostsCategory(category string) ([]*model.Post, error) {
-	p.m.Lock()
-	defer p.m.Unlock()
-	rows, err := p.db.Query(postsCategoryQuery, category)
+	rows, err := p.db.QueryContext(ctx, postsCategoryQuery, category)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, errors.ErrNotFoundData

@@ -1,3 +1,4 @@
-Log: 2024/04/07 13:45:46 midellware.go:17: http: named cookie not present
-Log: 2024/04/07 13:45:46 midellware.go:56: No Authenticated User: Please Authenticate
-Log: 2024/04/07 13:46:38 server.go:28: http: Server closed
+Log: 2024/04/07 15:37:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/07 15:38:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/07 15:38:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/07 15:39:50 server.go:28: http: Server closed

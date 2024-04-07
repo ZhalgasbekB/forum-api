@@ -5,7 +5,7 @@ import (
 	"errors"
 	"net/http"
 
-	"gitea.com/lzhuk/forum/internal/helpers/response"
+	"gitea.com/lzhuk/forum/internal/helpers/json"
 )
 
 type ErrorCustom struct {
@@ -21,10 +21,10 @@ var (
 	ErrInvalidCredentials = errors.New("Invalid Credentials")
 )
 
-func ErrorSendler(w http.ResponseWriter, status int, message string) {
+func ErrorSend(w http.ResponseWriter, status int, message string) {
 	custom := &ErrorCustom{
 		Status:  status,
 		Message: message,
 	}
-	response.WriteJSON(w, custom.Status, custom)
+	json.WriteJSON(w, custom.Status, custom)
 }

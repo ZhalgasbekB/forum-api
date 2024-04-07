@@ -7,16 +7,14 @@ import (
 type ILikePostRepository interface {
 	CreateLikePostRepository(*model.LikePost) error
 	DeleteLikeByPostIdRepository(int, int) error
-	
+
 	GetLikePostRepository(int, int) (*model.LikePost, error)
-	GetLikesAndDislikesPostRepository(int) (int, int, error)
 	GetLikeAndDislikeAllPostRepository() (map[int][]int, error)
 	GetUserLikedPostRepository(int) ([]model.Post, error)
 }
 
 type ILikePostService interface {
 	LikePostService(*model.LikePost) error
-	GetLikesAndDislikesPostService(int) (int, int, error)
 	GetUserLikedPostService(int) ([]model.Post, error)
 	GetLikeAndDislikeAllPostService() (map[int][]int, error)
 }
@@ -40,14 +38,6 @@ func (l *LikePostService) LikePostService(like *model.LikePost) error {
 		}
 	}
 	return l.likePostRepo.CreateLikePostRepository(like)
-}
-
-func (l *LikePostService) GetLikesAndDislikesPostService(post_id int) (int, int, error) {
-	likes, dislikes, err := l.likePostRepo.GetLikesAndDislikesPostRepository(post_id)
-	if err != nil {
-		return -1, -1, err
-	}
-	return likes, dislikes, nil
 }
 
 func (l *LikePostService) GetUserLikedPostService(user_id int) ([]model.Post, error) {

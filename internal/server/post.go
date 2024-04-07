@@ -1,12 +1,13 @@
 package server
 
 import (
+	"gitea.com/lzhuk/forum/internal/model"
 	"log"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
 	"gitea.com/lzhuk/forum/internal/errors"
-	"gitea.com/lzhuk/forum/internal/helpers/response"
+	"gitea.com/lzhuk/forum/internal/helpers/json"
 )
 
 func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
@@ -18,14 +19,14 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	posts, err := h.Services.PostsService.GetAllPostService(r.Context())
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	res, err := h.Services.LikePosts.GetLikeAndDislikeAllPostService()
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -35,7 +36,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 			posts[i].Dislike = res[v.PostId][1]
 		}
 	}
-	response.WriteJSON(w, http.StatusOK, posts)
+	json.WriteJSON(w, http.StatusOK, posts)
 }
 
 func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
@@ -48,12 +49,12 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 	post, err := convert.ConvertCreatePost(r, user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 	if err := h.Services.PostsService.CreatePostService(r.Context(), *post); err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
@@ -69,13 +70,13 @@ func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 	post, err := convert.ConvertUpdatePost(r, user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	if err := h.Services.PostsService.UpdateUserPostService(r.Context(), *post); err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -92,13 +93,13 @@ func (h *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	deleteModel, err := convert.ConvertDeletePost(r, user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	if err := h.Services.PostsService.DeleteUserPostService(r.Context(), deleteModel); err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -113,29 +114,24 @@ func (h *Handler) Post(w http.ResponseWriter, r *http.Request) {
 	id, err := convert.ConvertParamID(r)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	postComments, err := h.Services.CommentService.CommentsLikesNames(r.Context(), id)
+	post, err := h.Services.PostsService.GetIdPostService(r.Context(), id)
 	if err != nil {
 		log.Println(err)
-		if err == errors.ErrSQLNoRows {
-			errors.ErrorSendler(w, http.StatusInternalServerError, errors.ErrNotFoundData.Error())
-		}
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	comments, err := h.Services.CommentService.CommentsLikesNames(r.Context(), id)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	likes, dislike, err := h.Services.LikePosts.GetLikesAndDislikesPostService(id)
-	if err != nil {
-		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
-		return
-	}
-	postComments.Post.Like = likes
-	postComments.Post.Dislike = dislike
-	response.WriteJSON(w, http.StatusOK, postComments)
+	json.WriteJSON(w, http.StatusOK, model.PostCommentsDTO{Post: post, Comments: comments})
 }
 
 func (h *Handler) PostsUser(w http.ResponseWriter, r *http.Request) {
@@ -147,10 +143,10 @@ func (h *Handler) PostsUser(w http.ResponseWriter, r *http.Request) {
 	postU, err := h.Services.PostsService.GetUserPostService(r.Context(), user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, postU)
+	json.WriteJSON(w, http.StatusOK, postU)
 }
 
 func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
@@ -163,12 +159,12 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 	like, err := convert.LikePostConvertor(r, user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 	if err := h.Services.LikePosts.LikePostService(like); err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 	w.WriteHeader(http.StatusOK)
@@ -183,10 +179,10 @@ func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 	likedPosts, err := h.Services.LikePosts.GetUserLikedPostService(user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, likedPosts)
+	json.WriteJSON(w, http.StatusOK, likedPosts)
 }
 
 func (h *Handler) PostCategory(w http.ResponseWriter, r *http.Request) {
@@ -195,11 +191,11 @@ func (h *Handler) PostCategory(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	category := r.URL.Query().Get("name")
-	postsCategory, err := h.Services.PostsService.PostsCategoryService(category)
+	postsCategory, err := h.Services.PostsService.PostsCategoryService(r.Context(), category)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusInternalServerError, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	response.WriteJSON(w, http.StatusOK, postsCategory)
+	json.WriteJSON(w, http.StatusOK, postsCategory)
 }

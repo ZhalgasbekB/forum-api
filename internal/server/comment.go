@@ -18,13 +18,13 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 	createComment, err := convert.CreateCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
 
 	if err := h.Services.CommentService.CreateCommentService(r.Context(), createComment); err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
@@ -40,12 +40,12 @@ func (h *Handler) DeleteComment(w http.ResponseWriter, r *http.Request) {
 	deletedComment, err := convert.DeleteCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
 	if err := h.Services.CommentService.DeleteCommentService(r.Context(), deletedComment); err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
 	w.WriteHeader(http.StatusAccepted)
@@ -61,13 +61,13 @@ func (h *Handler) UpdateComment(w http.ResponseWriter, r *http.Request) {
 	updComment, err := convert.UpdateCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
 
 	if err := h.Services.CommentService.UpdateCommentService(r.Context(), updComment); err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
 	w.WriteHeader(http.StatusAccepted)
@@ -83,13 +83,13 @@ func (h *Handler) LikeComments(w http.ResponseWriter, r *http.Request) {
 	like, err := convert.LikeCommentConvertor(r, user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
 
 	if err := h.Services.LikeComments.LikeCommentService(like); err != nil {
 		log.Println(err)
-		errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 		return
 	}
 	w.WriteHeader(http.StatusOK)

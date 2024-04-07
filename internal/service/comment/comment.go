@@ -11,11 +11,7 @@ type ICommentRepository interface {
 	CreateComment(context.Context, *model.Comment) error
 	UpdateComment(context.Context, *model.Comment) error
 	DeleteComment(context.Context, *model.Comment) error
-
-	CommentsName(ctx context.Context) (map[int]string, error)
-	CommentsByPostId(int) ([]model.Comment, error)
-	LikesCommentsByPostRepository(int) (map[int][]int, error)
-	PostCommentsRepository(context.Context, int) (*model.PostCommentsDTO, error)
+	CommentsPostByIDRepository(context.Context, int) ([]model.Comment, error) // CHECK
 }
 
 type ICommentService interface {
@@ -23,7 +19,7 @@ type ICommentService interface {
 	UpdateCommentService(context.Context, *model.Comment) error
 	DeleteCommentService(context.Context, *model.Comment) error
 
-	CommentsLikesNames(context.Context, int) (*model.PostCommentsDTO, error)
+	CommentsLikesNames(context.Context, int) ([]model.Comment, error)
 }
 
 type CommentService struct {
@@ -49,41 +45,6 @@ func (r *CommentService) DeleteCommentService(ctx context.Context, comm *model.C
 	return r.iCommentRepository.DeleteComment(ctx, comm)
 }
 
-func (r *CommentService) CommentsLikesNames(ctx context.Context, post_id int) (*model.PostCommentsDTO, error) {
-	postUname, err := r.iCommentRepository.PostCommentsRepository(ctx, post_id)
-	if err != nil {
-		return nil, err
-	}
-
-	commentsPost, err := r.iCommentRepository.CommentsByPostId(post_id)
-	if err != nil {
-		return nil, err
-	}
-
-	commentName, err := r.iCommentRepository.CommentsName(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	comm, err := r.iCommentRepository.LikesCommentsByPostRepository(post_id)
-	if err != nil {
-		return nil, err
-	}
-
-	for i, v := range commentsPost {
-		for k1, v1 := range commentName {
-			if v.ID == k1 {
-				commentsPost[i].Name = v1
-			}
-		}
-		for k2, v2 := range comm {
-			if v.ID == k2 {
-				commentsPost[i].Like = v2[0]
-				commentsPost[i].Dislike = v2[1]
-			}
-		}
-
-	}
-	postUname.Comments = commentsPost
-	return postUname, nil
+func (r *CommentService) CommentsLikesNames(ctx context.Context, post_id int) ([]model.Comment, error) {
+	return r.iCommentRepository.CommentsPostByIDRepository(ctx, post_id)
 }

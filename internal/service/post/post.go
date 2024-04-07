@@ -8,25 +8,25 @@ import (
 )
 
 type IPostsRepository interface {
-	CreatePostRepository(ctx context.Context, post model.Post) error
-	PostsRepository(ctx context.Context) ([]*model.Post, error)
+	CreatePostRepository(context.Context, model.Post) error
+	UpdatePostByUserIdRepository(context.Context, model.Post) error
+	DeletePostByUserIdRepository(context.Context, *model.Post) error
+
+	PostsCategoryRepository(context.Context, string) ([]*model.Post, error)
 	PostByIdRepository(ctx context.Context, id int) (*model.Post, error)
 	PostByUserIdRepository(ctx context.Context, userId int) ([]*model.Post, error)
-	UpdatePostByUserIdRepository(ctx context.Context, post model.Post) error
-	DeletePostByUserIdRepository(ctx context.Context, deleteModel *model.Post) error
-	PostCommentsRepository(context.Context, int) (*model.PostCommentsDTO, error)
-	PostsCategory(category string) ([]*model.Post, error) // 1
+	PostsRepository(ctx context.Context) ([]*model.Post, error)
 }
 
 type IPostsService interface {
 	CreatePostService(ctx context.Context, post model.Post) error
-	GetAllPostService(ctx context.Context) ([]*model.Post, error)
-	GetIdPostService(ctx context.Context, numId int) (*model.Post, error)
-	GetUserPostService(ctx context.Context, numId int) ([]*model.Post, error)
 	UpdateUserPostService(ctx context.Context, post model.Post) error
 	DeleteUserPostService(ctx context.Context, deleteModel *model.Post) error
-	CommentsPostService(context.Context, int) (*model.PostCommentsDTO, error)
-	PostsCategoryService(category string) ([]*model.Post, error) // 2
+
+	PostsCategoryService(context.Context, string) ([]*model.Post, error)
+	GetIdPostService(ctx context.Context, numId int) (*model.Post, error)
+	GetUserPostService(ctx context.Context, numId int) ([]*model.Post, error)
+	GetAllPostService(ctx context.Context) ([]*model.Post, error)
 }
 
 type PostsService struct {
@@ -64,10 +64,6 @@ func (p *PostsService) DeleteUserPostService(ctx context.Context, deleteModel *m
 	return p.postsRepository.DeletePostByUserIdRepository(ctx, deleteModel)
 }
 
-func (p *PostsService) CommentsPostService(ctx context.Context, id int) (*model.PostCommentsDTO, error) {
-	return p.postsRepository.PostCommentsRepository(ctx, id)
-}
-
-func (p *PostsService) PostsCategoryService(category string) ([]*model.Post, error) {
-	return p.postsRepository.PostsCategory(category)
+func (p *PostsService) PostsCategoryService(ctx context.Context, category string) ([]*model.Post, error) {
+	return p.postsRepository.PostsCategoryRepository(ctx, category)
 }

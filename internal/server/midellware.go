@@ -37,7 +37,7 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		user, err := h.Services.UserService.UserByIDService(session.UserID)
 		if err != nil {
 			log.Println(err)
-			errors.ErrorSendler(w, http.StatusSeeOther, err.Error())
+			errors.ErrorSend(w, http.StatusSeeOther, err.Error())
 			return
 		}
 
@@ -54,7 +54,7 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 		user := contextUser(r)
 		if user == nil {
 			log.Println("No Authenticated User: Please Authenticate")
-			errors.ErrorSendler(w, http.StatusSeeOther, "No Authenticated User: Please Authenticate")
+			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated User: Please Authenticate")
 			return
 		}
 		next.ServeHTTP(w, r)
