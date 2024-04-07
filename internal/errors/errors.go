@@ -24,13 +24,3 @@ func NewError(status int, message string) *ErrorCustom {
 		Message: message,
 	}
 }
-
-func ErrorChecker(err error) {
-	switch err {
-	case ErrHaveDuplicateEmail:
-	case ErrInvalidCredentials:
-	case ErrSQLNoRows:
-	case ErrSessionExpired:
-
-	}
-} //// ?????
