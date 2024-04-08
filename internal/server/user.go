@@ -20,21 +20,21 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	userReq, err := convert.UserLoginRequestBody(r)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	user, err := h.Services.UserService.UserByEmailService(userReq.Email, userReq.Password)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	session, err := h.Services.SessionService.CreateSessionService(user.ID)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -51,13 +51,13 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 	user, err := convert.UserRegisterRequestBody(r)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	if err := h.Services.UserService.CreateUserService(user); err != nil {
 		log.Println(err)
-		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -73,13 +73,13 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 	cookie, err := cookies.Cookie(r)
 	if err != nil {
 		log.Println(err)
-		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	if err := h.Services.SessionService.DeleteSessionService(cookie.Value); err != nil {
 		log.Println(err)
-		errors.ErrorSend(w, http.StatusSeeOther, err.Error())
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 

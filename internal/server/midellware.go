@@ -37,7 +37,7 @@ func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
 		user, err := h.Services.UserService.UserByIDService(session.UserID)
 		if err != nil {
 			log.Println(err)
-			errors.ErrorSend(w, http.StatusSeeOther, err.Error())
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 			return
 		}
 
