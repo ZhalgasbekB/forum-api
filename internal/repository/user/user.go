@@ -24,10 +24,14 @@ const (
 
 func (u *UserRepository) CreateUser(user *model.User) error {
 	if _, err := u.db.Exec(createUserQuery, user.Name, user.Email, user.Password, user.IsAdmin, user.CreatedAt); err != nil {
-		if err.Error() == "UNIQUE constraint failed: users.email" {
+		switch err.Error() {
+		case "UNIQUE constraint failed: users.email":
 			return errors.ErrHaveDuplicateEmail
+		case "UNIQUE constraint failed: users.name":
+			return errors.ErrHaveDuplicateName
+		default:
+			return err
 		}
-		return err
 	}
 	return nil
 }
