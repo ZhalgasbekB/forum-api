@@ -7,10 +7,18 @@ const (
 	apiGitHubKey = ""
 )
 
-func Google(w http.ResponseWriter, r *http.Request) {}
+func (h *Handler) Google(w http.ResponseWriter, r *http.Request) {
+	return
+}
 
-func GoogleCallback(w http.ResponseWriter, r *http.Request) {}
+func (h *Handler) GoogleCallback(w http.ResponseWriter, r *http.Request) {
+	return
+}
 
-func GitHub(w http.ResponseWriter, r *http.Request) {}
+func (h *Handler) GitHub(w http.ResponseWriter, r *http.Request) {
+	return
+}
 
-func GitHubCallback(w http.ResponseWriter, r *http.Request) {}
+func (h *Handler) GitHubCallback(w http.ResponseWriter, r *http.Request) {
+	return
+}

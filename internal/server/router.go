@@ -11,10 +11,10 @@ type Router interface {
 func NewRouter(h *Handler) http.Handler {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/google/login", nil) // POST
-	mux.HandleFunc("/google/callback", nil)
-	mux.HandleFunc("/github/login", nil) // POST
-	mux.HandleFunc("/github/callback", nil)
+	mux.HandleFunc("/google/login", h.Google) // POST
+	mux.HandleFunc("/google/callback", h.GoogleCallback)
+	mux.HandleFunc("/github/login", h.GitHub) // POST
+	mux.HandleFunc("/github/callback", h.GitHubCallback)
 
 	mux.HandleFunc("/d3", h.Home)           // 200 (GET METHOD) get all posts
 	mux.HandleFunc("/login", h.Login)       // 200 (POST METHOD)
