@@ -46,7 +46,7 @@ func (us *UserService) UserByEmailService(email, password string) (*model.User, 
 		return nil, err
 	}
 	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)) != nil {
-		return nil, errors.ErrInvalidCredentials
+		return nil, errors.ErrInvalidPassword
 	}
 	return user, nil
 }

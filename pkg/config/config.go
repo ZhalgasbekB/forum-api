@@ -7,11 +7,21 @@ import (
 )
 
 type Config struct {
-	Port    string `json:"port"`
-	Db      struct {
+	Port string `json:"port"`
+	Db   struct {
 		Driver string `json:"driver"`
 		Dsn    string `json:"dsn"`
 	} `json:"db"`
+	Google struct {
+		Client_ID     string `json:"client_id"`
+		Client_Secret string `json:"client_secret"`
+		ReURL         string `json:"redirect_uri"`
+	} `json:"google_config"`
+	GitHub struct {
+		Client_ID     string `json:"client_id"`
+		Client_Secret string `json:"client_secret"`
+		ReURL         string `json:"redirect_uri"`
+	} `json:"github_config"`
 }
 
 func Load() (Config, error) {

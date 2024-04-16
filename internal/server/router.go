@@ -11,13 +11,9 @@ type Router interface {
 func NewRouter(h *Handler) http.Handler {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/google/login", h.Google) // POST
-	mux.HandleFunc("/google/callback", h.GoogleCallback)
-	mux.HandleFunc("/github/login", h.GitHub) // POST
-	mux.HandleFunc("/github/callback", h.GitHubCallback)
-
 	mux.HandleFunc("/d3", h.Home)           // 200 (GET METHOD) get all posts
 	mux.HandleFunc("/login", h.Login)       // 200 (POST METHOD)
+	mux.HandleFunc("/auth", h.Authenticate) // 200 (POST BY ANOTHER SERVICE)
 	mux.HandleFunc("/register", h.Register) // 201 (POST METHOD)
 
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout)))                // 200 (POST METHOD)

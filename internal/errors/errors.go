@@ -17,6 +17,7 @@ var (
 	ErrSQLNoRows    = sql.ErrNoRows
 	ErrNotFoundData = errors.New("Not Found Any Data")
 
+	ErrInvalidPassword    = errors.New("Invalid Password")
 	ErrHaveDuplicateName  = errors.New("Name already exist")
 	ErrHaveDuplicateEmail = errors.New("Email already exist")
 	ErrInvalidCredentials = errors.New("Invalid Credentials")

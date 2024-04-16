@@ -1,7 +1,17 @@
 {
-  "port": "8080",
+  "port": "8083",
   "db":{
     "driver":"sqlite3",
     "dsn":"forum.sqlite3"
+  },
+  "google_config" : {
+    "client_id" : "16807684949-bp5bhvp85ar5sfj2iuasmfsf4l6bj4up.apps.googleusercontent.com",
+    "client_secret" : "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",
+    "redirect_uri" : "http://localhost:8080/google/callback"
+  },
+  "github_config" : {
+    "client_id" : "21c2671efe47648ceedd",
+    "client_secret" : "fbf46e505b7583bd24c5309bd342379f80591e68",
+    "redirect_uri" : "http://localhost:8080/github/callback"
   }
 }

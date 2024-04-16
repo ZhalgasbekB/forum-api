@@ -26,3 +26,9 @@ type UserResponseDTO struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
+
+type UserAuthDTO struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
