@@ -7,12 +7,12 @@ import (
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
-type SessinonRepository struct {
+type SessionRepository struct {
 	db *sql.DB
 }
 
-func NewSessionRepository(db *sql.DB) *SessinonRepository {
-	return &SessinonRepository{db: db}
+func NewSessionRepository(db *sql.DB) *SessionRepository {
+	return &SessionRepository{db: db}
 }
 
 const (
@@ -23,21 +23,21 @@ const (
 	sessionQueryByUUID   = `SELECT * FROM sessions WHERE uuid = $1`
 )
 
-func (s *SessinonRepository) CreateSession(session *model.Session) error {
+func (s *SessionRepository) CreateSession(session *model.Session) error {
 	if _, err := s.db.Exec(createSessionQuery, session.UUID, session.UserID, session.ExpireAt); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (s *SessinonRepository) DeleteSession(uuid string) error {
+func (s *SessionRepository) DeleteSession(uuid string) error {
 	if _, err := s.db.Exec(deleteSessionQuery, uuid); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (s *SessinonRepository) SessionByID(userID int) (*model.Session, error) {
+func (s *SessionRepository) SessionByID(userID int) (*model.Session, error) {
 	var session model.Session
 	if err := s.db.QueryRow(sessionQueryByID, userID).Scan(&session.UUID, &session.UserID, &session.ExpireAt); err != nil {
 		return nil, err
@@ -45,7 +45,7 @@ func (s *SessinonRepository) SessionByID(userID int) (*model.Session, error) {
 	return &session, nil
 }
 
-func (s *SessinonRepository) UserIDBySession(session *model.Session) (int, error) {
+func (s *SessionRepository) UserIDBySession(session *model.Session) (int, error) {
 	var userId int
 	if err := s.db.QueryRow(userIDQueryBySession, session.UUID).Scan(&userId); err != nil {
 		if err == sql.ErrNoRows {
@@ -56,7 +56,7 @@ func (s *SessinonRepository) UserIDBySession(session *model.Session) (int, error
 	return userId, nil
 }
 
-func (s *SessinonRepository) SessionByUUID(uuid string) (*model.Session, error) {
+func (s *SessionRepository) SessionByUUID(uuid string) (*model.Session, error) {
 	session := &model.Session{}
 	if err := s.db.QueryRow(sessionQueryByUUID, uuid).Scan(&session.UUID, &session.UserID, &session.ExpireAt); err != nil {
 		if err == sql.ErrNoRows {

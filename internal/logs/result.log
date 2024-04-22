@@ -1,104 +1,57 @@
-Log: 2024/04/16 14:57:37 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:00 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:00 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:05 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:08 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:08 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:10 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:13 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:13 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:14 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:20 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:20 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:21 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:25 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:28 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:28 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:30 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:33 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:33 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:34 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:39 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:39 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:45 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:58:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:59:00 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 14:59:20 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:00 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:06 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:10 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:11 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:21 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:27 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:32 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:34 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:40 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:52 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:56 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:56 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:01:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:34:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:34:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:34:17 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:44:35 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:44:35 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:44:38 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:51:27 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:51:27 server.go:3214: http: panic serving [::1]:49339: runtime error: invalid memory address or nil pointer dereference
-goroutine 613 [running]:
-net/http.(*conn).serve.func1()
-	/usr/local/go/src/net/http/server.go:1868 +0xb0
-panic({0x1011892e0?, 0x1013c49a0?})
-	/usr/local/go/src/runtime/panic.go:920 +0x26c
-gitea.com/lzhuk/forum/internal/server.(*Handler).Authenticate(0x14000126240, {0x1011e19e0, 0x14000296380}, 0x100f6bec4?)
-	/Users/zhalgasbolatov/Downloads/forum_deploy/internal/server/authorization.go:36 +0x354
-net/http.HandlerFunc.ServeHTTP(0x140001161e0?, {0x1011e19e0?, 0x14000296380?}, 0x140000a7a38?)
-	/usr/local/go/src/net/http/server.go:2136 +0x38
-net/http.(*ServeMux).ServeHTTP(0x140000a7ae0?, {0x1011e19e0, 0x14000296380}, 0x140000c1f00)
-	/usr/local/go/src/net/http/server.go:2514 +0x144
-gitea.com/lzhuk/forum/internal/server.NewRouter.(*Handler).IsAuthenticated.func14({0x1011e19e0, 0x14000296380}, 0x14000289530?)
-	/Users/zhalgasbolatov/Downloads/forum_deploy/internal/server/midellware.go:18 +0x98
-net/http.HandlerFunc.ServeHTTP(0x10?, {0x1011e19e0?, 0x14000296380?}, 0x14000296380?)
-	/usr/local/go/src/net/http/server.go:2136 +0x38
-net/http.serverHandler.ServeHTTP({0x1011e0ba0?}, {0x1011e19e0?, 0x14000296380?}, 0x6?)
-	/usr/local/go/src/net/http/server.go:2938 +0xbc
-net/http.(*conn).serve(0x14000292870, {0x1011e2080, 0x140000aa180})
-	/usr/local/go/src/net/http/server.go:2009 +0x518
-created by net/http.(*Server).Serve in goroutine 22
-	/usr/local/go/src/net/http/server.go:3086 +0x4cc
-Log: 2024/04/16 15:53:19 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:53:19 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:53:36 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:53:40 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:53:40 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:53:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:00 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:01 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:02 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:05 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:05 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:10 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:10 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:11 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:16 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:17 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:20 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:23 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:23 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 15:54:27 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:09:45 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:09:45 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:09:50 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:09:55 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:09:56 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:09:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:10:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:10:59 user.go:29: Invalid Password
-Log: 2024/04/16 16:11:00 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:11:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:11:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/16 16:11:16 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:13:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:14:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:15:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:15:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:15:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:15:17 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:15:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:16:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:16:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:16:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:17:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:17:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:17:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:17:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:17:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:27:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:27:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:27:57 user.go:59: Email already exist
+Log: 2024/04/18 15:27:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:27:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:27:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:28:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:28:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:28:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:28:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:28:14 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:28:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:29:17 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:30:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:30:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:31:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:34:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:34:05 user.go:59: Email already exist
+Log: 2024/04/18 15:34:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:34:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:34:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:34:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:34:18 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:34:27 midellware.go:17: http: named cookie not present
+Log: 2024/04/18 15:34:27 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:51:27 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:51:27 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:51:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:52:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:53:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:54:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:55:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:55:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:55:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/19 13:55:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/20 18:40:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/20 18:40:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/20 18:40:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/20 18:40:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/20 18:40:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/20 18:40:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/22 07:56:00 server.go:28: http: Server closed
