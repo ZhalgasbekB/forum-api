@@ -16,7 +16,6 @@ func UserRegisterRequestBody(r *http.Request) (*model.User, error) {
 		Name:     user.Name,
 		Email:    user.Email,
 		Password: user.Password,
-		IsAdmin:  false,
 	}, nil
 }
 

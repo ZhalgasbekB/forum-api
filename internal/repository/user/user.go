@@ -16,14 +16,14 @@ func NewUserRepo(db *sql.DB) *UserRepository {
 }
 
 const (
-	createUserQuery   = `INSERT INTO users (name, email, password, is_admin, created_at) VALUES ($1,$2,$3,$4,$5)`
+	createUserQuery   = `INSERT INTO users (name, email, password, created_at) VALUES ($1,$2,$3,$4,$5)`
 	userByIDQuery     = `SELECT * FROM users WHERE id = $1`
 	usersByEmailQuery = `SELECT * FROM users WHERE email = $1`
 	usersQuery        = `SELECT * FROM users`
 )
 
 func (u *UserRepository) CreateUser(user *model.User) error {
-	if _, err := u.db.Exec(createUserQuery, user.Name, user.Email, user.Password, user.IsAdmin, user.CreatedAt); err != nil {
+	if _, err := u.db.Exec(createUserQuery, user.Name, user.Email, user.Password, user.CreatedAt); err != nil {
 		switch err.Error() {
 		case "UNIQUE constraint failed: users.email":
 			return errors.ErrHaveDuplicateEmail
@@ -38,7 +38,7 @@ func (u *UserRepository) CreateUser(user *model.User) error {
 
 func (u *UserRepository) UserByID(id int) (*model.User, error) {
 	user := &model.User{}
-	if err := u.db.QueryRow(userByIDQuery, id).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.IsAdmin, &user.CreatedAt); err != nil {
+	if err := u.db.QueryRow(userByIDQuery, id).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.CreatedAt); err != nil {
 		if err == errors.ErrSQLNoRows {
 			return nil, errors.ErrNotFoundData
 		}
@@ -49,7 +49,7 @@ func (u *UserRepository) UserByID(id int) (*model.User, error) {
 
 func (u *UserRepository) UserByEmail(email string) (*model.User, error) {
 	user := &model.User{}
-	if err := u.db.QueryRow(usersByEmailQuery, email).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.IsAdmin, &user.CreatedAt); err != nil {
+	if err := u.db.QueryRow(usersByEmailQuery, email).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.CreatedAt); err != nil {
 		if err == errors.ErrSQLNoRows {
 			return nil, errors.ErrInvalidCredentials
 		}
@@ -67,7 +67,7 @@ func (u *UserRepository) Users() ([]model.User, error) {
 
 	for rows.Next() {
 		var user model.User
-		if err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.IsAdmin, &user.CreatedAt); err != nil {
+		if err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.CreatedAt); err != nil {
 			return nil, err
 		}
 		users = append(users, user)

@@ -1,5 +1,0 @@
-CREATE TABLE IF NOT EXIST roles (
-    user_id INTEGER NOT NULL,
-    role VARCHAR(30),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);

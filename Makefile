@@ -7,4 +7,6 @@ migrate:
 	sqlite3 forum.sqlite3 < migrations/posts_like.sql
 	sqlite3 forum.sqlite3 < migrations/comments.sql
 	sqlite3 forum.sqlite3 < migrations/comments_like.sql
+	sqlite3 forum.sqlite3 < migrations/roles.sql
+
 
