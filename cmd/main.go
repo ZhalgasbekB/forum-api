@@ -2,18 +2,21 @@ package main
 
 import (
 	"context"
-	"gitea.com/lzhuk/forum/pkg/db/driver"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
+	"gitea.com/lzhuk/forum/pkg/db/driver"
+
+	admin2 "gitea.com/lzhuk/forum/internal/repository/admin"
 	comment2 "gitea.com/lzhuk/forum/internal/repository/comment"
 	post2 "gitea.com/lzhuk/forum/internal/repository/post"
 	user2 "gitea.com/lzhuk/forum/internal/repository/user"
 
 	"gitea.com/lzhuk/forum/internal/app"
+	"gitea.com/lzhuk/forum/internal/service/admin"
 	"gitea.com/lzhuk/forum/internal/service/comment"
 	"gitea.com/lzhuk/forum/internal/service/post"
 	"gitea.com/lzhuk/forum/internal/service/user"
@@ -60,6 +63,11 @@ func main() {
 	commentsRepo := comment2.NewCommentsRepo(db)
 	likeCommentsRepo := comment2.NewLikeCommentRepository(db)
 
+	// TEST
+	adminRepo := admin2.InitAdminRepository(db)
+	adminService := admin.NewAdminService(adminRepo)
+	//
+
 	usersService := user.NewUserService(usersRepo)
 	sessionsService := user.NewSessionService(sessionRepo)
 	postsService := post.NewPostsService(postsRepo)
@@ -67,7 +75,7 @@ func main() {
 	commentsService := comment.NewCommentsService(commentsRepo)
 	likeCommentsService := comment.NewLikeCommentService(likeCommentsRepo)
 
-	services := service.NewService(usersService, sessionsService, postsService, commentsService, likePostsService, likeCommentsService)
+	services := service.NewService(usersService, sessionsService, postsService, commentsService, likePostsService, likeCommentsService, adminService)
 	handler := server.NewHandler(services)
 	router := server.NewRouter(&handler)
 	s := app.NewServer(cfg, router)

@@ -22,7 +22,7 @@ func NewRouter(h *Handler) http.Handler {
 	// mux.Handle("/admin/role-update", nil)
 	// mux.Handle("/admin/user-update", nil)
 	// mux.Handle("/admin/user-delete", nil)
-	// mux.Handle("/admin/info", nil)   // all users
+	mux.HandleFunc("/admin/info", h.AdminUsers) // all users
 	// mux.Handle("/admin/issues", nil) // messages from users and moderators
 
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout)))                // 200 (POST METHOD)

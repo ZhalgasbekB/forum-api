@@ -10,8 +10,8 @@ type IAdminRepository interface {
 
 type IAdminService interface {
 	UsersService() ([]model.User, error)
-	UpdateUserService() error
-	DeleteUserService() error
+	UpdateUserService(model.User) error
+	DeleteUserService(int) error
 }
 
 type AdminService struct {
