@@ -2,6 +2,7 @@ package convert
 
 import (
 	"encoding/json"
+	"gitea.com/lzhuk/forum/internal/helpers/roles"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/model"
@@ -16,6 +17,7 @@ func UserRegisterRequestBody(r *http.Request) (*model.User, error) {
 		Name:     user.Name,
 		Email:    user.Email,
 		Password: user.Password,
+		Role:     roles.USER,
 	}, nil
 }
 
@@ -35,5 +37,9 @@ func AuthenticateUserDTO(r *http.Request) (*model.User, error) {
 	if err := json.NewDecoder(r.Body).Decode(user); err != nil {
 		return nil, err
 	}
-	return &model.User{Name: user.Name, Email: user.Email, Password: user.Password}, nil
+	return &model.User{
+		Name:     user.Name,
+		Email:    user.Email,
+		Password: user.Password,
+	}, nil
 }
