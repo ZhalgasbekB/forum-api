@@ -1,5 +1,0 @@
-Log: 2024/04/22 12:18:04 server.go:3214: http: TLS handshake error from [::1]:57363: acme/autocert: server name component count invalid
-Log: 2024/04/22 12:18:04 server.go:3214: http: TLS handshake error from [::1]:57364: acme/autocert: server name component count invalid
-Log: 2024/04/22 12:18:04 server.go:3214: http: TLS handshake error from [::1]:57365: acme/autocert: server name component count invalid
-Log: 2024/04/22 12:18:04 server.go:3214: http: TLS handshake error from [::1]:57366: acme/autocert: server name component count invalid
-Log: 2024/04/23 07:39:52 server.go:57: http: Server closed

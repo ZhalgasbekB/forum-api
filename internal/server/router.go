@@ -2,6 +2,7 @@ package server
 
 import (
 	"net/http"
+	"time"
 )
 
 type Router interface {
@@ -10,6 +11,7 @@ type Router interface {
 
 func NewRouter(h *Handler) http.Handler {
 	mux := http.NewServeMux()
+	rateLimiter := RateLimitMiddleware(5, 1*time.Second)
 
 	mux.HandleFunc("/d3", h.Home)           // 200 (GET METHOD) get all posts
 	mux.HandleFunc("/login", h.Login)       // 200 (POST METHOD)
@@ -33,5 +35,5 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/d3/comment-update", h.RequiredAuthentication(http.HandlerFunc(h.UpdateComment))) // 202	(PUT METHOD) update
 	mux.Handle("/d3/comment-delete", h.RequiredAuthentication(http.HandlerFunc(h.DeleteComment))) // 202 	(DELETE METHOD) delete
 
-	return h.IsAuthenticated(mux)
+	return rateLimiter(h.IsAuthenticated(mux))
 }

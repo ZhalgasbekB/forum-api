@@ -7,7 +7,6 @@ type User struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	Password  string    `json:"password"`
-	IsAdmin   bool      `json:"is_admin"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
@@ -31,4 +30,9 @@ type UserAuthDTO struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
+}
+
+type Roles struct {
+	UserID int    `json:"user_id"`
+	Role   string `json:"role"`
 }

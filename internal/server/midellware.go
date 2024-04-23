@@ -60,3 +60,33 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+func RateLimitMiddleware(limit int, interval time.Duration) func(http.Handler) http.Handler {
+	var tokens = make(chan struct{}, limit)
+
+	go func() {
+		ticker := time.NewTicker(interval)
+		defer ticker.Stop()
+		for {
+			select {
+			case <-ticker.C:
+				select {
+				case tokens <- struct{}{}:
+				default:
+				}
+			}
+		}
+	}()
+
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			select {
+			case <-tokens:
+				next.ServeHTTP(w, r)
+			default:
+				errors.ErrorSend(w, http.StatusTooManyRequests, "Too many requests")
+				return
+			}
+		})
+	}
+}
