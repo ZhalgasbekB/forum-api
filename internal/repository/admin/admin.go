@@ -10,7 +10,7 @@ type AdminRepository struct {
 }
 
 const (
-	userQuery       = `SELECT * FROM users WHERE role != $1`
+	userQuery       = `SELECT * FROM users WHERE role != $1 ORDER BY CASE WHEN role = $2 THEN 1 WHEN role = $3 THEN 2 ELSE 3 END;`
 	updateUserQuery = `UPDATE users SET name = $1, email = $2, password = $3, role = $4 WHERE user_id = $5`
 	deleteUserQuery = `DELETE FROM users WHERE user_id = $1`
 )
@@ -23,7 +23,7 @@ func InitAdminRepository(db *sql.DB) *AdminRepository {
 
 func (a *AdminRepository) Users() ([]model.User, error) {
 	users := []model.User{}
-	rows, err := a.DB.Query(userQuery, "ADMIN")
+	rows, err := a.DB.Query(userQuery, "ADMIN", "MODERATOR", "USER")
 	if err != nil {
 		return nil, err
 	}
