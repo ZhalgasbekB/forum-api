@@ -1,2 +1,2 @@
-Log: 2024/04/23 16:47:19 server.go:3217: http: TLS handshake error from 127.0.0.1:39348: EOF
-Log: 2024/04/23 16:49:23 server.go:33: http: Server closed
+Log: 2024/04/23 15:59:11 midellware.go:17: http: named cookie not present
+Log: 2024/04/23 15:59:23 server.go:32: http: Server closed

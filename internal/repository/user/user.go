@@ -16,7 +16,7 @@ func NewUserRepo(db *sql.DB) *UserRepository {
 }
 
 const (
-	createUserQuery   = `INSERT INTO users (name, email, password, created_at) VALUES ($1,$2,$3,$4,$5)`
+	createUserQuery   = `INSERT INTO users (name, email, password, created_at) VALUES ($1,$2,$3,$4)`
 	userByIDQuery     = `SELECT * FROM users WHERE id = $1`
 	usersByEmailQuery = `SELECT * FROM users WHERE email = $1`
 	usersQuery        = `SELECT * FROM users`
