@@ -26,10 +26,6 @@ func NewServer(cfg config.Config, r server.Router) *Server {
 	//	tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
 	//	tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
 	//}
-
-	tlsConfig := &tls.Config{
-		CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},
-	}
 	//tlsConfig1 := &tls.Config{
 	//	MinVersion:               tls.VersionTLS12,
 	//	PreferServerCipherSuites: true,
@@ -41,6 +37,10 @@ func NewServer(cfg config.Config, r server.Router) *Server {
 	//}
 	//go http.ListenAndServe(":http", certManager.HTTPHandler(nil))
 	//go http.ListenAndServe(":80", certManager.HTTPHandler(r))
+
+	tlsConfig := &tls.Config{
+		CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},
+	}
 	return &Server{
 		ServerHTTP: &http.Server{
 			Addr:      ":" + cfg.Port,
