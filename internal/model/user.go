@@ -31,8 +31,3 @@ type UserAuthDTO struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
-
-type Roles struct {
-	UserID int    `json:"user_id"`
-	Role   string `json:"role"`
-}
