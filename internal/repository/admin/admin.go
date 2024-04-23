@@ -2,6 +2,7 @@ package admin
 
 import (
 	"database/sql"
+	"fmt"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -12,8 +13,8 @@ type AdminRepository struct {
 
 const (
 	userQuery       = `SELECT * FROM users WHERE role != $1 ORDER BY CASE WHEN role = $2 THEN 1 WHEN role = $3 THEN 2 ELSE 3 END;`
-	updateUserQuery = `UPDATE users SET name = $1, email = $2, password = $3, role = $4 WHERE user_id = $5`
-	deleteUserQuery = `DELETE FROM users WHERE user_id = $1`
+	updateUserQuery = `UPDATE users SET role = $1 WHERE id = $2`
+	deleteUserQuery = `DELETE FROM users WHERE id = $1`
 )
 
 func InitAdminRepository(db *sql.DB) *AdminRepository {
@@ -39,8 +40,9 @@ func (a *AdminRepository) Users() ([]model.User, error) {
 }
 
 func (a *AdminRepository) UpdateUser(user model.User) error {
-	if _, err := a.DB.Query(updateUserQuery, user.Name, user.Email, user.Password, user.Role, user.ID); err != nil {
-		return nil
+	fmt.Println(user.Role)
+	if _, err := a.DB.Exec(updateUserQuery, user.Role, user.ID); err != nil {
+		return err
 	}
 	return nil
 }

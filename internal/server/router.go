@@ -17,10 +17,11 @@ func NewRouter(h *Handler) http.Handler {
 	mux.HandleFunc("/login", h.Login)       // 200 (POST METHOD)
 	mux.HandleFunc("/auth", h.Authenticate) // 200 (POST BY ANOTHER SERVICE)
 	mux.HandleFunc("/register", h.Register) // 201 (POST METHOD)
-	mux.HandleFunc("/admin", h.Admin)       // all users
+
+	mux.HandleFunc("/admin", h.Admin)                       // all users // POST
+	mux.HandleFunc("/admin/role-update", h.AdminChangeRole) // POST
 
 	// mux.Handle("/admin", nil)
-	// mux.Handle("/admin/role-update", nil)
 	// mux.Handle("/admin/user-update", nil)
 	// mux.Handle("/admin/user-delete", nil)
 	// mux.Handle("/admin/issues", nil) // messages from users and moderators

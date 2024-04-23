@@ -2,7 +2,7 @@ package model
 
 type AdminPage struct {
 	Issues []IssueModerator `json:"issues"`
-	//Reports []Report         `json:"reports"`
+	// Reports []Report         `json:"reports"`
 }
 
 type IssueModerator struct {
@@ -10,14 +10,12 @@ type IssueModerator struct {
 	Message string `json:"message"`
 }
 
-//type Report struct {
-//	Status  bool   `json:"status"`
-//	Message string `json:"message"`
-//}
-
 type Moderator struct {
 	Report      string `json:"report"`
 	ModeratorId int    `json:"moderator_id"`
 }
-type UserIssue struct {
+
+type RoleDTO struct {
+	UserID int    `json:"user_id"`
+	Role   string `json:"role"`
 }
