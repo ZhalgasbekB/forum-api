@@ -17,12 +17,12 @@ func NewRouter(h *Handler) http.Handler {
 	mux.HandleFunc("/login", h.Login)       // 200 (POST METHOD)
 	mux.HandleFunc("/auth", h.Authenticate) // 200 (POST BY ANOTHER SERVICE)
 	mux.HandleFunc("/register", h.Register) // 201 (POST METHOD)
+	mux.HandleFunc("/admin", h.Admin)       // all users
 
 	// mux.Handle("/admin", nil)
 	// mux.Handle("/admin/role-update", nil)
 	// mux.Handle("/admin/user-update", nil)
 	// mux.Handle("/admin/user-delete", nil)
-	mux.HandleFunc("/admin/info", h.AdminUsers) // all users
 	// mux.Handle("/admin/issues", nil) // messages from users and moderators
 
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout)))                // 200 (POST METHOD)

@@ -16,14 +16,14 @@ func NewUserRepo(db *sql.DB) *UserRepository {
 }
 
 const (
-	createUserQuery   = `INSERT INTO users (name, email, password, created_at) VALUES ($1,$2,$3,$4)`
+	createUserQuery   = `INSERT INTO users (name, email, password, role, created_at) VALUES ($1,$2,$3,$4,$5)`
 	userByIDQuery     = `SELECT * FROM users WHERE id = $1`
 	usersByEmailQuery = `SELECT * FROM users WHERE email = $1`
 	usersQuery        = `SELECT * FROM users`
 )
 
 func (u *UserRepository) CreateUser(user *model.User) error {
-	if _, err := u.db.Exec(createUserQuery, user.Name, user.Email, user.Password, user.CreatedAt); err != nil {
+	if _, err := u.db.Exec(createUserQuery, user.Name, user.Email, user.Password, user.Role, user.CreatedAt); err != nil {
 		switch err.Error() {
 		case "UNIQUE constraint failed: users.email":
 			return errors.ErrHaveDuplicateEmail

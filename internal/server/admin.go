@@ -9,7 +9,7 @@ import (
 	"gitea.com/lzhuk/forum/internal/errors"
 )
 
-func (h *Handler) AdminUsers(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Admin(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return

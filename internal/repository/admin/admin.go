@@ -2,6 +2,7 @@ package admin
 
 import (
 	"database/sql"
+
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
@@ -29,7 +30,7 @@ func (a *AdminRepository) Users() ([]model.User, error) {
 	}
 	for rows.Next() {
 		user := model.User{}
-		if err := rows.Scan(&user.ID, &user.Email, &user.Password, &user.Role, &user.CreatedAt); err != nil {
+		if err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.Role, &user.CreatedAt); err != nil {
 			return nil, err
 		}
 		users = append(users, user)
