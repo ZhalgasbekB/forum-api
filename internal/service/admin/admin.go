@@ -1,8 +1,18 @@
 package admin
 
-type IAdminRepository interface{}
+import "gitea.com/lzhuk/forum/internal/model"
 
-type IAdminService interface{}
+type IAdminRepository interface {
+	Users() ([]model.User, error)
+	UpdateUser(model.User) error
+	DeleteUser(int) error
+}
+
+type IAdminService interface {
+	UsersService() ([]model.User, error)
+	UpdateUserService() error
+	DeleteUserService() error
+}
 
 type AdminService struct {
 	iAdminRepository IAdminRepository
@@ -14,6 +24,14 @@ func NewAdminService(iAdminRepository IAdminRepository) *AdminService {
 	}
 }
 
-func (as *AdminService) Users() error      { return nil }
-func (as *AdminService) UpdateUser() error { return nil }
-func (as *AdminService) DeleteUser() error { return nil }
+func (as *AdminService) UsersService() ([]model.User, error) {
+	return as.iAdminRepository.Users()
+}
+
+func (as *AdminService) UpdateUserService(us model.User) error {
+	return as.iAdminRepository.UpdateUser(us)
+}
+
+func (as *AdminService) DeleteUserService(id int) error {
+	return as.iAdminRepository.DeleteUser(id)
+}
