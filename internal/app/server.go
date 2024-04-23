@@ -15,29 +15,6 @@ type Server struct {
 }
 
 func NewServer(cfg config.Config, r server.Router) *Server {
-	//certManager := autocert.Manager{
-	//	Prompt: autocert.AcceptTOS,
-	//	Cache:  autocert.DirCache("certs1"),
-	//}
-	//tlsConfig := certManager.TLSConfig()
-	//tlsConfig.MinVersion = tls.VersionTLS12
-	//tlsConfig.PreferServerCipherSuites = true
-	//tlsConfig.CipherSuites = []uint16{
-	//	tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
-	//	tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-	//}
-	//tlsConfig1 := &tls.Config{
-	//	MinVersion:               tls.VersionTLS12,
-	//	PreferServerCipherSuites: true,
-	//	CipherSuites: []uint16{
-	//		tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
-	//		tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-	//		// Add more secure cipher suites here
-	//	},
-	//}
-	//go http.ListenAndServe(":http", certManager.HTTPHandler(nil))
-	//go http.ListenAndServe(":80", certManager.HTTPHandler(r))
-
 	tlsConfig := &tls.Config{
 		CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},
 	}
@@ -56,8 +33,6 @@ func (s *Server) Start(ctx context.Context) error {
 			log.Println(err)
 			return
 		}
-		//"./certs/cert.pem", "./certs/key.pem"
-		//log.Fatal(server.ListenAndServeTLS("", ""))
 	}()
 	<-ctx.Done()
 	return s.ServerHTTP.Shutdown(context.Background())
