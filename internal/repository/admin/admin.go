@@ -53,3 +53,7 @@ func (a *AdminRepository) DeleteUser(user_id int) error {
 	}
 	return nil
 }
+
+/// FULL UPDATE USER AND ADD TABLE WHICH TAKES A SOME DATA FROM MSSAGE FROM MODERATORS AND SERVE IT (???) need some think
+/// 1. Update USER FULL
+/// 2. MODERATOR ISSUES (???)
