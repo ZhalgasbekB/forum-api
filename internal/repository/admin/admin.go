@@ -40,7 +40,7 @@ func (a *AdminRepository) Users() ([]model.User, error) {
 	return users, nil
 }
 
-func (a *AdminRepository) UpdateUser(user model.User) error {
+func (a *AdminRepository) UpdateUser(user *model.User) error {
 	if _, err := a.DB.Exec(updateUserQuery, user.Role, user.ID); err != nil {
 		return err
 	}
@@ -54,7 +54,7 @@ func (a *AdminRepository) DeleteUser(user_id int) error {
 	return nil
 }
 
-func (a *AdminRepository) UpdateUserNewDate(user model.User) error {
+func (a *AdminRepository) UpdateUserNewDate(user *model.User) error {
 	if _, err := a.DB.Exec(updateAllQuery, user.Name, user.Email, user.ID); err != nil {
 		return err
 	}

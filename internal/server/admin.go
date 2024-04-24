@@ -54,7 +54,7 @@ func (h *Handler) AdminChangeRole(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.Services.Admin.UpdateUserService(*uRole); err != nil {
+	if err := h.Services.Admin.UpdateUserService(uRole); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
@@ -94,8 +94,19 @@ func (h *Handler) AdminUpdateAll(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-	// ???
-	// ???
 
-	
+	user, err := convert.UpdateUserAdmin(r)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if err := h.Services.Admin.UpdateUserNewDateService(user); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 }

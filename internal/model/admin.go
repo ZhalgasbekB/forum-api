@@ -26,7 +26,9 @@ type UserDeleteDTO struct {
 }
 
 type UserUpdateDTO struct {
-	UserID int `json:"user_id"`
-	Name string `json:"name"`
-	Email string `json:"email"`
+	UserID int    `json:"user_id"`
+	Name   string `json:"name"`
+	Email  string `json:"email"`
 }
+
+/// ????

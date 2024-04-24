@@ -2,7 +2,6 @@ package convert
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/helpers/roles"
@@ -29,14 +28,19 @@ func UpdateRole(r *http.Request) (*model.User, error) {
 func DeleteUser(r *http.Request) (int, error) {
 	user := &model.UserDeleteDTO{}
 	if err := json.NewDecoder(r.Body).Decode(user); err != nil {
-		fmt.Println(user.UserID)
 		return -1, err
 	}
 	return user.UserID, nil
 }
 
-func UpdateUserAdmin(r *http.Request) (model.User, error) {
-	
-
-	return , nil
+func UpdateUserAdmin(r *http.Request) (*model.User, error) {
+	userUpdate := &model.UserUpdateDTO{}
+	if err := json.NewDecoder(r.Body).Decode(userUpdate); err != nil {
+		return nil, nil
+	}
+	return &model.User{
+		ID:    userUpdate.UserID,
+		Name:  userUpdate.Name,
+		Email: userUpdate.Email,
+	}, nil
 }
