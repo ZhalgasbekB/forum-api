@@ -19,3 +19,7 @@ type RoleDTO struct {
 	UserID int    `json:"user_id"`
 	Role   string `json:"role"`
 }
+
+type UserDeleteDTO struct {
+	UserID int `json:"user_id"`
+}

@@ -62,7 +62,7 @@ func (h *Handler) RequiredAuthentication(next http.Handler) http.Handler {
 }
 
 func RateLimitMiddleware(limit int, interval time.Duration) func(http.Handler) http.Handler {
-	var tokens = make(chan struct{}, limit)
+	tokens := make(chan struct{}, limit)
 
 	go func() {
 		ticker := time.NewTicker(interval)

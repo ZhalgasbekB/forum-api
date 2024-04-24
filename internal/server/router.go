@@ -18,8 +18,9 @@ func NewRouter(h *Handler) http.Handler {
 	mux.HandleFunc("/auth", h.Authenticate) // 200 (POST BY ANOTHER SERVICE)
 	mux.HandleFunc("/register", h.Register) // 201 (POST METHOD)
 
-	mux.HandleFunc("/admin", h.Admin)                       // all users // POST
+	mux.HandleFunc("/admin", h.Admin)                       // POST
 	mux.HandleFunc("/admin/role-update", h.AdminChangeRole) // POST
+	mux.HandleFunc("/admin/user-delete", h.AdminDeleteUser) // POST
 
 	// mux.Handle("/admin", nil)
 	// mux.Handle("/admin/user-update", nil)

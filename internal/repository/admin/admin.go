@@ -48,7 +48,7 @@ func (a *AdminRepository) UpdateUser(user model.User) error {
 }
 
 func (a *AdminRepository) DeleteUser(user_id int) error {
-	if _, err := a.DB.Query(deleteUserQuery, user_id); err != nil {
+	if _, err := a.DB.Exec(deleteUserQuery, user_id); err != nil {
 		return err
 	}
 	return nil
