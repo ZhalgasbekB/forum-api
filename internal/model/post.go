@@ -30,3 +30,11 @@ type PostCommentsDTO struct {
 	Post     *Post     `json:"post"`
 	Comments []Comment `json:"comments"`
 }
+
+type PostId struct {
+	PostId int `json:"post_id"`
+}
+
+type PathImagePost struct {
+	Path string `json:"path"`
+}

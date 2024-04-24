@@ -32,16 +32,21 @@ func NewPostsRepo(db *sql.DB) *PostsRepository {
 	}
 }
 
-func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.Post) error {
+func (p PostsRepository) CreatePostRepository(ctx context.Context, post model.Post) (int, error) {
 	p.m.Lock()
 	defer p.m.Unlock()
-	if _, err := p.db.ExecContext(ctx, createPostQuery, post.UserId, post.CategoryName, post.Title, post.Description, post.CreateDate); err != nil {
+	result, err := p.db.ExecContext(ctx, createPostQuery, post.UserId, post.CategoryName, post.Title, post.Description, post.CreateDate)
+	if err != nil {
 		if err == sql.ErrNoRows {
-			return errors.ErrNotFoundData
+			return 0, errors.ErrNotFoundData
 		}
-		return err
+		return 0, err
 	}
-	return nil
+	postId, err := result.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
+	return int(postId), nil
 }
 
 func (p PostsRepository) PostsRepository(ctx context.Context) ([]*model.Post, error) {

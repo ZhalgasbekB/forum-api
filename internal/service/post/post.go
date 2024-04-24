@@ -8,7 +8,7 @@ import (
 )
 
 type IPostsRepository interface {
-	CreatePostRepository(context.Context, model.Post) error
+	CreatePostRepository(ctx context.Context, post model.Post) (int, error)
 	UpdatePostByUserIdRepository(context.Context, model.Post) error
 	DeletePostByUserIdRepository(context.Context, *model.Post) error
 
@@ -19,7 +19,7 @@ type IPostsRepository interface {
 }
 
 type IPostsService interface {
-	CreatePostService(ctx context.Context, post model.Post) error
+	CreatePostService(ctx context.Context, post model.Post) (int, error)
 	UpdateUserPostService(ctx context.Context, post model.Post) error
 	DeleteUserPostService(ctx context.Context, deleteModel *model.Post) error
 
@@ -39,7 +39,7 @@ func NewPostsService(postsRepository IPostsRepository) *PostsService {
 	}
 }
 
-func (p *PostsService) CreatePostService(ctx context.Context, post model.Post) error {
+func (p *PostsService) CreatePostService(ctx context.Context, post model.Post) (int, error) {
 	post.CreateDate = time.Now()
 	return p.postsRepository.CreatePostRepository(ctx, post)
 }

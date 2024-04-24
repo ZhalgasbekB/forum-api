@@ -1,9 +1,11 @@
 package server
 
 import (
-	"gitea.com/lzhuk/forum/internal/model"
+	"fmt"
 	"log"
 	"net/http"
+
+	"gitea.com/lzhuk/forum/internal/model"
 
 	"gitea.com/lzhuk/forum/internal/convert"
 	"gitea.com/lzhuk/forum/internal/errors"
@@ -53,13 +55,14 @@ func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	if err := h.Services.PostsService.CreatePostService(r.Context(), *post); err != nil {
+	postId, err := h.Services.PostsService.CreatePostService(r.Context(), *post)
+	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-
-	w.WriteHeader(http.StatusCreated)
+	fmt.Println(postId)
+	json.WriteJSON(w, http.StatusCreated, model.PostId{PostId: postId})
 }
 
 func (h *Handler) UpdatePost(w http.ResponseWriter, r *http.Request) {
@@ -212,17 +215,37 @@ func (h *Handler) PostCategory(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) UploadPostImage(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		w.Header().Set("Allow", http.MethodPost)
-		return
+	switch r.Method {
+	case http.MethodPost:
+		imageDate, err := convert.ConvertUploadPostImage(r)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+
+		err = h.Services.UploadImage.AddImagePostService(imageDate)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+		w.WriteHeader(http.StatusCreated)
+	case http.MethodGet:
+		imageDate, err := convert.ConvertUploadPostImage(r)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+
+		pathImage, err := h.Services.UploadImage.GetImagePostService(imageDate.PostId)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+		json.WriteJSON(w, http.StatusOK, model.PathImagePost{Path: pathImage})
+	default:
 	}
-
-	post, err := convert.ConvertUploadPostImage(r, user.ID)
-	if err != nil {
-		log.Println(err)
-		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
-		return
-	}
-
-
 }

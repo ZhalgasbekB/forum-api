@@ -9,6 +9,13 @@ type IUploadImagePostRepository interface {
 	DeleteImagePostRepository(postId int) error
 }
 
+type IImagePostService interface {
+	AddImagePostService(image *model.UploadPostImage) error
+	GetImagePostService(postId int) (string, error)
+	UpdateImageService(image *model.UploadPostImage) error
+	DeleteImagePostService(postId int) error
+}
+
 type UploadImagePostService struct {
 	uploadImagePostRepository IUploadImagePostRepository
 }
