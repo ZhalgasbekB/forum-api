@@ -34,3 +34,9 @@ func DeleteUser(r *http.Request) (int, error) {
 	}
 	return user.UserID, nil
 }
+
+func UpdateUserAdmin(r *http.Request) (model.User, error) {
+	
+
+	return , nil
+}

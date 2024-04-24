@@ -88,3 +88,14 @@ func (h *Handler) AdminDeleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 	json.WriteJSON(w, http.StatusOK, id)
 }
+
+func (h *Handler) AdminUpdateAll(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	// ???
+	// ???
+
+	
+}

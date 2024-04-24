@@ -2,7 +2,6 @@ package admin
 
 import (
 	"database/sql"
-	"fmt"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -15,6 +14,8 @@ const (
 	userQuery       = `SELECT * FROM users WHERE role != $1 ORDER BY CASE WHEN role = $2 THEN 1 WHEN role = $3 THEN 2 ELSE 3 END;`
 	updateUserQuery = `UPDATE users SET role = $1 WHERE id = $2`
 	deleteUserQuery = `DELETE FROM users WHERE id = $1`
+
+	updateAllQuery = `UPDATE users SET name = $1, email = $2 WHERE id = $3`
 )
 
 func InitAdminRepository(db *sql.DB) *AdminRepository {
@@ -40,7 +41,6 @@ func (a *AdminRepository) Users() ([]model.User, error) {
 }
 
 func (a *AdminRepository) UpdateUser(user model.User) error {
-	fmt.Println(user.Role)
 	if _, err := a.DB.Exec(updateUserQuery, user.Role, user.ID); err != nil {
 		return err
 	}
@@ -54,6 +54,11 @@ func (a *AdminRepository) DeleteUser(user_id int) error {
 	return nil
 }
 
-/// FULL UPDATE USER AND ADD TABLE WHICH TAKES A SOME DATA FROM MSSAGE FROM MODERATORS AND SERVE IT (???) need some think
-/// 1. Update USER FULL
+func (a *AdminRepository) UpdateUserNewDate(user model.User) error {
+	if _, err := a.DB.Exec(updateAllQuery, user.Name, user.Email, user.ID); err != nil {
+		return err
+	}
+	return nil
+}
+
 /// 2. MODERATOR ISSUES (???)
