@@ -210,3 +210,19 @@ func (h *Handler) PostCategory(w http.ResponseWriter, r *http.Request) {
 
 	json.WriteJSON(w, http.StatusOK, postsCategory)
 }
+
+func (h *Handler) UploadPostImage(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.Header().Set("Allow", http.MethodPost)
+		return
+	}
+
+	post, err := convert.ConvertUploadPostImage(r, user.ID)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+
+}

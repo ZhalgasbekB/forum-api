@@ -60,3 +60,4 @@ func ConvertParamID(r *http.Request) (int, error) {
 }
 
  
+func ConvertUploadPostImage(r *http.Request) ()
