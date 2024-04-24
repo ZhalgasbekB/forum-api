@@ -16,6 +16,7 @@ type Moderator struct {
 }
 
 /// USE
+
 type RoleDTO struct {
 	UserID int    `json:"user_id"`
 	Role   string `json:"role"`

@@ -20,6 +20,7 @@ func NewRouter(h *Handler) http.Handler {
 
 	mux.HandleFunc("/admin", h.Admin)                       // POST
 	mux.HandleFunc("/admin/role-update", h.AdminChangeRole) // POST
+	mux.HandleFunc("/admin/user-update", h.AdminUpdateAll)  // POST
 	mux.HandleFunc("/admin/user-delete", h.AdminDeleteUser) // POST
 
 	// mux.Handle("/admin", nil)
