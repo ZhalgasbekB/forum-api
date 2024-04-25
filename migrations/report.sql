@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS reports(
     status TEXT NOT NULL DEFAULT 'open' CHECK (status IN ('open', 'closed', 'ignored')),
     category_issue TEXT NOT NULL DEFAULT 'issue' CHECK (category_issue IN ('issue', 'user-issue', 'post-issue', 'comment-issue')),
     reason TEXT NOT NULL,
-    admin_response TEXT,
+    admin_response TEXT NOT NULL DEFAULT 'EMPTY',
     created_at TIMESTAMP DEFAULT (datetime('now')),
     updated_at TIMESTAMP DEFAULT (datetime('now')),
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE SET NULL,

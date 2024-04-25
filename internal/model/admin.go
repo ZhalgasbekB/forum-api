@@ -4,14 +4,6 @@ package model
 type AdminPage struct { // Issues []IssueModerator `json:"issues"`
 }
 
-// ???
-
-type Moderator struct {
-	ModeratorId int    `json:"moderator_id"`
-	Report      string `json:"report"`
-}
-
-/// USE
 
 type RoleDTO struct {
 	UserID int    `json:"user_id"`

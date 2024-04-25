@@ -136,3 +136,12 @@ func (h *Handler) AdminReports(w http.ResponseWriter, r *http.Request) {
 
 	hh.WriteJSON(w, http.StatusOK, reports)
 }
+
+func (h *Handler) UpdateReport(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPut {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	
+}

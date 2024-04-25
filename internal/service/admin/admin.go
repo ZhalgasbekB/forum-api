@@ -9,6 +9,7 @@ type IAdminRepository interface {
 	UpdateUserNewDate(*model.User) error
 	CreateReportRepository(*model.ReportCreateDTO) error
 	ReportsModerator() ([]model.Report, error)
+	UpdateReport(*model.ReportResponseDTO) error
 }
 
 type IAdminService interface {
@@ -18,6 +19,7 @@ type IAdminService interface {
 	UpdateUserNewDateService(*model.User) error
 	CreateReportService(*model.ReportCreateDTO) error
 	ReportsModeratorService() ([]model.Report, error)
+	UpdateReportService(*model.ReportResponseDTO) error
 }
 
 type AdminService struct {
@@ -52,4 +54,8 @@ func (as *AdminService) CreateReportService(r *model.ReportCreateDTO) error {
 
 func (as *AdminService) ReportsModeratorService() ([]model.Report, error) {
 	return as.iAdminRepository.ReportsModerator()
+}
+
+func (as *AdminService) UpdateReportService(update *model.ReportResponseDTO) error {
+	return as.iAdminRepository.UpdateReport(update)
 }

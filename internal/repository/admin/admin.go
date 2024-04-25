@@ -2,7 +2,6 @@ package admin
 
 import (
 	"database/sql"
-	"fmt"
 	"time"
 
 	"gitea.com/lzhuk/forum/internal/model"
@@ -69,8 +68,7 @@ const (
 	reportUpdateQuery = `UPDATE reports SET admin = $1`
 	reportDeleteQuery = `DELETE FROM reports WHERE report_id = $1`
 
-	reportsGet  = `SELECT * FROM reports`
-	reportsGet1 = `SELECT report_id, post_id, comment_id, user_id, moderator, status, category_issue, reason, created_at, updated_at FROM reports`
+	reportsGet = `SELECT * FROM reports`
 )
 
 func (a *AdminRepository) CreateReportRepository(report *model.ReportCreateDTO) error {
@@ -89,26 +87,23 @@ func (a *AdminRepository) DeleteReport(id int) error {
 
 func (a *AdminRepository) ReportsModerator() ([]model.Report, error) {
 	reports := []model.Report{}
-	rows, err := a.DB.Query(reportsGet1)
+	rows, err := a.DB.Query(reportsGet)
 	if err != nil {
 		return nil, err
 	}
 	for rows.Next() {
 		report := &model.Report{}
-		if err := rows.Scan(&report.ID, &report.PostID, &report.CommentID, &report.UserID, &report.ModeratorID, &report.Status, &report.CategoryIssue, &report.Reason, &report.CreateAt, &report.UpdateAt); err != nil {
-			fmt.Println(err)
+		if err := rows.Scan(&report.ID, &report.PostID, &report.CommentID, &report.UserID, &report.ModeratorID, &report.Status, &report.CategoryIssue, &report.Reason, &report.AdminResponse, &report.CreateAt, &report.UpdateAt); err != nil {
 			return nil, err
 		}
 		reports = append(reports, *report)
 	}
-
 	return reports, nil
 }
 
-func (a *AdminRepository) UpdateReport(update model.ReportResponseDTO) error {
+func (a *AdminRepository) UpdateReport(update *model.ReportResponseDTO) error {
 	updatedTime := time.Now()
-	/// ???? SOME TO CHANGE IN THIS CODE ???
-	if _, err := a.DB.Exec(reportUpdateQuery, update.AdminID, update.AdminResponse, update.Status, updatedTime); err != nil {
+	if _, err := a.DB.Exec(reportUpdateQuery, update.AdminResponse, update.Status, updatedTime); err != nil {
 		return err
 	}
 	return nil
