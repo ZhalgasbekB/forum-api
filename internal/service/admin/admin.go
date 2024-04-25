@@ -1,3 +1,4 @@
+
 package admin
 
 import "gitea.com/lzhuk/forum/internal/model"

@@ -1,18 +1,14 @@
 package model
 
 // ????
-type AdminPage struct {
-	Issues []IssueModerator `json:"issues"`
+type AdminPage struct { // Issues []IssueModerator `json:"issues"`
 }
 
-type IssueModerator struct {
-	UserID  int    `json:"user_id"`
-	Message string `json:"message"`
-}
+// ???
 
 type Moderator struct {
-	Report      string `json:"report"`
 	ModeratorId int    `json:"moderator_id"`
+	Report      string `json:"report"`
 }
 
 /// USE
@@ -31,5 +27,3 @@ type UserUpdateDTO struct {
 	Name   string `json:"name"`
 	Email  string `json:"email"`
 }
-
-/// ????
