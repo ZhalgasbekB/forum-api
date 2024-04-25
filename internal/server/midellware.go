@@ -92,6 +92,7 @@ func RateLimitMiddleware(limit int, interval time.Duration) func(http.Handler) h
 	}
 }
 
+/// ADMIN and MODERATOR
 func (h *Handler) AdminVerification(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := contextUser(r)
@@ -103,6 +104,7 @@ func (h *Handler) AdminVerification(next http.Handler) http.Handler {
 		if user.Role != roles.ADMIN {
 			log.Println("No Authenticated Admin: You aren't admin")
 			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated Admin: You aren't admin")
+			return
 		}
 
 		next.ServeHTTP(w, r)
@@ -120,6 +122,8 @@ func (h *Handler) ModeratorVerification(next http.Handler) http.Handler {
 		if user.Role != roles.MODERATOR {
 			log.Println("No Authenticated Moderator: You aren't moderator")
 			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated Moderator: You aren't moderator")
+			return
+
 		}
 		next.ServeHTTP(w, r)
 	})

@@ -2,7 +2,6 @@ package convert
 
 import (
 	"encoding/json"
-	"gitea.com/lzhuk/forum/internal/helpers/roles"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/model"
@@ -17,7 +16,7 @@ func UserRegisterRequestBody(r *http.Request) (*model.User, error) {
 		Name:     user.Name,
 		Email:    user.Email,
 		Password: user.Password,
-		Role:     roles.USER,
+		Role:     user.Role,
 	}, nil
 }
 

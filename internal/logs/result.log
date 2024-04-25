@@ -1,2 +1,2 @@
-Log: 2024/04/25 16:52:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 16:53:33 server.go:32: http: Server closed
+Log: 2024/04/25 18:11:02 midellware.go:105: No Authenticated Admin: You aren't admin
+Log: 2024/04/25 18:11:57 server.go:32: http: Server closed

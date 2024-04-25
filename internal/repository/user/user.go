@@ -38,7 +38,7 @@ func (u *UserRepository) CreateUser(user *model.User) error {
 
 func (u *UserRepository) UserByID(id int) (*model.User, error) {
 	user := &model.User{}
-	if err := u.db.QueryRow(userByIDQuery, id).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.CreatedAt); err != nil {
+	if err := u.db.QueryRow(userByIDQuery, id).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.Role, &user.CreatedAt); err != nil {
 		if err == errors.ErrSQLNoRows {
 			return nil, errors.ErrNotFoundData
 		}
@@ -49,7 +49,7 @@ func (u *UserRepository) UserByID(id int) (*model.User, error) {
 
 func (u *UserRepository) UserByEmail(email string) (*model.User, error) {
 	user := &model.User{}
-	if err := u.db.QueryRow(usersByEmailQuery, email).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.CreatedAt); err != nil {
+	if err := u.db.QueryRow(usersByEmailQuery, email).Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.Role, &user.CreatedAt); err != nil {
 		if err == errors.ErrSQLNoRows {
 			return nil, errors.ErrInvalidCredentials
 		}
@@ -67,7 +67,7 @@ func (u *UserRepository) Users() ([]model.User, error) {
 
 	for rows.Next() {
 		var user model.User
-		if err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.CreatedAt); err != nil {
+		if err := rows.Scan(&user.ID, &user.Name, &user.Email, &user.Password, &user.Role, &user.CreatedAt); err != nil {
 			return nil, err
 		}
 		users = append(users, user)
