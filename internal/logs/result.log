@@ -1,39 +1,1151 @@
-Log: 2024/04/25 13:54:37 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:54:40 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:54:42 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:54:42 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:54:42 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:55:08 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:55:08 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:55:25 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:55:25 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:55:25 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:55:25 post.go:245: sql: no rows in result set
-Log: 2024/04/25 13:56:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:56:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:56:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:56:15 post.go:245: sql: no rows in result set
-Log: 2024/04/25 13:56:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:56:56 post.go:245: sql: no rows in result set
-Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:00 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:02 post.go:245: sql: no rows in result set
-Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:04 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:05 user.go:59: Email already exist
-Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:05 post.go:245: sql: no rows in result set
-Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 14:00:50 server.go:28: http: Server closed
+Log: 2024/04/25 15:34:16 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:34:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:34:20 user.go:59: Email already exist
+Log: 2024/04/25 15:34:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:34:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:34:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:34:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:34:20 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:34:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:34:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:30 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:33 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:37:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:35 user.go:59: Email already exist
+Log: 2024/04/25 15:37:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:36 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:36 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:36 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:36 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:37:36 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:36 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:42 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:37:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:48 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:37:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:51 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:37:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:37:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:09 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:39:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:12 user.go:59: Email already exist
+Log: 2024/04/25 15:39:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:12 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:39:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:13 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:39:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:39 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:39:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:44 user.go:59: Email already exist
+Log: 2024/04/25 15:39:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:44 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:39:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:57 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:39:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:39:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:04 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:40:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:24 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:40:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:41 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:50 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:50 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:51 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:52 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:53 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:40:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:40:54 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:46:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:03 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:46:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:05 post.go:122: strconv.Atoi: parsing "square_320_c1f0049994dc417049eeea91a87ec4ab.jpeg": invalid syntax
+Log: 2024/04/25 15:46:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:46:49 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:47:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:47:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:47:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:47:09 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:50:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:03 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:50:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:04 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:50:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:08 user.go:59: Email already exist
+Log: 2024/04/25 15:50:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:08 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:50:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:17 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:17 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:17 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:17 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:50:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:48 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:50:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:54 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:50:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:50:59 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:51:17 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:19 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:51:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:24 user.go:59: Email already exist
+Log: 2024/04/25 15:51:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:24 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:51:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:27 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:27 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:27 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:51:27 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:53:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:04 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:53:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:05 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:53:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:41 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:53:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:42 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 15:53:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:45 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:53:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:48 post.go:244: sql: no rows in result set
+Log: 2024/04/25 15:53:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 15:53:51 post.go:122: strconv.Atoi: parsing "004_05648-scaled.jpg": invalid syntax
+Log: 2024/04/25 16:01:11 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:01:11 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:01:11 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:01:11 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:02:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:02:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:02:20 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:02:20 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:15:31 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:32 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:15:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:35 user.go:59: Email already exist
+Log: 2024/04/25 16:15:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:35 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:15:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:38 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:15:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:15:53 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:17:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:17:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:17:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:17:23 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:17:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:17:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:17:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:17:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:17:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:17:43 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:19:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:32 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:19:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:38 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:19:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:55 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:19:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:19:57 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:20:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:08 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:20:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:10 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:20:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:43 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:20:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:47 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:20:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:51 user.go:59: Email already exist
+Log: 2024/04/25 16:20:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:51 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:20:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:20:52 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:21:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:21:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:21:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:21:07 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:21:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:21:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:21:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:21:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:21:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:21:15 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:25:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:25:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:25:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:25:53 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:26:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:44 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:26:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:47 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:26:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:26:49 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:27:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:00 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:27:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:01 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:27:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:27:02 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:38:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:49 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:38:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:53 user.go:59: Email already exist
+Log: 2024/04/25 16:38:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:53 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:38:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:38:57 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:39:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:10 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:39:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:26 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:39:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:33 user.go:59: Email already exist
+Log: 2024/04/25 16:39:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:34 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:39:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:39:37 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:44:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:09 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:44:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:15 user.go:59: Email already exist
+Log: 2024/04/25 16:44:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:15 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:44:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:17 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:17 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:17 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:44:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:26 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:44:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:28 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:28 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:44:28 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:46:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:46:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:46:02 post.go:122: strconv.Atoi: parsing "Mcd2.jpg": invalid syntax
+Log: 2024/04/25 16:54:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:26 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:54:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:29 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:29 user.go:59: Email already exist
+Log: 2024/04/25 16:54:29 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:29 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:29 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:29 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:29 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:54:29 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:54:29 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:40 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:40 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:40 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:40 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:55:40 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:40 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:42 user.go:59: Email already exist
+Log: 2024/04/25 16:55:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:42 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:55:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:55:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:56:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:56:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:56:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:56:24 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:56:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:56:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:56:28 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:56:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:56:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:31 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:31 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:31 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:31 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:58:31 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:31 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:35 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:51 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:58:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:57 user.go:59: Email already exist
+Log: 2024/04/25 16:58:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:57 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:58:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:58:57 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:59:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:59:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:59:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:59:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:59:55 post.go:244: sql: no rows in result set
+Log: 2024/04/25 16:59:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:59:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:00:07 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:00:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:00:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:00:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:00:13 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:00:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:00:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:01 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:02:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:13 user.go:59: Email already exist
+Log: 2024/04/25 17:02:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:13 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:02:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:24 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:02:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:02:59 user.go:59: Name already exist
+Log: 2024/04/25 17:03:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:08 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:03:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:25 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:03:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:03:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:04:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:04:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:04:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:04:37 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:04:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:04:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:05:40 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:33 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:40 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:42 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:09:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:45 user.go:59: Email already exist
+Log: 2024/04/25 17:09:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:45 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:09:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:45 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:09:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:10:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:10:03 user.go:59: Email already exist
+Log: 2024/04/25 17:10:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:10:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:10:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:10:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:10:03 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:10:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:10:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:10:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:50 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:27:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:52 user.go:59: Email already exist
+Log: 2024/04/25 17:27:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:52 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:27:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:27:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:29:11 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:30 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:35 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:30:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:37 user.go:59: Email already exist
+Log: 2024/04/25 17:30:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:37 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:30:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:30:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:08 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:32:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:10 user.go:59: Email already exist
+Log: 2024/04/25 17:32:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:10 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:32:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:52 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:32:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:32:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:39 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:33:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:40 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:43 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:33:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:51 user.go:59: Email already exist
+Log: 2024/04/25 17:33:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:51 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:33:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:51 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:33:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:02 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:34:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:50 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:34:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:52 user.go:59: Email already exist
+Log: 2024/04/25 17:34:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:52 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:34:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:34:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:35:52 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:35:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:35:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:35:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:35:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:35:58 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:35:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:35:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:36:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:36:00 user.go:59: Email already exist
+Log: 2024/04/25 17:36:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:36:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:36:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:36:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:36:00 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:36:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:36:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:36:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:36:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:01 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:37:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:03 user.go:59: Email already exist
+Log: 2024/04/25 17:37:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:03 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:37:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:15 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:37:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:16 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:53 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:37:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:37:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:18 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:18 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:18 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:18 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:39:18 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:18 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:22 user.go:59: Email already exist
+Log: 2024/04/25 17:39:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:22 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:39:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:39:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:46 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:40:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:48 user.go:59: Email already exist
+Log: 2024/04/25 17:40:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:48 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:40:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:40:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:42:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:01 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:43:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:03 user.go:59: Email already exist
+Log: 2024/04/25 17:43:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:03 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:43:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:43:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:44:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:44:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:44:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:44:01 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:44:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:44:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:44:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:45:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:47:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:47:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:47:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:47:38 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:47:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:47:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:47:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:01 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:48:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:31 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:47 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:48:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:48:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:49:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:49:30 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:50:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:51:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:51:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:51:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:51:48 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:51:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:51:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:49 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:54 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:57:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:56 user.go:59: Email already exist
+Log: 2024/04/25 17:57:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:56 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:57:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:57:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:30 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:32 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:58:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:32 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:35 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:35 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:38 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:58:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:38 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:43 user.go:59: Email already exist
+Log: 2024/04/25 17:58:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:43 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:58:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:58:44 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:01 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:03 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:59:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:03 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:05 user.go:59: Email already exist
+Log: 2024/04/25 17:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:05 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:47 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:59:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:50 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:59:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:53 user.go:59: Email already exist
+Log: 2024/04/25 17:59:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:53 post.go:244: sql: no rows in result set
+Log: 2024/04/25 17:59:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:53 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 17:59:54 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:00:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:55 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:01:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:55 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:58 user.go:59: Email already exist
+Log: 2024/04/25 18:01:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:58 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:01:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:58 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:01:59 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:04:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:04:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:04:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:04:43 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:04:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:04:43 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:06 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:05:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:06 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:05:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:12 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:05:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:12 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:05:14 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:18 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:27 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:05:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:06:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:06:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:06:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:06:34 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:06:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:06:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:06:34 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:06:34 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:07:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:05 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:07:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:05 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:07:11 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:22 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:07:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:22 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:07:22 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:08:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:12 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:17 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:18 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:19 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:08:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:19 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:19 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:08:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:23 user.go:59: Email already exist
+Log: 2024/04/25 18:08:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:23 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:08:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:23 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:08:24 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:46 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:47 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:08:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:47 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:08:47 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:08:50 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:04 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:09:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:04 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:09:06 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:10 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:09:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:10 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:10 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:09:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:13 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:09:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:13 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:13 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:09:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:21 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:21 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:21 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:21 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:09:21 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:21 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:21 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:09:21 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:10:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:09 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:10:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:09 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:09 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:10:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:23 user.go:59: Email already exist
+Log: 2024/04/25 18:10:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:23 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:10:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:23 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:23 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:10:26 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:41 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:10:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:41 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 18:10:41 post.go:244: sql: no rows in result set
+Log: 2024/04/25 18:14:28 server.go:28: http: Server closed
