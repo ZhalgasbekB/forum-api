@@ -8,7 +8,7 @@ type IAdminRepository interface {
 	DeleteUser(int) error
 	UpdateUserNewDate(*model.User) error
 	CreateReportRepository(*model.ReportCreateDTO) error
-	ReportsModerator() ([]model.Report, error)
+	ReportsByStatus() ([]model.Report, error)
 	UpdateReport(*model.ReportResponseDTO) error
 }
 
@@ -53,7 +53,7 @@ func (as *AdminService) CreateReportService(r *model.ReportCreateDTO) error {
 }
 
 func (as *AdminService) ReportsModeratorService() ([]model.Report, error) {
-	return as.iAdminRepository.ReportsModerator()
+	return as.iAdminRepository.ReportsByStatus()
 }
 
 func (as *AdminService) UpdateReportService(update *model.ReportResponseDTO) error {

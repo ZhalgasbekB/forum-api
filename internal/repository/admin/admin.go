@@ -68,6 +68,7 @@ const (
 	reportUpdateQuery = `UPDATE reports SET  status = $1, admin_response = $2, updated_at = $3 WHERE report_id = $4`
 	reportDeleteQuery = `DELETE FROM reports WHERE report_id = $1`
 	reportss          = `SELECT * FROM reports`
+	reportss1         = `SELECT * FROM reports WHERE status = FALSE`
 )
 
 func (a *AdminRepository) CreateReportRepository(report *model.ReportCreateDTO) error {
@@ -92,9 +93,9 @@ func (a *AdminRepository) UpdateReport(update *model.ReportResponseDTO) error {
 	return nil
 }
 
-func (a *AdminRepository) ReportsModerator() ([]model.Report, error) {
+func (a *AdminRepository) ReportsByStatus() ([]model.Report, error) {
 	reports := []model.Report{}
-	rows, err := a.DB.Query(reportss)
+	rows, err := a.DB.Query(reportss1)
 	if err != nil {
 		return nil, err
 	}
@@ -107,5 +108,3 @@ func (a *AdminRepository) ReportsModerator() ([]model.Report, error) {
 	}
 	return reports, nil
 }
-
-func (a *AdminRepository) ReportsByStatus() {}

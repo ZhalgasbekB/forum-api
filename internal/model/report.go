@@ -29,6 +29,6 @@ type (
 	ReportResponseDTO struct {
 		ReportID      int    `json:"report_id"`
 		AdminResponse string `json:"response"`
-		Status        string `json:"status"`
+		Status        bool   `json:"status"`
 	}
 )
