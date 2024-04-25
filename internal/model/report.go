@@ -8,7 +8,6 @@ type Report struct {
 	CommentID     int       `json:"comment_id"`
 	UserID        int       `json:"user_id"`
 	ModeratorID   int       `json:"moderator_id"`
-	AdminID       int       `json:"admin_id"`
 	Status        string    `json:"status"`
 	CategoryIssue string    `json:"category_issue"`
 	Reason        string    `json:"reason"`
