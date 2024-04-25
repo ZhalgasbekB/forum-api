@@ -1,282 +1,39 @@
-Log: 2024/04/24 18:01:02 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:01:02 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:01:02 post.go:244: no tables specified
-Log: 2024/04/24 18:01:09 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:01:09 user.go:59: Email already exist
-Log: 2024/04/24 18:01:09 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:01:09 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:01:09 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:01:09 post.go:244: no tables specified
-Log: 2024/04/24 18:01:16 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:02:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:02:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:02:07 post.go:244: no tables specified
-Log: 2024/04/24 18:02:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:02:07 post.go:244: no tables specified
-Log: 2024/04/24 18:02:21 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:02:21 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:02:21 post.go:244: no tables specified
-Log: 2024/04/24 18:02:21 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:02:21 post.go:244: no tables specified
-Log: 2024/04/24 18:02:23 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:03:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:03:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:04:34 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:04:34 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:04:34 post.go:244: no tables specified
-Log: 2024/04/24 18:04:34 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:04:34 post.go:244: no tables specified
-Log: 2024/04/24 18:05:30 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:05:30 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:05:30 post.go:244: no tables specified
-Log: 2024/04/24 18:05:30 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:05:30 post.go:244: no tables specified
-Log: 2024/04/24 18:05:30 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:05:30 post.go:244: no tables specified
-Log: 2024/04/24 18:06:50 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:06:50 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:06:50 post.go:244: no tables specified
-Log: 2024/04/24 18:06:50 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:06:50 post.go:244: no tables specified
-Log: 2024/04/24 18:06:50 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:06:50 post.go:244: no tables specified
-Log: 2024/04/24 18:06:56 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:07:22 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:07:22 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:07:22 post.go:244: no tables specified
-Log: 2024/04/24 18:07:22 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:07:22 post.go:244: no tables specified
-Log: 2024/04/24 18:07:22 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:07:22 post.go:244: no tables specified
-Log: 2024/04/24 18:07:22 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:07:22 post.go:244: no tables specified
-Log: 2024/04/24 18:13:08 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:18 post.go:244: no tables specified
-Log: 2024/04/24 18:13:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:18 post.go:244: no tables specified
-Log: 2024/04/24 18:13:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:18 post.go:244: no tables specified
-Log: 2024/04/24 18:13:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:18 post.go:244: no tables specified
-Log: 2024/04/24 18:13:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:18 post.go:244: no tables specified
-Log: 2024/04/24 18:13:50 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:51 user.go:59: Email already exist
-Log: 2024/04/24 18:13:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:51 post.go:244: no tables specified
-Log: 2024/04/24 18:13:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:51 post.go:244: no tables specified
-Log: 2024/04/24 18:13:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:51 post.go:244: no tables specified
-Log: 2024/04/24 18:13:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:51 post.go:244: no tables specified
-Log: 2024/04/24 18:13:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:13:51 post.go:244: no tables specified
-Log: 2024/04/24 18:14:01 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:01 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:01 post.go:244: no tables specified
-Log: 2024/04/24 18:14:01 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:01 post.go:244: no tables specified
-Log: 2024/04/24 18:14:01 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:01 post.go:244: no tables specified
-Log: 2024/04/24 18:14:01 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:01 post.go:244: no tables specified
-Log: 2024/04/24 18:14:01 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:01 post.go:244: no tables specified
-Log: 2024/04/24 18:14:01 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:01 post.go:244: no tables specified
-Log: 2024/04/24 18:14:35 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:43 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:43 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:43 post.go:244: no tables specified
-Log: 2024/04/24 18:14:43 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:43 post.go:244: no tables specified
-Log: 2024/04/24 18:14:43 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:43 post.go:244: no tables specified
-Log: 2024/04/24 18:14:43 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:43 post.go:244: no tables specified
-Log: 2024/04/24 18:14:43 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:43 post.go:244: no tables specified
-Log: 2024/04/24 18:14:43 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:43 post.go:244: no tables specified
-Log: 2024/04/24 18:14:43 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:14:43 post.go:244: no tables specified
-Log: 2024/04/24 18:17:08 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 user.go:59: Email already exist
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 post.go:244: no tables specified
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 post.go:244: no tables specified
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 post.go:244: no tables specified
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 post.go:244: no tables specified
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 post.go:244: no tables specified
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 post.go:244: no tables specified
-Log: 2024/04/24 18:17:12 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:12 post.go:244: no tables specified
-Log: 2024/04/24 18:17:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:18 post.go:244: no tables specified
-Log: 2024/04/24 18:17:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:18 post.go:244: no tables specified
-Log: 2024/04/24 18:17:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:18 post.go:244: no tables specified
-Log: 2024/04/24 18:17:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:18 post.go:244: no tables specified
-Log: 2024/04/24 18:17:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:18 post.go:244: no tables specified
-Log: 2024/04/24 18:17:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:18 post.go:244: no tables specified
-Log: 2024/04/24 18:17:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:18 post.go:244: no tables specified
-Log: 2024/04/24 18:17:18 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:17:18 post.go:244: no tables specified
-Log: 2024/04/24 18:17:58 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 post.go:244: no tables specified
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 post.go:244: no tables specified
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 post.go:244: no tables specified
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 post.go:244: no tables specified
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 post.go:244: no tables specified
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 post.go:244: no tables specified
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 post.go:244: no tables specified
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 post.go:244: no tables specified
-Log: 2024/04/24 18:18:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:07 post.go:244: no tables specified
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 user.go:59: Email already exist
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 post.go:244: no tables specified
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 post.go:244: no tables specified
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 post.go:244: no tables specified
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 post.go:244: no tables specified
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 post.go:244: no tables specified
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 post.go:244: no tables specified
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 post.go:244: no tables specified
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 post.go:244: no tables specified
-Log: 2024/04/24 18:18:15 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:15 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:24 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:24 post.go:244: no tables specified
-Log: 2024/04/24 18:18:47 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:54 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:54 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 user.go:59: Email already exist
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:18:59 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:18:59 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:19:07 midellware.go:17: http: named cookie not present
-Log: 2024/04/24 18:19:07 post.go:244: no tables specified
-Log: 2024/04/24 18:20:04 server.go:28: http: Server closed
+Log: 2024/04/25 13:54:37 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:54:40 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:54:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:54:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:54:42 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:55:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:55:08 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:55:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:55:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:55:25 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:55:25 post.go:245: sql: no rows in result set
+Log: 2024/04/25 13:56:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:56:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:56:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:56:15 post.go:245: sql: no rows in result set
+Log: 2024/04/25 13:56:15 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:56:56 post.go:245: sql: no rows in result set
+Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:56:56 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:00 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:02 post.go:245: sql: no rows in result set
+Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:02 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:04 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:05 user.go:59: Email already exist
+Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:05 post.go:245: sql: no rows in result set
+Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 13:59:05 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 14:00:50 server.go:28: http: Server closed
