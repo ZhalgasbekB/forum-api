@@ -66,6 +66,8 @@ const (
 	reportCreateQuery = `INSERT INTO reports (post_id, comment_id, user_id, moderator, category_issue, reason) VALUES ($1, $2, $3, $4, $5, $6)`
 	reportUpdateQuery = `UPDATE reports SET admin = $1`
 	reportDeleteQuery = `DELETE FROM reports WHERE report_id = $1`
+
+	reportsGet = `SELECT * FROM reports`
 )
 
 func (a *AdminRepository) CreateReportRepository(report *model.ReportCreateDTO) error {
@@ -86,8 +88,19 @@ func (a *AdminRepository) DeleteReport(id int) error {
 	return nil
 }
 
-func (a *AdminRepository) Report() error {
-	return nil
-}
+func (a *AdminRepository) ReportsModerator() ([]model.Report, error) {
+	reports := []model.Report{}
+	rows, err := a.DB.Query(reportsGet)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		report := &model.Report{}
+		if err := rows.Scan(report.ID, report.PostID, report.CommentID, report.UserID, report.ModeratorID, report.AdminID, report.Status, report.CategoryIssue, report.Reason, report.AdminResponse, report.CreateAt, report.UpdateAt); err != nil {
+			return nil, err
+		}
+		reports = append(reports, *report)
+	}
 
-// more code
+	return reports, nil
+} 
