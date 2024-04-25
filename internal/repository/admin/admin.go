@@ -2,6 +2,7 @@ package admin
 
 import (
 	"database/sql"
+	"time"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -77,10 +78,6 @@ func (a *AdminRepository) CreateReportRepository(report *model.ReportCreateDTO) 
 	return nil
 }
 
-func (a *AdminRepository) UpdateReport() error {
-	return nil
-}
-
 func (a *AdminRepository) DeleteReport(id int) error {
 	if _, err := a.DB.Exec(reportDeleteQuery, id); err != nil {
 		return err
@@ -103,4 +100,13 @@ func (a *AdminRepository) ReportsModerator() ([]model.Report, error) {
 	}
 
 	return reports, nil
-} 
+}
+
+func (a *AdminRepository) UpdateReport(update model.ReportResponseDTO) error {
+	updatedTime := time.Now()
+	/// ???? SOME TO CHANGE IN THIS CODE ??? 
+	if _, err := a.DB.Exec(reportUpdateQuery, update.AdminID, update.AdminResponse, update.Status, updatedTime); err != nil {
+		return err
+	}
+	return nil
+}

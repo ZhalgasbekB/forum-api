@@ -120,3 +120,19 @@ func (h *Handler) ModeratorReport(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 }
+
+func (h *Handler) AdminReports(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	reports, err := h.Services.Admin.ReportsModeratorService()
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	hh.WriteJSON(w, http.StatusOK, reports)
+}

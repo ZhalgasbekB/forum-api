@@ -26,7 +26,11 @@ type (
 		CategoryIssue string `json:"category_issue"`
 		Reason        string `json:"reason"`
 	}
-	ReportDTO1 struct{}
+	ReportResponseDTO struct {
+		AdminID       int    `json:"user_id"`
+		AdminResponse string `json:"response"`
+		Status        string `json:"status"`
+	}
 	ReportDTO2 struct{}
 	ReportDTO3 struct{}
 	ReportDTO4 struct{}
