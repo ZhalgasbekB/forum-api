@@ -67,8 +67,7 @@ const (
 	reportCreateQuery = `INSERT INTO reports (post_id, comment_id, user_id, moderator, category_issue, reason) VALUES ($1, $2, $3, $4, $5, $6)`
 	reportUpdateQuery = `UPDATE reports SET  status = $1, admin_response = $2, updated_at = $3 WHERE report_id = $4`
 	reportDeleteQuery = `DELETE FROM reports WHERE report_id = $1`
-
-	reportsGet = `SELECT * FROM reports`
+	reportss          = `SELECT * FROM reports`
 )
 
 func (a *AdminRepository) CreateReportRepository(report *model.ReportCreateDTO) error {
@@ -85,9 +84,17 @@ func (a *AdminRepository) DeleteReport(id int) error {
 	return nil
 }
 
+func (a *AdminRepository) UpdateReport(update *model.ReportResponseDTO) error {
+	updatedTime := time.Now()
+	if _, err := a.DB.Exec(reportUpdateQuery, update.Status, update.AdminResponse, updatedTime, update.ReportID); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (a *AdminRepository) ReportsModerator() ([]model.Report, error) {
 	reports := []model.Report{}
-	rows, err := a.DB.Query(reportsGet)
+	rows, err := a.DB.Query(reportss)
 	if err != nil {
 		return nil, err
 	}
@@ -101,10 +108,4 @@ func (a *AdminRepository) ReportsModerator() ([]model.Report, error) {
 	return reports, nil
 }
 
-func (a *AdminRepository) UpdateReport(update *model.ReportResponseDTO) error {
-	updatedTime := time.Now()
-	if _, err := a.DB.Exec(reportUpdateQuery, update.Status, update.AdminResponse, updatedTime, update.ReportID); err != nil {
-		return err
-	}
-	return nil
-}
+func (a *AdminRepository) ReportsByStatus() {}

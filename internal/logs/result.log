@@ -1,4 +1,2 @@
-Log: 2024/04/25 16:30:45 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 16:30:45 admin.go:153: CHECK constraint failed: status IN ('open', 'closed', 'ignored')
-Log: 2024/04/25 16:30:51 midellware.go:17: http: named cookie not present
-Log: 2024/04/25 16:32:56 server.go:32: http: Server closed
+Log: 2024/04/25 16:40:39 midellware.go:17: http: named cookie not present
+Log: 2024/04/25 16:40:52 server.go:32: http: Server closed
