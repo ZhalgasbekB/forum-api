@@ -1,4 +1,3 @@
-
 package admin
 
 import "gitea.com/lzhuk/forum/internal/model"
@@ -8,6 +7,7 @@ type IAdminRepository interface {
 	UpdateUser(*model.User) error
 	DeleteUser(int) error
 	UpdateUserNewDate(*model.User) error
+	CreateReportRepository(*model.ReportCreateDTO) error
 }
 
 type IAdminService interface {
@@ -15,6 +15,7 @@ type IAdminService interface {
 	UpdateUserService(*model.User) error
 	DeleteUserService(int) error
 	UpdateUserNewDateService(*model.User) error
+	CreateReportService(*model.ReportCreateDTO) error
 }
 
 type AdminService struct {
@@ -41,4 +42,8 @@ func (as *AdminService) DeleteUserService(id int) error {
 
 func (as *AdminService) UpdateUserNewDateService(user *model.User) error {
 	return as.iAdminRepository.UpdateUserNewDate(user)
+}
+
+func (as *AdminService) CreateReportService(r *model.ReportCreateDTO) error {
+	return as.iAdminRepository.CreateReportRepository(r)
 }

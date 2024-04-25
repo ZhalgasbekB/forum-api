@@ -1,11 +1,13 @@
 package server
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/convert"
-	"gitea.com/lzhuk/forum/internal/helpers/json"
+	hh "gitea.com/lzhuk/forum/internal/helpers/json"
+	"gitea.com/lzhuk/forum/internal/model"
 
 	"gitea.com/lzhuk/forum/internal/errors"
 )
@@ -31,7 +33,7 @@ func (h *Handler) Admin(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	json.WriteJSON(w, http.StatusOK, users)
+	hh.WriteJSON(w, http.StatusOK, users)
 }
 
 func (h *Handler) AdminChangeRole(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +54,7 @@ func (h *Handler) AdminChangeRole(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	json.WriteJSON(w, http.StatusOK, uRole.Role)
+	hh.WriteJSON(w, http.StatusOK, uRole.Role)
 }
 
 func (h *Handler) AdminDeleteUser(w http.ResponseWriter, r *http.Request) {
@@ -72,7 +74,7 @@ func (h *Handler) AdminDeleteUser(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	json.WriteJSON(w, http.StatusOK, id)
+	hh.WriteJSON(w, http.StatusOK, id)
 }
 
 func (h *Handler) AdminUpdateAll(w http.ResponseWriter, r *http.Request) {
@@ -89,6 +91,28 @@ func (h *Handler) AdminUpdateAll(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := h.Services.Admin.UpdateUserNewDateService(user); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *Handler) ModeratorReport(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	report := &model.ReportCreateDTO{}
+	if err := json.NewDecoder(r.Body).Decode(report); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if err := h.Services.Admin.CreateReportService(report); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return

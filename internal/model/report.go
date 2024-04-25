@@ -17,12 +17,12 @@ type Report struct {
 
 type (
 	ReportCreateDTO struct {
-		PostID      int    `json:"post_id"`
-		CommentID   int    `json:"comment_id"`
-		ModeratorID int    `json:"moderator_id"`
-		AdminID     int    `json:"admin_id"`
-		Status      string `json:"status"`
-		Reason      string `json:"reason"`
+		PostID        int    `json:"post_id"`
+		CommentID     int    `json:"comment_id"`
+		UserID        int    `json:"user_id"`
+		ModeratorID   int    `json:"moderator_id"`
+		CategoryIssue string `json:"category_issue"`
+		Reason        string `json:"reason"`
 	}
 	ReportDTO1 struct{}
 	ReportDTO2 struct{}
