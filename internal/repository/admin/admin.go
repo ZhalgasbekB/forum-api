@@ -12,10 +12,9 @@ type AdminRepository struct {
 
 const (
 	userQuery       = `SELECT * FROM users WHERE role != $1 ORDER BY CASE WHEN role = $2 THEN 1 WHEN role = $3 THEN 2 ELSE 3 END;`
+	updateAllQuery  = `UPDATE users SET name = $1, email = $2 WHERE id = $3`
 	updateUserQuery = `UPDATE users SET role = $1 WHERE id = $2`
 	deleteUserQuery = `DELETE FROM users WHERE id = $1`
-
-	updateAllQuery = `UPDATE users SET name = $1, email = $2 WHERE id = $3`
 )
 
 func InitAdminRepository(db *sql.DB) *AdminRepository {
@@ -62,3 +61,21 @@ func (a *AdminRepository) UpdateUserNewDate(user *model.User) error {
 }
 
 /// 2. MODERATOR ISSUES (???)
+
+const (
+	reportCreateQuery = `INSERT INTO reports (post_id, comment_id, moderator, reason) VALUES ($1, $2, $3, $4)`
+	reportUpdateQuery = `UPDATE reports SET admin = $1`
+	reportDeleteQuery = `DELETE FROM reports WHERE report_id = $1`
+)
+
+func (a *AdminRepository) CreateReport() {
+}
+
+func (a *AdminRepository) UpdateReport() {
+}
+
+func (a *AdminRepository) DeleteReport() {
+}
+
+func (a *AdminRepository) Report() {
+}

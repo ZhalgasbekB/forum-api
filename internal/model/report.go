@@ -4,10 +4,10 @@ import "time"
 
 type Report struct {
 	ID            int       `json:"id"`
-	PostId        int       `json:"post_id"`
-	CommentId     int       `json:"comment_id"`
-	ReportedBy    int       `json:"moderator_id"`
-	AssignedTo    int       `json:"admin_id"`
+	PostID        int       `json:"post_id"`
+	CommentID     int       `json:"comment_id"`
+	ModeratorID   int       `json:"moderator_id"`
+	AdminID       int       `json:"admin_id"`
 	Status        string    `json:"status"`
 	Reason        string    `json:"reason"`
 	AdminResponse string    `json:"admin_response"`
@@ -16,7 +16,14 @@ type Report struct {
 }
 
 type (
-	ReportDTO  struct{}
+	ReportCreateDTO struct {
+		PostID      int    `json:"post_id"`
+		CommentID   int    `json:"comment_id"`
+		ModeratorID int    `json:"moderator_id"`
+		AdminID     int    `json:"admin_id"`
+		Status      string `json:"status"`
+		Reason      string `json:"reason"`
+	}
 	ReportDTO1 struct{}
 	ReportDTO2 struct{}
 	ReportDTO3 struct{}
