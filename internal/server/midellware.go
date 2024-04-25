@@ -8,6 +8,7 @@ import (
 
 	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/helpers/cookies"
+	"gitea.com/lzhuk/forum/internal/helpers/roles"
 )
 
 func (h *Handler) IsAuthenticated(next http.Handler) http.Handler {
@@ -89,4 +90,37 @@ func RateLimitMiddleware(limit int, interval time.Duration) func(http.Handler) h
 			}
 		})
 	}
+}
+
+func (h *Handler) AdminVerification(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		user := contextUser(r)
+		if user == nil {
+			log.Println("No Authenticated User: Please Authenticate")
+			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated User: Please Authenticate")
+			return
+		}
+		if user.Role != roles.ADMIN {
+			log.Println("No Authenticated Admin: You aren't admin")
+			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated Admin: You aren't admin")
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
+func (h *Handler) ModeratorVerification(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		user := contextUser(r)
+		if user == nil {
+			log.Println("No Authenticated User: Please Authenticate")
+			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated User: Please Authenticate")
+			return
+		}
+		if user.Role != roles.MODERATOR {
+			log.Println("No Authenticated Moderator: You aren't moderator")
+			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated Moderator: You aren't moderator")
+		}
+		next.ServeHTTP(w, r)
+	})
 }
