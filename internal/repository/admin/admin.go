@@ -63,19 +63,26 @@ func (a *AdminRepository) UpdateUserNewDate(user *model.User) error {
 /// 2. MODERATOR ISSUES (???)
 
 const (
-	reportCreateQuery = `INSERT INTO reports (post_id, comment_id, moderator, reason) VALUES ($1, $2, $3, $4)`
+	reportCreateQuery = `INSERT INTO reports (post_id, comment_id, user_id, moderator, category_issue, reason) VALUES ($1, $2, $3, $4, $5)`
 	reportUpdateQuery = `UPDATE reports SET admin = $1`
 	reportDeleteQuery = `DELETE FROM reports WHERE report_id = $1`
 )
 
-func (a *AdminRepository) CreateReport() {
+func (a *AdminRepository) CreateReport(report model.ReportCreateDTO) error {
+	if _, err := a.DB.Exec(reportCreateQuery); err != nil {
+		return err
+	}
+	return nil
 }
 
-func (a *AdminRepository) UpdateReport() {
+func (a *AdminRepository) UpdateReport() error {
+	return nil
 }
 
-func (a *AdminRepository) DeleteReport() {
+func (a *AdminRepository) DeleteReport() error {
+	return nil
 }
 
-func (a *AdminRepository) Report() {
+func (a *AdminRepository) Report() error {
+	return nil
 }

@@ -1,8 +1,8 @@
 CREATE TABLE reports (
     report_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    post_id INTEGER,
-    comment_id INTEGER,
-    user_id INTEGER,
+    post_id INTEGER NOT NULL DEFAULT -1,
+    comment_id INTEGER NOT NULL DEFAULT -1,
+    user_id INTEGER NOT NULL DEFAULT -1,
     moderator INTEGER NOT NULL,
     admin INTEGER,
     status TEXT NOT NULL DEFAULT 'open' CHECK (status IN ('open', 'closed', 'ignored')),
@@ -13,6 +13,7 @@ CREATE TABLE reports (
     updated_at TIMESTAMP DEFAULT (datetime('now')),
     FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE SET NULL,
     FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE SET NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
     FOREIGN KEY (moderator) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (admin) REFERENCES users(id) ON DELETE SET NULL
 );
