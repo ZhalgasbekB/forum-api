@@ -143,5 +143,16 @@ func (h *Handler) UpdateReport(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	
+	update := &model.ReportResponseDTO{}
+	if err := json.NewDecoder(r.Body).Decode(update); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	if err := h.Services.Admin.UpdateReportService(update); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	w.WriteHeader(http.StatusOK)
 }

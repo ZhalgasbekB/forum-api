@@ -25,7 +25,9 @@ type (
 		CategoryIssue string `json:"category_issue"`
 		Reason        string `json:"reason"`
 	}
+
 	ReportResponseDTO struct {
+		ReportID      int    `json:"report_id"`
 		AdminResponse string `json:"response"`
 		Status        string `json:"status"`
 	}
