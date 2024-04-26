@@ -24,8 +24,8 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/admin/response-moderator", h.AdminVerification(http.HandlerFunc(h.UpdateReport)))
 
 	mux.Handle("/admin/user-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteUser)))
-	// mux.Handle("/admin/comment-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteComment)))
-	// mux.Handle("/admin/post-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeletePost)))
+	mux.Handle("/admin/post-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeletePost)))
+	mux.Handle("/admin/comment-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteComment)))
 
 	// mux.Handle("/admin/create-category", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
 
