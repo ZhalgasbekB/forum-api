@@ -48,6 +48,10 @@ func (h *Handler) AdminChangeRole(w http.ResponseWriter, r *http.Request) {
 	hh.WriteJSON(w, http.StatusOK, uRole.Role)
 }
 
+func (h *Handler) AdminCreateCategory(w http.ResponseWriter, r *http.Request) {
+	// post 
+}
+
 func (h *Handler) AdminDeleteUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)

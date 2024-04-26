@@ -32,6 +32,8 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
 	// mux.Handle("/user/up-role", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
 
+	/// UP ROLE, CATEGORY, AND ?????
+
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
 	mux.Handle("/d3/user-likes", h.RequiredAuthentication(http.HandlerFunc(h.LikedPostsUser))) // 200 (GET METHOD)
 	mux.Handle("/d3/user-posts", h.RequiredAuthentication(http.HandlerFunc(h.PostsUser)))      // 200 (GET METHOD) user posts
