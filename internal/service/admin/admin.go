@@ -16,8 +16,8 @@ type IAdminRepository interface {
 	ReportsByStatus() ([]model.Report, error)
 	UpdateReport(*model.ReportResponseDTO) error
 
-	// UserWantsRepository(int) error
-	// UserWants() ([]model.WantsDTO, error)
+	UserWantsRepository(model.WantsDTO) error
+	UserWants() ([]model.WantsDTO, error)
 }
 
 type IAdminService interface {
@@ -34,8 +34,8 @@ type IAdminService interface {
 	ReportsModeratorService() ([]model.Report, error)
 	UpdateReportService(*model.ReportResponseDTO) error
 
-	// UserWantsService(int) error
-	// UserWantsService1() ([]model.WantsDTO, error)
+	UserWantsService(model.WantsDTO) error
+	UsersWantsService() ([]model.WantsDTO, error)
 }
 
 type AdminService struct {
@@ -84,10 +84,10 @@ func (as *AdminService) CreateCategoryService(category string) error {
 	return as.iAdminRepository.CreateCategory(category)
 }
 
-// func (as *AdminService) UserWantsService(user_id int) error {
-// 	return as.iAdminRepository.UserWantsRepository(user_id)
-// }
+func (as *AdminService) UserWantsService(m model.WantsDTO) error {
+	return as.iAdminRepository.UserWantsRepository(m)
+}
 
-// func (as *AdminService) UserWantsService1() ([]model.WantsDTO, error) {
-// 	return as.iAdminRepository.UserWants()
-// }
+func (as *AdminService) UsersWantsService1() ([]model.WantsDTO, error) {
+	return as.iAdminRepository.UserWants()
+}
