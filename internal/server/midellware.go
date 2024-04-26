@@ -98,12 +98,12 @@ func (h *Handler) AdminVerification(next http.Handler) http.Handler {
 		user := contextUser(r)
 		if user == nil {
 			log.Println("No Authenticated User: Please Authenticate")
-			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated User: Please Authenticate")
+			errors.ErrorSend(w, http.StatusBadRequest, "No Authenticated User: Please Authenticate")
 			return
 		}
 		if user.Role != roles.ADMIN {
 			log.Println("No Authenticated Admin: You aren't admin")
-			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated Admin: You aren't admin")
+			errors.ErrorSend(w, http.StatusBadRequest, "No Authenticated Admin: You Aren't Admin")
 			return
 		}
 
@@ -116,12 +116,12 @@ func (h *Handler) ModeratorVerification(next http.Handler) http.Handler {
 		user := contextUser(r)
 		if user == nil {
 			log.Println("No Authenticated User: Please Authenticate")
-			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated User: Please Authenticate")
+			errors.ErrorSend(w, http.StatusBadRequest, "No Authenticated User: Please Authenticate")
 			return
 		}
 		if user.Role != roles.MODERATOR {
 			log.Println("No Authenticated Moderator: You aren't moderator")
-			errors.ErrorSend(w, http.StatusSeeOther, "No Authenticated Moderator: You aren't moderator")
+			errors.ErrorSend(w, http.StatusBadRequest, "No Authenticated Moderator: You Aren't Moderator")
 			return
 
 		}

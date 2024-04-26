@@ -12,15 +12,6 @@ import (
 	"gitea.com/lzhuk/forum/internal/errors"
 )
 
-// FOR CHECKING  ADMIN
-// user := contextUser(r)
-// if user.Role != roles.ADMIN {
-// 	log.Println("Not Admin")
-// 	errors.ErrorSend(w, http.StatusInternalServerError, "Because You Are Not Admin")
-// 	return
-// }
-//
-
 func (h *Handler) Admin(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -74,30 +65,48 @@ func (h *Handler) AdminDeleteUser(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	hh.WriteJSON(w, http.StatusOK, id)
+	w.WriteHeader(http.StatusOK)
 }
 
-func (h *Handler) AdminUpdateAll(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) AdminDeletePost(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
-
-	user, err := convert.UpdateUserAdmin(r)
+	id, err := convert.DeletePost(r)
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-
-	if err := h.Services.Admin.UpdateUserNewDateService(user); err != nil {
+	if err := h.Services.Admin.DeletePostService(id); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-
 	w.WriteHeader(http.StatusOK)
 }
+
+func (h *Handler) AdminDeleteComment(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	id, err := convert.DeleteComment(r)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	if err := h.Services.Admin.DeleteCommentService(id); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+/// Moderator func (????)
 
 func (h *Handler) ModeratorReport(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {

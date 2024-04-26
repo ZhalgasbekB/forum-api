@@ -33,6 +33,22 @@ func DeleteUser(r *http.Request) (int, error) {
 	return user.UserID, nil
 }
 
+func DeletePost(r *http.Request) (int, error) {
+	post := &model.PostDeleteDTO{}
+	if err := json.NewDecoder(r.Body).Decode(post); err != nil {
+		return -1, err
+	}
+	return post.PostID, nil
+}
+
+func DeleteComment(r *http.Request) (int, error) {
+	comment := &model.CommentDeleteDTO1{}
+	if err := json.NewDecoder(r.Body).Decode(comment); err != nil {
+		return -1, err
+	}
+	return comment.CommenID, nil
+}
+
 func UpdateUserAdmin(r *http.Request) (*model.User, error) {
 	userUpdate := &model.UserUpdateDTO{}
 	if err := json.NewDecoder(r.Body).Decode(userUpdate); err != nil {

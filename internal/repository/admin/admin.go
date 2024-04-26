@@ -12,10 +12,11 @@ type AdminRepository struct {
 }
 
 const (
-	userQuery       = `SELECT * FROM users WHERE role != $1 ORDER BY CASE WHEN role = $2 THEN 1 WHEN role = $3 THEN 2 ELSE 3 END;`
-	updateAllQuery  = `UPDATE users SET name = $1, email = $2 WHERE id = $3`
-	updateUserQuery = `UPDATE users SET role = $1 WHERE id = $2`
-	deleteUserQuery = `DELETE FROM users WHERE id = $1`
+	userQuery          = `SELECT * FROM users WHERE role != $1 ORDER BY CASE WHEN role = $2 THEN 1 WHEN role = $3 THEN 2 ELSE 3 END;`
+	updateUserQuery    = `UPDATE users SET role = $1 WHERE id = $2`
+	deleteUserQuery    = `DELETE FROM users WHERE id = $1`
+	deletePostQuery    = `DELETE FROM posts WHERE id = $1`
+	deleteCommentQuery = `DELETE FROM comments WHERE id = $1`
 )
 
 func InitAdminRepository(db *sql.DB) *AdminRepository {
@@ -54,8 +55,15 @@ func (a *AdminRepository) DeleteUser(user_id int) error {
 	return nil
 }
 
-func (a *AdminRepository) UpdateUserNewDate(user *model.User) error {
-	if _, err := a.DB.Exec(updateAllQuery, user.Name, user.Email, user.ID); err != nil {
+func (a *AdminRepository) DeletePost(post_id int) error {
+	if _, err := a.DB.Exec(deletePostQuery, post_id); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (a *AdminRepository) DeleteComment(comment_id int) error {
+	if _, err := a.DB.Exec(deleteCommentQuery, comment_id); err != nil {
 		return err
 	}
 	return nil
