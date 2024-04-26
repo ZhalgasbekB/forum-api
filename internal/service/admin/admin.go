@@ -76,18 +76,22 @@ func (as *AdminService) ReportsModeratorService() ([]model.Report, error) {
 	return as.iAdminRepository.ReportsByStatus()
 }
 
-func (as *AdminService) UpdateReportService(update *model.ReportResponseDTO) error {
-	return as.iAdminRepository.UpdateReport(update)
-}
-
 func (as *AdminService) CreateCategoryService(category string) error {
 	return as.iAdminRepository.CreateCategory(category)
+}
+
+func (as *AdminService) DeleteCategoryService(category string) error {
+	return as.iAdminRepository.DeleteCategory(category)
+}
+
+func (as *AdminService) UpdateReportService(update *model.ReportResponseDTO) error {
+	return as.iAdminRepository.UpdateReport(update)
 }
 
 func (as *AdminService) UserWantsService(m model.WantsDTO) error {
 	return as.iAdminRepository.UserWantsRepository(m)
 }
 
-func (as *AdminService) UsersWantsService1() ([]model.WantsDTO, error) {
+func (as *AdminService) UsersWantsService() ([]model.WantsDTO, error) {
 	return as.iAdminRepository.UserWants()
 }
