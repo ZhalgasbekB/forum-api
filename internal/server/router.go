@@ -30,8 +30,8 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/admin/create-category", h.ModeratorVerification(http.HandlerFunc(h.AdminCreateCategory))) // POST
 	mux.Handle("/admin/delete-category", h.ModeratorVerification(http.HandlerFunc(h.AdminDeleteCategory))) // DELETE
 
-	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport))) // POST 
-	// mux.Handle("/user/up-role", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
+	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport))) // POST
+	mux.Handle("/user/up-role", h.RequiredAuthentication(http.HandlerFunc(h.UserUpRole)))         // POST
 
 	/// UP ROLE, CATEGORY, AND ?????
 

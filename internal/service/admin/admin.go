@@ -16,7 +16,7 @@ type IAdminRepository interface {
 	ReportsByStatus() ([]model.Report, error)
 	UpdateReport(*model.ReportResponseDTO) error
 
-	UserWantsRepository(model.WantsDTO) error
+	UserWantsRepository(*model.WantsDTO) error
 	UserWants() ([]model.WantsDTO, error)
 }
 
@@ -34,7 +34,7 @@ type IAdminService interface {
 	ReportsModeratorService() ([]model.Report, error)
 	UpdateReportService(*model.ReportResponseDTO) error
 
-	UserWantsService(model.WantsDTO) error
+	UserWantsService(*model.WantsDTO) error
 	UsersWantsService() ([]model.WantsDTO, error)
 }
 
@@ -88,7 +88,7 @@ func (as *AdminService) UpdateReportService(update *model.ReportResponseDTO) err
 	return as.iAdminRepository.UpdateReport(update)
 }
 
-func (as *AdminService) UserWantsService(m model.WantsDTO) error {
+func (as *AdminService) UserWantsService(m *model.WantsDTO) error {
 	return as.iAdminRepository.UserWantsRepository(m)
 }
 

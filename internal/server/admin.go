@@ -45,6 +45,7 @@ func (h *Handler) AdminChangeRole(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+
 	hh.WriteJSON(w, http.StatusOK, uRole.Role)
 }
 
@@ -208,47 +209,41 @@ func (h *Handler) UpdateReport(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// ???
-// func (h *Handler) UserUpRole(w http.ResponseWriter, r *http.Request) {
-// 	if r.Method != http.MethodPost {
-// 		w.WriteHeader(http.StatusMethodNotAllowed)
-// 		return
-// 	}
+// USER UP (???)
+func (h *Handler) UserUpRole(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
 
-// 	userID := &model.WantsDTO{}
-// 	if err := json.NewDecoder(r.Body).Decode(userID); err != nil {
-// 		log.Println(err)
-// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
-// 		return
-// 	}
+	user := &model.WantsDTO{}
+	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-// 	if err := h.Services.Admin.UserWantsService(userID.UserID); err != nil {
-// 		log.Println(err)
-// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
-// 		return
-// 	}
+	if err := h.Services.Admin.UserWantsService(user); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-// 	w.WriteHeader(http.StatusOK)
-// }
+	w.WriteHeader(http.StatusOK)
+}
 
-// func (h *Handler) UserClearWants(w http.ResponseWriter, r *http.Request) {
-// 	if r.Method != http.MethodDelete {
-// 		w.WriteHeader(http.StatusMethodNotAllowed)
-// 		return
-// 	}
+func (h *Handler) UsersWants(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodDelete {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
 
-// 	userID := &model.WantsDTO{}
-// 	if err := json.NewDecoder(r.Body).Decode(userID); err != nil {
-// 		log.Println(err)
-// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
-// 		return
-// 	}
+	users, err := h.Services.Admin.UsersWantsService()
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
 
-// 	if err := h.Services.Admin.UserDeleteService(userID.UserID); err != nil {
-// 		log.Println(err)
-// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
-// 		return
-// 	}
-
-// 	w.WriteHeader(http.StatusOK)
-// }
+	hh.WriteJSON(w, http.StatusOK, users)
+}

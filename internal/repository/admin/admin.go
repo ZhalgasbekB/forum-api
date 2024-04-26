@@ -141,7 +141,7 @@ const (
 	wantsQuery = `SELECT user_id, user_name FROM wants WHERE status = 0` // can change from $1
 )
 
-func (a *AdminRepository) UserWantsRepository(w model.WantsDTO) error {
+func (a *AdminRepository) UserWantsRepository(w *model.WantsDTO) error {
 	if _, err := a.DB.Exec(wantQuery, w.UserID, w.UserName); err != nil {
 		return err
 	}
@@ -163,4 +163,3 @@ func (a *AdminRepository) UserWants() ([]model.WantsDTO, error) {
 	}
 	return wants, err
 }
-
