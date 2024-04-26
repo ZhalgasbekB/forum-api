@@ -30,3 +30,7 @@ type UserUpdateDTO struct {
 type CategoryDTO struct {
 	CategoryName string `json:"category"`
 }
+
+type WantsDTO struct {
+	UserID  int `json:"user_id"`
+}

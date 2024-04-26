@@ -148,7 +148,7 @@ func (h *Handler) AdminDeleteComment(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-/// Moderator func (????)
+/// Moderator func (???)
 
 func (h *Handler) ModeratorReport(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -207,3 +207,48 @@ func (h *Handler) UpdateReport(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 }
+
+// ???
+// func (h *Handler) UserUpRole(w http.ResponseWriter, r *http.Request) {
+// 	if r.Method != http.MethodPost {
+// 		w.WriteHeader(http.StatusMethodNotAllowed)
+// 		return
+// 	}
+
+// 	userID := &model.WantsDTO{}
+// 	if err := json.NewDecoder(r.Body).Decode(userID); err != nil {
+// 		log.Println(err)
+// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+// 		return
+// 	}
+
+// 	if err := h.Services.Admin.UserWantsService(userID.UserID); err != nil {
+// 		log.Println(err)
+// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+// 		return
+// 	}
+
+// 	w.WriteHeader(http.StatusOK)
+// }
+
+// func (h *Handler) UserClearWants(w http.ResponseWriter, r *http.Request) {
+// 	if r.Method != http.MethodDelete {
+// 		w.WriteHeader(http.StatusMethodNotAllowed)
+// 		return
+// 	}
+
+// 	userID := &model.WantsDTO{}
+// 	if err := json.NewDecoder(r.Body).Decode(userID); err != nil {
+// 		log.Println(err)
+// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+// 		return
+// 	}
+
+// 	if err := h.Services.Admin.UserDeleteService(userID.UserID); err != nil {
+// 		log.Println(err)
+// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+// 		return
+// 	}
+
+// 	w.WriteHeader(http.StatusOK)
+// }

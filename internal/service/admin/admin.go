@@ -15,6 +15,9 @@ type IAdminRepository interface {
 	CreateReportRepository(*model.ReportCreateDTO) error
 	ReportsByStatus() ([]model.Report, error)
 	UpdateReport(*model.ReportResponseDTO) error
+
+// 	UserWantsRepository(int) error
+// 	UserDeleteRepository(int) error
 }
 
 type IAdminService interface {
@@ -30,6 +33,9 @@ type IAdminService interface {
 	CreateReportService(*model.ReportCreateDTO) error
 	ReportsModeratorService() ([]model.Report, error)
 	UpdateReportService(*model.ReportResponseDTO) error
+
+	// UserWantsService(int) error
+	// UserDeleteService(int) error
 }
 
 type AdminService struct {
@@ -81,3 +87,11 @@ func (as *AdminService) CreateCategoryService(category string) error {
 func (as *AdminService) DeleteCategoryService(category string) error {
 	return as.iAdminRepository.DeleteCategory(category)
 }
+
+// func (as *AdminService) UserWantsService(user_id int) error {
+// 	return as.iAdminRepository.UserWantsRepository(user_id)
+// }
+
+// func (as *AdminService) UserDeleteService(user_id int) error {
+// 	return as.iAdminRepository.UserWantsRepository(user_id)
+// }

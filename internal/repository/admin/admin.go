@@ -133,3 +133,24 @@ func (a *AdminRepository) ReportsByStatus() ([]model.Report, error) {
 	}
 	return reports, nil
 }
+
+// 3 User up to
+
+// const (
+// 	wantsQuery  = `INSERT INTO wants (user_id) VALUES($1)`
+// 	deleteQuery = `DELETE FROM wants WHERE user_id = $1`
+// )
+
+// func (a *AdminRepository) UserWantsRepository(user_id int) error {
+// 	if _, err := a.DB.Exec(wantsQuery, user_id); err != nil {
+// 		return err
+// 	}
+// 	return nil
+// }
+
+// func (a *AdminRepository) UserDeleteRepository(user_id int) error {
+// 	if _, err := a.DB.Exec(deleteQuery, user_id); err != nil {
+// 		return err
+// 	}
+// 	return nil
+// }
