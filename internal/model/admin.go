@@ -32,5 +32,6 @@ type CategoryDTO struct {
 }
 
 type WantsDTO struct {
-	UserID  int `json:"user_id"`
+	UserID   int    `json:"user_id"`
+	UserName string `json:"user_name"`
 }

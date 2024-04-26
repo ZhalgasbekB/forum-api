@@ -136,21 +136,31 @@ func (a *AdminRepository) ReportsByStatus() ([]model.Report, error) {
 
 // 3 User up to
 
-// const (
-// 	wantsQuery  = `INSERT INTO wants (user_id) VALUES($1)`
-// 	deleteQuery = `DELETE FROM wants WHERE user_id = $1`
-// )
+const (
+	wantQuery  = `INSERT INTO wants (user_id, user_name, status) VALUES($1, $2, $3)`
+	wantsQuery = `SELECT user_id, user_name FROM wants WHERE status = 0` // can change from $1
+)
 
-// func (a *AdminRepository) UserWantsRepository(user_id int) error {
-// 	if _, err := a.DB.Exec(wantsQuery, user_id); err != nil {
-// 		return err
-// 	}
-// 	return nil
-// }
+func (a *AdminRepository) UserWantsRepository(w model.WantsDTO) error {
+	if _, err := a.DB.Exec(wantQuery, w.UserID, w.UserName); err != nil {
+		return err
+	}
+	return nil
+}
 
-// func (a *AdminRepository) UserDeleteRepository(user_id int) error {
-// 	if _, err := a.DB.Exec(deleteQuery, user_id); err != nil {
-// 		return err
-// 	}
-// 	return nil
-// }
+func (a *AdminRepository) UserWants() ([]model.WantsDTO, error) {
+	wants := []model.WantsDTO{}
+	rows, err := a.DB.Query(wantsQuery)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		want := &model.WantsDTO{}
+		if err := rows.Scan(&want.UserID, &want.UserName); err != nil {
+			return nil, err
+		}
+		wants = append(wants, *want)
+	}
+	return wants, err
+}
+
