@@ -26,3 +26,7 @@ type UserUpdateDTO struct {
 	Name   string `json:"name"`
 	Email  string `json:"email"`
 }
+
+type CategoryDTO struct {
+	CategoryName string `json:"category"`
+}

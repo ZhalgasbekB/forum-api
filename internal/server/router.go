@@ -18,8 +18,8 @@ func NewRouter(h *Handler) http.Handler {
 	mux.HandleFunc("/register", h.Register)                                     // 201 (POST METHOD)
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout))) // 200 (POST METHOD)
 
-	mux.Handle("/admin", h.AdminVerification(http.HandlerFunc(h.Admin)))
-	mux.Handle("/admin/reports", h.AdminVerification(http.HandlerFunc(h.AdminReports)))
+	mux.Handle("/admin", h.AdminVerification(http.HandlerFunc(h.Admin)))                // GET
+	mux.Handle("/admin/reports", h.AdminVerification(http.HandlerFunc(h.AdminReports))) // GET
 	mux.Handle("/admin/role-update", h.AdminVerification(http.HandlerFunc(h.AdminChangeRole)))
 	mux.Handle("/admin/response-moderator", h.AdminVerification(http.HandlerFunc(h.UpdateReport)))
 
@@ -27,7 +27,8 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/admin/post-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeletePost)))
 	mux.Handle("/admin/comment-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteComment)))
 
-	// mux.Handle("/admin/create-category", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
+	mux.Handle("/admin/create-category", h.ModeratorVerification(http.HandlerFunc(h.AdminCreateCategory))) // POST
+	mux.Handle("/admin/delete-category", h.ModeratorVerification(http.HandlerFunc(h.AdminDeleteCategory))) // DELETE
 
 	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
 	// mux.Handle("/user/up-role", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))

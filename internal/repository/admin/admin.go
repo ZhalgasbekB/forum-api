@@ -17,6 +17,9 @@ const (
 	deleteUserQuery    = `DELETE FROM users WHERE id = $1`
 	deletePostQuery    = `DELETE FROM posts WHERE id = $1`
 	deleteCommentQuery = `DELETE FROM comments WHERE id = $1`
+
+	categoryCreate = `INSERT INTO categories (category) VALUES ($1)`
+	categoryDelete = `DELETE FROM categories WHERE category = $1 `
 )
 
 func InitAdminRepository(db *sql.DB) *AdminRepository {
@@ -64,6 +67,20 @@ func (a *AdminRepository) DeletePost(post_id int) error {
 
 func (a *AdminRepository) DeleteComment(comment_id int) error {
 	if _, err := a.DB.Exec(deleteCommentQuery, comment_id); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (a *AdminRepository) CreateCategory(category string) error {
+	if _, err := a.DB.Exec(categoryCreate, category); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (a *AdminRepository) DeleteCategory(category string) error {
+	if _, err := a.DB.Exec(categoryDelete, category); err != nil {
 		return err
 	}
 	return nil

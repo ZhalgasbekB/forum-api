@@ -9,6 +9,9 @@ type IAdminRepository interface {
 	DeletePost(int) error
 	DeleteComment(int) error
 
+	CreateCategory(string) error
+	DeleteCategory(string) error
+
 	CreateReportRepository(*model.ReportCreateDTO) error
 	ReportsByStatus() ([]model.Report, error)
 	UpdateReport(*model.ReportResponseDTO) error
@@ -20,6 +23,9 @@ type IAdminService interface {
 	DeleteUserService(int) error
 	DeletePostService(int) error
 	DeleteCommentService(int) error
+
+	CreateCategoryService(string) error
+	DeleteCategoryService(string) error
 
 	CreateReportService(*model.ReportCreateDTO) error
 	ReportsModeratorService() ([]model.Report, error)
@@ -66,4 +72,12 @@ func (as *AdminService) ReportsModeratorService() ([]model.Report, error) {
 
 func (as *AdminService) UpdateReportService(update *model.ReportResponseDTO) error {
 	return as.iAdminRepository.UpdateReport(update)
+}
+
+func (as *AdminService) CreateCategoryService(category string) error {
+	return as.iAdminRepository.CreateCategory(category)
+}
+
+func (as *AdminService) DeleteCategoryService(category string) error {
+	return as.iAdminRepository.DeleteCategory(category)
 }
