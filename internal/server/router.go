@@ -15,7 +15,6 @@ func NewRouter(h *Handler) http.Handler {
 
 	mux.HandleFunc("/d3", h.Home)           // 200 (GET METHOD) get all posts
 	mux.HandleFunc("/login", h.Login)       // 200 (POST METHOD)
-	mux.HandleFunc("/auth", h.Authenticate) // 200 (POST BY ANOTHER SERVICE)
 	mux.HandleFunc("/register", h.Register) // 201 (POST METHOD)
 
 	mux.Handle("/admin", h.AdminVerification(http.HandlerFunc(h.Admin)))                       // POST
@@ -23,20 +22,10 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/admin/role-update", h.AdminVerification(http.HandlerFunc(h.AdminChangeRole))) // POST
 	mux.Handle("/admin/user-update", h.AdminVerification(http.HandlerFunc(h.AdminUpdateAll)))  // POST
 	mux.Handle("/admin/user-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteUser))) // POST
+	mux.Handle("/admin/moderator", h.AdminVerification(http.HandlerFunc(h.UpdateReport)))      // POST
 
-	// mux.HandleFunc("/admin", h.Admin)                       // POST
-	// mux.HandleFunc("/admin/reports", h.AdminReports)        // POST
-	// mux.HandleFunc("/admin/role-update", h.AdminChangeRole) // POST
-	// mux.HandleFunc("/admin/user-update", h.AdminUpdateAll)  // POST
-	// mux.HandleFunc("/admin/user-delete", h.AdminDeleteUser) // POST
+	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport))) // POST
 
-	mux.HandleFunc("/admin/moderator", h.UpdateReport)     // POST
-	mux.HandleFunc("/moderator/report", h.ModeratorReport) // POST
-
-	// mux.Handle("/admin", nil)
-	// mux.Handle("/admin/user-update", nil)
-	// mux.Handle("/admin/user-delete", nil)
-	// mux.Handle("/admin/issues", nil) // messages from users and moderators
 
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout)))                // 200 (POST METHOD)
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
