@@ -108,5 +108,5 @@ func (as *AdminService) UserWantRoleAdminResponseService(adminR *model.AdminResp
 			return err
 		}
 	}
-	return as.iAdminRepository.UpdateWantUser(adminR) /// SOME CODE SAYS REJECTED OR APROUVE
+	return as.iAdminRepository.UpdateWantUser(adminR)
 }
