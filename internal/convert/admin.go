@@ -48,15 +48,3 @@ func DeleteComment(r *http.Request) (int, error) {
 	}
 	return comment.CommenID, nil
 }
-
-func UpdateUserAdmin(r *http.Request) (*model.User, error) {
-	userUpdate := &model.UserUpdateDTO{}
-	if err := json.NewDecoder(r.Body).Decode(userUpdate); err != nil {
-		return nil, nil
-	}
-	return &model.User{
-		ID:    userUpdate.UserID,
-		Name:  userUpdate.Name,
-		Email: userUpdate.Email,
-	}, nil
-}

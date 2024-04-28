@@ -2,6 +2,7 @@ package server
 
 import (
 	"encoding/json"
+	"gitea.com/lzhuk/forum/internal/helpers/roles"
 	"log"
 	"net/http"
 
@@ -209,7 +210,10 @@ func (h *Handler) UpdateReport(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+// WRITE
+
 // USER UP (???)
+
 func (h *Handler) UserUpRole(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -233,7 +237,7 @@ func (h *Handler) UserUpRole(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) UsersWants(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodDelete {
+	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
@@ -246,4 +250,32 @@ func (h *Handler) UsersWants(w http.ResponseWriter, r *http.Request) {
 	}
 
 	hh.WriteJSON(w, http.StatusOK, users)
+}
+
+func (h *Handler) UserWantRoleAdminResponse(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	temp := struct {
+		UserID int `json:"user_id"`
+		Status int `json:"number"`
+	}{} // r.Converter
+
+	if err := json.NewDecoder(r.Body).Decode(temp); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	if temp.Status == 1 {
+		t := &model.User{ID: temp.UserID, Role: roles.MODERATOR}
+		if err := h.Services.Admin.UpdateUserService(t); err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+	}
+
+	// UPDATE STATUS 1 OR -1 //
 }
