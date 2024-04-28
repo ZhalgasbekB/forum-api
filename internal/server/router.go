@@ -18,22 +18,26 @@ func NewRouter(h *Handler) http.Handler {
 	mux.HandleFunc("/register", h.Register)                                     // 201 (POST METHOD)
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout))) // 200 (POST METHOD)
 
-	mux.Handle("/admin", h.AdminVerification(http.HandlerFunc(h.Admin)))                // GET
-	mux.Handle("/admin/reports", h.AdminVerification(http.HandlerFunc(h.AdminReports))) // GET
-	mux.Handle("/admin/role-update", h.AdminVerification(http.HandlerFunc(h.AdminChangeRole)))
-	mux.Handle("/admin/response-moderator", h.AdminVerification(http.HandlerFunc(h.UpdateReport)))
+	// ADMIN, MODERATOR, USER
+	mux.Handle("/admin", h.AdminVerification(http.HandlerFunc(h.Admin))) // GET
+	mux.Handle("/admin/wants", h.AdminVerification(http.HandlerFunc(h.UsersWants)))
+	mux.Handle("/admin/reports", h.AdminVerification(http.HandlerFunc(h.AdminReports)))        // GET
+	mux.Handle("/admin/role-update", h.AdminVerification(http.HandlerFunc(h.AdminChangeRole))) // PUT
 
-	mux.Handle("/admin/user-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteUser)))
-	mux.Handle("/admin/post-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeletePost)))
-	mux.Handle("/admin/comment-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteComment)))
+	mux.Handle("/admin/response-moderator", h.AdminVerification(http.HandlerFunc(h.UpdateReport))) // PUT
+	mux.Handle("/admin/response-user", h.AdminVerification(http.HandlerFunc(h.UserWantRoleAdminResponse)))
 
-	mux.Handle("/admin/create-category", h.ModeratorVerification(http.HandlerFunc(h.AdminCreateCategory))) // POST
+	mux.Handle("/admin/user-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteUser)))       // DELETE
+	mux.Handle("/admin/post-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeletePost)))       // DELETE
+	mux.Handle("/admin/comment-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteComment))) // DELETE
+
+	mux.Handle("/admin/create-category", h.ModeratorVerification(http.HandlerFunc(h.AdminCreateCategory)))
 	mux.Handle("/admin/delete-category", h.ModeratorVerification(http.HandlerFunc(h.AdminDeleteCategory))) // DELETE
 
-	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport))) // POST
-	mux.Handle("/user/up-role", h.RequiredAuthentication(http.HandlerFunc(h.UserUpRole)))         // POST
+	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
+	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserUpRole)))
 
-	/// UP ROLE, CATEGORY, AND ?????
+	/// ADMIN
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
 	mux.Handle("/d3/user-likes", h.RequiredAuthentication(http.HandlerFunc(h.LikedPostsUser))) // 200 (GET METHOD)
