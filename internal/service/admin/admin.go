@@ -40,7 +40,6 @@ type IAdminService interface {
 
 	UserWantsService(*model.WantsDTO) error
 	UsersWantsService() ([]model.WantsDTO, error)
-
 	UserWantRoleAdminResponseService(user *model.AdminResponse) error
 }
 
