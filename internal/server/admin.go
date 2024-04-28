@@ -211,6 +211,23 @@ func (h *Handler) AdminResponseModerator(w http.ResponseWriter, r *http.Request)
 	w.WriteHeader(http.StatusOK)
 }
 
+func (h *Handler) ModeratorReports(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	moderator := contextUser(r)
+	reports, err := h.Services.Admin.MonderatorReportsService(moderator.ID)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	hh.WriteJSON(w, http.StatusOK, reports)
+}
+
 // USER 3
 
 func (h *Handler) UserRole(w http.ResponseWriter, r *http.Request) {
@@ -239,7 +256,7 @@ func (h *Handler) UsersWants(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
-	}
+	} //// THINK
 
 	users, err := h.Services.Admin.UsersWantRoleService()
 	if err != nil {
@@ -271,4 +288,21 @@ func (h *Handler) AdminResponseUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
+}
+
+func (h *Handler) UserWants(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	user := contextUser(r)
+	wants, err := h.Services.Admin.UserWantsService(user.ID)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	hh.WriteJSON(w, http.StatusOK, wants)
 }

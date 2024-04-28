@@ -20,8 +20,11 @@ type IAdminRepository interface {
 	ResponseReportAdmin(*model.ReportResponseDTO) error
 
 	UserWant(*model.WantsDTO) error
-	UsersWantRole() ([]model.WantsDTO, error)
-	UpdateUserWantStatus(u *model.AdminResponse) error
+	UsersWantRole() ([]model.Wants2DTO, error)
+	UpdateUserWantStatus(*model.AdminResponse) error
+
+	MonderatorReports(int) ([]model.Report, error)
+	UserWants(int) ([]model.Wants1DTO, error)
 }
 
 type IAdminService interface {
@@ -39,8 +42,11 @@ type IAdminService interface {
 	ResponseReportAdminService(*model.ReportResponseDTO) error
 
 	UserWantService(*model.WantsDTO) error
-	UsersWantRoleService() ([]model.WantsDTO, error)
+	UsersWantRoleService() ([]model.Wants2DTO, error)
 	UpdateUserWantStatusService(user *model.AdminResponse) error
+
+	MonderatorReportsService(int) ([]model.Report, error)
+	UserWantsService(int) ([]model.Wants1DTO, error)
 }
 
 type AdminService struct {
@@ -97,7 +103,7 @@ func (as *AdminService) UserWantService(m *model.WantsDTO) error {
 	return as.iAdminRepository.UserWant(m)
 }
 
-func (as *AdminService) UsersWantRoleService() ([]model.WantsDTO, error) {
+func (as *AdminService) UsersWantRoleService() ([]model.Wants2DTO, error) {
 	return as.iAdminRepository.UsersWantRole()
 }
 
@@ -108,4 +114,12 @@ func (as *AdminService) UpdateUserWantStatusService(adminR *model.AdminResponse)
 		}
 	}
 	return as.iAdminRepository.UpdateUserWantStatus(adminR)
+}
+
+func (as *AdminService) MonderatorReportsService(m int) ([]model.Report, error) {
+	return as.iAdminRepository.MonderatorReports(m)
+}
+
+func (as *AdminService) UserWantsService(u int) ([]model.Wants1DTO, error) {
+	return as.iAdminRepository.UserWants(u)
 }

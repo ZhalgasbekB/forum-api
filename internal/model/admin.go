@@ -32,6 +32,11 @@ type Wants1DTO struct {
 	Status    int       `json:"status"`
 	CreatedAt time.Time `json:"created_at"`
 }
+type Wants2DTO struct {
+	UserID   int       `json:"user_id"`
+	UserName string    `json:"user_name"`
+	CreateAt time.Time `json:"create_at"`
+}
 
 type AdminResponse struct {
 	UserID int `json:"user_id"`

@@ -155,7 +155,7 @@ func (a *AdminRepository) MonderatorReports(moderator_id int) ([]model.Report, e
 
 const (
 	wantQuery       = `INSERT INTO wants (user_id, user_name) VALUES($1, $2)`
-	wantsQuery      = `SELECT user_id, user_name FROM wants WHERE status = 0`
+	wantsQuery      = `SELECT user_id, user_name, created_at FROM wants WHERE status = 0`
 	updateWantQuery = `UPDATE wants SET status = $1 WHERE user_id = $2`
 	wantsUser       = `SELECT status, created_at FROM wants WHERE user_id = $1`
 )
@@ -167,14 +167,14 @@ func (a *AdminRepository) UserWant(w *model.WantsDTO) error {
 	return nil
 }
 
-func (a *AdminRepository) UsersWantRole() ([]model.WantsDTO, error) {
-	wants := []model.WantsDTO{}
+func (a *AdminRepository) UsersWantRole() ([]model.Wants2DTO, error) {
+	wants := []model.Wants2DTO{}
 	rows, err := a.DB.Query(wantsQuery)
 	if err != nil {
 		return nil, err
 	}
 	for rows.Next() {
-		want := &model.WantsDTO{}
+		want := &model.Wants2DTO{}
 		if err := rows.Scan(&want.UserID, &want.UserName); err != nil {
 			return nil, err
 		}
@@ -189,6 +189,8 @@ func (a *AdminRepository) UpdateUserWantStatus(u *model.AdminResponse) error {
 	}
 	return nil
 }
+
+// CHECK
 
 func (a *AdminRepository) UserWants(user_id int) ([]model.Wants1DTO, error) {
 	wants := []model.Wants1DTO{}

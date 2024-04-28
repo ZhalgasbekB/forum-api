@@ -3,6 +3,7 @@ package comment
 import (
 	"context"
 	"database/sql"
+
 	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/model"
 	_ "github.com/mattn/go-sqlite3"
