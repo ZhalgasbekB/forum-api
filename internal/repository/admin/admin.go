@@ -89,11 +89,11 @@ func (a *AdminRepository) DeleteCategory(category string) error {
 /// 2. MODERATOR ISSUES
 
 const (
-	reportCreateQuery = `INSERT INTO reports (post_id, comment_id, user_id, moderator, category_issue, reason) VALUES ($1, $2, $3, $4, $5, $6)`
-	reportUpdateQuery = `UPDATE reports SET  status = $1, admin_response = $2, updated_at = $3 WHERE report_id = $4`
-	reportDeleteQuery = `DELETE FROM reports WHERE report_id = $1`
-	reportss          = `SELECT * FROM reports`
-	reportss1         = `SELECT * FROM reports WHERE status = FALSE`
+	reportCreateQuery     = `INSERT INTO reports (post_id, comment_id, user_id, moderator, category_issue, reason) VALUES ($1, $2, $3, $4, $5, $6)`
+	reportUpdateQuery     = `UPDATE reports SET  status = $1, admin_response = $2, updated_at = $3 WHERE report_id = $4`
+	reportDeleteQuery     = `DELETE FROM reports WHERE report_id = $1`
+	reportsQuery          = `SELECT * FROM reports WHERE status = FALSE`
+	reportsModeratorQuery = `SELECT * FROM reports WHERE moderator = $1`
 )
 
 func (a *AdminRepository) CreateReportModerator(report *model.ReportCreateDTO) error {
@@ -120,7 +120,24 @@ func (a *AdminRepository) ResponseReportAdmin(update *model.ReportResponseDTO) e
 
 func (a *AdminRepository) ReportsByStatus() ([]model.Report, error) {
 	reports := []model.Report{}
-	rows, err := a.DB.Query(reportss1)
+	rows, err := a.DB.Query(reportsQuery)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		report := &model.Report{}
+		if err := rows.Scan(&report.ID, &report.PostID, &report.CommentID, &report.UserID, &report.ModeratorID, &report.Status, &report.CategoryIssue, &report.Reason, &report.AdminResponse, &report.CreateAt, &report.UpdateAt); err != nil {
+			return nil, err
+		}
+		reports = append(reports, *report)
+	}
+	return reports, nil
+}
+
+// CHECK
+func (a *AdminRepository) MonderatorReports(moderator_id int) ([]model.Report, error) {
+	reports := []model.Report{}
+	rows, err := a.DB.Query(reportsModeratorQuery, moderator_id)
 	if err != nil {
 		return nil, err
 	}
@@ -169,5 +186,22 @@ func (a *AdminRepository) UpdateUserWantStatus(u *model.AdminResponse) error {
 	if _, err := a.DB.Exec(updateWantQuery, u.Status, u.UserID); err != nil {
 		return err
 	}
+	return nil
+}
+
+func (a *AdminRepository) UserWants() error {
+	// reports := []model.Report{}
+	// rows, err := a.DB.Query(reportsModeratorQuery, moderator_id)
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// for rows.Next() {
+	// 	report := &model.Report{}
+	// 	if err := rows.Scan(&report.ID, &report.PostID, &report.CommentID, &report.UserID, &report.ModeratorID, &report.Status, &report.CategoryIssue, &report.Reason, &report.AdminResponse, &report.CreateAt, &report.UpdateAt); err != nil {
+	// 		return nil, err
+	// 	}
+	// 	reports = append(reports, *report)
+	// }
+	// return reports, nil
 	return nil
 }

@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type UserDeleteDTO struct {
 	UserID int `json:"user_id"`
 }
@@ -24,6 +26,12 @@ type RoleDTO struct {
 type WantsDTO struct {
 	UserID   int    `json:"user_id"`
 	UserName string `json:"user_name"`
+}
+
+type Wants1DTO struct {
+	UserID    int       `json:"user_id"`
+	UserName  string    `json:"user_name"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 type AdminResponse struct {
