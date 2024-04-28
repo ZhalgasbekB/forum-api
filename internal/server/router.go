@@ -21,21 +21,21 @@ func NewRouter(h *Handler) http.Handler {
 	// ADMIN, MODERATOR, USER
 	mux.Handle("/admin", h.AdminVerification(http.HandlerFunc(h.Admin)))                       // GET //RABOTAET
 	mux.Handle("/admin/wants", h.AdminVerification(http.HandlerFunc(h.UsersWants)))            // GET //RABOTAET
-	mux.Handle("/admin/reports", h.AdminVerification(http.HandlerFunc(h.AdminReports)))        // GET
+	mux.Handle("/admin/reports", h.AdminVerification(http.HandlerFunc(h.AdminReports)))        // GET //RABOTAET
 	mux.Handle("/admin/role-update", h.AdminVerification(http.HandlerFunc(h.AdminChangeRole))) // PUT //RABOTAET
 
-	mux.Handle("/admin/response-moderator", h.AdminVerification(http.HandlerFunc(h.UpdateReport)))         // PUT
+	mux.Handle("/admin/response-moderator", h.AdminVerification(http.HandlerFunc(h.UpdateReport)))         // PUT // CHECK STATUS FIELD //RABOTAET
 	mux.Handle("/admin/response-user", h.AdminVerification(http.HandlerFunc(h.UserWantRoleAdminResponse))) // RABOTAET
 
 	mux.Handle("/admin/user-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteUser)))       // DELETE //RABOTAET
-	mux.Handle("/admin/post-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeletePost)))       // DELETE //RABOTAET ??
-	mux.Handle("/admin/comment-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteComment))) // DELETE //RABOTAET ??
+	mux.Handle("/admin/post-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeletePost)))       // DELETE //RABOTAET
+	mux.Handle("/admin/comment-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteComment))) // DELETE //RABOTAET
 
-	mux.Handle("/admin/create-category", h.AdminVerification(http.HandlerFunc(h.AdminCreateCategory))) //RABOTAET
+	mux.Handle("/admin/create-category", h.AdminVerification(http.HandlerFunc(h.AdminCreateCategory))) // RABOTAET
 	mux.Handle("/admin/delete-category", h.AdminVerification(http.HandlerFunc(h.AdminDeleteCategory))) // DELETE //RABOTAET
 
-	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
-	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserUpRole))) // RABOTAET // THINK NEED YOU FOR USER NAME OR NOT
+	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport))) // RABOTAET
+	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserUpRole)))            // RABOTAET // THINK NEED YOU FOR USER NAME OR NOT // NEED CHECKER FOR ONLY USER
 	/// ADMIN
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
