@@ -22,7 +22,7 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/admin", h.AdminVerification(http.HandlerFunc(h.Admin)))                       // GET
 	mux.Handle("/admin/wants", h.AdminVerification(http.HandlerFunc(h.UsersWants)))            // GET
 	mux.Handle("/admin/reports", h.AdminVerification(http.HandlerFunc(h.AdminReports)))        // GET
-	mux.Handle("/admin/role-update", h.AdminVerification(http.HandlerFunc(h.AdminChangeRole))) // PUT
+	mux.Handle("/admin/role-update", h.AdminVerification(http.HandlerFunc(h.AdminChangeRole))) // PUT //RABOTAET
 
 	mux.Handle("/admin/response-moderator", h.AdminVerification(http.HandlerFunc(h.UpdateReport))) // PUT
 	mux.Handle("/admin/response-user", h.AdminVerification(http.HandlerFunc(h.UserWantRoleAdminResponse)))
@@ -36,7 +36,6 @@ func NewRouter(h *Handler) http.Handler {
 
 	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
 	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserUpRole)))
-
 	/// ADMIN
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts

@@ -137,7 +137,7 @@ func (a *AdminRepository) ReportsByStatus() ([]model.Report, error) {
 // 3 User up to
 
 const (
-	wantQuery       = `INSERT INTO wants (user_id, user_name, status) VALUES($1, $2, $3)`
+	wantQuery       = `INSERT INTO wants (user_id, user_name) VALUES($1, $2)`
 	wantsQuery      = `SELECT user_id, user_name FROM wants WHERE status = 0` // can change from $1
 	updateWantQuery = `UPDATE wants SET status = $1 WHERE = $2`
 )
