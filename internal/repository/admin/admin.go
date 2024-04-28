@@ -175,7 +175,7 @@ func (a *AdminRepository) UsersWantRole() ([]model.Wants2DTO, error) {
 	}
 	for rows.Next() {
 		want := &model.Wants2DTO{}
-		if err := rows.Scan(&want.UserID, &want.UserName); err != nil {
+		if err := rows.Scan(&want.UserID, &want.UserName, &want.CreateAt); err != nil {
 			return nil, err
 		}
 		wants = append(wants, *want)

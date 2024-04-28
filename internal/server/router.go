@@ -36,10 +36,10 @@ func NewRouter(h *Handler) http.Handler {
 
 	// AND ADD 2 ROUTES FOR CHEKCING MODERATORS AND USERS FOR THIS REQ
 	mux.Handle("/moderator/reports", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReports))) // GET
-	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
+	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))   // SAME DONT NEED JSON
 
 	mux.Handle("/user/wants", h.RequiredAuthentication(http.HandlerFunc(h.UserWants))) // GET
-	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserRole)))   // CHECK ONLY USER ???
+	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserRole)))   // CHECK ONLY USER ??? DONT NEED JSON
 	/// ADMIN
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
