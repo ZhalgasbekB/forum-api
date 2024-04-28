@@ -48,3 +48,11 @@ func DeleteComment(r *http.Request) (int, error) {
 	}
 	return comment.CommenID, nil
 }
+
+func AdminResponse(r *http.Request) (*model.AdminResponse, error) {
+	resp := &model.AdminResponse{}
+	if err := json.NewDecoder(r.Body).Decode(resp); err != nil {
+		return nil, nil
+	}
+	return resp, nil
+}

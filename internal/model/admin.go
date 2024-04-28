@@ -35,3 +35,8 @@ type WantsDTO struct {
 	UserID   int    `json:"user_id"`
 	UserName string `json:"user_name"`
 }
+
+type AdminResponse struct {
+	UserID int `json:"user_id"`
+	Status int `json:"number"`
+}

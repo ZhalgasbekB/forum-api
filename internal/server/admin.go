@@ -2,7 +2,6 @@ package server
 
 import (
 	"encoding/json"
-	"gitea.com/lzhuk/forum/internal/helpers/roles"
 	"log"
 	"net/http"
 
@@ -258,24 +257,27 @@ func (h *Handler) UserWantRoleAdminResponse(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	temp := struct {
-		UserID int `json:"user_id"`
-		Status int `json:"number"`
-	}{} // r.Converter
-
-	if err := json.NewDecoder(r.Body).Decode(temp); err != nil {
+	temp, err := convert.AdminResponse(r)
+	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	if temp.Status == 1 {
-		t := &model.User{ID: temp.UserID, Role: roles.MODERATOR}
-		if err := h.Services.Admin.UpdateUserService(t); err != nil {
-			log.Println(err)
-			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
-			return
-		}
+
+	if err := h.Services.Admin.UserWantRoleAdminResponseService(temp); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
 	}
+
+	// if temp.Status == 1 {
+	// 	t := &model.User{ID: temp.UserID, Role: roles.MODERATOR}
+	// 	if err := h.Services.Admin.UpdateUserService(t); err != nil {
+	// 		log.Println(err)
+	// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+	// 		return
+	// 	}
+	// }
 
 	// UPDATE STATUS 1 OR -1 //
 }
