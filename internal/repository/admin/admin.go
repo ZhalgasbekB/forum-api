@@ -157,6 +157,7 @@ const (
 	wantQuery       = `INSERT INTO wants (user_id, user_name) VALUES($1, $2)`
 	wantsQuery      = `SELECT user_id, user_name FROM wants WHERE status = 0`
 	updateWantQuery = `UPDATE wants SET status = $1 WHERE user_id = $2`
+	wantsUser       = `SELECT status, created_at FROM wants WHERE user_id = $1`
 )
 
 func (a *AdminRepository) UserWant(w *model.WantsDTO) error {
@@ -189,19 +190,18 @@ func (a *AdminRepository) UpdateUserWantStatus(u *model.AdminResponse) error {
 	return nil
 }
 
-func (a *AdminRepository) UserWants() error {
-	// reports := []model.Report{}
-	// rows, err := a.DB.Query(reportsModeratorQuery, moderator_id)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// for rows.Next() {
-	// 	report := &model.Report{}
-	// 	if err := rows.Scan(&report.ID, &report.PostID, &report.CommentID, &report.UserID, &report.ModeratorID, &report.Status, &report.CategoryIssue, &report.Reason, &report.AdminResponse, &report.CreateAt, &report.UpdateAt); err != nil {
-	// 		return nil, err
-	// 	}
-	// 	reports = append(reports, *report)
-	// }
-	// return reports, nil
-	return nil
+func (a *AdminRepository) UserWants(user_id int) ([]model.Wants1DTO, error) {
+	wants := []model.Wants1DTO{}
+	rows, err := a.DB.Query(wantsUser, user_id)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		want := &model.Wants1DTO{}
+		if err := rows.Scan(&want.Status, &want.CreatedAt); err != nil {
+			return nil, err
+		}
+		wants = append(wants, *want)
+	}
+	return wants, nil
 }

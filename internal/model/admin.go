@@ -29,8 +29,7 @@ type WantsDTO struct {
 }
 
 type Wants1DTO struct {
-	UserID    int       `json:"user_id"`
-	UserName  string    `json:"user_name"`
+	Status    int       `json:"status"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
