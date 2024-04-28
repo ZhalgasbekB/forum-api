@@ -30,15 +30,3 @@ func UserLoginRequestBody(r *http.Request) (*model.User, error) {
 		Password: user.Password,
 	}, nil
 }
-
-func AuthenticateUserDTO(r *http.Request) (*model.User, error) {
-	user := &model.UserAuthDTO{}
-	if err := json.NewDecoder(r.Body).Decode(user); err != nil {
-		return nil, err
-	}
-	return &model.User{
-		Name:     user.Name,
-		Email:    user.Email,
-		Password: user.Password,
-	}, nil
-}
