@@ -12,6 +12,8 @@ import (
 	"gitea.com/lzhuk/forum/internal/errors"
 )
 
+// ADMIN
+
 func (h *Handler) Admin(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -149,7 +151,7 @@ func (h *Handler) AdminDeleteComment(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-/// Moderator func (???)
+/// MODERATOR 2
 
 func (h *Handler) ModeratorReport(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -189,7 +191,7 @@ func (h *Handler) AdminReports(w http.ResponseWriter, r *http.Request) {
 	hh.WriteJSON(w, http.StatusOK, reports)
 }
 
-func (h *Handler) UpdateReport(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) AdminResponseModerator(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPut {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
@@ -209,10 +211,9 @@ func (h *Handler) UpdateReport(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-// WRITE
-// USER UP (???)
+// USER 3
 
-func (h *Handler) UserUpRole(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) UserRole(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
@@ -250,7 +251,7 @@ func (h *Handler) UsersWants(w http.ResponseWriter, r *http.Request) {
 	hh.WriteJSON(w, http.StatusOK, users)
 }
 
-func (h *Handler) UserWantRoleAdminResponse(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) AdminResponseUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
