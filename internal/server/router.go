@@ -35,11 +35,11 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/admin/delete-category", h.AdminVerification(http.HandlerFunc(h.AdminDeleteCategory))) // DELETE
 
 	// AND ADD 2 ROUTES FOR CHEKCING MODERATORS AND USERS FOR THIS REQ
-	// mux.Handle("/moderator/reports", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReports))) // GET
+	mux.Handle("/moderator/reports", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReports))) // GET
 	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
 
-	// mux.Handle("/user/wants", h.RequiredAuthentication(http.HandlerFunc(h.UserWants))) // GET
-	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserRole))) // CHECK ONLY USER ???
+	mux.Handle("/user/wants", h.RequiredAuthentication(http.HandlerFunc(h.UserWants))) // GET
+	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserRole)))   // CHECK ONLY USER ???
 	/// ADMIN
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
