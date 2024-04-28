@@ -19,8 +19,8 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout))) // 200 (POST METHOD)
 
 	// ADMIN, MODERATOR, USER
-	mux.Handle("/admin", h.AdminVerification(http.HandlerFunc(h.Admin)))                       // GET
-	mux.Handle("/admin/wants", h.AdminVerification(http.HandlerFunc(h.UsersWants)))            // GET
+	mux.Handle("/admin", h.AdminVerification(http.HandlerFunc(h.Admin)))                       // GET //RABOTAET
+	mux.Handle("/admin/wants", h.AdminVerification(http.HandlerFunc(h.UsersWants)))            // GET //RABOTAET
 	mux.Handle("/admin/reports", h.AdminVerification(http.HandlerFunc(h.AdminReports)))        // GET //RABOTAET
 	mux.Handle("/admin/role-update", h.AdminVerification(http.HandlerFunc(h.AdminChangeRole))) // PUT //RABOTAET
 
