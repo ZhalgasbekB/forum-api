@@ -1,7 +1,6 @@
 package admin
 
 import (
-	"gitea.com/lzhuk/forum/internal/helpers/roles"
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
@@ -21,6 +20,8 @@ type IAdminRepository interface {
 
 	UserWantsRepository(*model.WantsDTO) error
 	UserWants() ([]model.WantsDTO, error)
+
+	UpdateWantUser(u *model.AdminResponse) error
 }
 
 type IAdminService interface {
@@ -103,9 +104,9 @@ func (as *AdminService) UsersWantsService() ([]model.WantsDTO, error) {
 
 func (as *AdminService) UserWantRoleAdminResponseService(adminR *model.AdminResponse) error {
 	if adminR.Status == 1 {
-		if err := as.iAdminRepository.UpdateUser(&model.User{ID: adminR.UserID, Role: roles.MODERATOR}); err != nil {
+		if err := as.iAdminRepository.UpdateWantUser(adminR); err != nil {
 			return err
 		}
 	}
-	return nil /// SOME CODE SAYS REJECTED
+	return as.iAdminRepository.UpdateWantUser(adminR) /// SOME CODE SAYS REJECTED OR APROUVE
 }

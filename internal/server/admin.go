@@ -270,14 +270,5 @@ func (h *Handler) UserWantRoleAdminResponse(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	// if temp.Status == 1 {
-	// 	t := &model.User{ID: temp.UserID, Role: roles.MODERATOR}
-	// 	if err := h.Services.Admin.UpdateUserService(t); err != nil {
-	// 		log.Println(err)
-	// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
-	// 		return
-	// 	}
-	// }
-
-	// UPDATE STATUS 1 OR -1 //
+	w.WriteHeader(http.StatusOK)
 }

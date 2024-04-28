@@ -137,8 +137,9 @@ func (a *AdminRepository) ReportsByStatus() ([]model.Report, error) {
 // 3 User up to
 
 const (
-	wantQuery  = `INSERT INTO wants (user_id, user_name, status) VALUES($1, $2, $3)`
-	wantsQuery = `SELECT user_id, user_name FROM wants WHERE status = 0` // can change from $1
+	wantQuery       = `INSERT INTO wants (user_id, user_name, status) VALUES($1, $2, $3)`
+	wantsQuery      = `SELECT user_id, user_name FROM wants WHERE status = 0` // can change from $1
+	updateWantQuery = `UPDATE wants SET status = $1 WHERE = $2`
 )
 
 func (a *AdminRepository) UserWantsRepository(w *model.WantsDTO) error {
@@ -162,4 +163,11 @@ func (a *AdminRepository) UserWants() ([]model.WantsDTO, error) {
 		wants = append(wants, *want)
 	}
 	return wants, err
+}
+
+func (a *AdminRepository) UpdateWantUser(u *model.AdminResponse) error {
+	if _, err := a.DB.Exec(updateWantQuery, u.Status, u.UserID); err != nil {
+		return err
+	}
+	return nil
 }
