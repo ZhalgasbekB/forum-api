@@ -42,7 +42,7 @@ func DeletePost(r *http.Request) (int, error) {
 }
 
 func DeleteComment(r *http.Request) (int, error) {
-	comment := &model.CommentDeleteDTO1{}
+	comment := &model.CommentDeleteAdminDTO{}
 	if err := json.NewDecoder(r.Body).Decode(comment); err != nil {
 		return -1, err
 	}
