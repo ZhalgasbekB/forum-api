@@ -12,7 +12,7 @@ type AdminRepository struct {
 }
 
 const (
-	userQuery          = `SELECT * FROM users WHERE role != $1 ORDER BY CASE WHEN role = $2 THEN 1 WHEN role = $3 THEN 2 ELSE 3 END;`
+	usersQuery         = `SELECT * FROM users WHERE role != $1 ORDER BY CASE WHEN role = $2 THEN 1 WHEN role = $3 THEN 2 ELSE 3 END;`
 	updateUserQuery    = `UPDATE users SET role = $1 WHERE id = $2`
 	deleteUserQuery    = `DELETE FROM users WHERE id = $1`
 	deletePostQuery    = `DELETE FROM posts WHERE id = $1`
@@ -30,7 +30,7 @@ func InitAdminRepository(db *sql.DB) *AdminRepository {
 
 func (a *AdminRepository) Users() ([]model.User, error) {
 	users := []model.User{}
-	rows, err := a.DB.Query(userQuery, "ADMIN", "MODERATOR", "USER")
+	rows, err := a.DB.Query(usersQuery, "ADMIN", "MODERATOR", "USER")
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func (a *AdminRepository) Users() ([]model.User, error) {
 	return users, nil
 }
 
-func (a *AdminRepository) UpdateUser(user *model.User) error {
+func (a *AdminRepository) ChangeRole(user *model.User) error {
 	if _, err := a.DB.Exec(updateUserQuery, user.Role, user.ID); err != nil {
 		return err
 	}
@@ -86,7 +86,7 @@ func (a *AdminRepository) DeleteCategory(category string) error {
 	return nil
 }
 
-/// 2. MODERATOR ISSUES (???)
+/// 2. MODERATOR ISSUES
 
 const (
 	reportCreateQuery = `INSERT INTO reports (post_id, comment_id, user_id, moderator, category_issue, reason) VALUES ($1, $2, $3, $4, $5, $6)`
@@ -96,7 +96,7 @@ const (
 	reportss1         = `SELECT * FROM reports WHERE status = FALSE`
 )
 
-func (a *AdminRepository) CreateReportRepository(report *model.ReportCreateDTO) error {
+func (a *AdminRepository) CreateReportModerator(report *model.ReportCreateDTO) error {
 	if _, err := a.DB.Exec(reportCreateQuery, report.PostID, report.CommentID, report.UserID, report.ModeratorID, report.CategoryIssue, report.Reason); err != nil {
 		return err
 	}
@@ -110,7 +110,7 @@ func (a *AdminRepository) DeleteReport(id int) error {
 	return nil
 }
 
-func (a *AdminRepository) UpdateReport(update *model.ReportResponseDTO) error {
+func (a *AdminRepository) ResponseReportAdmin(update *model.ReportResponseDTO) error {
 	updatedTime := time.Now()
 	if _, err := a.DB.Exec(reportUpdateQuery, update.Status, update.AdminResponse, updatedTime, update.ReportID); err != nil {
 		return err
@@ -134,22 +134,22 @@ func (a *AdminRepository) ReportsByStatus() ([]model.Report, error) {
 	return reports, nil
 }
 
-// 3 User up to
+///  3 USER ISSUE
 
 const (
 	wantQuery       = `INSERT INTO wants (user_id, user_name) VALUES($1, $2)`
-	wantsQuery      = `SELECT user_id, user_name FROM wants WHERE status = 0` // can change from $1
+	wantsQuery      = `SELECT user_id, user_name FROM wants WHERE status = 0`
 	updateWantQuery = `UPDATE wants SET status = $1 WHERE user_id = $2`
 )
 
-func (a *AdminRepository) UserWantsRepository(w *model.WantsDTO) error {
+func (a *AdminRepository) UserWant(w *model.WantsDTO) error {
 	if _, err := a.DB.Exec(wantQuery, w.UserID, w.UserName); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (a *AdminRepository) UserWants() ([]model.WantsDTO, error) {
+func (a *AdminRepository) UsersWantRole() ([]model.WantsDTO, error) {
 	wants := []model.WantsDTO{}
 	rows, err := a.DB.Query(wantsQuery)
 	if err != nil {
@@ -165,7 +165,7 @@ func (a *AdminRepository) UserWants() ([]model.WantsDTO, error) {
 	return wants, err
 }
 
-func (a *AdminRepository) UpdateWantUser(u *model.AdminResponse) error {
+func (a *AdminRepository) UpdateUserWantStatus(u *model.AdminResponse) error {
 	if _, err := a.DB.Exec(updateWantQuery, u.Status, u.UserID); err != nil {
 		return err
 	}

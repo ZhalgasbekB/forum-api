@@ -42,7 +42,7 @@ func (h *Handler) AdminChangeRole(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.Services.Admin.UpdateUserService(uRole); err != nil {
+	if err := h.Services.Admin.ChangeRoleService(uRole); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
@@ -166,7 +166,7 @@ func (h *Handler) ModeratorReport(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.Services.Admin.CreateReportService(report); err != nil {
+	if err := h.Services.Admin.CreateReportModeratorService(report); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
@@ -181,7 +181,7 @@ func (h *Handler) AdminReports(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	reports, err := h.Services.Admin.ReportsModeratorService()
+	reports, err := h.Services.Admin.ReportsByStatusService()
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
@@ -203,7 +203,7 @@ func (h *Handler) AdminResponseModerator(w http.ResponseWriter, r *http.Request)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	if err := h.Services.Admin.UpdateReportService(update); err != nil {
+	if err := h.Services.Admin.ResponseReportAdminService(update); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
@@ -226,7 +226,7 @@ func (h *Handler) UserRole(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.Services.Admin.UserWantsService(user); err != nil {
+	if err := h.Services.Admin.UserWantService(user); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
@@ -241,7 +241,7 @@ func (h *Handler) UsersWants(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	users, err := h.Services.Admin.UsersWantsService()
+	users, err := h.Services.Admin.UsersWantRoleService()
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
@@ -264,7 +264,7 @@ func (h *Handler) AdminResponseUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := h.Services.Admin.UserWantRoleAdminResponseService(temp); err != nil {
+	if err := h.Services.Admin.UpdateUserWantStatusService(temp); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return

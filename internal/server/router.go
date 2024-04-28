@@ -24,7 +24,7 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/admin/reports", h.AdminVerification(http.HandlerFunc(h.AdminReports)))        // GET
 	mux.Handle("/admin/role-update", h.AdminVerification(http.HandlerFunc(h.AdminChangeRole))) // PUT
 
-	mux.Handle("/admin/response-moderator", h.AdminVerification(http.HandlerFunc(h.AdminResponseModerator))) // PUT // CHECK STATUS FIELD
+	mux.Handle("/admin/response-moderator", h.AdminVerification(http.HandlerFunc(h.AdminResponseModerator))) // PUT
 	mux.Handle("/admin/response-user", h.AdminVerification(http.HandlerFunc(h.AdminResponseUser)))
 
 	mux.Handle("/admin/user-delete", h.AdminVerification(http.HandlerFunc(h.AdminDeleteUser)))       // DELETE
@@ -34,8 +34,9 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/admin/create-category", h.AdminVerification(http.HandlerFunc(h.AdminCreateCategory)))
 	mux.Handle("/admin/delete-category", h.AdminVerification(http.HandlerFunc(h.AdminDeleteCategory))) // DELETE
 
+	// AND ADD 2 ROUTES FOR CHEKCING MODERATORS AND USERS FOR THIS REQ
 	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
-	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserRole))) // THINK NEED YOU FOR USER NAME OR NOT // NEED CHECKER FOR ONLY USER
+	mux.Handle("/user/role", h.RequiredAuthentication(http.HandlerFunc(h.UserRole)))
 	/// ADMIN
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts

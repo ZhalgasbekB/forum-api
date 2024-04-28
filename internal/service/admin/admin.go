@@ -7,7 +7,7 @@ import (
 
 type IAdminRepository interface {
 	Users() ([]model.User, error)
-	UpdateUser(*model.User) error
+	ChangeRole(*model.User) error
 	DeleteUser(int) error
 	DeletePost(int) error
 	DeleteComment(int) error
@@ -15,19 +15,18 @@ type IAdminRepository interface {
 	CreateCategory(string) error
 	DeleteCategory(string) error
 
-	CreateReportRepository(*model.ReportCreateDTO) error
+	CreateReportModerator(*model.ReportCreateDTO) error
 	ReportsByStatus() ([]model.Report, error)
-	UpdateReport(*model.ReportResponseDTO) error
+	ResponseReportAdmin(*model.ReportResponseDTO) error
 
-	UserWantsRepository(*model.WantsDTO) error
-	UserWants() ([]model.WantsDTO, error)
-
-	UpdateWantUser(u *model.AdminResponse) error
+	UserWant(*model.WantsDTO) error
+	UsersWantRole() ([]model.WantsDTO, error)
+	UpdateUserWantStatus(u *model.AdminResponse) error
 }
 
 type IAdminService interface {
 	UsersService() ([]model.User, error)
-	UpdateUserService(*model.User) error
+	ChangeRoleService(*model.User) error
 	DeleteUserService(int) error
 	DeletePostService(int) error
 	DeleteCommentService(int) error
@@ -35,13 +34,13 @@ type IAdminService interface {
 	CreateCategoryService(string) error
 	DeleteCategoryService(string) error
 
-	CreateReportService(*model.ReportCreateDTO) error
-	ReportsModeratorService() ([]model.Report, error)
-	UpdateReportService(*model.ReportResponseDTO) error
+	CreateReportModeratorService(*model.ReportCreateDTO) error
+	ReportsByStatusService() ([]model.Report, error)
+	ResponseReportAdminService(*model.ReportResponseDTO) error
 
-	UserWantsService(*model.WantsDTO) error
-	UsersWantsService() ([]model.WantsDTO, error)
-	UserWantRoleAdminResponseService(user *model.AdminResponse) error
+	UserWantService(*model.WantsDTO) error
+	UsersWantRoleService() ([]model.WantsDTO, error)
+	UpdateUserWantStatusService(user *model.AdminResponse) error
 }
 
 type AdminService struct {
@@ -58,8 +57,8 @@ func (as *AdminService) UsersService() ([]model.User, error) {
 	return as.iAdminRepository.Users()
 }
 
-func (as *AdminService) UpdateUserService(us *model.User) error {
-	return as.iAdminRepository.UpdateUser(us)
+func (as *AdminService) ChangeRoleService(us *model.User) error {
+	return as.iAdminRepository.ChangeRole(us)
 }
 
 func (as *AdminService) DeleteUserService(id int) error {
@@ -74,12 +73,16 @@ func (as *AdminService) DeleteCommentService(id int) error {
 	return as.iAdminRepository.DeleteComment(id)
 }
 
-func (as *AdminService) CreateReportService(r *model.ReportCreateDTO) error {
-	return as.iAdminRepository.CreateReportRepository(r)
+func (as *AdminService) CreateReportModeratorService(r *model.ReportCreateDTO) error {
+	return as.iAdminRepository.CreateReportModerator(r)
 }
 
-func (as *AdminService) ReportsModeratorService() ([]model.Report, error) {
+func (as *AdminService) ReportsByStatusService() ([]model.Report, error) {
 	return as.iAdminRepository.ReportsByStatus()
+}
+
+func (as *AdminService) ResponseReportAdminService(update *model.ReportResponseDTO) error {
+	return as.iAdminRepository.ResponseReportAdmin(update)
 }
 
 func (as *AdminService) CreateCategoryService(category string) error {
@@ -90,23 +93,19 @@ func (as *AdminService) DeleteCategoryService(category string) error {
 	return as.iAdminRepository.DeleteCategory(category)
 }
 
-func (as *AdminService) UpdateReportService(update *model.ReportResponseDTO) error {
-	return as.iAdminRepository.UpdateReport(update)
+func (as *AdminService) UserWantService(m *model.WantsDTO) error {
+	return as.iAdminRepository.UserWant(m)
 }
 
-func (as *AdminService) UserWantsService(m *model.WantsDTO) error {
-	return as.iAdminRepository.UserWantsRepository(m)
+func (as *AdminService) UsersWantRoleService() ([]model.WantsDTO, error) {
+	return as.iAdminRepository.UsersWantRole()
 }
 
-func (as *AdminService) UsersWantsService() ([]model.WantsDTO, error) {
-	return as.iAdminRepository.UserWants()
-}
-
-func (as *AdminService) UserWantRoleAdminResponseService(adminR *model.AdminResponse) error {
+func (as *AdminService) UpdateUserWantStatusService(adminR *model.AdminResponse) error {
 	if adminR.Status == 1 {
-		if err := as.iAdminRepository.UpdateUser(&model.User{ID: adminR.UserID, Role: roles.MODERATOR}); err != nil {
+		if err := as.iAdminRepository.ChangeRole(&model.User{ID: adminR.UserID, Role: roles.MODERATOR}); err != nil {
 			return err
 		}
 	}
-	return as.iAdminRepository.UpdateWantUser(adminR)
+	return as.iAdminRepository.UpdateUserWantStatus(adminR)
 }
