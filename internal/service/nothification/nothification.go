@@ -6,12 +6,14 @@ type INothificationRepository interface {
 	Create() error
 	Read() ([]model.Nothification, error)
 	Update() error
+	NothificationIsRead() (bool, error)
 }
 
 type INothificationService interface {
 	CreateService() error
 	ReadService() ([]model.Nothification, error)
 	UpdateService() error
+	NothificationIsReadService() (bool, error)
 }
 
 type NothificationService struct {
@@ -34,4 +36,8 @@ func (ns *NothificationService) ReadService() ([]model.Nothification, error) {
 
 func (ns *NothificationService) UpdateService() error {
 	return ns.nothificationRepository.Update()
+}
+
+func (ns *NothificationService) NothificationIsReadService() (bool, error) {
+	return ns.nothificationRepository.NothificationIsRead()
 }

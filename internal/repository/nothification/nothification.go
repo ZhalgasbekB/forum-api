@@ -32,7 +32,7 @@ func (n *NothificationRepository) Create() error {
 	return nil
 }
 
-func (n *NothificationRepository) NothificationCheck() (bool, error) {
+func (n *NothificationRepository) NothificationIsRead() (bool, error) {
 	var isRead bool
 	if err := n.DB.QueryRow(noth).Scan(&isRead); err != nil {
 		return false, err
