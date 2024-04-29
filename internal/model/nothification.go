@@ -3,14 +3,14 @@ package model
 import "time"
 
 type Nothification struct {
-	ID                int       `json:"id"`
-	UserID            int       `json:"user_id"`
-	TypeNoth          string    `json:"type"`
-	PostID            int       `json:"post_id"`
-	CreatedNothUserID int       `json:"noth_user_id"`
-	Message           string    `json:"message"`
-	ISRead            bool      `json:"is_read"`
-	CreatedAt         time.Time `json:"create_at"`
+	ID            int       `json:"id"`
+	UserID        int       `json:"user_id"`
+	PostID        int       `json:"post_id"`
+	Type          string    `json:"type"`
+	CreatedUserID int       `json:"create_user_id"`
+	Message       string    `json:"message"`
+	IsRead        bool      `json:"is_read"`
+	CreatedAt     time.Time `json:"created_at"`
 }
 
 type NothificationDTO struct {
