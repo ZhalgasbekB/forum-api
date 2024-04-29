@@ -230,7 +230,7 @@ func (h *Handler) ModeratorReports(w http.ResponseWriter, r *http.Request) {
 
 // USER 3
 
-func (h *Handler) UserRole(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) UserWant(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
