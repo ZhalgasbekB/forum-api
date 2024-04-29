@@ -25,17 +25,17 @@ func InitNothificationService(nothificationRepository INothificationRepository) 
 }
 
 func (ns *NothificationService) CreateService() error {
-	return nil
+	return ns.nothificationRepository.Create()
 }
 
 func (ns *NothificationService) ReadService() error {
-	return nil
+	return ns.nothificationRepository.Read()
 }
 
 func (ns *NothificationService) DeleteService() error {
-	return nil
+	return ns.nothificationRepository.Delete()
 }
 
 func (ns *NothificationService) UpdateService() error {
-	return nil
+	return ns.nothificationRepository.Update()
 }
