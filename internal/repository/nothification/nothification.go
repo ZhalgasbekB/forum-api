@@ -23,8 +23,8 @@ const (
 	noth                = `SELECT EXISTS (SELECT 1 FROM nothifications WHERE user_id = $1 AND is_read = FALSE) AS check`
 )
 
-func (n *NothificationRepository) Create() error { // ???
-	if _, err := n.DB.Exec(nothCreateQuery); err != nil {
+func (n *NothificationRepository) Create(n1 *model.Nothification) error {
+	if _, err := n.DB.Exec(nothCreateQuery, n1.UserID, n1.PostID, n1.Type, n1.CreatedUserID, n1.Message); err != nil {
 		return err
 	}
 	return nil

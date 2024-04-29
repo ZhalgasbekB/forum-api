@@ -3,15 +3,15 @@ package nothification
 import "gitea.com/lzhuk/forum/internal/model"
 
 type INothificationRepository interface {
-	Create() error
-	Read() ([]model.Nothification, error)
+	Create(*model.Nothification) error
+	Read(int) ([]model.Nothification, error)
 	Update() error
 	NothificationIsRead() (bool, error)
 }
 
 type INothificationService interface {
-	CreateService() error
-	ReadService() ([]model.Nothification, error)
+	CreateService(*model.Nothification) error
+	ReadService(int) ([]model.Nothification, error)
 	UpdateService() error
 	NothificationIsReadService() (bool, error)
 }
@@ -26,12 +26,12 @@ func InitNothificationService(nothificationRepository INothificationRepository) 
 	}
 }
 
-func (ns *NothificationService) CreateService() error {
-	return ns.nothificationRepository.Create()
+func (ns *NothificationService) CreateService(n *model.Nothification) error {
+	return ns.nothificationRepository.Create(n)
 }
 
-func (ns *NothificationService) ReadService() ([]model.Nothification, error) {
-	return ns.nothificationRepository.Read()
+func (ns *NothificationService) ReadService(id int) ([]model.Nothification, error) {
+	return ns.nothificationRepository.Read(id)
 }
 
 func (ns *NothificationService) UpdateService() error {

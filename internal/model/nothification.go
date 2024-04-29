@@ -13,8 +13,11 @@ type Nothification struct {
 	CreatedAt     time.Time `json:"created_at"`
 }
 
-type NothificationDTO1 struct {
-	ID int `json:"id"`
+type NothificationCreateDTO struct {
+	UserId        int    `json:"user_id"`
+	PostId        int    `json:"post_id"`
+	Type          string `json:"type"`
+	CreatedUserId int    `json:"created_user_id"`
 }
 
 type NothificationDTO2 struct {
