@@ -20,8 +20,8 @@ func InitNothificationRepository(db *sql.DB) *NothificationRepository {
 
 const (
 	nothCreateQuery     = `INSERT INTO nothifications (user_id, post_id, type, created_user_id, message) VALUES($1, $2, $3, $4, $5)`
-	readedQuery         = `UPDATE nothifications SET is_read = TRUE` /// ??? ADDS
-	nothificationsQuery = `SELECT * FROM nothifications WHERE user_id = $1`
+	readedQuery         = `UPDATE nothifications SET is_read = TRUE`
+	nothificationsQuery = `SELECT * FROM nothifications WHERE user_id = $1 AND is_read = FALSE`
 )
 
 func (n *NothificationRepository) Create() error {
@@ -48,13 +48,6 @@ func (n *NothificationRepository) Read(user_id int) ([]model.Nothification, erro
 }
 
 func (n *NothificationRepository) Update() error {
-	if _, err := n.DB.Exec(query); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (n *NothificationRepository) Delete() error {
 	if _, err := n.DB.Exec(query); err != nil {
 		return err
 	}

@@ -5,14 +5,12 @@ import "gitea.com/lzhuk/forum/internal/model"
 type INothificationRepository interface {
 	Create() error
 	Read() ([]model.Nothification, error)
-	Delete() error
 	Update() error
 }
 
 type INothificationService interface {
 	CreateService() error
-	ReadService() error
-	DeleteService() error
+	ReadService() ([]model.Nothification, error)
 	UpdateService() error
 }
 
@@ -32,10 +30,6 @@ func (ns *NothificationService) CreateService() error {
 
 func (ns *NothificationService) ReadService() ([]model.Nothification, error) {
 	return ns.nothificationRepository.Read()
-}
-
-func (ns *NothificationService) DeleteService() error {
-	return ns.nothificationRepository.Delete()
 }
 
 func (ns *NothificationService) UpdateService() error {
