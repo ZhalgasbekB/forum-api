@@ -20,7 +20,7 @@ const (
 	notificationCreateQuery  = `INSERT INTO notifications (user_id, post_id, type, created_user_id, message) VALUES($1, $2, $3, $4, $5)`
 	notificationUpdateQuery  = `UPDATE notifications SET is_read = TRUE WHERE user_id = $1`
 	notificationsQuery       = `SELECT * FROM notifications WHERE user_id = $1 AND is_read = FALSE`
-	notificationsIsReadQuery = `SELECT EXISTS (SELECT 1 FROM notifications WHERE user_id = $1 AND is_read = FALSE) AS check`
+	notificationsIsReadQuery = `SELECT EXISTS (SELECT 1 FROM notifications WHERE user_id = $1 AND is_read = FALSE) AS has_unread_notifications`
 )
 
 func (n *NotificationRepository) Create(n1 *model.Notification) error {
