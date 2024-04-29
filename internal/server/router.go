@@ -42,9 +42,9 @@ func NewRouter(h *Handler) http.Handler {
 	/// ADMIN
 
 	// ADVANCED FEATURES ??? AND CHECK HOME PAGE IS_READ
-	mux.Handle("/notification/create", h.ModeratorVerification(http.HandlerFunc(h.NotificationCreate))) // POST
-	mux.Handle("/notifications", h.RequiredAuthentication(http.HandlerFunc(h.Notifications)))           // GET
-	mux.Handle("/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification)))      // PUT
+	mux.Handle("/notification/create", h.RequiredAuthentication(http.HandlerFunc(h.NotificationCreate))) // POST
+	mux.Handle("/notifications", h.RequiredAuthentication(http.HandlerFunc(h.Notifications)))            // GET
+	mux.Handle("/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification)))       // PUT
 	//
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
