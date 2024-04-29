@@ -42,9 +42,9 @@ func NewRouter(h *Handler) http.Handler {
 	/// ADMIN
 
 	// ADVANCED FEATURES
-	//mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))   // SAME DONT NEED JSON
-	//mux.Handle("/user/wants", h.RequiredAuthentication(http.HandlerFunc(h.UserWants))) // GET
-	//mux.Handle("/user/want", h.RequiredAuthentication(http.HandlerFunc(h.UserWant)))   // CHECK ONLY USER ??? DONT NEED JSON
+	mux.Handle("/notification/create", h.ModeratorVerification(http.HandlerFunc(h.NotificationCreate))) // POST
+	mux.Handle("/notifications", h.RequiredAuthentication(http.HandlerFunc(h.Notifications)))           // GET
+	mux.Handle("/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification)))      // PUT
 	//
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
