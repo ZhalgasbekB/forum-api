@@ -1,6 +1,10 @@
 package nothification
 
-import "database/sql"
+import (
+	"database/sql"
+
+	"gitea.com/lzhuk/forum/internal/model"
+)
 
 const query = ""
 
@@ -15,8 +19,9 @@ func InitNothificationRepository(db *sql.DB) *NothificationRepository {
 }
 
 const (
-	nothCreateQuery = `INSERT INTO nothifications (user_id, post_id, type, created_user_id, message) VALUES($1, $2, $3, $4, $5)`
-	readedQuery     = `UPDATE nothifications SET is_read = TRUE` /// ??? ADDS
+	nothCreateQuery     = `INSERT INTO nothifications (user_id, post_id, type, created_user_id, message) VALUES($1, $2, $3, $4, $5)`
+	readedQuery         = `UPDATE nothifications SET is_read = TRUE` /// ??? ADDS
+	nothificationsQuery = `SELECT * FROM nothifications WHERE user_id = $1`
 )
 
 func (n *NothificationRepository) Create() error {
@@ -26,8 +31,20 @@ func (n *NothificationRepository) Create() error {
 	return nil
 }
 
-func (n *NothificationRepository) Read() error {
-	return nil
+func (n *NothificationRepository) Read(user_id int) ([]model.Nothification, error) {
+	userNothifications := []model.Nothification{}
+	rows, err := n.DB.Query(nothificationsQuery, user_id)
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		nothification := &model.Nothification{}
+		if err := rows.Scan(&nothification.ID, &nothification.UserID, &nothification.PostID, &nothification.Type, &nothification.CreatedUserID, &nothification.Message, &nothification.IsRead, &nothification.CreatedAt); err != nil {
+			return nil, err
+		}
+		userNothifications = append(userNothifications, *nothification)
+	}
+	return userNothifications, nil
 }
 
 func (n *NothificationRepository) Update() error {

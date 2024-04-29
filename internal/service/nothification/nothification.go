@@ -1,8 +1,10 @@
 package nothification
 
+import "gitea.com/lzhuk/forum/internal/model"
+
 type INothificationRepository interface {
 	Create() error
-	Read() error
+	Read() ([]model.Nothification, error)
 	Delete() error
 	Update() error
 }
@@ -28,7 +30,7 @@ func (ns *NothificationService) CreateService() error {
 	return ns.nothificationRepository.Create()
 }
 
-func (ns *NothificationService) ReadService() error {
+func (ns *NothificationService) ReadService() ([]model.Nothification, error) {
 	return ns.nothificationRepository.Read()
 }
 
