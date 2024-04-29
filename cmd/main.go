@@ -12,12 +12,14 @@ import (
 
 	admin2 "gitea.com/lzhuk/forum/internal/repository/admin"
 	comment2 "gitea.com/lzhuk/forum/internal/repository/comment"
+	noth2 "gitea.com/lzhuk/forum/internal/repository/nothification"
 	post2 "gitea.com/lzhuk/forum/internal/repository/post"
 	user2 "gitea.com/lzhuk/forum/internal/repository/user"
 
 	"gitea.com/lzhuk/forum/internal/app"
 	"gitea.com/lzhuk/forum/internal/service/admin"
 	"gitea.com/lzhuk/forum/internal/service/comment"
+	"gitea.com/lzhuk/forum/internal/service/nothification"
 	"gitea.com/lzhuk/forum/internal/service/post"
 	"gitea.com/lzhuk/forum/internal/service/user"
 
@@ -62,11 +64,9 @@ func main() {
 	likePostRepo := post2.NewLikePostRepository(db)
 	commentsRepo := comment2.NewCommentsRepo(db)
 	likeCommentsRepo := comment2.NewLikeCommentRepository(db)
-
-	// TEST
 	adminRepo := admin2.InitAdminRepository(db)
-	adminService := admin.NewAdminService(adminRepo)
-	//
+
+	nothRepo := noth2.InitNothificationRepository(db)
 
 	usersService := user.NewUserService(usersRepo)
 	sessionsService := user.NewSessionService(sessionRepo)
@@ -74,8 +74,11 @@ func main() {
 	likePostsService := post.NewLikePostService(likePostRepo)
 	commentsService := comment.NewCommentsService(commentsRepo)
 	likeCommentsService := comment.NewLikeCommentService(likeCommentsRepo)
+	adminService := admin.NewAdminService(adminRepo)
 
-	services := service.NewService(usersService, sessionsService, postsService, commentsService, likePostsService, likeCommentsService, adminService)
+	nothService := nothification.InitNothificationService(nothRepo)
+
+	services := service.NewService(usersService, sessionsService, postsService, commentsService, likePostsService, likeCommentsService, adminService, nothService)
 	handler := server.NewHandler(services)
 	router := server.NewRouter(&handler)
 	s := app.NewServer(cfg, router)
