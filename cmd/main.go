@@ -66,7 +66,7 @@ func main() {
 	likeCommentsRepo := comment2.NewLikeCommentRepository(db)
 	adminRepo := admin2.InitAdminRepository(db)
 
-	nothRepo := noth2.InitNothificationRepository(db)
+	nothRepo := noth2.InitNotificationRepository(db)
 
 	usersService := user.NewUserService(usersRepo)
 	sessionsService := user.NewSessionService(sessionRepo)

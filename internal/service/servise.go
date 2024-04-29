@@ -16,7 +16,7 @@ type Service struct {
 	LikePosts      post.ILikePostService
 	LikeComments   comment.ILikeCommentService
 	Admin          admin.IAdminService
-	Nothification  nothification.INothificationService //
+	Nothification  nothification.INotificationService //
 }
 
 func NewService(userService user.IUserService,
@@ -26,7 +26,7 @@ func NewService(userService user.IUserService,
 	LikePosts post.ILikePostService,
 	LikeComments comment.ILikeCommentService,
 	Admins admin.IAdminService,
-	Nothification1 nothification.INothificationService) Service {
+	Nothification1 nothification.INotificationService) Service {
 	return Service{
 		UserService:    userService,
 		SessionService: sessionService,
