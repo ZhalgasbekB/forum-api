@@ -28,7 +28,7 @@ func (h *Handler) NothificationCreate(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-func (h *Handler) Noth1(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Notifications(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
