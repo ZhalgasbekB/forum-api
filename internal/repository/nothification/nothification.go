@@ -14,6 +14,12 @@ func InitNothificationRepository(db *sql.DB) *NothificationRepository {
 	}
 }
 
+const (
+	createNothQuery = ``
+	updateQuery     = ``
+	deleteQuery     = ``
+)
+
 func (n *NothificationRepository) Create() error {
 	if _, err := n.DB.Exec(query); err != nil {
 		return err
