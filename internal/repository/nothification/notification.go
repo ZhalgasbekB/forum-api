@@ -39,7 +39,7 @@ func (n *NotificationRepository) NotificationIsRead() (bool, error) { // CHECK
 }
 
 func (n *NotificationRepository) Read(user_id int) ([]model.Notification, error) {
-	userNothifications := []model.Notification{}
+	userNotifications := []model.Notification{}
 	rows, err := n.DB.Query(notificationsQuery, user_id)
 	if err != nil {
 		return nil, err
@@ -49,9 +49,9 @@ func (n *NotificationRepository) Read(user_id int) ([]model.Notification, error)
 		if err := rows.Scan(&nothification.ID, &nothification.UserID, &nothification.PostID, &nothification.Type, &nothification.CreatedUserID, &nothification.Message, &nothification.IsRead, &nothification.CreatedAt); err != nil {
 			return nil, err
 		}
-		userNothifications = append(userNothifications, *nothification)
+		userNotifications = append(userNotifications, *nothification)
 	}
-	return userNothifications, nil
+	return userNotifications, nil
 }
 
 func (n *NotificationRepository) Update() error {

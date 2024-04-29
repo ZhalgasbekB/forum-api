@@ -13,7 +13,7 @@ func (h *Handler) NothificationCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	notification, err := convert.NothificationCreate(r)
+	notification, err := convert.NotificationCreate(r)
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
