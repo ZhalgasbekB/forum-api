@@ -15,9 +15,8 @@ func InitNothificationRepository(db *sql.DB) *NothificationRepository {
 }
 
 const (
-	createNothQuery = ``
-	updateQuery     = ``
-	deleteQuery     = ``
+	nothCreateQuery = `INSERT INTO nothifications (user_id, post_id, type, created_user_id, message) VALUES($1, $2, $3, $4, $5)`
+	readedQuery     = `UPDATE nothifications SET is_read = TRUE` /// ??? ADDS
 )
 
 func (n *NothificationRepository) Create() error {
