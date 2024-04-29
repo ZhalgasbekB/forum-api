@@ -6,8 +6,6 @@ import (
 	"gitea.com/lzhuk/forum/internal/model"
 )
 
-const query = ""
-
 type NothificationRepository struct {
 	DB *sql.DB
 }
@@ -26,7 +24,7 @@ const (
 )
 
 func (n *NothificationRepository) Create() error {
-	if _, err := n.DB.Exec(query); err != nil {
+	if _, err := n.DB.Exec(nothCreateQuery); err != nil {
 		return err
 	}
 	return nil
@@ -57,7 +55,7 @@ func (n *NothificationRepository) Read(user_id int) ([]model.Nothification, erro
 }
 
 func (n *NothificationRepository) Update() error {
-	if _, err := n.DB.Exec(query); err != nil {
+	if _, err := n.DB.Exec(readedQuery); err != nil {
 		return err
 	}
 	return nil
