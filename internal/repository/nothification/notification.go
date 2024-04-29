@@ -45,11 +45,11 @@ func (n *NotificationRepository) Read(user_id int) ([]model.Notification, error)
 		return nil, err
 	}
 	for rows.Next() {
-		nothification := &model.Notification{}
-		if err := rows.Scan(&nothification.ID, &nothification.UserID, &nothification.PostID, &nothification.Type, &nothification.CreatedUserID, &nothification.Message, &nothification.IsRead, &nothification.CreatedAt); err != nil {
+		notification := &model.Notification{}
+		if err := rows.Scan(&notification.ID, &notification.UserID, &notification.PostID, &notification.Type, &notification.CreatedUserID, &notification.Message, &notification.IsRead, &notification.CreatedAt); err != nil {
 			return nil, err
 		}
-		userNotifications = append(userNotifications, *nothification)
+		userNotifications = append(userNotifications, *notification)
 	}
 	return userNotifications, nil
 }
