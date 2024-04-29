@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"gitea.com/lzhuk/forum/internal/model"
 	"log"
 	"net/http"
@@ -14,6 +15,17 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.Header().Set("Allow", http.MethodGet)
 		return
+	}
+
+	user := contextUser(r)
+	if user != nil {
+		is_read, err := h.Services.Nothification.NotificationIsReadService(user.ID)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+		fmt.Println(is_read)
 	}
 
 	posts, err := h.Services.PostsService.GetAllPostService(r.Context())

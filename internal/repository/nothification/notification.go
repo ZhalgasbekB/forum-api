@@ -30,9 +30,9 @@ func (n *NotificationRepository) Create(n1 *model.Notification) error {
 	return nil
 }
 
-func (n *NotificationRepository) NotificationIsRead() (bool, error) { // CHECK
+func (n *NotificationRepository) NotificationIsRead(user_id int) (bool, error) { // CHECK
 	var isRead bool
-	if err := n.DB.QueryRow(notificationsIsReadQuery).Scan(&isRead); err != nil {
+	if err := n.DB.QueryRow(notificationsIsReadQuery, user_id).Scan(&isRead); err != nil {
 		return false, err
 	}
 	return isRead, nil
