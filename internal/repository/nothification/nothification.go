@@ -33,11 +33,11 @@ func (n *NothificationRepository) Create() error {
 }
 
 func (n *NothificationRepository) NothificationCheck() (bool, error) {
-	var check bool
-	if err := n.DB.QueryRow(noth).Scan(&check); err != nil {
+	var isRead bool
+	if err := n.DB.QueryRow(noth).Scan(&isRead); err != nil {
 		return false, err
 	}
-	return check, nil
+	return isRead, nil
 }
 
 func (n *NothificationRepository) Read(user_id int) ([]model.Nothification, error) {
