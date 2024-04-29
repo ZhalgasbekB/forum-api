@@ -23,22 +23,18 @@ type RoleDTO struct {
 	Role   string `json:"role"`
 }
 
-type WantsDTO struct {
-	UserID   int    `json:"user_id"`
-	UserName string `json:"user_name"`
+type AdminResponse struct {
+	UserID int `json:"user_id"`
+	Status int `json:"number"`
 }
 
 type Wants1DTO struct {
 	Status    int       `json:"status"`
 	CreatedAt time.Time `json:"created_at"`
 }
+
 type Wants2DTO struct {
 	UserID   int       `json:"user_id"`
 	UserName string    `json:"user_name"`
 	CreateAt time.Time `json:"create_at"`
-}
-
-type AdminResponse struct {
-	UserID int `json:"user_id"`
-	Status int `json:"number"`
 }

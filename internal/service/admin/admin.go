@@ -19,7 +19,7 @@ type IAdminRepository interface {
 	ReportsByStatus() ([]model.Report, error)
 	ResponseReportAdmin(*model.ReportResponseDTO) error
 
-	UserWant(*model.WantsDTO) error
+	UserWant(*model.User) error
 	UsersWantRole() ([]model.Wants2DTO, error)
 	UpdateUserWantStatus(*model.AdminResponse) error
 
@@ -41,7 +41,7 @@ type IAdminService interface {
 	ReportsByStatusService() ([]model.Report, error)
 	ResponseReportAdminService(*model.ReportResponseDTO) error
 
-	UserWantService(*model.WantsDTO) error
+	UserWantService(*model.User) error
 	UsersWantRoleService() ([]model.Wants2DTO, error)
 	UpdateUserWantStatusService(user *model.AdminResponse) error
 
@@ -99,7 +99,7 @@ func (as *AdminService) DeleteCategoryService(category string) error {
 	return as.iAdminRepository.DeleteCategory(category)
 }
 
-func (as *AdminService) UserWantService(m *model.WantsDTO) error {
+func (as *AdminService) UserWantService(m *model.User) error {
 	return as.iAdminRepository.UserWant(m)
 }
 

@@ -7,6 +7,7 @@ import (
 
 	"gitea.com/lzhuk/forum/internal/convert"
 	hh "gitea.com/lzhuk/forum/internal/helpers/json"
+	"gitea.com/lzhuk/forum/internal/helpers/roles"
 	"gitea.com/lzhuk/forum/internal/model"
 
 	"gitea.com/lzhuk/forum/internal/errors"
@@ -236,10 +237,10 @@ func (h *Handler) UserWant(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user := &model.WantsDTO{} // ONLY FOR USERS
-	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
-		log.Println(err)
-		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+	user := contextUser(r)
+	if user.Role != roles.USER {
+		log.Println("You aren't user")
+		errors.ErrorSend(w, http.StatusInternalServerError, "You aren't user")
 		return
 	}
 
@@ -256,7 +257,7 @@ func (h *Handler) UsersWants(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
-	} //// THINK
+	}
 
 	users, err := h.Services.Admin.UsersWantRoleService()
 	if err != nil {

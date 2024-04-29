@@ -160,8 +160,8 @@ const (
 	wantsUser       = `SELECT status, created_at FROM wants WHERE user_id = $1`
 )
 
-func (a *AdminRepository) UserWant(w *model.WantsDTO) error {
-	if _, err := a.DB.Exec(wantQuery, w.UserID, w.UserName); err != nil {
+func (a *AdminRepository) UserWant(w *model.User) error {
+	if _, err := a.DB.Exec(wantQuery, w.ID, w.Name); err != nil {
 		return err
 	}
 	return nil
