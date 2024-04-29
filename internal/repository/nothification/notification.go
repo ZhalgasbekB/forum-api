@@ -18,7 +18,7 @@ func InitNotificationRepository(db *sql.DB) *NotificationRepository {
 
 const (
 	notificationCreateQuery  = `INSERT INTO notifications (user_id, post_id, type, created_user_id, message) VALUES($1, $2, $3, $4, $5)`
-	notificationUpdateQuery  = `UPDATE notifications SET is_read = TRUE`
+	notificationUpdateQuery  = `UPDATE notifications SET is_read = TRUE WHERE user_id = $1`
 	notificationsQuery       = `SELECT * FROM notifications WHERE user_id = $1 AND is_read = FALSE`
 	notificationsIsReadQuery = `SELECT EXISTS (SELECT 1 FROM notifications WHERE user_id = $1 AND is_read = FALSE) AS check`
 )
@@ -38,6 +38,13 @@ func (n *NotificationRepository) NotificationIsRead() (bool, error) { // CHECK
 	return isRead, nil
 }
 
+func (n *NotificationRepository) Update(user_id int) error {
+	if _, err := n.DB.Exec(notificationUpdateQuery, user_id); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (n *NotificationRepository) Read(user_id int) ([]model.Notification, error) {
 	userNotifications := []model.Notification{}
 	rows, err := n.DB.Query(notificationsQuery, user_id)
@@ -52,11 +59,4 @@ func (n *NotificationRepository) Read(user_id int) ([]model.Notification, error)
 		userNotifications = append(userNotifications, *notification)
 	}
 	return userNotifications, nil
-}
-
-func (n *NotificationRepository) Update() error {
-	if _, err := n.DB.Exec(notificationUpdateQuery); err != nil {
-		return err
-	}
-	return nil
 }

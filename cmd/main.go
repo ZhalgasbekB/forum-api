@@ -76,7 +76,7 @@ func main() {
 	likeCommentsService := comment.NewLikeCommentService(likeCommentsRepo)
 	adminService := admin.NewAdminService(adminRepo)
 
-	nothService := nothification.InitNothificationService(nothRepo)
+	nothService := nothification.InitNotificationService(nothRepo)
 
 	services := service.NewService(usersService, sessionsService, postsService, commentsService, likePostsService, likeCommentsService, adminService, nothService)
 	handler := server.NewHandler(services)
