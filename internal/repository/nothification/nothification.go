@@ -22,6 +22,7 @@ const (
 	nothCreateQuery     = `INSERT INTO nothifications (user_id, post_id, type, created_user_id, message) VALUES($1, $2, $3, $4, $5)`
 	readedQuery         = `UPDATE nothifications SET is_read = TRUE`
 	nothificationsQuery = `SELECT * FROM nothifications WHERE user_id = $1 AND is_read = FALSE`
+	noth                = `SELECT EXISTS (SELECT 1 FROM nothifications WHERE user_id = $1 AND is_read = FALSE) AS check`
 )
 
 func (n *NothificationRepository) Create() error {
@@ -29,6 +30,14 @@ func (n *NothificationRepository) Create() error {
 		return err
 	}
 	return nil
+}
+
+func (n *NothificationRepository) NothificationCheck() (bool, error) {
+	var check bool
+	if err := n.DB.QueryRow(noth).Scan(&check); err != nil {
+		return false, err
+	}
+	return check, nil
 }
 
 func (n *NothificationRepository) Read(user_id int) ([]model.Nothification, error) {
