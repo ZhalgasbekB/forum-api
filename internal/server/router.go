@@ -37,8 +37,8 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/moderator/reports", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReports))) // GET
 	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))   // SAME DONT NEED JSON
 
-	mux.Handle("/user/wants", h.RequiredAuthentication(http.HandlerFunc(h.UserWants))) // GET
-	mux.Handle("/user/want", h.RequiredAuthentication(http.HandlerFunc(h.UserWant)))   // CHECK ONLY USER ??? DONT NEED JSON
+	mux.Handle("/d3/user-wants", h.RequiredAuthentication(http.HandlerFunc(h.UserWants))) // GET
+	mux.Handle("/d3/user-want", h.RequiredAuthentication(http.HandlerFunc(h.UserWant)))   // CHECK ONLY USER ??? DONT NEED JSON
 	/// ADMIN
 
 	///// ADVANCED FEATURE
@@ -47,7 +47,6 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/d3/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification))) // PUT
 
 	///// ACTIVITY
-	// mux.Handle("/activity", h.RequiredAuthentication(http.HandlerFunc(h.Notification))) //  ???
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
 	mux.Handle("/d3/user-likes", h.RequiredAuthentication(http.HandlerFunc(h.LikedPostsUser))) // 200 (GET METHOD)
