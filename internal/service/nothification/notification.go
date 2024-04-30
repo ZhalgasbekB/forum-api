@@ -7,7 +7,7 @@ import (
 type INotificationRepository interface {
 	Create(*model.Notification) error
 	Read(int) ([]model.Notification, error)
-	Update(int) error
+	Update(int, int) error
 	NotificationIsRead(int) (bool, error)
 
 	DuplicateNotification(*model.Notification) (*model.Notification, error)
@@ -16,8 +16,8 @@ type INotificationRepository interface {
 
 type INotificationService interface {
 	CreateService(*model.Notification, bool) error
-	ReadService(int) ([]model.Notification, error)
-	UpdateService(int) error
+	NotificationsService(int) ([]model.Notification, error)
+	UpdateService(int, int) error
 	NotificationIsReadService(int) (bool, error)
 	CreateCommentService(*model.Notification) error
 }
@@ -55,12 +55,12 @@ func (ns *NotificationService) CreateCommentService(n *model.Notification) error
 	return ns.notificationRepository.Create(n)
 }
 
-func (ns *NotificationService) ReadService(u_id int) ([]model.Notification, error) {
+func (ns *NotificationService) NotificationsService(u_id int) ([]model.Notification, error) {
 	return ns.notificationRepository.Read(u_id)
 }
 
-func (ns *NotificationService) UpdateService(u_id int) error {
-	return ns.notificationRepository.Update(u_id)
+func (ns *NotificationService) UpdateService(u_id, id int) error {
+	return ns.notificationRepository.Update(u_id, id)
 }
 
 func (ns *NotificationService) NotificationIsReadService(u_id int) (bool, error) {

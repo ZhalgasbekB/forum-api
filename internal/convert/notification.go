@@ -1,7 +1,9 @@
 package convert
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"gitea.com/lzhuk/forum/internal/model"
 )
@@ -31,4 +33,12 @@ func NotificationCreateComment(user_id int, comment *model.Comment) *model.Notif
 		CreatedUserID: comment.User,
 		Message:       fmt.Sprintf("Yoy get notification from user: %d, type of notification: %s, on your post: %d.", comment.User, commentS, comment.Post),
 	}
+}
+
+func NotificationUpdateComment(r *http.Request) (int, error) {
+	n := &model.NotificationUpdateDTO{}
+	if err := json.NewDecoder(r.Body).Decode(&n); err != nil {
+		return -1, err
+	}
+	return n.ID, nil
 }

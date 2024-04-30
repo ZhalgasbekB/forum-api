@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"gitea.com/lzhuk/forum/internal/convert"
 	"gitea.com/lzhuk/forum/internal/errors"
 	"gitea.com/lzhuk/forum/internal/helpers/json"
 )
@@ -15,7 +16,7 @@ func (h *Handler) Notifications(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user := contextUser(r)
-	notifications, err := h.Services.Nothification.ReadService(user.ID)
+	notifications, err := h.Services.Nothification.NotificationsService(user.ID)
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
@@ -32,7 +33,14 @@ func (h *Handler) Notification(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user := contextUser(r)
-	if err := h.Services.Nothification.UpdateService(user.ID); err != nil {
+	id, err := convert.NotificationUpdateComment(r)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if err := h.Services.Nothification.UpdateService(user.ID, id); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
