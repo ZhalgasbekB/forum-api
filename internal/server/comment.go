@@ -15,7 +15,7 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user := contextUser(r)
-	createComment, err := convert.CreateCommentConvert(r, user.ID)
+	createComment, user_id, err := convert.CreateCommentConvert(r, user.ID)
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
@@ -23,6 +23,13 @@ func (h *Handler) CreateComment(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := h.Services.CommentService.CreateCommentService(r.Context(), createComment); err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	notification := convert.NotificationCreateComment(user_id, createComment)
+	if err := h.Services.Nothification.CreateCommentService(notification); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return

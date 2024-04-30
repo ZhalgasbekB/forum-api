@@ -16,6 +16,7 @@ type Comment struct {
 }
 
 type CreateCommentDTO struct {
+	User        int    `json:"user_id"`
 	Post        int    `json:"post_id"`
 	Description string `json:"description"`
 }

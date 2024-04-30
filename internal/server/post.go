@@ -189,7 +189,7 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	notification := convert.NothificationCreateLikes(r, like, user_id)
+	notification := convert.NotificationCreateLikes(like, user_id)
 	if err := h.Services.Nothification.CreateService(notification, isLiked); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())

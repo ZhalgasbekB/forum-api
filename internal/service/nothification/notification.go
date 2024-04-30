@@ -19,6 +19,7 @@ type INotificationService interface {
 	ReadService(int) ([]model.Notification, error)
 	UpdateService(int) error
 	NotificationIsReadService(int) (bool, error)
+	CreateCommentService(*model.Notification) error
 }
 
 type NotificationService struct {
@@ -42,11 +43,15 @@ func (ns *NotificationService) CreateService(n *model.Notification, isLiked bool
 			return err
 		}
 
-		if nOld != nil && !isLiked {
+		if !isLiked {
 			return nil
 		}
 	}
 
+	return ns.notificationRepository.Create(n)
+}
+
+func (ns *NotificationService) CreateCommentService(n *model.Notification) error {
 	return ns.notificationRepository.Create(n)
 }
 
