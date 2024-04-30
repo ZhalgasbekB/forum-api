@@ -86,3 +86,13 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 	cookies.DeleteCookie(w)
 	w.WriteHeader(http.StatusSeeOther)
 }
+
+func (h *Handler) Activity(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	user := contextUser(r)
+
+	json.WriteJSON(w, http.StatusOK, user)
+}

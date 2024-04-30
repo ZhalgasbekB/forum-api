@@ -13,7 +13,7 @@ func NewRouter(h *Handler) http.Handler {
 	mux := http.NewServeMux()
 	rateLimiter := RateLimitMiddleware(5, 1*time.Second)
 
-	mux.HandleFunc("/d3", h.Home)                                               // 200 (GET METHOD) get all posts
+	mux.HandleFunc("/d3", h.Home)                                               // 200 (GET METHOD) get all posts and notifications ????
 	mux.HandleFunc("/login", h.Login)                                           // 200 (POST METHOD)
 	mux.HandleFunc("/register", h.Register)                                     // 201 (POST METHOD)
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout))) // 200 (POST METHOD)
@@ -42,6 +42,7 @@ func NewRouter(h *Handler) http.Handler {
 	/// ADMIN
 
 	///// ADVANCED FEATURE
+	mux.Handle("/d3/user-activity", h.RequiredAuthentication(http.HandlerFunc(h.Activity)))
 	mux.Handle("/notifications", h.RequiredAuthentication(http.HandlerFunc(h.Notifications)))      // GET
 	mux.Handle("/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification))) // PUT
 

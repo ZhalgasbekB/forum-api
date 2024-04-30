@@ -15,7 +15,7 @@ type UserRegisterDTO struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
-	Role  string `json:"role"` // role
+	Role     string `json:"role"`
 }
 
 type UserLoginDTO struct {
@@ -32,4 +32,11 @@ type UserAuthDTO struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
+}
+
+type UserActivityDTO struct {
+	CreatedPost   []Post            `json:"u_posts"`
+	LikdedPost    []Post            `json:"u_likes"`
+	DislikePost   []Post            `json:"u_dislikes"`
+	CommentedPost []PostCommentsDTO `json:"U-comments"`
 }
