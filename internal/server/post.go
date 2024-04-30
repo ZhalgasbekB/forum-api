@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -38,16 +39,16 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// user := contextUser(r)
-	// if user != nil {
-	// 	is_read, err := h.Services.Nothification.NotificationIsReadService(user.ID)
-	// 	if err != nil {
-	// 		log.Println(err)
-	// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
-	// 		return
-	// 	}
-	// 	fmt.Println(is_read)
-	// }
+	user := contextUser(r)
+	if user != nil {
+		is_read, err := h.Services.Nothification.NotificationIsReadService(user.ID)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+		fmt.Println(is_read)
+	}
 
 	json.WriteJSON(w, http.StatusOK, posts)
 }
