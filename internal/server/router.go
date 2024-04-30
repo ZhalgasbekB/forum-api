@@ -41,11 +41,10 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/user/want", h.RequiredAuthentication(http.HandlerFunc(h.UserWant)))   // CHECK ONLY USER ??? DONT NEED JSON
 	/// ADMIN
 
-	// ADVANCED FEATURES ??? AND CHECK HOME PAGE IS_READ
-	mux.Handle("/notification/create", h.RequiredAuthentication(http.HandlerFunc(h.NotificationCreate))) // POST
-	mux.Handle("/notifications", h.RequiredAuthentication(http.HandlerFunc(h.Notifications)))            // GET
-	mux.Handle("/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification)))       // PUT
-	//
+	///// ADVANCED FEATURES ??? AND CHECK HOME PAGE IS_READ
+	mux.Handle("/notifications", h.RequiredAuthentication(http.HandlerFunc(h.Notifications)))      // GET
+	mux.Handle("/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification))) // PUT
+	/////
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
 	mux.Handle("/d3/user-likes", h.RequiredAuthentication(http.HandlerFunc(h.LikedPostsUser))) // 200 (GET METHOD)

@@ -21,10 +21,30 @@ const (
 	notificationUpdateQuery  = `UPDATE notifications SET is_read = TRUE WHERE user_id = $1`
 	notificationsQuery       = `SELECT * FROM notifications WHERE user_id = $1 AND is_read = FALSE`
 	notificationsIsReadQuery = `SELECT EXISTS (SELECT 1 FROM notifications WHERE user_id = $1 AND is_read = FALSE) AS has_unread_notifications`
+
+	duplicateQuery = `SELECT * FROM notifications WHERE user_id = $1 AND post_id = $2 AND created_user_id = $3 AND type != "comment"`
+	deleteQuery    = `DELETE FROM notifications WHERE user_id = $1 AND post_id = $2 AND created_user_id = $3 AND type = $4 AND is_read != TRUE`
 )
 
 func (n *NotificationRepository) Create(n1 *model.Notification) error {
 	if _, err := n.DB.Exec(notificationCreateQuery, n1.UserID, n1.PostID, n1.Type, n1.CreatedUserID, n1.Message); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (n *NotificationRepository) DuplicateNotification(nl *model.Notification) (*model.Notification, error) {
+	no := &model.Notification{}
+	if err := n.DB.QueryRow(duplicateQuery, nl.UserID, nl.PostID, nl.CreatedUserID).Scan(&no.ID, &no.UserID, &no.PostID, &no.Type, &no.CreatedUserID, &no.Message, &no.IsRead, &no.CreatedAt); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+	}
+	return no, nil
+}
+
+func (n *NotificationRepository) DeleteNotification(nl *model.Notification) error {
+	if _, err := n.DB.Exec(deleteQuery, nl.UserID, nl.PostID, nl.CreatedUserID, nl.Type); err != nil {
 		return err
 	}
 	return nil

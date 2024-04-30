@@ -2,9 +2,10 @@ package server
 
 import (
 	"fmt"
-	"gitea.com/lzhuk/forum/internal/model"
 	"log"
 	"net/http"
+
+	"gitea.com/lzhuk/forum/internal/model"
 
 	"gitea.com/lzhuk/forum/internal/convert"
 	"gitea.com/lzhuk/forum/internal/errors"
@@ -174,14 +175,22 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user := contextUser(r)
-	like, err := convert.LikePostConvertor(r, user.ID)
+	like, user_id, err := convert.LikePostConvertor(r, user.ID)
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	if err := h.Services.LikePosts.LikePostService(like); err != nil {
+	isLiked, err := h.Services.LikePosts.LikePostService(like)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	
+	notification := convert.NothificationCreateLikes(r, like, user_id)
+	if err := h.Services.Nothification.CreateService(notification, isLiked); err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
@@ -189,6 +198,9 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 }
+
+// if isLiked {
+// }
 
 func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {

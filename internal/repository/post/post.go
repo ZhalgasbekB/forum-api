@@ -18,7 +18,7 @@ const (
 	postByIdWithLikesQuery = `SELECT  ps.id,  ps.user_id,  ps.category_name,  ps.title,  ps.description,  ps.create_at,  u.name, COALESCE(SUM(CASE WHEN pl.status = true THEN 1 ELSE 0 END), 0) AS likes, COALESCE(SUM(CASE WHEN pl.status = false THEN 1 ELSE 0 END), 0) AS dislikes FROM  posts ps JOIN  users u ON ps.user_id = u.id LEFT JOIN  posts_likes pl ON ps.id = pl.post_id WHERE  ps.id = $1 GROUP BY  ps.id, u.id;`
 
 	postsByUserIdQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name, SUM(CASE WHEN pl.status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN pl.status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts ps JOIN users u ON ps.user_id = u.id LEFT JOIN posts_likes pl ON ps.id = pl.post_id WHERE ps.user_id = $1 GROUP BY ps.id, u.id ORDER BY ps.create_at DESC`
-	postsCategoryQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name, SUM(CASE WHEN pl.status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN pl.status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts ps JOIN users u ON ps.user_id = u.id LEFT JOIN posts_likes pl ON ps.id = pl.post_id WHERE ps.category_name = $1 GROUP BY ps.id, u.id ORDER BY ps.create_at DESC` // CHECK
+	postsCategoryQuery = `SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name, SUM(CASE WHEN pl.status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN pl.status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts ps JOIN users u ON ps.user_id = u.id LEFT JOIN posts_likes pl ON ps.id = pl.post_id WHERE ps.category_name = $1 GROUP BY ps.id, u.id ORDER BY ps.create_at DESC`
 )
 
 type PostsRepository struct {

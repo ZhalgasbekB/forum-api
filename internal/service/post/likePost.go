@@ -5,7 +5,7 @@ import (
 )
 
 type ILikePostRepository interface {
-	CreateLikePostRepository(*model.LikePost) error
+	CreateLikePostRepository(*model.LikePost) (bool, error)
 	DeleteLikeByPostIdRepository(int, int) error
 
 	GetLikePostRepository(int, int) (*model.LikePost, error)
@@ -14,7 +14,7 @@ type ILikePostRepository interface {
 }
 
 type ILikePostService interface {
-	LikePostService(*model.LikePost) error
+	LikePostService(*model.LikePost) (bool, error)
 	GetUserLikedPostService(int) ([]model.Post, error)
 	GetLikeAndDislikeAllPostService() (map[int][]int, error)
 }
@@ -29,12 +29,12 @@ func NewLikePostService(likePostRepo ILikePostRepository) *LikePostService {
 	}
 }
 
-func (l *LikePostService) LikePostService(like *model.LikePost) error {
+func (l *LikePostService) LikePostService(like *model.LikePost) (bool, error) {
 	oldLike, _ := l.likePostRepo.GetLikePostRepository(like.UserId, like.PostId)
 	if oldLike != nil {
 		l.likePostRepo.DeleteLikeByPostIdRepository(like.UserId, like.PostId)
 		if oldLike.LikeStatus == like.LikeStatus {
-			return nil
+			return false, nil
 		}
 	}
 	return l.likePostRepo.CreateLikePostRepository(like)

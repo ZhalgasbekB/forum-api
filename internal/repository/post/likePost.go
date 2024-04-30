@@ -25,11 +25,11 @@ func NewLikePostRepository(db *sql.DB) *LikePostRepository {
 	}
 }
 
-func (l *LikePostRepository) CreateLikePostRepository(like *model.LikePost) error {
+func (l *LikePostRepository) CreateLikePostRepository(like *model.LikePost) (bool, error) {
 	if _, err := l.db.Exec(createLikePostQuery, like.UserId, like.PostId, like.LikeStatus); err != nil {
-		return err
+		return false, err
 	}
-	return nil
+	return true, nil
 }
 
 func (l *LikePostRepository) DeleteLikeByPostIdRepository(user_id, post_id int) error {

@@ -19,7 +19,3 @@ type NotificationCreateDTO struct {
 	Type          string `json:"type"`
 	CreatedUserId int    `json:"created_user_id"`
 }
-
-type NotificationDTO2 struct {
-	ID int `json:"id"`
-}

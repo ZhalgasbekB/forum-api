@@ -1,16 +1,21 @@
 package nothification
 
-import "gitea.com/lzhuk/forum/internal/model"
+import (
+	"gitea.com/lzhuk/forum/internal/model"
+)
 
 type INotificationRepository interface {
 	Create(*model.Notification) error
 	Read(int) ([]model.Notification, error)
 	Update(int) error
 	NotificationIsRead(int) (bool, error)
+
+	DuplicateNotification(*model.Notification) (*model.Notification, error)
+	DeleteNotification(*model.Notification) error
 }
 
 type INotificationService interface {
-	CreateService(*model.Notification) error
+	CreateService(*model.Notification, bool) error
 	ReadService(int) ([]model.Notification, error)
 	UpdateService(int) error
 	NotificationIsReadService(int) (bool, error)
@@ -26,7 +31,22 @@ func InitNotificationService(notificationRepository INotificationRepository) *No
 	}
 }
 
-func (ns *NotificationService) CreateService(n *model.Notification) error {
+func (ns *NotificationService) CreateService(n *model.Notification, isLiked bool) error {
+	nOld, err := ns.notificationRepository.DuplicateNotification(n)
+	if err != nil {
+		return err
+	}
+
+	if nOld != nil && (!isLiked || (nOld.Type != n.Type)) {
+		if err := ns.notificationRepository.DeleteNotification(nOld); err != nil {
+			return err
+		}
+
+		if nOld != nil && !isLiked {
+			return nil
+		}
+	}
+
 	return ns.notificationRepository.Create(n)
 }
 

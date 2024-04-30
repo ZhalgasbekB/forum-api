@@ -7,6 +7,7 @@ type LikePost struct {
 }
 
 type LikePostDTO struct {
+	UserId     int  `json:"user_id"`
 	PostId     int  `json:"post_id"`
 	LikeStatus bool `json:"status"`
 }
