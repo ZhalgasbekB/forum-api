@@ -44,7 +44,9 @@ func NewRouter(h *Handler) http.Handler {
 	///// ADVANCED FEATURE
 	mux.Handle("/notifications", h.RequiredAuthentication(http.HandlerFunc(h.Notifications)))      // GET
 	mux.Handle("/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification))) // PUT
-	/////
+
+	///// ACTIVITY
+	// mux.Handle("/activity", h.RequiredAuthentication(http.HandlerFunc(h.Notification))) //  ???
 
 	mux.Handle("/d3/category", h.RequiredAuthentication(http.HandlerFunc(h.PostCategory)))     // 200 (GET METHOD) user posts
 	mux.Handle("/d3/user-likes", h.RequiredAuthentication(http.HandlerFunc(h.LikedPostsUser))) // 200 (GET METHOD)
