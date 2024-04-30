@@ -92,7 +92,36 @@ func (h *Handler) Activity(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
+
 	user := contextUser(r)
 
-	json.WriteJSON(w, http.StatusOK, user)
+	uPosts, err := h.Services.PostsService.GetUserPostService(r.Context(), user.ID)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	uLikes, err := h.Services.LikePosts.GetUserLikedPostService(user.ID, true)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	uDislikes, err := h.Services.LikePosts.GetUserLikedPostService(user.ID, false)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	uComments, err := h.Services.CommentService.CommentsByUserIdService(r.Context(), user.ID)
+	if err != nil {
+		log.Println(err)
+		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	json.WriteJSON(w, http.StatusOK, &model.UserActivityDTO{CreatedPost: uPosts, LikdedPost: uLikes, DislikePost: uDislikes, CommentedPost: uComments})
 }

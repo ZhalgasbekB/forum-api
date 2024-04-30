@@ -21,7 +21,6 @@ type IUserService interface {
 	UserByIDService(int) (*model.User, error)
 	UsersService() ([]model.User, error)
 
-	ActivityService() error
 }
 
 type UserService struct {
@@ -61,6 +60,4 @@ func (us *UserService) UsersService() ([]model.User, error) {
 	return us.iUserRepository.Users()
 }
 
-func (us *UserService) ActivityService() error {
-	return nil
-}
+ 

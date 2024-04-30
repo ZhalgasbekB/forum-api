@@ -35,8 +35,8 @@ type UserAuthDTO struct {
 }
 
 type UserActivityDTO struct {
-	CreatedPost   []Post            `json:"u_posts"`
-	LikdedPost    []Post            `json:"u_likes"`
-	DislikePost   []Post            `json:"u_dislikes"`
-	CommentedPost []PostCommentsDTO `json:"U-comments"`
+	CreatedPost   []*Post   `json:"u_posts"`
+	LikdedPost    []Post    `json:"u_likes"`
+	DislikePost   []Post    `json:"u_dislikes"`
+	CommentedPost []Comment `json:"u-comments"`
 }

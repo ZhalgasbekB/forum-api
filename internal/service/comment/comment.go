@@ -12,14 +12,17 @@ type ICommentRepository interface {
 	UpdateComment(context.Context, *model.Comment) error
 	DeleteComment(context.Context, *model.Comment) error
 	CommentsPostByIDRepository(context.Context, int) ([]model.Comment, error) // CHECK
+
+	CommentsByUserId(context.Context, int) ([]model.Comment, error)
 }
 
 type ICommentService interface {
 	CreateCommentService(context.Context, *model.Comment) error
 	UpdateCommentService(context.Context, *model.Comment) error
 	DeleteCommentService(context.Context, *model.Comment) error
-
 	CommentsLikesNames(context.Context, int) ([]model.Comment, error)
+
+	CommentsByUserIdService(context.Context, int) ([]model.Comment, error)
 }
 
 type CommentService struct {
@@ -47,4 +50,8 @@ func (r *CommentService) DeleteCommentService(ctx context.Context, comm *model.C
 
 func (r *CommentService) CommentsLikesNames(ctx context.Context, post_id int) ([]model.Comment, error) {
 	return r.iCommentRepository.CommentsPostByIDRepository(ctx, post_id)
+}
+
+func (r *CommentService) CommentsByUserIdService(ctx context.Context, user_id int) ([]model.Comment, error) {
+	return r.iCommentRepository.CommentsByUserId(ctx, user_id)
 }

@@ -43,8 +43,8 @@ func NewRouter(h *Handler) http.Handler {
 
 	///// ADVANCED FEATURE
 	mux.Handle("/d3/user-activity", h.RequiredAuthentication(http.HandlerFunc(h.Activity)))
-	mux.Handle("/notifications", h.RequiredAuthentication(http.HandlerFunc(h.Notifications)))      // GET
-	mux.Handle("/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification))) // PUT
+	mux.Handle("/d3/notifications", h.RequiredAuthentication(http.HandlerFunc(h.Notifications)))      // GET
+	mux.Handle("/d3/notification/update", h.RequiredAuthentication(http.HandlerFunc(h.Notification))) // PUT
 
 	///// ACTIVITY
 	// mux.Handle("/activity", h.RequiredAuthentication(http.HandlerFunc(h.Notification))) //  ???

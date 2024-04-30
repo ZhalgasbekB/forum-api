@@ -14,7 +14,8 @@ const (
 	updateCommQuery = `UPDATE comments SET description = $1, updated_at = $2 WHERE id = $3`
 	deleteCommQuery = `DELETE FROM comments WHERE id = $1 AND user_id = $2`
 
-	commentsByPostIdQuery = `SELECT c.id, c.post_id, c.user_id, us.name AS user_name, c.description, c.created_at, c.updated_at,COALESCE(cl.likes, 0) AS likes,COALESCE(cl.dislikes, 0) AS dislikes FROM comments c JOIN   users us ON c.user_id = us.id LEFT JOIN (SELECT comment_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes  GROUP BY comment_id) cl ON c.id = cl.comment_id WHERE  c.post_id = $1;`
+	commentsByPostIdQuery   = `SELECT c.id, c.post_id, c.user_id, us.name AS user_name, c.description, c.created_at, c.updated_at,COALESCE(cl.likes, 0) AS likes,COALESCE(cl.dislikes, 0) AS dislikes FROM comments c JOIN   users us ON c.user_id = us.id LEFT JOIN (SELECT comment_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes  GROUP BY comment_id) cl ON c.id = cl.comment_id WHERE  c.post_id = $1;`
+	commentsByUserIdIdQuery = `SELECT c.id, c.post_id, c.user_id, us.name AS user_name, c.description, c.created_at, c.updated_at,COALESCE(cl.likes, 0) AS likes,COALESCE(cl.dislikes, 0) AS dislikes FROM comments c JOIN   users us ON c.user_id = us.id LEFT JOIN (SELECT comment_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM comments_likes  GROUP BY comment_id) cl ON c.id = cl.comment_id WHERE  c.user_id = $1;`
 )
 
 type CommentsRepository struct {
@@ -49,6 +50,26 @@ func (repo *CommentsRepository) DeleteComment(ctx context.Context, comm *model.C
 func (repo *CommentsRepository) CommentsPostByIDRepository(ctx context.Context, id int) ([]model.Comment, error) {
 	commentsPost := []model.Comment{}
 	rows, err := repo.db.QueryContext(ctx, commentsByPostIdQuery, id)
+	if err != nil {
+		if err == errors.ErrSQLNoRows {
+			return nil, errors.ErrNotFoundData
+		}
+		return nil, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		comment := model.Comment{}
+		if err := rows.Scan(&comment.ID, &comment.Post, &comment.User, &comment.Name, &comment.Description, &comment.CreatedDate, &comment.UpdatedDate, &comment.Like, &comment.Dislike); err != nil {
+			return nil, err
+		}
+		commentsPost = append(commentsPost, comment)
+	}
+	return commentsPost, nil
+}
+
+func (repo *CommentsRepository) CommentsByUserId(ctx context.Context, us int) ([]model.Comment, error) {
+	commentsPost := []model.Comment{}
+	rows, err := repo.db.QueryContext(ctx, commentsByUserIdIdQuery, us)
 	if err != nil {
 		if err == errors.ErrSQLNoRows {
 			return nil, errors.ErrNotFoundData

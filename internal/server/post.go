@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -16,17 +15,6 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		w.Header().Set("Allow", http.MethodGet)
 		return
-	}
-
-	user := contextUser(r)
-	if user != nil {
-		is_read, err := h.Services.Nothification.NotificationIsReadService(user.ID)
-		if err != nil {
-			log.Println(err)
-			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
-			return
-		}
-		fmt.Println(is_read)
 	}
 
 	posts, err := h.Services.PostsService.GetAllPostService(r.Context())
@@ -49,6 +37,17 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 			posts[i].Dislike = res[v.PostId][1]
 		}
 	}
+
+	// user := contextUser(r)
+	// if user != nil {
+	// 	is_read, err := h.Services.Nothification.NotificationIsReadService(user.ID)
+	// 	if err != nil {
+	// 		log.Println(err)
+	// 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+	// 		return
+	// 	}
+	// 	fmt.Println(is_read)
+	// }
 
 	json.WriteJSON(w, http.StatusOK, posts)
 }
@@ -206,7 +205,7 @@ func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user := contextUser(r)
-	likedPosts, err := h.Services.LikePosts.GetUserLikedPostService(user.ID)
+	likedPosts, err := h.Services.LikePosts.GetUserLikedPostService(user.ID, true)
 	if err != nil {
 		log.Println(err)
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())

@@ -10,12 +10,12 @@ type ILikePostRepository interface {
 
 	GetLikePostRepository(int, int) (*model.LikePost, error)
 	GetLikeAndDislikeAllPostRepository() (map[int][]int, error)
-	GetUserLikedPostRepository(int) ([]model.Post, error)
+	GetUserLikedPostRepository(int, bool) ([]model.Post, error)
 }
 
 type ILikePostService interface {
 	LikePostService(*model.LikePost) (bool, error)
-	GetUserLikedPostService(int) ([]model.Post, error)
+	GetUserLikedPostService(int, bool) ([]model.Post, error)
 	GetLikeAndDislikeAllPostService() (map[int][]int, error)
 }
 
@@ -40,8 +40,8 @@ func (l *LikePostService) LikePostService(like *model.LikePost) (bool, error) {
 	return l.likePostRepo.CreateLikePostRepository(like)
 }
 
-func (l *LikePostService) GetUserLikedPostService(user_id int) ([]model.Post, error) {
-	return l.likePostRepo.GetUserLikedPostRepository(user_id)
+func (l *LikePostService) GetUserLikedPostService(user_id int, status_like bool) ([]model.Post, error) {
+	return l.likePostRepo.GetUserLikedPostRepository(user_id, status_like)
 }
 
 func (l *LikePostService) GetLikeAndDislikeAllPostService() (map[int][]int, error) {

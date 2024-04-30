@@ -11,7 +11,7 @@ const (
 	deleteLikePostQuery = "DELETE FROM posts_likes WHERE user_id = $1 AND post_id = $2"
 	checkLikePostQuery  = "SELECT * FROM posts_likes WHERE user_id = $1 AND post_id = $2"
 
-	likedPostAndHisLikes = "SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name AS author_name, COALESCE(ld.likes, 0) AS likes, COALESCE(ld.dislikes, 0) AS dislikes FROM posts_likes pl JOIN posts ps ON pl.post_id = ps.id JOIN users u ON ps.user_id = u.id LEFT JOIN ( SELECT post_id, SUM(CASE WHEN status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts_likes GROUP BY post_id ) AS ld ON ps.id = ld.post_id WHERE pl.user_id = $1 AND pl.status = TRUE"
+	likedPostAndHisLikes = "SELECT ps.id, ps.user_id, ps.category_name, ps.title, ps.description, ps.create_at, u.name AS author_name, COALESCE(ld.likes, 0) AS likes, COALESCE(ld.dislikes, 0) AS dislikes FROM posts_likes pl JOIN posts ps ON pl.post_id = ps.id JOIN users u ON ps.user_id = u.id LEFT JOIN ( SELECT post_id, SUM(CASE WHEN status = TRUE THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = FALSE THEN 1 ELSE 0 END) AS dislikes FROM posts_likes GROUP BY post_id ) AS ld ON ps.id = ld.post_id WHERE pl.user_id = $1 AND pl.status = $2" // CHANGE
 	likesOnAllPostsQuery = "SELECT post_id, SUM(CASE WHEN status = true THEN 1 ELSE 0 END) AS likes, SUM(CASE WHEN status = false THEN 1 ELSE 0 END) AS dislikes FROM posts_likes GROUP BY post_id"
 )
 
@@ -47,9 +47,9 @@ func (l *LikePostRepository) GetLikePostRepository(userId, postId int) (*model.L
 	return likedPost, nil
 }
 
-func (l *LikePostRepository) GetUserLikedPostRepository(user_id int) ([]model.Post, error) {
+func (l *LikePostRepository) GetUserLikedPostRepository(user_id int, status_like bool) ([]model.Post, error) {
 	likedPosts := []model.Post{}
-	rows, err := l.db.Query(likedPostAndHisLikes, user_id)
+	rows, err := l.db.Query(likedPostAndHisLikes, user_id, status_like)
 	if err != nil {
 		return nil, err
 	}
