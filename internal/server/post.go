@@ -188,7 +188,7 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 		errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	
+
 	notification := convert.NothificationCreateLikes(r, like, user_id)
 	if err := h.Services.Nothification.CreateService(notification, isLiked); err != nil {
 		log.Println(err)
@@ -198,9 +198,6 @@ func (h *Handler) LikePosts(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 }
-
-// if isLiked {
-// }
 
 func (h *Handler) LikedPostsUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
