@@ -30,3 +30,8 @@ type PostCommentsDTO struct {
 	Post     *Post     `json:"post"`
 	Comments []Comment `json:"comments"`
 }
+
+type PostsNotification struct {
+	Posts           []*Post `json:"posts"`
+	NewNotification bool   `json:"new_notifications"`
+}

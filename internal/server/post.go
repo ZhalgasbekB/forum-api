@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -40,6 +39,7 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 	}
 
 	user := contextUser(r)
+	newNotifications := false
 	if user != nil {
 		is_read, err := h.Services.Nothification.NotificationIsReadService(user.ID)
 		if err != nil {
@@ -47,10 +47,13 @@ func (h *Handler) Home(w http.ResponseWriter, r *http.Request) {
 			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
 			return
 		}
-		fmt.Println(is_read)
+		newNotifications = is_read
 	}
 
-	json.WriteJSON(w, http.StatusOK, posts)
+	json.WriteJSON(w, http.StatusOK, &model.PostsNotification{
+		Posts:           posts,
+		NewNotification: newNotifications,
+	})
 }
 
 func (h *Handler) CreatePosts(w http.ResponseWriter, r *http.Request) {

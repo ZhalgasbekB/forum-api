@@ -1,1 +1,3 @@
-Log: 2024/04/30 19:34:23 server.go:32: http: Server closed
+Log: 2024/04/30 21:52:09 midellware.go:18: http: named cookie not present
+Log: 2024/04/30 21:52:43 midellware.go:18: http: named cookie not present
+Log: 2024/04/30 21:52:49 server.go:32: http: Server closed
