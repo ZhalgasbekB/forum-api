@@ -35,10 +35,10 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/admin/delete-category", h.AdminVerification(http.HandlerFunc(h.AdminDeleteCategory))) // DELETE
 
 	mux.Handle("/moderator/reports", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReports))) // GET
-	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))   // SAME DONT NEED JSON
+	mux.Handle("/moderator/report", h.ModeratorVerification(http.HandlerFunc(h.ModeratorReport)))
 
 	mux.Handle("/d3/user-wants", h.RequiredAuthentication(http.HandlerFunc(h.UserWants))) // GET
-	mux.Handle("/d3/user-want", h.RequiredAuthentication(http.HandlerFunc(h.UserWant)))   // CHECK ONLY USER ??? DONT NEED JSON
+	mux.Handle("/d3/user-want", h.RequiredAuthentication(http.HandlerFunc(h.UserWant)))
 	/// ADMIN
 
 	///// ADVANCED FEATURE
