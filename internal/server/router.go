@@ -13,7 +13,6 @@ func NewRouter(h *Handler) http.Handler {
 
 	mux.HandleFunc("/d3", h.Home)           // 200 (GET METHOD) get all posts
 	mux.HandleFunc("/login", h.Login)       // 200 (POST METHOD)
-	mux.HandleFunc("/auth", h.Authenticate) // 200 (POST BY ANOTHER SERVICE)
 	mux.HandleFunc("/register", h.Register) // 201 (POST METHOD)
 
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout)))                // 200 (POST METHOD)
