@@ -13,7 +13,6 @@ func NewRouter(h *Handler) http.Handler {
 
 	mux.HandleFunc("/d3", h.Home)           // 200 (GET METHOD) get all posts
 	mux.HandleFunc("/login", h.Login)       // 200 (POST METHOD)
-	mux.HandleFunc("/auth", h.Authenticate) // 200 (POST BY ANOTHER SERVICE)
 	mux.HandleFunc("/register", h.Register) // 201 (POST METHOD)
 
 	mux.Handle("/logout", h.RequiredAuthentication(http.HandlerFunc(h.Logout)))                // 200 (POST METHOD)
@@ -21,7 +20,7 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/d3/user-likes", h.RequiredAuthentication(http.HandlerFunc(h.LikedPostsUser))) // 200 (GET METHOD)
 	mux.Handle("/d3/user-posts", h.RequiredAuthentication(http.HandlerFunc(h.PostsUser)))      // 200 (GET METHOD) user posts
 
-	mux.HandleFunc("/d3/post", h.Post)               // 200    	(GET METHOD) post and his comments id ?? category
+	mux.HandleFunc("/d3/post", h.Post)                                                       // 200    	(GET METHOD) post and his comments id ?? category
 	mux.Handle("/d3/post-create", h.RequiredAuthentication(http.HandlerFunc(h.CreatePosts))) // 201   // (POST METHOD) create post
 	mux.Handle("/d3/post-update", h.RequiredAuthentication(http.HandlerFunc(h.UpdatePost)))  // 202   // (PUT METHOD) update
 	mux.Handle("/d3/post-delete", h.RequiredAuthentication(http.HandlerFunc(h.DeletePost)))  // 202   // (DELETE METHOD) delete
