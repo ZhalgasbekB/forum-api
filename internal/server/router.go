@@ -32,5 +32,5 @@ func NewRouter(h *Handler) http.Handler {
 	mux.Handle("/d3/comment-update", h.RequiredAuthentication(http.HandlerFunc(h.UpdateComment))) // 202	(PUT METHOD) update
 	mux.Handle("/d3/comment-delete", h.RequiredAuthentication(http.HandlerFunc(h.DeleteComment))) // 202 	(DELETE METHOD) delete
 
-	return h.IsAuthenticated(mux)
+	return h.IsAuthenticated(mux) // CHECK
 }
