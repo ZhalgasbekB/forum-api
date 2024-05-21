@@ -23,8 +23,6 @@ import (
 	"gitea.com/lzhuk/forum/pkg/db/driver"
 )
 
-type KeyUser string
-
 func TestStartPage(t *testing.T) {
 	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
