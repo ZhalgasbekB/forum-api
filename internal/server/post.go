@@ -234,3 +234,40 @@ func (h *Handler) PostCategory(w http.ResponseWriter, r *http.Request) {
 
 	json.WriteJSON(w, http.StatusOK, postsCategory)
 }
+
+func (h *Handler) UploadPostImage(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodPost:
+		imageDate, err := convert.ConvertUploadPostImage(r)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+
+		err = h.Services.UploadImage.AddImagePostService(imageDate)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+		w.WriteHeader(http.StatusCreated)
+	case http.MethodGet:
+		imageDate, err := convert.ConvertUploadPostImage(r)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+
+		pathImage, err := h.Services.UploadImage.GetImagePostService(imageDate.PostId)
+		if err != nil {
+			log.Println(err)
+			errors.ErrorSend(w, http.StatusInternalServerError, err.Error())
+			return
+		}
+		json.WriteJSON(w, http.StatusOK, model.PathImagePost{Path: pathImage})
+	default:
+		return
+	}
+}

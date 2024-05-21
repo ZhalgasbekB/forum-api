@@ -15,6 +15,15 @@ type Post struct {
 	Dislike int    `json:"dislikes"`
 }
 
+type UploadPostImage struct {
+	Path   string `json:"path"`
+	PostId int    `json:"post_id"`
+}
+
+type PathImagePost struct {
+	Path string `json:"path"`
+}
+
 type CreatePostDTO struct {
 	CategoryName string `json:"category_name"`
 	Title        string `json:"title"`
@@ -33,5 +42,5 @@ type PostCommentsDTO struct {
 
 type PostsNotification struct {
 	Posts           []*Post `json:"posts"`
-	NewNotification bool   `json:"new_notifications"`
+	NewNotification bool    `json:"new_notifications"`
 }

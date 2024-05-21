@@ -67,6 +67,7 @@ func main() {
 	adminRepo := admin2.InitAdminRepository(db)
 
 	nothRepo := noth2.InitNotificationRepository(db)
+	uploadImagePostRepo := post2.NewUploadImagePostRepository(db)
 
 	usersService := user.NewUserService(usersRepo)
 	sessionsService := user.NewSessionService(sessionRepo)
@@ -77,8 +78,9 @@ func main() {
 	adminService := admin.NewAdminService(adminRepo)
 
 	nothService := nothification.InitNotificationService(nothRepo)
+	uploadImagePostService := post.NewUploadImagePostService(uploadImagePostRepo)
 
-	services := service.NewService(usersService, sessionsService, postsService, commentsService, likePostsService, likeCommentsService, adminService, nothService)
+	services := service.NewService(usersService, sessionsService, postsService, commentsService, likePostsService, likeCommentsService, adminService, nothService, uploadImagePostService)
 	handler := server.NewHandler(services)
 	router := server.NewRouter(&handler)
 	s := app.NewServer(cfg, router)

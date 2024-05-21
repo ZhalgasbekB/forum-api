@@ -17,6 +17,7 @@ type Service struct {
 	LikeComments   comment.ILikeCommentService
 	Admin          admin.IAdminService
 	Nothification  nothification.INotificationService //
+	UploadImage    post.IImagePostService
 }
 
 func NewService(userService user.IUserService,
@@ -26,7 +27,8 @@ func NewService(userService user.IUserService,
 	LikePosts post.ILikePostService,
 	LikeComments comment.ILikeCommentService,
 	Admins admin.IAdminService,
-	Nothification1 nothification.INotificationService) Service {
+	Nothification1 nothification.INotificationService,
+	UploadImage post.IImagePostService) Service {
 	return Service{
 		UserService:    userService,
 		SessionService: sessionService,
@@ -36,5 +38,6 @@ func NewService(userService user.IUserService,
 		LikeComments:   LikeComments,
 		Admin:          Admins,
 		Nothification:  Nothification1,
+		UploadImage:    UploadImage,
 	}
 }

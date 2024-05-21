@@ -59,4 +59,14 @@ func ConvertParamID(r *http.Request) (int, error) {
 	return id, err
 }
 
- 
+func ConvertUploadPostImage(r *http.Request) (*model.UploadPostImage, error) {
+	uploadPostImage := &model.UploadPostImage{}
+	if err := json.NewDecoder(r.Body).Decode(uploadPostImage); err != nil {
+		return nil, err
+	}
+
+	return &model.UploadPostImage{
+		Path:   uploadPostImage.Path,
+		PostId: uploadPostImage.PostId,
+	}, nil
+}

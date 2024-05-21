@@ -11,6 +11,7 @@ migrate:
 	sqlite3 forum.sqlite3 < migrations/categories.sql
 	sqlite3 forum.sqlite3 < migrations/wants.sql
 	sqlite3 forum.sqlite3 < migrations/notification.sql
+	sqlite3 forum.sqlite3 < migrations/upload_image.sql
 
 
 
